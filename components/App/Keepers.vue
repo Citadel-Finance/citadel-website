@@ -11,62 +11,62 @@
           </div>
         </div>
         <b-row class="keepers__header">
-          <b-col>Postion</b-col>
-          <b-col>Adress</b-col>
-          <b-col>Contributions (USD)</b-col>
+          <b-col class="keepers__header_title">Postion</b-col>
+          <b-col class="keepers__header_title">Adress</b-col>
+          <b-col class="keepers__header_title">Contributions (USD)</b-col>
         </b-row>
         <b-row class="keepers__header__items">
-          <b-col>
+          <b-col class="keepers__header__items_title_01">
             1
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_02">
             dgdg5s6...sgsgsf465s
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_03">
             $ 15 256 547
           </b-col>
         </b-row>
         <b-row class="keepers__header__items">
-          <b-col>
+          <b-col class="keepers__header__items_title_01">
             1
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_02">
             dgdg5s6...sgsgsf465s
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_03">
             $ 15 256 547
           </b-col>
         </b-row>
         <b-row class="keepers__header__items">
-          <b-col>
+          <b-col class="keepers__header__items_title_01">
             1
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_02">
             dgdg5s6...sgsgsf465s
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_03">
             $ 15 256 547
           </b-col>
         </b-row>
         <b-row class="keepers__header__items">
-          <b-col>
+          <b-col class="keepers__header__items_title_01">
             1
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_02">
             dgdg5s6...sgsgsf465s
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_03">
             $ 15 256 547
           </b-col>
         </b-row>
         <b-row class="keepers__header__items">
-          <b-col>
+          <b-col class="keepers__header__items_title_01">
             1
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_02">
             dgdg5s6...sgsgsf465s
           </b-col>
-          <b-col>
+          <b-col class="keepers__header__items_title_03">
             $ 15 256 547
           </b-col>
         </b-row>
@@ -76,8 +76,6 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 export default {
   name: 'Keepers',
@@ -99,6 +97,12 @@ export default {
   font-size: 21px;
   display: flex;
   align-items: center;
+  color: #240A36;
+}
+.keepers__title_second {
+  font-size: 18px;
+  font-weight: 500;
+  color: #7B6C86;
 }
 .keepers__title_wrapper {
   display: flex;
@@ -119,12 +123,33 @@ export default {
    }
 }
 .keepers__header_title {
-  margin: 14px 20px 14px 20px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #7B6C86;
+  &:last-child{
+    text-align: right;
+  }
 }
 .keepers__header__items {
   align-items: center;
   justify-content: space-between;
   display: flex;
   margin: 38px 20px 20px 20px;
+}
+.keepers__header__items_title_01 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #240A36;
+}
+.keepers__header__items_title_02 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #7B6C86;
+}
+.keepers__header__items_title_03 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #C31433;
+  text-align: right;
 }
 </style>

@@ -36,6 +36,9 @@ export default {
   ],
   styleResources: {
     scss: ['./assets/scss/resourses.scss'],
+    css: [
+      '~assets/scss/global.scss',
+    ],
   },
   modules: [
     '@nuxtjs/style-resources',

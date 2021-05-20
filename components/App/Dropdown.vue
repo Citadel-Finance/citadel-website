@@ -18,16 +18,22 @@
         <img
           src="../../assets/Ethereum.svg"
           alt="logo"
-        >
-        <div class="dropdown__menu_title">
-          ETH POOL
-        </div>
+        > ETH POOL
+<!--        <div class="dropdown__menu_title">-->
+<!--            <b-dropdown id="dropdown-offset" offset="-50" text="ETH POOL" class="dropdown__menu_title">-->
+<!--              <b-dropdown-item href="#">Action</b-dropdown-item>-->
+<!--              <b-dropdown-item href="#">Another action</b-dropdown-item>-->
+<!--              <b-dropdown-item href="#">Something else here</b-dropdown-item>-->
+<!--            </b-dropdown>-->
+<!--        </div>-->
         <img
           src="../../assets/dropdown_arrow.svg"
           alt="dropdown"
         >
       </div>
     </div>
+    <Edit />
+    <Delete />
     <div class="dropdown__info">
       <div class="dropdown__info_title">
         ANNUAL PERCENTAGE RATE
@@ -41,14 +47,20 @@
 </template>
 
 <script>
+import Edit from './Admin/Edit';
+import Delete from './Admin/Delete';
 
 export default {
   name: 'Dropdown',
+  components: {
+    Edit,
+    Delete,
+  },
   props: {},
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .dropdown__container {
   width: 1170px;
   height: 113px;
@@ -80,12 +92,18 @@ export default {
 }
 .dropdown__hr {
   border: 2px solid #C31433;
+  justify-content: right;
   color: darkred;
-  background: black;
   width: 40px;
-  margin: 20px 0px 0px 0px;
+  margin: 20px 0;
 }
 .dropdown__info {
-  justify-content: end;
+  display: block;
+  justify-content: flex-end;
+}
+.dropdown__info_title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #7B6C86;
 }
 </style>

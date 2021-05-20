@@ -5,17 +5,29 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Default' }}
+        {{ title || options.title || 'Connect wallet' }}
       </div>
       <button
         v-if="!options.isUnclosable"
         class="ctm-modal__x"
         @click="close()"
       >
-        x
+        <img src="../../../assets/x.svg" alt="x">
       </button>
     </div>
-    <slot />
+    <button >
+      <slot />
+    </button>
+    <button >
+      <slot />
+    </button>
+    <button >
+      <slot />
+    </button>
+    <button >
+      <slot />
+    </button>
+
   </div>
 </template>
 <script>
@@ -51,5 +63,8 @@ export default {
 <style lang="scss" scoped>
 .ctm-modal {
   @include modalKit;
+}
+.ctm-modal__header {
+  margin-bottom: 30px;
 }
 </style>

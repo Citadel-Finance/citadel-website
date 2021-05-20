@@ -26,24 +26,33 @@
     vertical-align: middle;
     width: 100%;
     position: relative;
-    max-width: 500px;
+    max-width: 474px;
     text-align: left;
     background: #FFFFFF;
+    border-radius: 10px;
   }
   &__text {
-
+    font-size: 18px;
+    font-weight: 500;
+    color: #240A36;
   }
   &__content {
-    padding: 35px;
+    padding: 20px;
+    background-color: #F6F5F7;
+    margin: 0 20px 15px 20px;
+    text-align: center;
+    border-radius: 10px;
+    width: 434px;
+    max-width: 434px;
   }
   &__header {
-    padding: 35px 35px 0;
+    padding: 20px 20px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   &__title {
-    font-size: 30px;
+    font-size: 21px;
   }
   &__x {
 

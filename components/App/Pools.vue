@@ -5,23 +5,26 @@
         Pools
       </div>
       <b-row class="pools__header">
-        <b-col>Currency</b-col>
-        <b-col>Apy</b-col>
-        <b-col>Liquidity (USD)</b-col>
-        <b-col>Balance</b-col>
+        <b-col class="pools__header_title">Currency</b-col>
+        <b-col class="pools__header_title">Apy</b-col>
+        <b-col class="pools__header_title">Liquidity (USD)</b-col>
+        <b-col class="pools__header_title">Balance</b-col>
       </b-row>
       <b-row class="pools__header__items">
-        <b-col>
+        <b-col class="div__header__items_img">
           <img
             src="../../assets/Ethereum.svg"
             alt="coin"
             class="pools__header__img"
-          > ETH
+          >
+          <div class="pools__header__items_title_01">
+            ETH
+          </div>
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           15.25%
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           $ 15 256 547
         </b-col>
         <b-col>
@@ -29,17 +32,20 @@
         </b-col>
       </b-row>
       <b-row class="pools__header__items">
-        <b-col>
+        <b-col class="div__header__items_img">
           <img
             src="../../assets/Ethereum.svg"
             alt="coin"
             class="pools__header__img"
-          > ETH
+          >
+          <div class="pools__header__items_title_01">
+            ETH
+          </div>
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           15.25%
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           $ 15 256 547
         </b-col>
         <b-col>
@@ -47,17 +53,20 @@
         </b-col>
       </b-row>
       <b-row class="pools__header__items">
-        <b-col>
+        <b-col class="div__header__items_img">
           <img
             src="../../assets/Ethereum.svg"
             alt="coin"
             class="pools__header__img"
-          > ETH
+          >
+          <div class="pools__header__items_title_01">
+            ETH
+          </div>
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           15.25%
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           $ 15 256 547
         </b-col>
         <b-col>
@@ -65,17 +74,20 @@
         </b-col>
       </b-row>
       <b-row class="pools__header__items">
-        <b-col>
+        <b-col class="div__header__items_img">
           <img
             src="../../assets/Ethereum.svg"
             alt="coin"
             class="pools__header__img"
-          > ETH
+          >
+          <div class="pools__header__items_title_01">
+            ETH
+          </div>
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           15.25%
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           $ 15 256 547
         </b-col>
         <b-col>
@@ -83,17 +95,20 @@
         </b-col>
       </b-row>
       <b-row class="pools__header__items">
-        <b-col>
+        <b-col class="div__header__items_img">
           <img
             src="../../assets/Ethereum.svg"
             alt="coin"
             class="pools__header__img"
-          > ETH
+          >
+          <div class="pools__header__items_title_01">
+            ETH
+          </div>
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           15.25%
         </b-col>
-        <b-col>
+        <b-col class="pools__header__items_title_02">
           $ 15 256 547
         </b-col>
         <b-col>
@@ -105,8 +120,6 @@
 </template>
 
 <script>
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 export default {
   name: 'Pools',
@@ -130,7 +143,7 @@ export default {
   padding: 20px 0px 0px 0px;
   margin: 30px 0px 20px 20px;
   font-size: 21px;
-  /*display: flex;*/
+  display: flex;
   /*align-items: center;*/
 }
 .pools__header {
@@ -143,9 +156,6 @@ export default {
   border-radius: 10px;
   margin: 0px 20px 24px 20px;
 }
-.pools__header_title {
-  margin: 14px 20px 14px 20px;
-}
 .pools__header__items {
   align-items: center;
   justify-content: space-between;
@@ -154,5 +164,25 @@ export default {
 }
 .pools__header__img {
   margin: 0px 15px 5px 0px;
+}
+.pools__header_title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #7B6C86;
+  /*padding-right: 100px;*/
+}
+.div__header__items_img {
+  display: flex;
+  align-items: center;
+}
+.pools__header__items_title_01 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #240A36;
+}
+.pools__header__items_title_02 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #7B6C86;
 }
 </style>
