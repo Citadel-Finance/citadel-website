@@ -17,6 +17,7 @@
       <withdraw-pool v-if="modals.withdrawPool === currentModalKey"/>
       <add-pool v-if="modals.addPool === currentModalKey"/>
       <deposit-pool v-if="modals.depositPool === currentModalKey"/>
+      <claim-pool v-if="modals.claimPool === currentModalKey"/>
     </div>
   </transition>
 </template>
@@ -28,6 +29,7 @@ import deletePool from '@/components/CtmModal/DeletePoolModal/index';
 import withdrawPool from '@/components/CtmModal/WithdrawPoolModal/index';
 import addPool from '@/components/CtmModal/AddPoolModal/index';
 import depositPool from '@/components/CtmModal/DepositPoolModal/index';
+import claimPool from '@/components/CtmModal/ClaimPoolModal/index';
 
 export default {
   components: {
@@ -36,6 +38,7 @@ export default {
     'withdraw-pool': withdrawPool,
     'deposit-pool': depositPool,
     'add-pool': addPool,
+    'claim-pool': claimPool,
   },
   data: () => ({
     modals,

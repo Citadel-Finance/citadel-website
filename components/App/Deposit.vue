@@ -74,7 +74,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .deposit__container {
   width: 1170px;
   height: 154px;
@@ -98,8 +98,12 @@ export default {
 }
 .header__button {
   width: 350px;
+  height: 51px;
   max-width: 350px;
   margin: 10px 20px 12px 0px;
+  background: #C31433;
+  border-radius: 10px;
+  color: #FFFFFF;
 }
 .balance__card{
   padding-top: 20px;

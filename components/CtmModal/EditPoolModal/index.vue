@@ -32,8 +32,8 @@
       Status
     </div>
     <div class="">
-      <input type="radio" id="one" value="Active" v-model="picked" class="edit-modal__radiobuttons">
-      <input type="radio" id="two" value="inactive" v-model="picked" class="edit-modal__radiobuttons">
+      <input type="radio" id="one" value="Active" class="edit-modal__radiobuttons">
+      <input type="radio" id="two" value="inactive" class="edit-modal__radiobuttons">
     </div>
     <div class="edit-modal__buttons">
       <button

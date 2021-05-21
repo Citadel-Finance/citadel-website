@@ -1,0 +1,8 @@
+.header_title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #7B6C86;
+  &:last-child{
+    text-align: right;
+  }
+}
