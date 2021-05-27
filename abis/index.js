@@ -604,7 +604,7 @@ export const BEP20 = [
     type: 'function',
   },
 ];
-export const POOL = [
+export const Pool = [
   {
     inputs: [
       {
@@ -1798,7 +1798,7 @@ export const POOL = [
     type: 'function',
   },
 ];
-export const FACTORY = [
+export const Factory = [
   {
     inputs: [
       {

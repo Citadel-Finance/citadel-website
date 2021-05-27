@@ -68,34 +68,34 @@ export default {
     close() {
       this.$store.dispatch('modals/hide');
     },
-    async init() {
-      await createAbstractions();
-      // await createBep20Inst();
-      await createInsts();
-    },
+    // async init() {
+    //   await createAbstractions();
+    //   // await createBep20Inst();
+    //   await createInsts();
+    // },
     async handleConnectWallet() {
-      const r = await this.connectWallet();
-      if (r.ok !== true) {
-        let msg;
-        if (r.code === 4001) {
-          msg = 'Metamask connection error';
-        }
-        this.close();
-        this.ShowModal({
-          key: modals.default,
-          title: msg,
-          text: 'Connect to Metamask',
-        });
-      }
+      await this.$store.dispatch('user/connectWallet');
+      // if (r.ok !== true) {
+      //   let msg;
+      //   if (r.code === 4001) {
+      //     msg = 'Metamask connection error';
+      //   }
+      //   this.close();
+      //   this.ShowModal({
+      //     key: modals.default,
+      //     title: msg,
+      //     text: 'Connect to Metamask',
+      //   });
+      // }
     },
-    async connectWallet() {
-      const r = await initWeb3Provider();
-      if (r.ok === true) {
-        await this.close();
-        await this.init();
-      }
-      return r;
-    },
+    // async connectWallet() {
+    //   // const r = await initWeb3Provider();
+    //   // if (r.ok === true) {
+    //   //   await this.close();
+    //   //   await this.init();
+    //   // }
+    //   // return r;
+    // },
   },
 };
 </script>
