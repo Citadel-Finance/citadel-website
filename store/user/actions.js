@@ -43,7 +43,6 @@ export default {
     console.log('pools', pools);
     console.log('DONE');
 
-
     // const r = await pools[0].deposit();
     // console.log('deposit', r);
   },
