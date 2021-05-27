@@ -45,6 +45,8 @@ import modals from '@/store/modals/modals';
 
 export default {
   name: 'Deposit',
+  components: {
+  },
   props: {
     title: {
       default: '',
@@ -54,8 +56,6 @@ export default {
       type: Boolean,
       default: false,
     },
-  },
-  components: {
   },
   methods: {
     openWithdrawModal() {

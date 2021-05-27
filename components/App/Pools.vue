@@ -5,11 +5,21 @@
         Pools
       </div>
       <b-row class="pools__header">
-        <b-col class="pools__header_title">Currency</b-col>
-        <b-col class="pools__header_title">Apy</b-col>
-        <b-col class="pools__header_title">Liquidity (USD)</b-col>
-        <b-col class="pools__header_title">Balance</b-col>
-        <b-col class="pools__header_title">Status</b-col>
+        <b-col class="pools__header_title">
+          Currency
+        </b-col>
+        <b-col class="pools__header_title">
+          Apy
+        </b-col>
+        <b-col class="pools__header_title">
+          Liquidity (USD)
+        </b-col>
+        <b-col class="pools__header_title">
+          Balance
+        </b-col>
+        <b-col class="pools__header_title">
+          Status
+        </b-col>
       </b-row>
       <b-row class="pools__header__items">
         <b-col class="div__header__items_img">
@@ -32,13 +42,13 @@
           23 025
         </b-col>
         <b-col>
-          <span class="dot"></span>
+          <span class="dot" />
           Active
         </b-col>
         <b-col class="admin__pools__menu">
-          <span class="dot__menu"></span>
-          <span class="dot__menu"></span>
-          <span class="dot__menu"></span>
+          <span class="dot__menu" />
+          <span class="dot__menu" />
+          <span class="dot__menu" />
         </b-col>
       </b-row>
       <b-row class="pools__header__items">

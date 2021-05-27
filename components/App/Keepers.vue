@@ -11,9 +11,15 @@
           </div>
         </div>
         <b-row class="keepers__header">
-          <b-col class="keepers__header_title">Postion</b-col>
-          <b-col class="keepers__header_title">Adress</b-col>
-          <b-col class="keepers__header_title">Contributions (USD)</b-col>
+          <b-col class="keepers__header_title">
+            Postion
+          </b-col>
+          <b-col class="keepers__header_title">
+            Adress
+          </b-col>
+          <b-col class="keepers__header_title">
+            Contributions (USD)
+          </b-col>
         </b-row>
         <b-row class="keepers__header__items">
           <b-col class="keepers__header__items_title_01">

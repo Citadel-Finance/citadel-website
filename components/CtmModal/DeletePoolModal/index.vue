@@ -12,7 +12,10 @@
         class="ctm-modal__x"
         @click="close()"
       >
-        <img src="@/assets/x.svg" alt="x">
+        <img
+          src="@/assets/x.svg"
+          alt="x"
+        >
       </button>
     </div>
     <div class="delete-modal__wrapper">
@@ -30,7 +33,7 @@
         Delete
       </button>
     </div>
-    </div>
+  </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';

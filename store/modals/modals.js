@@ -6,5 +6,5 @@ export default {
   withdrawPool: 'withdrawPool',
   addPool: 'addPool',
   depositPool: 'depositPool',
-  claimPool: 'claimPool',
+  // claimPool: 'claimPool',
 };

@@ -4,10 +4,10 @@
       Balance CitaDEL
     </div>
     <div class="balance__row">
-      <Card title="SUPPLY CITADEL"/>
-      <Card title="BALANCE CITADEL"/>
-      <Card title="REWARDS CITADEL"/>
-      <Card title="PRICE CITADEL"/>
+      <Card title="SUPPLY CITADEL" />
+      <Card title="BALANCE CITADEL" />
+      <Card title="REWARDS CITADEL" />
+      <Card title="PRICE CITADEL" />
     </div>
     <div
       class="balance__btn"
@@ -24,10 +24,10 @@ import Card from '~/components/App/Card';
 
 export default {
   name: 'Balance',
-  props: {
-  },
   components: {
     Card,
+  },
+  props: {
   },
   methods: {
     openClaimModal() {

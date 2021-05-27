@@ -2,7 +2,7 @@
   <div class="header-button">
     <button
       class="header__button"
-      @click="openTestModal()"
+      @click="openTestModal"
     >
       {{ title }}
     </button>
@@ -25,7 +25,7 @@ export default {
   methods: {
     openTestModal() {
       this.ShowModal({
-        text: 'WalletConnect',
+        text: 'Connect to Metamask',
       });
     },
   },

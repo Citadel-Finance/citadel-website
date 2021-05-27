@@ -20,9 +20,15 @@
         <p>15 Mar</p>
       </div>
       <div class="chart__buttons">
-        <button class="chart__buttons_button">24h</button>
-        <button class="chart__buttons_button">7d</button>
-        <button class="chart__buttons_button">All</button>
+        <button class="chart__buttons_button">
+          24h
+        </button>
+        <button class="chart__buttons_button">
+          7d
+        </button>
+        <button class="chart__buttons_button">
+          All
+        </button>
       </div>
     </div>
     <div class="chart__container">
@@ -45,9 +51,15 @@
         <p>15 Mar</p>
       </div>
       <div class="chart__buttons">
-        <button class="chart__buttons_button">24h</button>
-        <button class="chart__buttons_button">7d</button>
-        <button class="chart__buttons_button">All</button>
+        <button class="chart__buttons_button">
+          24h
+        </button>
+        <button class="chart__buttons_button">
+          7d
+        </button>
+        <button class="chart__buttons_button">
+          All
+        </button>
       </div>
     </div>
     <div class="chart__container">
@@ -70,9 +82,15 @@
         <p>15 Mar</p>
       </div>
       <div class="chart__buttons">
-        <button class="chart__buttons_button">24h</button>
-        <button class="chart__buttons_button">7d</button>
-        <button class="chart__buttons_button">All</button>
+        <button class="chart__buttons_button">
+          24h
+        </button>
+        <button class="chart__buttons_button">
+          7d
+        </button>
+        <button class="chart__buttons_button">
+          All
+        </button>
       </div>
     </div>
   </div>

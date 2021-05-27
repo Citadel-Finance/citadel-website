@@ -2,17 +2,26 @@
   <div>
     <div class="transaction__wrapper">
       <div class="transaction__title__wrapper">
-      <div class="transaction__title">
-        Transaction
-      </div>
-      <button class="admin__addpool__button"
-      @click="openAddModal"
-      >Add new Pool</button>
+        <div class="transaction__title">
+          Transaction
+        </div>
+        <button
+          class="admin__addpool__button"
+          @click="openAddModal"
+        >
+          Add new Pool
+        </button>
       </div>
       <b-row class="transaction__header">
-        <b-col class="transaction__header_title">Date</b-col>
-        <b-col class="transaction__header_title">Change</b-col>
-        <b-col class="transaction__header_title">TX HASH</b-col>
+        <b-col class="transaction__header_title">
+          Date
+        </b-col>
+        <b-col class="transaction__header_title">
+          Change
+        </b-col>
+        <b-col class="transaction__header_title">
+          TX HASH
+        </b-col>
       </b-row>
       <b-row class="transaction__header__items">
         <b-col class="transaction__header__items_title_01">

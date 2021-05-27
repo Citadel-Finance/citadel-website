@@ -12,43 +12,65 @@
         class="ctm-modal__x"
         @click="close()"
       >
-        <img src="@/assets/x.svg" alt="x">
+        <img
+          src="@/assets/x.svg"
+          alt="x"
+        >
       </button>
     </div>
     <div class="edit-modal__wrapper">
       <div class="edit-modal__title">
         Liquidity mining reward
       </div>
-    <div class="edit-modal__input">
-      <input type="text" placeholder="" class="edit-modal__input">
-    </div>
-    <div class="edit-modal__title">
-      APE tax
-    </div>
-    <div class="edit-modal__input">
-      <input type="text" class="edit-modal__input">
-    </div>
-    <div class="edit-modal__title">
-      Status
-    </div>
-    <div class="">
-      <input type="radio" id="one" value="Active" class="edit-modal__radiobuttons">
-      <input type="radio" id="two" value="inactive" class="edit-modal__radiobuttons">
-    </div>
-    <div class="edit-modal__buttons">
-      <button
-        v-if="!options.isUnclosable"
-        class="edit-modal__buttons_close"
-        @click="close()"
+      <div class="edit-modal__input">
+        <input
+          type="text"
+          placeholder=""
+          class="edit-modal__input"
+        >
+      </div>
+      <div
+        class="edit-modal__title"
       >
-        Close
-      </button>
-      <button class="edit-modal__buttons_save">
-        Save
-      </button>
+        APE tax
+      </div>
+      <div class="edit-modal__input">
+        <input
+          type="text"
+          class="edit-modal__input"
+        >
+      </div>
+      <div class="edit-modal__title">
+        Status
+      </div>
+      <div class="">
+        <input
+          id="one"
+          type="radio"
+          value="Active"
+          class="edit-modal__radiobuttons"
+        >
+        <input
+          id="two"
+          type="radio"
+          value="inactive"
+          class="edit-modal__radiobuttons"
+        >
+      </div>
+      <div class="edit-modal__buttons">
+        <button
+          v-if="!options.isUnclosable"
+          class="edit-modal__buttons_close"
+          @click="close()"
+        >
+          Close
+        </button>
+        <button class="edit-modal__buttons_save">
+          Save
+        </button>
+      </div>
     </div>
-    </div>
-    </div>
+  </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';

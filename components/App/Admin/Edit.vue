@@ -1,7 +1,10 @@
 <template>
   <button @click="openEditModal">
     <div class="admin__edit">
-      <img src="@/assets/edit.svg" alt="edit">
+      <img
+        src="@/assets/edit.svg"
+        alt="edit"
+      >
     </div>
   </button>
 </template>

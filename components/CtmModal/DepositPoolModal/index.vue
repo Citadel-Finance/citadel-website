@@ -12,7 +12,10 @@
         class="ctm-modal__x"
         @click="close()"
       >
-        <img src="@/assets/x.svg" alt="x">
+        <img
+          src="@/assets/x.svg"
+          alt="x"
+        >
       </button>
     </div>
     <div class="deposit-modal__wrapper">
@@ -22,25 +25,33 @@
       <div class="deposit-modal__subtitle">
         To deposit ETH, you will be prompted to confirm the deposit.
       </div>
-      <div class="deposit-modal__input_title">Amount</div>
-    <div class="deposit-modal__input">
-      <input type="text" placeholder="Amount in ETH" class="deposit-modal__input">
+      <div class="deposit-modal__input_title">
+        Amount
+      </div>
+      <div class="deposit-modal__input">
+        <input
+          type="text"
+          placeholder="Amount in ETH"
+          class="deposit-modal__input"
+        >
+      </div>
+      <div class="deposit-modal__input_subtitle">
+        Your balance: <b>23.25640000 ETH</b>
+      </div>
+      <div class="deposit-modal__buttons">
+        <button
+          v-if="!options.isUnclosable"
+          class="deposit-modal__buttons_close"
+          @click="close()"
+        >
+          Close
+        </button>
+        <button class="deposit-modal__buttons_save">
+          Deposit
+        </button>
+      </div>
     </div>
-      <div class="deposit-modal__input_subtitle">Your balance: <b>23.25640000 ETH</b></div>
-    <div class="deposit-modal__buttons">
-      <button
-        v-if="!options.isUnclosable"
-        class="deposit-modal__buttons_close"
-        @click="close()"
-      >
-        Close
-      </button>
-      <button class="deposit-modal__buttons_save">
-        Deposit
-      </button>
-    </div>
-    </div>
-    </div>
+  </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';

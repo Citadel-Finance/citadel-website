@@ -19,13 +19,13 @@
           src="../../assets/Ethereum.svg"
           alt="logo"
         > ETH POOL
-<!--        <div class="dropdown__menu_title">-->
-<!--            <b-dropdown id="dropdown-offset" offset="-50" text="ETH POOL" class="dropdown__menu_title">-->
-<!--              <b-dropdown-item href="#">Action</b-dropdown-item>-->
-<!--              <b-dropdown-item href="#">Another action</b-dropdown-item>-->
-<!--              <b-dropdown-item href="#">Something else here</b-dropdown-item>-->
-<!--            </b-dropdown>-->
-<!--        </div>-->
+        <!--        <div class="dropdown__menu_title">-->
+        <!--            <b-dropdown id="dropdown-offset" offset="-50" text="ETH POOL" class="dropdown__menu_title">-->
+        <!--              <b-dropdown-item href="#">Action</b-dropdown-item>-->
+        <!--              <b-dropdown-item href="#">Another action</b-dropdown-item>-->
+        <!--              <b-dropdown-item href="#">Something else here</b-dropdown-item>-->
+        <!--            </b-dropdown>-->
+        <!--        </div>-->
         <img
           src="../../assets/dropdown_arrow.svg"
           alt="dropdown"

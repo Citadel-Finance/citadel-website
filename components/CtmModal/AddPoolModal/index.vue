@@ -12,30 +12,37 @@
         class="ctm-modal__x"
         @click="close()"
       >
-        <img src="@/assets/x.svg" alt="x">
+        <img
+          src="@/assets/x.svg"
+          alt="x"
+        >
       </button>
     </div>
     <div class="add-modal__wrapper">
       <div class="add-modal__title">
         Lorem ipsum
       </div>
-    <div class="add-modal__input">
-      <input type="text" placeholder="type here" class="add-modal__input">
+      <div class="add-modal__input">
+        <input
+          type="text"
+          placeholder="type here"
+          class="add-modal__input"
+        >
+      </div>
+      <div class="add-modal__buttons">
+        <button
+          v-if="!options.isUnclosable"
+          class="add-modal__buttons_close"
+          @click="close()"
+        >
+          Close
+        </button>
+        <button class="add-modal__buttons_save">
+          Save
+        </button>
+      </div>
     </div>
-    <div class="add-modal__buttons">
-      <button
-        v-if="!options.isUnclosable"
-        class="add-modal__buttons_close"
-        @click="close()"
-      >
-        Close
-      </button>
-      <button class="add-modal__buttons_save">
-        Save
-      </button>
-    </div>
-    </div>
-    </div>
+  </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';

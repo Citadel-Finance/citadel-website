@@ -1,10 +1,12 @@
 <template>
   <button @click="openDeleteModal">
     <div class="admin__delete">
-      <img src="@/assets/delete.svg" alt="edit">
+      <img
+        src="@/assets/delete.svg"
+        alt="edit"
+      >
     </div>
   </button>
-
 </template>
 
 <script>
