@@ -42,7 +42,7 @@ export default {
     console.log('tokens', tokens);
     console.log('pools', pools);
     console.log('DONE');
-    // TODO setChild
+
 
     // const r = await pools[0].deposit();
     // console.log('deposit', r);
