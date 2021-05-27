@@ -29,14 +29,18 @@ export default {
     console.log('poolData', poolData);
 
     const tokensAddresses = poolData.map((pair) => pair.token);
+    const poolsAddresses = poolData.map((pair) => pair.pool);
     const tokens = tokensAddresses.map((address) => new Token({ address }));
+    const pools = poolsAddresses.map((address) => new Pool({ address }));
+
     await Promise.all([...tokens.map((token) => token.initInst())]);
     await Promise.all([...tokens.map((token) => token.fetchAll())]);
     console.log('tokens', tokens);
 
-    const poolsAddresses = poolData.map((pair) => pair.pool);
-    const pools = poolsAddresses.map((address) => new Pool({ address }));
     await Promise.all([...pools.map((pool) => pool.initInst())]);
     console.log('pools', pools);
+
+    // const r = await pools[0].deposit();
+    // console.log('deposit', r);
   },
 };

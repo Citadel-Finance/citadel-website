@@ -12,17 +12,13 @@ export default class Pool extends BasicSmartContract {
     });
   }
 
-  // async fetchPoolsData() {
-  //   try {
-  //     // equal
-  //     // this.poolData = await this.inst().allPools();
-  //     this.poolData = await this.fetchContractData('allPools');
-  //     return output({
-  //       poolData: this.poolData,
-  //     });
-  //   } catch (e) {
-  //     console.log('fetchPoolsData error', e, this);
-  //     return error(500, 'fetchPoolsData error', e);
-  //   }
-  // }
+  async deposit() {
+    try {
+      const r = await this.inst().deposit('100000');
+      return output({ r });
+    } catch (e) {
+      console.log('deposit error', e, this);
+      return error(500, 'deposit error', e);
+    }
+  }
 }

@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js';
 import BasicSmartContract from '~/classes/BasicSmartContract';
 import { BEP20 as TokenAbi } from '~/abis';
 import {
@@ -16,7 +17,8 @@ export default class Token extends BasicSmartContract {
 
   async fetchBalance() {
     try {
-      const balance = await this.fetchContractData('balanceOf', [getUserAddress()]);
+      let balance = await this.fetchContractData('balanceOf', [getUserAddress()]);
+      balance = new BigNumber(balance).shiftedBy(-this.decimals).toString();
       this.balance = balance;
       return output({
         balance,
