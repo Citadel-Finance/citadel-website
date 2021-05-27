@@ -15,6 +15,10 @@ export default class Token extends BasicSmartContract {
     });
   }
 
+  setParrentAddress(value) {
+    this.parrentAddress = value;
+  }
+
   async fetchBalance() {
     try {
       let balance = await this.fetchContractData('balanceOf', [getUserAddress()]);

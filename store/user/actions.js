@@ -11,7 +11,7 @@ export default {
       return;
     }
     await dispatch('initFactory');
-    await dispatch('initTokensAndPools');
+    await dispatch('initPoolsAndTokens');
   },
   async initFactory({ commit }) {
     const factory = new Factory({
@@ -24,21 +24,25 @@ export default {
     }
     commit('setFactory', factory);
   },
-  async initTokensAndPools({ getters }) {
+  async initPoolsAndTokens({ getters }) {
     const { poolData } = getters.getFactory;
-    console.log('poolData', poolData);
-
     const tokensAddresses = poolData.map((pair) => pair.token);
     const poolsAddresses = poolData.map((pair) => pair.pool);
     const tokens = tokensAddresses.map((address) => new Token({ address }));
     const pools = poolsAddresses.map((address) => new Pool({ address }));
 
-    await Promise.all([...tokens.map((token) => token.initInst())]);
+    pools.forEach((pool, i) => {
+      pool.setChildAddress(tokensAddresses[i]);
+    });
+    tokens.forEach((token, i) => {
+      token.setParrentAddress(poolsAddresses[i]);
+    });
+    await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]);
     await Promise.all([...tokens.map((token) => token.fetchAll())]);
     console.log('tokens', tokens);
-
-    await Promise.all([...pools.map((pool) => pool.initInst())]);
     console.log('pools', pools);
+    console.log('DONE');
+    // TODO setChild
 
     // const r = await pools[0].deposit();
     // console.log('deposit', r);

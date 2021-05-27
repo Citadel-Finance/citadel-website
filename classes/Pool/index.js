@@ -12,7 +12,7 @@ export default class Pool extends BasicSmartContract {
     });
   }
 
-  async deposit() {
+  async deposit(amount) {
     try {
       const r = await this.inst().deposit('100000');
       return output({ r });
@@ -20,5 +20,9 @@ export default class Pool extends BasicSmartContract {
       console.log('deposit error', e, this);
       return error(500, 'deposit error', e);
     }
+  }
+
+  setChildAddress(value) {
+    this.childAddress = value;
   }
 }
