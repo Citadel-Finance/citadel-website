@@ -1952,6 +1952,31 @@ export const FACTORY = [
   },
   {
     inputs: [],
+    name: 'allPools',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'contract CitadelPool',
+            name: 'pool',
+            type: 'address',
+          },
+          {
+            internalType: 'contract IBEP20',
+            name: 'token',
+            type: 'address',
+          },
+        ],
+        internalType: 'struct CitadelFactory.PoolInfo[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'ctlToken',
     outputs: [
       {

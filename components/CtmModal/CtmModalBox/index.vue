@@ -38,7 +38,7 @@ import modals from '~/store/modals/modals';
 import {
   initWeb3Provider,
   createAbstractions,
-  createBep20Inst,
+  createBep20Inst, createInsts,
 } from '~/utils/web3';
 
 export default {
@@ -70,7 +70,8 @@ export default {
     },
     async init() {
       await createAbstractions();
-      await createBep20Inst();
+      // await createBep20Inst();
+      await createInsts();
     },
     async handleConnectWallet() {
       const r = await this.connectWallet();
