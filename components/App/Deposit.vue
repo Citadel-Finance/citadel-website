@@ -24,29 +24,57 @@
       </div>
     </div>
     <div class="deposit__buttons">
-      <CustomButton
-        title="Deposit"
+      <button
         class="header__button"
-      />
-      <CustomButton
-        title="Withdraw"
+        @click="openDepositModal"
+      >
+        Deposit
+      </button>
+      <button
         class="header__button"
-      />
+        @click="openWithdrawModal"
+      >
+        Withdraw
+      </button>
     </div>
   </div>
 </template>
 
 <script>
-import CustomButton from '~/components/App/Button';
+import modals from '@/store/modals/modals';
 
 export default {
-  name: 'Dropdown',
-  components: { CustomButton },
-  props: {},
+  name: 'Deposit',
+  props: {
+    title: {
+      default: '',
+      type: String,
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  components: {
+  },
+  methods: {
+    openWithdrawModal() {
+      this.ShowModal({
+        text: 'WalletConnect',
+        key: modals.withdrawPool,
+      });
+    },
+    openDepositModal() {
+      this.ShowModal({
+        text: 'WalletConnect',
+        key: modals.depositPool,
+      });
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .deposit__container {
   width: 1170px;
   height: 154px;
@@ -70,8 +98,12 @@ export default {
 }
 .header__button {
   width: 350px;
+  height: 51px;
   max-width: 350px;
   margin: 10px 20px 12px 0px;
+  background: #C31433;
+  border-radius: 10px;
+  color: #FFFFFF;
 }
 .balance__card{
   padding-top: 20px;

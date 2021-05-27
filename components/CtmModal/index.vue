@@ -12,16 +12,33 @@
           {{ options.text }}
         </div>
       </ctm-modal-box>
+      <edit-pool v-if="modals.editPool === currentModalKey"/>
+      <delete-pool v-if="modals.deletePool === currentModalKey"/>
+      <withdraw-pool v-if="modals.withdrawPool === currentModalKey"/>
+      <add-pool v-if="modals.addPool === currentModalKey"/>
+      <deposit-pool v-if="modals.depositPool === currentModalKey"/>
+      <claim-pool v-if="modals.claimPool === currentModalKey"/>
     </div>
   </transition>
 </template>
 <script>
 import { mapGetters } from 'vuex';
 import modals from '@/store/modals/modals';
+import EditPool from '@/components/CtmModal/EditPoolModal/index';
+import deletePool from '@/components/CtmModal/DeletePoolModal/index';
+import withdrawPool from '@/components/CtmModal/WithdrawPoolModal/index';
+import addPool from '@/components/CtmModal/AddPoolModal/index';
+import depositPool from '@/components/CtmModal/DepositPoolModal/index';
+import claimPool from '@/components/CtmModal/ClaimPoolModal/index';
 
 export default {
   components: {
-
+    'edit-pool': EditPool,
+    'delete-pool': deletePool,
+    'withdraw-pool': withdrawPool,
+    'deposit-pool': depositPool,
+    'add-pool': addPool,
+    'claim-pool': claimPool,
   },
   data: () => ({
     modals,

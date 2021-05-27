@@ -25,7 +25,7 @@ export default {
   methods: {
     openTestModal() {
       this.ShowModal({
-        text: 'test',
+        text: 'WalletConnect',
       });
     },
   },

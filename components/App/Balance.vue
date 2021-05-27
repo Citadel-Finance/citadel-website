@@ -9,13 +9,17 @@
       <Card title="REWARDS CITADEL"/>
       <Card title="PRICE CITADEL"/>
     </div>
-    <div class="balance__btn">
+    <div
+      class="balance__btn"
+      @click="openClaimModal"
+    >
       Claim
     </div>
   </div>
 </template>
 
 <script>
+import modals from '@/store/modals/modals';
 import Card from '~/components/App/Card';
 
 export default {
@@ -24,6 +28,14 @@ export default {
   },
   components: {
     Card,
+  },
+  methods: {
+    openClaimModal() {
+      this.ShowModal({
+        text: 'WalletConnect',
+        key: modals.claimPool,
+      });
+    },
   },
 };
 </script>
