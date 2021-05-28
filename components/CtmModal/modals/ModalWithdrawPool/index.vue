@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Edit Pool' }}
+        {{ title || options.title || 'Withdraw Pool' }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -13,7 +13,7 @@
         @click="close()"
       >
         <img
-          src="@/assets/x.svg"
+          src="~/assets/x.svg"
           alt="x"
         >
       </button>
@@ -47,7 +47,7 @@
           Close
         </button>
         <button class="deposit-modal__buttons_save">
-          Deposit
+          Withdraw
         </button>
       </div>
     </div>

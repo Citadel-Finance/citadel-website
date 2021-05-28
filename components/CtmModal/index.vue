@@ -12,11 +12,11 @@
           {{ options.text }}
         </div>
       </ctm-modal-box>
-      <edit-pool v-if="modals.editPool === currentModalKey" />
-      <delete-pool v-if="modals.deletePool === currentModalKey" />
-      <withdraw-pool v-if="modals.withdrawPool === currentModalKey" />
-      <add-pool v-if="modals.addPool === currentModalKey" />
-      <deposit-pool v-if="modals.depositPool === currentModalKey" />
+      <modal-add-pool v-if="modals.addPool === currentModalKey" />
+      <modal-delete-pool v-if="modals.deletePool === currentModalKey" />
+      <modal-deposit-pool v-if="modals.depositPool === currentModalKey" />
+      <modal-edit-pool v-if="modals.editPool === currentModalKey" />
+      <modal-withdraw-pool v-if="modals.withdrawPool === currentModalKey" />
       <!--      <claim-pool v-if="modals.claimPool === currentModalKey"/>-->
     </div>
   </transition>
@@ -24,20 +24,20 @@
 <script>
 import { mapGetters } from 'vuex';
 import modals from '@/store/modals/modals';
-import EditPool from '@/components/CtmModal/EditPoolModal/index';
-import deletePool from '@/components/CtmModal/DeletePoolModal/index';
-import withdrawPool from '@/components/CtmModal/WithdrawPoolModal/index';
-import addPool from '@/components/CtmModal/AddPoolModal/index';
-import depositPool from '@/components/CtmModal/DepositPoolModal/index';
+import modalAddPool from '@/components/CtmModal/modals/ModalAddPool/index';
+import modalDeletePool from '@/components/CtmModal/modals/ModalDeletePool/index';
+import modalDepositPool from '@/components/CtmModal/modals/ModalDepositPool/index';
+import modalEditPool from '@/components/CtmModal/modals/ModalEditPool/index';
+import modalWithdrawPool from '@/components/CtmModal/modals/ModalWithdrawPool/index';
 // import claimPool from '@/components/CtmModal/ClaimPoolModal/index';
 
 export default {
   components: {
-    'edit-pool': EditPool,
-    'delete-pool': deletePool,
-    'withdraw-pool': withdrawPool,
-    'deposit-pool': depositPool,
-    'add-pool': addPool,
+    'modal-add-pool': modalAddPool,
+    'modal-delete-pool': modalDeletePool,
+    'modal-deposit-pool': modalDepositPool,
+    'modal-edit-pool': modalEditPool,
+    'modal-withdraw-pool': modalWithdrawPool,
     // 'claim-pool': claimPool,
   },
   data: () => ({

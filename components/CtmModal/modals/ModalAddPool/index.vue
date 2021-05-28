@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Delete Pool' }}
+        {{ title || options.title || 'Add new pool' }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -13,25 +13,29 @@
         @click="close()"
       >
         <img
-          src="@/assets/x.svg"
+          src="~/assets/x.svg"
           alt="x"
         >
       </button>
     </div>
-    <div class="delete-modal__wrapper">
-      <div class="delete-modal__title">
-        Are you sure you want to delete pool?
+    <div class="app-modal__main">
+      <div class="app-modal__title">
+        Something
       </div>
-      <button
-        v-if="!options.isUnclosable"
-        class="delete-modal__buttons_close"
-        @click="close()"
-      >
-        Cancel
-      </button>
-      <button class="delete-modal__buttons_save">
-        Delete
-      </button>
+      <base-input
+        :placeholder="'20.06%'"
+      />
+      <div class="app-modal__buttons">
+        <base-btn
+          :mode="'secondary'"
+          @click="close()"
+        >
+          Close
+        </base-btn>
+        <base-btn>
+          Save
+        </base-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -69,27 +73,22 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.delete-modal__wrapper {
-  padding-left: 20px;
-}
-.delete-modal__title {
-  font-size: 16px;
-  font-weight: 400;
-  margin: 20px 0 47px;
-}
-.delete-modal__buttons_close {
-  height: 51px;
-  width: 147px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-.delete-modal__buttons_save {
-  height: 51px;
-  width: 267px;
-  border-radius: 10px;
-  background: #C31433;
-  color: white;
-  margin-left: 16px;
+.app-modal {
+  &__main {
+    padding: 20px;
+  }
+  &__title {
+    margin-bottom: 10px;
+    color: #240A36;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &__buttons {
+    margin-top: 140px;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+  }
 }
 </style>

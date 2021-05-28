@@ -13,60 +13,41 @@
         @click="close()"
       >
         <img
-          src="@/assets/x.svg"
+          src="~/assets/x.svg"
           alt="x"
         >
       </button>
     </div>
-    <div class="edit-modal__wrapper">
-      <div class="edit-modal__title">
+    <div class="deposit-modal__wrapper">
+      <div class="deposit-modal__title">
         Liquidity mining reward
       </div>
-      <div class="edit-modal__input">
+      <div class="deposit-modal__subtitle">
+        To deposit ETH, you will be prompted to confirm the deposit.
+      </div>
+      <div class="deposit-modal__input_title">
+        Amount
+      </div>
+      <div class="deposit-modal__input">
         <input
           type="text"
-          placeholder=""
-          class="edit-modal__input"
+          placeholder="Amount in ETH"
+          class="deposit-modal__input"
         >
       </div>
-      <div
-        class="edit-modal__title"
-      >
-        APE tax
+      <div class="deposit-modal__input_subtitle">
+        Your balance: <b>23.25640000 ETH</b>
       </div>
-      <div class="edit-modal__input">
-        <input
-          type="text"
-          class="edit-modal__input"
-        >
-      </div>
-      <div class="edit-modal__title">
-        Status
-      </div>
-      <div class="">
-        <input
-          id="one"
-          type="radio"
-          value="Active"
-          class="edit-modal__radiobuttons"
-        >
-        <input
-          id="two"
-          type="radio"
-          value="inactive"
-          class="edit-modal__radiobuttons"
-        >
-      </div>
-      <div class="edit-modal__buttons">
+      <div class="deposit-modal__buttons">
         <button
           v-if="!options.isUnclosable"
-          class="edit-modal__buttons_close"
+          class="deposit-modal__buttons_close"
           @click="close()"
         >
           Close
         </button>
-        <button class="edit-modal__buttons_save">
-          Save
+        <button class="deposit-modal__buttons_save">
+          Deposit
         </button>
       </div>
     </div>
@@ -106,10 +87,10 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.edit-modal__wrapper {
+.deposit-modal__wrapper {
   padding-left: 20px;
 }
-.edit-modal__input {
+.deposit-modal__input {
   padding-left: 10px;
   width: 424px;
   max-width: 434px;
@@ -117,27 +98,34 @@ export default {
   background: #F6F5F7;
   border-radius: 10px;
   border: 0;
+  margin-bottom: 20px;
 }
-.edit-modal__title {
+.deposit-modal__title {
+  margin: 30px 20px 20px 0;
+}
+.deposit-modal__subtitle {
+  font-size: 16px;
+  font-weight: 300;
+  color: #7B6C86;
+}
+.deposit-modal__input_subtitle{
+  text-align: right;
+  margin: 20px;
+}
+.deposit-modal__input_title {
+  font-size: 16px;
+  font-weight: 500;
+  color: #240A36;
   margin: 20px 0 10px;
 }
-.edit-modal__radiobuttons {
-  color: darkred;
-  height: 21px;
-  width: 21px;
-  margin-bottom: 36px;
-  &:last-child {
-    margin-left: 200px;
-  }
-}
-.edit-modal__buttons_close {
+.deposit-modal__buttons_close {
   height: 51px;
   width: 147px;
   background: #F6F5F7;
   border-radius: 10px;
   margin-bottom: 20px;
 }
-.edit-modal__buttons_save {
+.deposit-modal__buttons_save {
   height: 51px;
   width: 267px;
   border-radius: 10px;
