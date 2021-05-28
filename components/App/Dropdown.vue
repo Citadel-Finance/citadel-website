@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .dropdown__container {
   width: 1170px;
   height: 113px;

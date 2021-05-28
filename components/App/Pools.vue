@@ -148,7 +148,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .pools__wrapper {
   margin: auto;
   background: #FFFFFF;

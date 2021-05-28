@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Withdraw Pool' }}
+        {{ title || options.title || 'Withdraw pool' }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -18,37 +18,35 @@
         >
       </button>
     </div>
-    <div class="deposit-modal__wrapper">
-      <div class="deposit-modal__title">
-        Liquidity mining reward
+    <div class="withdraw-modal__main">
+      <div class="withdraw-modal__text">
+        {{ depositText }}
       </div>
-      <div class="deposit-modal__subtitle">
-        To deposit ETH, you will be prompted to confirm the deposit.
-      </div>
-      <div class="deposit-modal__input_title">
+      <div class="withdraw-modal__title">
         Amount
       </div>
-      <div class="deposit-modal__input">
-        <input
-          type="text"
-          placeholder="Amount in ETH"
-          class="deposit-modal__input"
-        >
+      <base-input
+        :placeholder="'Amount in ETH'"
+        :description="'MAX'"
+      />
+      <div class="withdraw-modal__balance max">
+        <div class="max__title">
+          Max:
+        </div>
+        <div class="max__value">
+          {{ balance }}
+        </div>
       </div>
-      <div class="deposit-modal__input_subtitle">
-        Your balance: <b>23.25640000 ETH</b>
-      </div>
-      <div class="deposit-modal__buttons">
-        <button
-          v-if="!options.isUnclosable"
-          class="deposit-modal__buttons_close"
+      <div class="withdraw-modal__buttons">
+        <base-btn
+          :mode="'secondary'"
           @click="close()"
         >
           Close
-        </button>
-        <button class="deposit-modal__buttons_save">
+        </base-btn>
+        <base-btn>
           Withdraw
-        </button>
+        </base-btn>
       </div>
     </div>
   </div>
@@ -71,6 +69,12 @@ export default {
       default: true,
     },
   },
+  data() {
+    return {
+      depositText: 'To withdraw ETH, you will first be asked to approve a transfer of kETH',
+      balance: '23.25640000 ETH',
+    };
+  },
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
@@ -83,54 +87,48 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .ctm-modal {
   @include modalKit;
 }
-.deposit-modal__wrapper {
-  padding-left: 20px;
+.withdraw-modal {
+  &__main {
+    padding: 20px;
+  }
+  &__text {
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+  }
+  &__title {
+    margin: 30px 0 10px;
+    color: #240A36;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &__buttons {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+  }
 }
-.deposit-modal__input {
-  padding-left: 10px;
-  width: 424px;
-  max-width: 434px;
-  height: 59px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  border: 0;
-  margin-bottom: 20px;
-}
-.deposit-modal__title {
-  margin: 30px 20px 20px 0;
-}
-.deposit-modal__subtitle {
-  font-size: 16px;
-  font-weight: 300;
-  color: #7B6C86;
-}
-.deposit-modal__input_subtitle{
-  text-align: right;
-  margin: 20px;
-}
-.deposit-modal__input_title {
-  font-size: 16px;
-  font-weight: 500;
-  color: #240A36;
-  margin: 20px 0 10px;
-}
-.deposit-modal__buttons_close {
-  height: 51px;
-  width: 147px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-.deposit-modal__buttons_save {
-  height: 51px;
-  width: 267px;
-  border-radius: 10px;
-  background: #C31433;
-  color: white;
-  margin-left: 16px;
+.max {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  &__title {
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+  }
+  &__value {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #240A36;
+  }
 }
 </style>

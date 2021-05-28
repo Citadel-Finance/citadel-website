@@ -108,7 +108,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .transaction__wrapper {
   margin: auto;
   background: #FFFFFF;

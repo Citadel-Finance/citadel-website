@@ -102,7 +102,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .ctm-modal {
   @include modalKit;
 }

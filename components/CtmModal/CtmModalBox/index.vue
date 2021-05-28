@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Connect wallet' }}
+        {{ title || options.title }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -18,28 +18,10 @@
         >
       </button>
     </div>
-    <button @click="handleConnectWallet">
-      <slot />
-    </button>
-    <!--    <button>-->
-    <!--      <slot />-->
-    <!--    </button>-->
-    <!--    <button>-->
-    <!--      <slot />-->
-    <!--    </button>-->
-    <!--    <button>-->
-    <!--      <slot />-->
-    <!--    </button>-->
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex';
-import modals from '~/store/modals/modals';
-import {
-  initWeb3Provider,
-  createAbstractions,
-  createBep20Inst, createInsts,
-} from '~/utils/web3';
 
 export default {
   props: {
@@ -64,13 +46,6 @@ export default {
   methods: {
     close() {
       this.$store.dispatch('modals/hide');
-    },
-    async handleConnectWallet() {
-      const r = await this.$store.dispatch('user/connectWallet');
-      if (!r.ok) {
-        return;
-      }
-      this.CloseModal();
     },
   },
 };

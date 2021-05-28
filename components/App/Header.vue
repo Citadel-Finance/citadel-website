@@ -8,33 +8,33 @@
         >
       </div>
       <div>
-        <CumstomButton
-          title="Connect Wallet"
-        />
+        <base-btn
+          @click="openModalConnect"
+        >
+          Connect Wallet
+        </base-btn>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import CumstomButton from './Button';
+import modals from '~/store/modals/modals';
 
 export default {
   name: 'Header',
-  components: {
-    CumstomButton,
-  },
   methods: {
-    openTestModal() {
+    openModalConnect() {
       this.ShowModal({
-        text: 'test',
+        text: 'WalletConnect',
+        key: modals.connectWallet,
       });
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .header {
   width: 100%;
   background: #ffffff;

@@ -1,10 +1,11 @@
 export default {
   default: 'default',
-  status: 'status',
-  editPool: 'editPool',
-  deletePool: 'deletePool',
-  withdrawPool: 'withdrawPool',
   addPool: 'addPool',
+  connectWallet: 'connectWallet',
+  deletePool: 'deletePool',
   depositPool: 'depositPool',
+  editPool: 'editPool',
+  status: 'status',
+  withdrawPool: 'withdrawPool',
   // claimPool: 'claimPool',
 };

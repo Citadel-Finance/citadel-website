@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Add new pool' }}
+        {{ title || options.title || 'Connect wallet' }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -18,23 +18,15 @@
         >
       </button>
     </div>
-    <div class="add-modal__main">
-      <div class="add-modal__title">
-        Something
-      </div>
-      <base-input
-        :placeholder="'20.06%'"
-        class="add-modal__input"
-      />
-      <div class="add-modal__buttons">
+    <div class="connect-modal__main">
+      <div class="connect-modal__buttons">
         <base-btn
+          v-for="wallet in wallets"
+          :key="wallet"
           :mode="'secondary'"
-          @click="close()"
+          @click="handleConnectWallet"
         >
-          Close
-        </base-btn>
-        <base-btn>
-          Save
+          {{ wallet }}
         </base-btn>
       </div>
     </div>
@@ -58,6 +50,16 @@ export default {
       default: true,
     },
   },
+  data() {
+    return {
+      wallets: [
+        'Metamask',
+        'Wallet1',
+        'Wallet2',
+        'Wallet3',
+      ],
+    };
+  },
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
@@ -67,6 +69,13 @@ export default {
     close() {
       this.$store.dispatch('modals/hide');
     },
+    async handleConnectWallet() {
+      const r = await this.$store.dispatch('user/connectWallet');
+      if (!r.ok) {
+        return;
+      }
+      this.CloseModal();
+    },
   },
 };
 </script>
@@ -74,24 +83,13 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.add-modal {
+.connect-modal {
   &__main {
     padding: 20px;
   }
-  &__title {
-    margin-bottom: 10px;
-    color: #240A36;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-  }
-  &__input {
-    margin-bottom: 140px;
-  }
   &__buttons {
     display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 20px;
+    grid-gap: 15px;
   }
 }
 </style>

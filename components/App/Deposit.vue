@@ -74,7 +74,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .deposit__container {
   width: 1170px;
   height: 154px;

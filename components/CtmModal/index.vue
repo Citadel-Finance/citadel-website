@@ -13,6 +13,7 @@
         </div>
       </ctm-modal-box>
       <modal-add-pool v-if="modals.addPool === currentModalKey" />
+      <modal-connect-wallet v-if="modals.connectWallet === currentModalKey" />
       <modal-delete-pool v-if="modals.deletePool === currentModalKey" />
       <modal-deposit-pool v-if="modals.depositPool === currentModalKey" />
       <modal-edit-pool v-if="modals.editPool === currentModalKey" />
@@ -25,6 +26,7 @@
 import { mapGetters } from 'vuex';
 import modals from '@/store/modals/modals';
 import modalAddPool from '@/components/CtmModal/modals/ModalAddPool/index';
+import modalConnectWallet from '@/components/CtmModal/modals/ModalConnectWallet/index';
 import modalDeletePool from '@/components/CtmModal/modals/ModalDeletePool/index';
 import modalDepositPool from '@/components/CtmModal/modals/ModalDepositPool/index';
 import modalEditPool from '@/components/CtmModal/modals/ModalEditPool/index';
@@ -34,6 +36,7 @@ import modalWithdrawPool from '@/components/CtmModal/modals/ModalWithdrawPool/in
 export default {
   components: {
     'modal-add-pool': modalAddPool,
+    'modal-connect-wallet': modalConnectWallet,
     'modal-delete-pool': modalDeletePool,
     'modal-deposit-pool': modalDepositPool,
     'modal-edit-pool': modalEditPool,

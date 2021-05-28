@@ -19,7 +19,7 @@
       </button>
     </div>
     <div class="delete-modal__main">
-      <div class="delete-modal__title">
+      <div class="delete-modal__text">
         Are you sure you want to delete pool?
       </div>
       <div class="delete-modal__buttons">
@@ -66,7 +66,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .ctm-modal {
   @include modalKit;
 }
@@ -74,7 +74,7 @@ export default {
   &__main {
     padding: 20px;
   }
-  &__title {
+  &__text {
     margin: 20px 0 50px;
     font-weight: 300;
     letter-spacing: 0.05em;

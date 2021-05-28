@@ -29,7 +29,8 @@ export default {
       return [
         {
           'base-btn_disabled': disabled,
-          'base-btn_secondary': mode === 'secondary',
+          'base-btn__secondary': mode === 'secondary',
+          'base-btn__secondary_disabled': mode === 'secondary' && disabled,
         },
       ];
     },
@@ -46,7 +47,7 @@ export default {
   height: 51px;
   max-height: 100%;
   width: 100%;
-  padding: 15px;
+  padding: 15px 30px;
   cursor: pointer;
   font-style: normal;
   font-weight: 500;
@@ -61,11 +62,12 @@ export default {
     background: #E6A1AE;
     pointer-events: none;
   }
-  &_secondary {
+  &__secondary {
     background: #F6F5F7;
     color: #240A36;
-    &:hover {
-      background: rgba(246, 245, 247, 0.75);
+    &_disabled {
+      opacity: 0.5;
+      pointer-events: none;
     }
   }
 }

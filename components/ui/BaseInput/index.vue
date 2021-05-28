@@ -10,6 +10,9 @@
         :placeholder="placeholder"
         @input="input(value)"
       >
+      <span
+        class="base-field__description"
+      >{{ description }}</span>
     </div>
     <div
       v-if="!isHideError"
@@ -24,6 +27,10 @@
 export default {
   props: {
     placeholder: {
+      type: String,
+      default: '',
+    },
+    description: {
       type: String,
       default: '',
     },
@@ -53,7 +60,6 @@ export default {
 .base-field {
   &__control {
     display: flex;
-    align-items: center;
     width: 100%;
     height: 59px;
     padding: 20px;
@@ -71,6 +77,14 @@ export default {
     border: none;
     background: transparent;
     color: #7B6C86;
+  }
+  &__description {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: right;
+    min-width: 73px;
+    color: #C31433;
   }
   &__error {
     display: flex;
