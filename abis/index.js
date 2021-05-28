@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/prefer-default-export
 export const BEP20 = [
   {
     inputs: [
@@ -1239,6 +1238,91 @@ export const Pool = [
   },
   {
     inputs: [],
+    name: 'getCommonData',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'decimals',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'totalStaked',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'dailyStaked',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'totalProfit',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'receiptProfit',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'tokensPerBlock',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'apyTax',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'premiumCoeff',
+            type: 'uint256',
+          },
+          {
+            internalType: 'contract IBEP20',
+            name: 'token',
+            type: 'address',
+          },
+          {
+            internalType: 'contract CTLToken',
+            name: 'ctlToken',
+            type: 'address',
+          },
+          {
+            internalType: 'bool',
+            name: 'enabled',
+            type: 'bool',
+          },
+          {
+            internalType: 'bool',
+            name: 'signDailyStaked',
+            type: 'bool',
+          },
+          {
+            internalType: 'string',
+            name: 'symbol',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+        ],
+        internalType: 'struct CitadelPool.CommonData',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'getOwner',
     outputs: [
       {
@@ -1307,6 +1391,52 @@ export const Pool = [
         internalType: 'uint256',
         name: '',
         type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
+      },
+    ],
+    name: 'getUserData',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'totalStaked',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'claimedReward',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'claimedCtl',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'availableReward',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'availableCtl',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct CitadelPool.UserData',
+        name: '',
+        type: 'tuple',
       },
     ],
     stateMutability: 'view',
