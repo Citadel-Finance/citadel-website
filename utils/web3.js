@@ -6,6 +6,7 @@ import { BEP20, POOL, FACTORY } from '~/abis';
 let web3;
 let web4;
 let userAddress;
+let chainId;
 
 let tokenAbs;
 let poolAbs;
@@ -41,6 +42,10 @@ export const initWeb3Provider = async () => {
     }
     // TODO check chainId
     userAddress = await web3.eth.getCoinbase();
+    chainId = await web3.eth.net.getId();
+    if (+chainId !== 97) {
+      return error(1, 'invalid chain', chainId);
+    }
     web4 = new Web4();
     await web4.setProvider(window.ethereum, userAddress);
     return output({ userAddress });
