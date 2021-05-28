@@ -3,4 +3,7 @@ export default () => ({
   userAddress: '',
 
   factory: {},
+
+  poolsMap: {},
+  tokensMap: {},
 });

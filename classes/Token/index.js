@@ -43,7 +43,7 @@ export default class Token extends BasicSmartContract {
 
   async fetchDecimals() {
     try {
-      const decimals = await this.fetchContractData('decimals');
+      const decimals = +(await this.fetchContractData('decimals'));
       this.decimals = decimals;
       return output({
         decimals,
@@ -64,6 +64,32 @@ export default class Token extends BasicSmartContract {
     } catch (e) {
       console.log('fetchSymbol error', e, this);
       return error(500, 'fetchSymbol error', e);
+    }
+  }
+
+  async allowance(recipient, owner = getUserAddress()) {
+    try {
+      const r = await await this.fetchContractData('allowance', [
+        owner, recipient,
+      ]);
+      console.log(r);
+      const bnAmount = new BigNumber(r).shiftedBy(-this.decimals).toString();
+      return output({
+        allowance: bnAmount,
+      });
+    } catch (err) {
+      console.log(err);
+      return error(500, 'fetchAllowance error', err);
+    }
+  }
+
+  async approve(recipient, amount) {
+    try {
+      const r = await this.inst().approve(recipient, amount);
+      return output(r);
+    } catch (e) {
+      console.log(e);
+      return error(500, 'approve error', e, this);
     }
   }
 }

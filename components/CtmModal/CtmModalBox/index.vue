@@ -54,7 +54,4 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.ctm-modal__header {
-  margin-bottom: 30px;
-}
 </style>
