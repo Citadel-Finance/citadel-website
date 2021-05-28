@@ -24,18 +24,12 @@
       </div>
     </div>
     <div class="deposit__buttons">
-      <button
-        class="header__button"
-        @click="openDepositModal"
-      >
+      <base-btn @click="openDepositModal">
         Deposit
-      </button>
-      <button
-        class="header__button"
-        @click="openWithdrawModal"
-      >
+      </base-btn>
+      <base-btn @click="openWithdrawModal">
         Withdraw
-      </button>
+      </base-btn>
     </div>
   </div>
 </template>
@@ -75,7 +69,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.deposit {
+  &__buttons {
+    width: 100%;
+    display: grid;
+    grid-gap: 12px;
+  }
+}
 .deposit__container {
+  padding: 20px;
   width: 1170px;
   height: 154px;
   background: #FFFFFF;
@@ -95,15 +97,6 @@ export default {
   height: 114px;
   width: 236px;
   max-width: 236px;
-}
-.header__button {
-  width: 350px;
-  height: 51px;
-  max-width: 350px;
-  margin: 10px 20px 12px 0px;
-  background: #C31433;
-  border-radius: 10px;
-  color: #FFFFFF;
 }
 .balance__card{
   padding-top: 20px;
