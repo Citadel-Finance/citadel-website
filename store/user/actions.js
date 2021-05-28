@@ -1,4 +1,4 @@
-import { createAbstractions, createInsts, initWeb3Provider } from '~/utils/web3';
+import { initWeb3Provider } from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
@@ -8,10 +8,16 @@ export default {
     const r = await initWeb3Provider();
     console.log(r);
     if (!r.ok) {
-      return;
+      // TODO show modal
+      // await dispatch('modals/show', {
+      //   //
+      // }, { root: true });
+
+      return r;
     }
     await dispatch('initFactory');
     await dispatch('initPoolsAndTokens');
+    return r;
   },
   async initFactory({ commit }) {
     const factory = new Factory({
@@ -38,7 +44,7 @@ export default {
       token.setParrentAddress(poolsAddresses[i]);
     });
     await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]);
-    await Promise.all([...tokens.map((token) => token.fetchAll())]);
+    await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchTotalStaked())]);
     console.log('tokens', tokens);
     console.log('pools', pools);
     console.log('DONE');

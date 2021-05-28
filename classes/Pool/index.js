@@ -12,6 +12,17 @@ export default class Pool extends BasicSmartContract {
     });
   }
 
+  async fetchTotalStaked() {
+    try {
+      const totalStaked = await this.fetchContractData('totalStaked');
+      console.log(totalStaked);
+      return output({ totalStaked });
+    } catch (e) {
+      console.log('deposit error', e, this);
+      return error(500, 'deposit error', e);
+    }
+  }
+
   async deposit(amount) {
     try {
       const r = await this.inst().deposit('100000');

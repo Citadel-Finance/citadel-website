@@ -23,7 +23,4 @@ export default {
   setProjects({ commit }, value) {
     commit('setProjects', value);
   },
-  async getApiData({ dispatch }) {
-    await dispatch('rate/getRate', null, { root: true });
-  },
 };
