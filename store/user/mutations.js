@@ -8,10 +8,19 @@ export default {
   setFactory(state, payload) {
     state.factory = payload;
   },
+  setCtlToken(state, payload) {
+    state.ctlToken = payload;
+  },
   setPoolsMap(state, payload) {
-    state.poolsMap = payload;
+    state.poolsMap = {
+      ...state.poolsMap,
+      ...payload,
+    };
   },
   setTokensMap(state, payload) {
-    state.tokensMap = payload;
+    state.tokensMap = {
+      ...state.tokensMap,
+      ...payload,
+    };
   },
 };

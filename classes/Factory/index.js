@@ -14,11 +14,19 @@ export default class Factory extends BasicSmartContract {
 
   async fetchPoolsData() {
     try {
-      // equal
-      // this.poolData = await this.inst().allPools();
-      this.poolData = await this.fetchContractData('allPools');
+      const [
+        poolData,
+        ctlToken,
+      ] = await Promise.all([
+        this.fetchContractData('allPools'),
+        this.fetchContractData('ctlToken'),
+      ]);
+      this.poolData = poolData;
+      this.ctlTokenAddress = ctlToken;
+      const { ctlTokenAddress } = this;
       return output({
-        poolData: this.poolData,
+        poolData,
+        ctlTokenAddress,
       });
     } catch (e) {
       console.log('fetchPoolsData error', e, this);

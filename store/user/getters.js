@@ -4,4 +4,5 @@ export default {
   getFactory: (state) => state.factory,
   getPoolsMap: (state) => state.poolsMap,
   getTokensMap: (state) => state.tokensMap,
+  getCtlToken: (state) => state.ctlToken,
 };
