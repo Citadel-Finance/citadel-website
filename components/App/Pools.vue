@@ -11,6 +11,16 @@
           </base-btn>
         </div>
       </div>
+      <div
+        v-for="(poolAddress, i) in Object.keys(poolsMap)"
+        :key="`pool__item-${i}`"
+      >
+        {{ poolsMap[poolAddress].totalStaked }} {{ tokensMap[poolsMap[poolAddress].childAddress].balance }} {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
+        <img
+          :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
+          alt=""
+        >
+      </div>
       <b-table
         class="pools__table table"
         :items="items"
@@ -74,6 +84,19 @@ export default {
   name: 'Pools',
   data() {
     return {
+
+      // poolsMapTest: {
+      //   '0xBC6ae91F55af580B4C0E8c32D7910d00D3dbe54d': {
+      //     abi: '....',
+      //     totalStaked: 10,
+      //   },
+      //   '0xBC6ae91F55af580B4C0E8c32D7910d00D3db154d': {
+      //     abi: '...',
+      //     totalStaked: 20,
+      //   },
+      // },
+      // // Object.keys(poolsMapTest) => []
+
       fields: [
         { key: 'currency', label: 'Currency' },
         { key: 'apy', label: 'APY' },
@@ -103,6 +126,7 @@ export default {
   computed: {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
+      tokensMap: 'user/getTokensMap',
     }),
   },
   methods: {
