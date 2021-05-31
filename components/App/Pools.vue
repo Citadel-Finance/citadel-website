@@ -1,5 +1,5 @@
 <template>
-  <div class="pools__container">
+  <div class="pools">
     <div class="pools__wrapper">
       <div class="pools__header header">
         <div class="header__title">
@@ -17,7 +17,6 @@
         :fields="fields"
         borderless
         thead-class="table__header"
-        details-td-class="table__td"
       >
         <template #head()="title">
           <div class="table__title">
@@ -48,7 +47,7 @@
           </div>
         </template>
         <template #cell(balance)="data">
-          <div class="table__col">
+          <div class="table__col balance">
             {{ data.value }}
           </div>
         </template>
@@ -64,6 +63,7 @@
 
 <script>
 
+import { mapGetters } from 'vuex';
 import modals from '~/store/modals/modals';
 
 export default {
@@ -96,6 +96,14 @@ export default {
       ],
     };
   },
+  computed: {
+    ...mapGetters({
+      poolsMap: 'user/getPoolsMap',
+    }),
+  },
+  async mounted() {
+    console.log(this.poolsMap);
+  },
   methods: {
     openAddModal() {
       this.ShowModal({
@@ -109,9 +117,7 @@ export default {
 
 <style lang="scss" scoped>
 .pools {
-  &__container {
-    padding: 30px 0 44px;
-  }
+  padding: 30px 0 44px;
   &__wrapper {
     margin: auto;
     background: #FFFFFF;
@@ -142,30 +148,46 @@ export default {
     }
   }
 }
-.table {
-  margin: 20px 0 0 0;
-  &__header {
-    background: rgba(36, 11, 54, 0.04);
-    border-radius: 10px;
-  }
-  &__col {
-    display: flex;
-    align-items: center;
-  }
-  &__td {
-    display: flex;
+.pools::v-deep {
+  .table {
+    margin: 20px 0 0 0;
+    thead {
+      background: rgba(36, 11, 54, 0.04);
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 10px;
+      line-height: 12px;
+      letter-spacing: 0.105em;
+      text-transform: uppercase;
+      color: #7B6C86;
+    }
+    th, td {
+      padding: 14px 20px;
+      vertical-align: inherit;
+    }
+    td {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 20px;
+      color: #7B6C86;
+    }
   }
 }
 .currency {
+  display: flex;
+  align-items: center;
   grid-gap: 15px;
-  &__img {
-
-  }
   &__value {
     font-weight: 600;
     font-size: 16px;
     line-height: 20px;
     color: #240A36;
   }
+}
+.balance {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: #240A36;
 }
 </style>

@@ -17,6 +17,7 @@
       <modal-delete-pool v-if="modals.deletePool === currentModalKey" />
       <modal-deposit-pool v-if="modals.depositPool === currentModalKey" />
       <modal-edit-pool v-if="modals.editPool === currentModalKey" />
+      <modal-status v-if="modals.status === currentModalKey" />
       <modal-withdraw-pool v-if="modals.withdrawPool === currentModalKey" />
       <!--      <claim-pool v-if="modals.claimPool === currentModalKey"/>-->
     </div>
@@ -30,6 +31,7 @@ import modalConnectWallet from '@/components/CtmModal/modals/ModalConnectWallet/
 import modalDeletePool from '@/components/CtmModal/modals/ModalDeletePool/index';
 import modalDepositPool from '@/components/CtmModal/modals/ModalDepositPool/index';
 import modalEditPool from '@/components/CtmModal/modals/ModalEditPool/index';
+import modalStatus from '@/components/CtmModal/modals/ModalStatus/index';
 import modalWithdrawPool from '@/components/CtmModal/modals/ModalWithdrawPool/index';
 // import claimPool from '@/components/CtmModal/ClaimPoolModal/index';
 
@@ -40,6 +42,7 @@ export default {
     'modal-delete-pool': modalDeletePool,
     'modal-deposit-pool': modalDepositPool,
     'modal-edit-pool': modalEditPool,
+    'modal-status': modalStatus,
     'modal-withdraw-pool': modalWithdrawPool,
     // 'claim-pool': claimPool,
   },

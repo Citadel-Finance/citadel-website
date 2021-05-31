@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Edit Pool' }}
+        {{ title || options.title || 'Deposit' }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -18,29 +18,26 @@
         >
       </button>
     </div>
-    <div class="edit-modal__main">
-      <div class="edit-modal__title">
-        Liquidity mining reward
+    <div class="deposit-modal__main">
+      <div class="deposit-modal__text">
+        {{ depositText }}
+      </div>
+      <div class="deposit-modal__title">
+        Amount
       </div>
       <base-input
-        :placeholder="'20.06%'"
-        class="edit-modal__input"
+        :placeholder="'Amount in ETH'"
+        :description="'MAX'"
       />
-      <div class="edit-modal__title">
-        APE tax
+      <div class="deposit-modal__balance balance">
+        <div class="balance__title">
+          Your balance:
+        </div>
+        <div class="balance__value">
+          {{ balance }}
+        </div>
       </div>
-      <base-input
-        :placeholder="'0.7%'"
-        class="edit-modal__input"
-      />
-      <div class="edit-modal__title">
-        Status
-      </div>
-      <base-radio
-        :options="optionsRadio"
-        class="edit-modal__radio"
-      />
-      <div class="edit-modal__buttons">
+      <div class="deposit-modal__buttons">
         <base-btn
           :mode="'secondary'"
           @click="close()"
@@ -48,7 +45,7 @@
           Close
         </base-btn>
         <base-btn>
-          Save
+          Deposit
         </base-btn>
       </div>
     </div>
@@ -74,10 +71,8 @@ export default {
   },
   data() {
     return {
-      optionsRadio: [
-        { label: 'Active', item: 'active', isActive: false },
-        { label: 'Inactive', tem: 'inactive', isActive: false },
-      ],
+      depositText: 'To deposit ETH, you will be prompted to confirm the deposit.',
+      balance: '23.25640000 ETH',
     };
   },
   computed: {
@@ -96,31 +91,44 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.edit-modal {
+.deposit-modal {
   &__main {
     padding: 20px;
   }
+  &__text {
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+  }
   &__title {
-    margin-bottom: 10px;
+    margin: 30px 0 10px;
     color: #240A36;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-  }
-  &__input {
-    margin-bottom: 10px;
   }
   &__buttons {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 20px;
   }
-  &__radio {
-    margin: 22px 0 37px;
-    font-weight: normal;
+}
+.balance {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  &__title {
     font-size: 16px;
     line-height: 20px;
     color: #7B6C86;
+  }
+  &__value {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #240A36;
   }
 }
 </style>
