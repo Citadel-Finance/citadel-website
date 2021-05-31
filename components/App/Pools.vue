@@ -1,231 +1,171 @@
 <template>
-  <div>
+  <div class="pools__container">
     <div class="pools__wrapper">
-      <div class="pools__title">
-        Pools
+      <div class="pools__header header">
+        <div class="header__title">
+          Pools
+        </div>
+        <div class="header__button">
+          <base-btn @click="openAddModal">
+            Add new pool
+          </base-btn>
+        </div>
       </div>
-      <b-row class="pools__header">
-        <b-col class="pools__header_title">
-          Currency
-        </b-col>
-        <b-col class="pools__header_title">
-          Apy
-        </b-col>
-        <b-col class="pools__header_title">
-          Liquidity (USD)
-        </b-col>
-        <b-col class="pools__header_title">
-          Balance
-        </b-col>
-        <b-col class="pools__header_title">
-          Status
-        </b-col>
-      </b-row>
-      <b-row class="pools__header__items">
-        <b-col class="div__header__items_img">
-          <img
-            src="../../assets/Ethereum.svg"
-            alt="coin"
-            class="pools__header__img"
-          >
-          <div class="pools__header__items_title_01">
-            ETH
+      <b-table
+        class="pools__table table"
+        :items="items"
+        :fields="fields"
+        borderless
+        thead-class="table__header"
+        details-td-class="table__td"
+      >
+        <template #head()="title">
+          <div class="table__title">
+            {{ title.label }}
           </div>
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          15.25%
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col>
-          23 025
-        </b-col>
-        <b-col>
-          <span class="dot" />
-          Active
-        </b-col>
-        <b-col class="admin__pools__menu">
-          <span class="dot__menu" />
-          <span class="dot__menu" />
-          <span class="dot__menu" />
-        </b-col>
-      </b-row>
-      <b-row class="pools__header__items">
-        <b-col class="div__header__items_img">
-          <img
-            src="../../assets/Ethereum.svg"
-            alt="coin"
-            class="pools__header__img"
-          >
-          <div class="pools__header__items_title_01">
-            ETH
+        </template>
+        <template #cell(currency)="data">
+          <div class="table__col currency">
+            <span class="currency__img">
+              <img
+                src="../../assets/Ethereum.svg"
+                alt=""
+              >
+            </span>
+            <span class="currency__value">
+              {{ data.value }}
+            </span>
           </div>
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          15.25%
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col>
-          23 025
-        </b-col>
-      </b-row>
-      <b-row class="pools__header__items">
-        <b-col class="div__header__items_img">
-          <img
-            src="../../assets/Ethereum.svg"
-            alt="coin"
-            class="pools__header__img"
-          >
-          <div class="pools__header__items_title_01">
-            ETH
+        </template>
+        <template #cell(apy)="data">
+          <div class="table__col">
+            {{ data.value }}
           </div>
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          15.25%
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col>
-          23 025
-        </b-col>
-      </b-row>
-      <b-row class="pools__header__items">
-        <b-col class="div__header__items_img">
-          <img
-            src="../../assets/Ethereum.svg"
-            alt="coin"
-            class="pools__header__img"
-          >
-          <div class="pools__header__items_title_01">
-            ETH
+        </template>
+        <template #cell(liquidity)="data">
+          <div class="table__col">
+            {{ data.value }}
           </div>
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          15.25%
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col>
-          23 025
-        </b-col>
-      </b-row>
-      <b-row class="pools__header__items">
-        <b-col class="div__header__items_img">
-          <img
-            src="../../assets/Ethereum.svg"
-            alt="coin"
-            class="pools__header__img"
-          >
-          <div class="pools__header__items_title_01">
-            ETH
+        </template>
+        <template #cell(balance)="data">
+          <div class="table__col">
+            {{ data.value }}
           </div>
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          15.25%
-        </b-col>
-        <b-col class="pools__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col>
-          23 025
-        </b-col>
-      </b-row>
+        </template>
+        <template #cell(status)="data">
+          <div class="table__col">
+            {{ data.value }}
+          </div>
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
 
 <script>
 
+import modals from '~/store/modals/modals';
+
 export default {
   name: 'Pools',
-  props: {
+  data() {
+    return {
+      fields: [
+        { key: 'currency', label: 'Currency' },
+        { key: 'apy', label: 'APY' },
+        { key: 'liquidity', label: 'Liquidity (USD)' },
+        { key: 'balance', label: 'Balance' },
+        { key: 'status', label: 'Status' },
+      ],
+      items: [
+        {
+          id: 0, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+        },
+        {
+          id: 1, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+        },
+        {
+          id: 2, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+        },
+        {
+          id: 3, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+        },
+        {
+          id: 4, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: false,
+        },
+      ],
+    };
+  },
+  methods: {
+    openAddModal() {
+      this.ShowModal({
+        text: 'WalletConnect',
+        key: modals.addPool,
+      });
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.pools__wrapper {
-  margin: auto;
-  background: #FFFFFF;
-  max-width: 1170px;
-  height: 466px;
-  border-radius: 10px;
-  align-items: center;
+.pools {
+  &__container {
+    padding: 30px 0 44px;
+  }
+  &__wrapper {
+    margin: auto;
+    background: #FFFFFF;
+    max-width: 1170px;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
 }
-.pools__title {
-  padding: 20px 0 0 0;
-  margin: 30px 0 20px 20px;
-  font-size: 21px;
-  display: flex;
+.header {
+  &__title {
+    font-size: 21px;
+    font-family: sans-serif, 'Conto-Medium';
+    line-height: 25px;
+    color: #240A36;
+    display: flex;
+    align-items: center;
+  }
+  &__button {
+    .base-btn {
+      font-size: 14px;
+      line-height: 17px;
+      padding: 10px 15px;
+      max-height: 38px;
+    }
+  }
 }
-.pools__header {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  width: 1130px;
-  height: 40px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  margin: 0 30px 24px 20px;
+.table {
+  margin: 20px 0 0 0;
+  &__header {
+    background: rgba(36, 11, 54, 0.04);
+    border-radius: 10px;
+  }
+  &__col {
+    display: flex;
+    align-items: center;
+  }
+  &__td {
+    display: flex;
+  }
 }
-.pools__header__items {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  margin: 0 20px 20px 20px;
-}
-.pools__header__img {
-  margin: 0 15px 5px 0;
-}
-.pools__header_title {
-  font-size: 10px;
-  font-weight: 700;
-  color: #7B6C86;
-  /*padding-right: 100px;*/
-}
-.div__header__items_img {
-  display: flex;
-  align-items: center;
-}
-.pools__header__items_title_01 {
-  font-size: 16px;
-  font-weight: 600;
-  color: #240A36;
-}
-.pools__header__items_title_02 {
-  font-size: 16px;
-  font-weight: 400;
-  color: #7B6C86;
-}
-.dot {
-  height: 8px;
-  width: 8px;
-  background-color: #2DCE89;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 10px;
-}
-.dot__menu {
-  height: 3px;
-  width: 3px;
-  background-color: #7B6C86;
-  border-radius: 50%;
-  display: block;
-  margin-top: 3px;
-}
-.admin__pools__menu {
-  height: 38px;
-  width: 38px;
-  max-width: 38px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  align-items: center;
-  padding-top: 7px;
-  padding-left: 18px;
+.currency {
+  grid-gap: 15px;
+  &__img {
+
+  }
+  &__value {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    color: #240A36;
+  }
 }
 </style>

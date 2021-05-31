@@ -18,56 +18,35 @@
         >
       </button>
     </div>
-    <div class="edit-modal__wrapper">
+    <div class="edit-modal__main">
       <div class="edit-modal__title">
-        Liquidity mining reward
+        Liquidity minig reward
       </div>
-      <div class="edit-modal__input">
-        <input
-          type="text"
-          placeholder=""
-          class="edit-modal__input"
-        >
-      </div>
-      <div
-        class="edit-modal__title"
-      >
+      <base-input
+        :placeholder="'20.06%'"
+        class="edit-modal__input"
+      />
+      <div class="edit-modal__title">
         APE tax
       </div>
-      <div class="edit-modal__input">
-        <input
-          type="text"
-          class="edit-modal__input"
-        >
-      </div>
+      <base-input
+        :placeholder="'0.7%'"
+        class="edit-modal__input"
+      />
       <div class="edit-modal__title">
         Status
       </div>
-      <div class="">
-        <input
-          id="one"
-          type="radio"
-          value="Active"
-          class="edit-modal__radiobuttons"
-        >
-        <input
-          id="two"
-          type="radio"
-          value="inactive"
-          class="edit-modal__radiobuttons"
-        >
-      </div>
+      <base-radio />
       <div class="edit-modal__buttons">
-        <button
-          v-if="!options.isUnclosable"
-          class="edit-modal__buttons_close"
+        <base-btn
+          :mode="'secondary'"
           @click="close()"
         >
           Close
-        </button>
-        <button class="edit-modal__buttons_save">
+        </base-btn>
+        <base-btn>
           Save
-        </button>
+        </base-btn>
       </div>
     </div>
   </div>
@@ -90,6 +69,14 @@ export default {
       default: true,
     },
   },
+  data() {
+    return {
+      // optionsRadio: [
+      //   { label: 'Active', value: 1 },
+      //   { label: 'Inactive', value: 2 },
+      // ],
+    };
+  },
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
@@ -106,43 +93,24 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.edit-modal__wrapper {
-  padding-left: 20px;
-}
-.edit-modal__input {
-  padding-left: 10px;
-  width: 424px;
-  max-width: 434px;
-  height: 59px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  border: 0;
-}
-.edit-modal__title {
-  margin: 20px 0 10px;
-}
-.edit-modal__radiobuttons {
-  color: darkred;
-  height: 21px;
-  width: 21px;
-  margin-bottom: 36px;
-  &:last-child {
-    margin-left: 200px;
+.edit-modal {
+  &__main {
+    padding: 20px;
   }
-}
-.edit-modal__buttons_close {
-  height: 51px;
-  width: 147px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  margin-bottom: 20px;
-}
-.edit-modal__buttons_save {
-  height: 51px;
-  width: 267px;
-  border-radius: 10px;
-  background: #C31433;
-  color: white;
-  margin-left: 16px;
+  &__title {
+    margin-bottom: 10px;
+    color: #240A36;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+  }
+  &__input {
+    margin-bottom: 10px;
+  }
+  &__buttons {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 20px;
+  }
 }
 </style>

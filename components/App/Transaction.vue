@@ -5,12 +5,6 @@
         <div class="transaction__title">
           Transaction
         </div>
-        <button
-          class="admin__addpool__button"
-          @click="openAddModal"
-        >
-          Add new Pool
-        </button>
       </div>
       <b-row class="transaction__header">
         <b-col class="transaction__header_title">
@@ -83,7 +77,6 @@
 </template>
 
 <script>
-import modals from '@/store/modals/modals';
 
 export default {
   name: 'Transaction',
@@ -95,14 +88,6 @@ export default {
     active: {
       type: Boolean,
       default: false,
-    },
-  },
-  methods: {
-    openAddModal() {
-      this.ShowModal({
-        text: 'WalletConnect',
-        key: modals.addPool,
-      });
     },
   },
 };
@@ -123,16 +108,6 @@ export default {
   display: flex;
   justify-content: space-between;
   text-align: center;
-}
-.admin__addpool__button {
-  align-items: center;
-  text-align: center;
-  background: #C31433;
-  height: 38px;
-  width: 129px;
-  color: white;
-  border-radius: 10px;
-  margin-right: 20px;
 }
 .transaction__title {
   margin: 20px;
