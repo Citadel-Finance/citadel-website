@@ -19,7 +19,7 @@
       <modal-edit-pool v-if="modals.editPool === currentModalKey" />
       <modal-status v-if="modals.status === currentModalKey" />
       <modal-withdraw-pool v-if="modals.withdrawPool === currentModalKey" />
-      <!--      <claim-pool v-if="modals.claimPool === currentModalKey"/>-->
+      <modal-claim-pool v-if="modals.claimPool === currentModalKey" />
     </div>
   </transition>
 </template>
@@ -27,24 +27,24 @@
 import { mapGetters } from 'vuex';
 import modals from '@/store/modals/modals';
 import modalAddPool from '@/components/CtmModal/modals/ModalAddPool/index';
+import modalClaimPool from '@/components/CtmModal/modals/ModalClaimPool/index';
 import modalConnectWallet from '@/components/CtmModal/modals/ModalConnectWallet/index';
 import modalDeletePool from '@/components/CtmModal/modals/ModalDeletePool/index';
 import modalDepositPool from '@/components/CtmModal/modals/ModalDepositPool/index';
 import modalEditPool from '@/components/CtmModal/modals/ModalEditPool/index';
 import modalStatus from '@/components/CtmModal/modals/ModalStatus/index';
 import modalWithdrawPool from '@/components/CtmModal/modals/ModalWithdrawPool/index';
-// import claimPool from '@/components/CtmModal/ClaimPoolModal/index';
 
 export default {
   components: {
     'modal-add-pool': modalAddPool,
+    'modal-claim-pool': modalClaimPool,
     'modal-connect-wallet': modalConnectWallet,
     'modal-delete-pool': modalDeletePool,
     'modal-deposit-pool': modalDepositPool,
     'modal-edit-pool': modalEditPool,
     'modal-status': modalStatus,
     'modal-withdraw-pool': modalWithdrawPool,
-    // 'claim-pool': claimPool,
   },
   data: () => ({
     modals,

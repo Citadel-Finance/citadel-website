@@ -1,19 +1,18 @@
 <template>
-  <div class="balance__container">
+  <div class="balance">
     <div class="balance__title">
-      Balance CitaDEL
+      {{ title }}
     </div>
-    <div class="balance__row">
+    <div class="balance__card">
       <Card title="SUPPLY CITADEL" />
       <Card title="BALANCE CITADEL" />
       <Card title="REWARDS CITADEL" />
       <Card title="PRICE CITADEL" />
     </div>
-    <div
-      class="balance__btn"
-      @click="openClaimModal"
-    >
-      Claim
+    <div class="balance__button">
+      <base-btn @click="openClaimModal">
+        Claim
+      </base-btn>
     </div>
   </div>
 </template>
@@ -29,6 +28,11 @@ export default {
   },
   props: {
   },
+  data() {
+    return {
+      title: 'Balance CitaDEL',
+    };
+  },
   methods: {
     openClaimModal() {
       this.ShowModal({
@@ -41,35 +45,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.balance__row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -5px;
-}
-.balance__container{
+.balance {
   background: #FFFFFF;
-  width: 370px;
-  height: 466px;
+  border-radius: 10px;
   padding: 20px;
-  border-radius: 10px;
-}
-
-.balance__btn {
-  margin-top: 15px;
-  height: 59px;
-  width: 330px;
-  cursor: pointer;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #FFFFFF;
-  transition: .3s;
-  background: #E6A1AE;
-}
-.balance__title{
-  padding-bottom: 20px;
+  &__title {
+    font-size: 21px;
+    line-height: 25px;
+    color: #240A36;
+    margin-bottom: 20px;
+  }
+  &__card {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  &__button {
+    margin-top: 20px;
+  }
 }
 </style>

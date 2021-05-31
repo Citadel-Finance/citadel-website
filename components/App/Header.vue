@@ -37,16 +37,16 @@ export default {
 <style lang="scss" scoped>
 .header {
   width: 100%;
-  background: #ffffff;
+  background: #FFFFFF;
   height: 80px;
   margin-bottom: 30px;
 }
 .header__wrapper {
   max-width: 1170px;
-  background: #ffffff;
+  background: #FFFFFF;
   display: flex;
   margin: auto;
   justify-content: space-between;
-  padding: 15px 0px 0px 0px;
+  padding: 15px 0 0 0;
 }
 </style>

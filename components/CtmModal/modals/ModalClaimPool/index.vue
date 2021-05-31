@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title || 'Deposit' }}
+        {{ title || options.title || 'Claim' }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -18,26 +18,39 @@
         >
       </button>
     </div>
-    <div class="deposit-modal__main">
-      <div class="deposit-modal__text">
-        {{ depositText }}
+    <div class="claim-modal__main">
+      <div class="claim-modal__text">
+        {{ claimText }}
       </div>
-      <div class="deposit-modal__title">
-        Amount
-      </div>
-      <base-input
-        :placeholder="'Amount in ETH'"
-        :description="'MAX'"
-      />
-      <div class="deposit-modal__balance balance">
-        <div class="balance__title">
-          Your balance:
+      <div class="claim-modal__rewards rewards">
+        <div class="rewards__titles">
+          <span
+            v-for="(item, i) in rewardsTitle"
+            :key="i"
+            class="rewards__title"
+          >
+            {{ item }}
+          </span>
         </div>
-        <div class="balance__value">
-          {{ balance }}
+        <div class="rewards__values">
+          <span
+            v-for="(item, i) in rewardsValues"
+            :key="i"
+            class="rewards__value"
+          >
+            {{ item }}
+          </span>
         </div>
       </div>
-      <div class="deposit-modal__buttons">
+      <div class="claim-modal__amount amount">
+        <div class="amount__title">
+          Total amount:
+        </div>
+        <div class="amount__value">
+          {{ amount }}
+        </div>
+      </div>
+      <div class="claim-modal__buttons">
         <base-btn
           :mode="'secondary'"
           @click="close()"
@@ -45,7 +58,7 @@
           Close
         </base-btn>
         <base-btn>
-          Deposit
+          Claim all
         </base-btn>
       </div>
     </div>
@@ -71,8 +84,20 @@ export default {
   },
   data() {
     return {
-      depositText: 'To deposit ETH, you will be prompted to confirm the deposit.',
-      balance: '23.25640000 ETH',
+      claimText: 'To deposit ETH, you will be prompted to confirm the deposit. ',
+      amount: '100.26000000 ETH',
+      rewardsTitle: {
+        earlyRewards: 'Early rewards:',
+        lp1Rewards: 'LP1 rewards:',
+        lp2Rewards: 'LP2 rewards:',
+        hidingGameRewards: 'Hiding game rewards:',
+      },
+      rewardsValues: {
+        earlyRewards: '23.25640000 ETH',
+        lp1Rewards: '23.25640000 ETH',
+        lp2Rewards: '23.25640000 ETH',
+        hidingGameRewards: '23.25640000 ETH',
+      },
     };
   },
   computed: {
@@ -91,7 +116,7 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.deposit-modal {
+.claim-modal {
   &__main {
     padding: 20px;
   }
@@ -115,20 +140,46 @@ export default {
     grid-gap: 20px;
   }
 }
-.balance {
+.rewards {
+  background: #F6F5F7;
+  border-radius: 10px;
+  padding: 20px 15px;
+  margin: 20px 0 10px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  &__titles {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr;
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+  }
+  &__values {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: 1fr;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
+    color: #240A36;
+  }
+}
+.amount {
+  display: flex;
+  padding: 20px 15px;
+  justify-content: space-between;
+  margin-bottom: 10px;
   &__title {
     font-size: 16px;
     line-height: 20px;
     color: #7B6C86;
   }
   &__value {
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
-    color: #240A36;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #240B36;
   }
 }
 </style>

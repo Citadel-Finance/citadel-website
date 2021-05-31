@@ -19,7 +19,10 @@
         thead-class="table__header"
       >
         <template #head()="title">
-          <div class="table__title">
+          <div
+            class="table__title"
+            @click="getPools"
+          >
             {{ title.label }}
           </div>
         </template>
@@ -65,6 +68,7 @@
 
 import { mapGetters } from 'vuex';
 import modals from '~/store/modals/modals';
+import pools from '~/pages/pools';
 
 export default {
   name: 'Pools',
@@ -101,15 +105,15 @@ export default {
       poolsMap: 'user/getPoolsMap',
     }),
   },
-  async mounted() {
-    console.log(this.poolsMap);
-  },
   methods: {
     openAddModal() {
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.addPool,
       });
+    },
+    getPools() {
+      console.log(this.poolsMap);
     },
   },
 };
@@ -170,6 +174,12 @@ export default {
       font-size: 16px;
       line-height: 20px;
       color: #7B6C86;
+    }
+    th:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+    th:last-child {
+      border-radius: 0 10px 10px 0;
     }
   }
 }
