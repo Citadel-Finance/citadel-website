@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js';
 import { initWeb3Provider } from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
@@ -16,7 +17,10 @@ export default {
       return r;
     }
     await dispatch('initFactory');
-    await dispatch('initPoolsAndTokens');
+    await Promise.all([
+      dispatch('initPoolsAndTokens'),
+      dispatch('initCtlToken'),
+    ]);
     return r;
   },
   async initFactory({ commit }) {
@@ -30,6 +34,14 @@ export default {
     }
     commit('setFactory', factory);
   },
+  async initCtlToken({ getters, commit }) {
+    const { ctlTokenAddress } = getters.getFactory;
+    console.log('ctlTokenAddress', ctlTokenAddress);
+    const ctlToken = new Token({ address: ctlTokenAddress });
+    await ctlToken.initInst();
+    await ctlToken.fetchAll();
+    commit('setCtlToken', ctlToken);
+  },
   async initPoolsAndTokens({ getters, commit }) {
     const { poolData } = getters.getFactory;
     const tokensAddresses = poolData.map((pair) => pair.token);
@@ -37,17 +49,12 @@ export default {
     const tokens = tokensAddresses.map((address) => new Token({ address }));
     const pools = poolsAddresses.map((address) => new Pool({ address }));
 
-    // pools.forEach((pool, i) => {
-    //   pool.setChildAddress(tokensAddresses[i]);
-    // });
     tokens.forEach((token, i) => {
       token.setParrentAddress(poolsAddresses[i]);
     });
+
     await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]);
-    await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchCommonData())]);
-    console.log('tokens', tokens);
-    console.log('pools', pools);
-    // console.log('DONE');
+    await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
 
     const poolsMap = {};
     pools.forEach((pool) => {
@@ -61,8 +68,28 @@ export default {
 
     commit('setPoolsMap', poolsMap);
     commit('setTokensMap', tokensMap);
+  },
 
-    // const r = await pools[0].deposit();
-    // console.log('deposit', r);
+  async poolDeposit({ getters }, { amount, poolAddress }) {
+    const poolsMap = getters.getPoolsMap;
+    const tokensMap = getters.getTokensMap;
+    const pool = poolsMap[poolAddress];
+    const tokenAddress = pool.childAddress;
+    const token = tokensMap[tokenAddress];
+    const bnAmount = new BigNumber(amount).shiftedBy(token.decimals).toString();
+    const { result } = await token.allowance(poolAddress);
+    const { allowance } = result;
+    console.log('allowance', allowance, amount);
+    if (+allowance < +amount) {
+      const approveRes = await token.approve(poolAddress, bnAmount);
+      if (!approveRes.ok) {
+        console.log('approve error');
+        return;
+      }
+      console.log(approveRes);
+    }
+    const depositRes = await pool.deposit(bnAmount);
+    console.log(depositRes);
+    console.log('DONE');
   },
 };

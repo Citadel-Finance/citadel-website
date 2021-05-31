@@ -13,15 +13,22 @@ export default class Pool extends BasicSmartContract {
     });
   }
 
+  async fetchAll() {
+    await Promise.all([
+      this.fetchCommonData(),
+    ]);
+  }
+
   async fetchCommonData() {
     try {
       const commonData = await this.fetchContractData('getCommonData');
-      console.log(commonData);
-      const { decimals, token, totalStaked } = commonData;
+      const {
+        decimals, token, totalStaked, symbol,
+      } = commonData;
       this.decimals = decimals;
+      this.symbol = symbol;
       this.childAddress = token;
       this.totalStaked = new BigNumber(totalStaked).shiftedBy(-decimals).toString();
-      console.log(this);
       return output({ commonData });
     } catch (e) {
       console.log('fetchCommonData error', e, this);

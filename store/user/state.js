@@ -6,4 +6,6 @@ export default () => ({
 
   poolsMap: {},
   tokensMap: {},
+
+  ctlToken: {},
 });
