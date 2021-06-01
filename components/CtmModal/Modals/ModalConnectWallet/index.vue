@@ -58,10 +58,12 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     async handleConnectWallet() {
+      this.SetLoader(true);
       const r = await this.$store.dispatch('user/connectWallet');
       if (!r.ok) {
         return;
       }
+      this.SetLoader(false);
       this.CloseModal();
     },
   },

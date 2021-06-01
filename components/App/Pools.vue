@@ -71,7 +71,7 @@
                 <b-td>
                   <base-dd-settings
                     :options="options"
-                    class="settings__dd"
+                    class="table-main__settings"
                   />
                 </b-td>
               </b-tr>
@@ -80,6 +80,7 @@
         </div>
       </client-only>
     </div>
+    <loader-screen />
   </div>
 </template>
 
@@ -115,6 +116,7 @@ export default {
   },
   methods: {
     openAddModal() {
+      this.SetLoader(true);
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.addPool,
