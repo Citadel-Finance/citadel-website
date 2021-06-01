@@ -8,18 +8,11 @@
       :class="classActive"
       @click="toggleDropdown()"
     >
-      <img
-        src="../../../assets/Ethereum.svg"
-        alt="logo"
-      >
-      <p class="base-dropdown__title">
-        {{ options[value].label }}
-      </p>
-      <img
-        class="base-dropdown__icon"
-        src="../../../assets/dropdown_arrow.svg"
-        alt="dropdown"
-      >
+      <span
+        v-for="(dot, i) of 3"
+        :key="`base-dropdown__dot_${i}`"
+        class="base-dropdown__dot"
+      />
     </div>
     <div
       v-if="isOptionVisible"
@@ -29,7 +22,6 @@
         v-for="(option, i) in options"
         :key="`base-dropdown__item_${i}`"
         class="base-dropdown__item"
-        @click="selectOption(i)"
       >
         {{ option.label }}
       </span>
@@ -77,10 +69,6 @@ export default {
     closeDropdown() {
       this.isOptionVisible = false;
     },
-    selectOption(i) {
-      this.$emit('input', i);
-      this.isOptionVisible = false;
-    },
     toggleDropdown() {
       this.isOptionVisible = !this.isOptionVisible;
     },
@@ -91,34 +79,24 @@ export default {
 <style lang="scss" scoped>
 .base-dropdown {
   position: relative;
-  width: 100%;
-  font-size: 21px;
-  line-height: 21px;
-  color: #240A36;
-
   &__head {
-    width: 219px;
-    max-height: 66px;
-    position: relative;
+    width: 38px;
+    height: 38px;
     display: flex;
-    grid-gap: 20px;
-    padding: 15px;
-    align-items: center;
+    grid-gap: 6px;
     background: #F6F5F7;
     border-radius: 10px;
     cursor: pointer;
-    &_active .base-dropdown__icon {
-      transform: rotate(180deg);
-    }
+    flex-direction: column;
+    justify-content: center;
   }
   &__items {
     position: absolute;
-    top: 80px;
-    left: -15%;
+    top: 45px;
+    right: 0;
     display: flex;
     width: 100%;
-    min-width: 290px;
-    margin: 0 auto;
+    min-width: 211px;
     flex-direction: column;
     background: #FFFFFF;
     box-shadow: 0 12px 31px rgba(0, 0, 0, 0.17);
@@ -138,8 +116,19 @@ export default {
       background: #F6F5F7;
     }
   }
-  &__icon {
-    transition: 0.2s ease-in-out;
+  &__dot {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #7B6C86;
+    }
   }
 }
 </style>

@@ -18,7 +18,6 @@
       <base-dropdown
         v-model="selected"
         :options="options"
-        :mode="'bg-transparent'"
         class="menu__dd"
       />
       <Edit />

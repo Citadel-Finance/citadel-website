@@ -68,6 +68,12 @@
                     </span>
                   </div>
                 </b-td>
+                <b-td>
+                  <base-dd-settings
+                    :options="options"
+                    class="settings__dd"
+                  />
+                </b-td>
               </b-tr>
             </nuxt-link>
           </b-tbody>
@@ -87,25 +93,17 @@ export default {
   name: 'Pools',
   data() {
     return {
-
-      // poolsMapTest: {
-      //   '0xBC6ae91F55af580B4C0E8c32D7910d00D3dbe54d': {
-      //     abi: '....',
-      //     totalStaked: 10,
-      //   },
-      //   '0xBC6ae91F55af580B4C0E8c32D7910d00D3db154d': {
-      //     abi: '...',
-      //     totalStaked: 20,
-      //   },
-      // },
-      // // Object.keys(poolsMapTest) => []
-
+      options: [
+        { label: 'Edit pool', value: 1 },
+        { label: 'Delete', value: 2 },
+      ],
       fields: [
         { key: 'currency', label: 'Currency' },
         { key: 'apy', label: 'APY' },
         { key: 'liquidity', label: 'Liquidity (USD)' },
         { key: 'balance', label: 'Balance' },
         { key: 'status', label: 'Status' },
+        { key: 'settings', label: '' },
       ],
     };
   },
@@ -174,11 +172,10 @@ export default {
   thead, tbody tr {
     display: grid;
     min-width: 1130px;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 1fr) 0.3fr;
   }
   th, td {
     padding: 14px 20px;
-    vertical-align: inherit;
     border: none;
   }
   td {
@@ -191,12 +188,6 @@ export default {
   }
   &__link {
     text-decoration: none;
-  }
-  &__link:hover {
-    tr {
-      border-radius: 10px;
-      background: #F6F5F7;
-    }
   }
 }
 .currency {
