@@ -11,17 +11,19 @@
           </base-btn>
         </div>
       </div>
-      <div
+      <!--      <div-->
+      <!--        v-for="(poolAddress, i) in Object.keys(poolsMap)"-->
+      <!--        :key="`pool__item-${i}`"-->
+      <!--      >-->
+      <!--        {{ poolsMap[poolAddress].totalStaked }} {{ tokensMap[poolsMap[poolAddress].childAddress].balance }} {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}-->
+      <!--        <img-->
+      <!--          :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"-->
+      <!--          alt=""-->
+      <!--        >-->
+      <!--      </div>-->
+      <b-table
         v-for="(poolAddress, i) in Object.keys(poolsMap)"
         :key="`pool__item-${i}`"
-      >
-        {{ poolsMap[poolAddress].totalStaked }} {{ tokensMap[poolsMap[poolAddress].childAddress].balance }} {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
-        <img
-          :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
-          alt=""
-        >
-      </div>
-      <b-table
         class="pools__table table"
         :items="items"
         :fields="fields"
@@ -36,16 +38,16 @@
             {{ title.label }}
           </div>
         </template>
-        <template #cell(currency)="data">
+        <template #cell(currency)="">
           <div class="table__col currency">
             <span class="currency__img">
               <img
-                src="../../assets/Ethereum.svg"
+                :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
                 alt=""
               >
             </span>
             <span class="currency__value">
-              {{ data.value }}
+              {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
             </span>
           </div>
         </template>
@@ -54,14 +56,14 @@
             {{ data.value }}
           </div>
         </template>
-        <template #cell(liquidity)="data">
+        <template #cell(liquidity)="">
           <div class="table__col">
-            {{ data.value }}
+            {{ poolsMap[poolAddress].totalStaked }}
           </div>
         </template>
-        <template #cell(balance)="data">
+        <template #cell(balance)="">
           <div class="table__col balance">
-            {{ data.value }}
+            {{ tokensMap[poolsMap[poolAddress].childAddress].balance }}
           </div>
         </template>
         <template #cell(status)="data">
@@ -106,20 +108,20 @@ export default {
       ],
       items: [
         {
-          id: 0, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+          currency: '', apy: '-', liquidity: '', balance: '', status: true,
         },
-        {
-          id: 1, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
-        },
-        {
-          id: 2, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
-        },
-        {
-          id: 3, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
-        },
-        {
-          id: 4, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: false,
-        },
+        // {
+        //   id: 1, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+        // },
+        // {
+        //   id: 2, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+        // },
+        // {
+        //   id: 3, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
+        // },
+        // {
+        //   id: 4, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: false,
+        // },
       ],
     };
   },
