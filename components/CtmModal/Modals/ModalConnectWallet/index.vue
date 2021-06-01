@@ -21,12 +21,10 @@
     <div class="connect-modal__main">
       <div class="connect-modal__buttons">
         <base-btn
-          v-for="wallet in wallets"
-          :key="wallet"
           :mode="'secondary'"
           @click="handleConnectWallet"
         >
-          {{ wallet }}
+          Metamask
         </base-btn>
       </div>
     </div>
@@ -49,16 +47,6 @@ export default {
       type: Boolean,
       default: true,
     },
-  },
-  data() {
-    return {
-      wallets: [
-        'Metamask',
-        'Wallet1',
-        'Wallet2',
-        'Wallet3',
-      ],
-    };
   },
   computed: {
     ...mapGetters({

@@ -26,14 +26,14 @@
 <script>
 import { mapGetters } from 'vuex';
 import modals from '@/store/modals/modals';
-import modalAddPool from '@/components/CtmModal/modals/ModalAddPool/index';
-import modalClaimPool from '@/components/CtmModal/modals/ModalClaimPool/index';
-import modalConnectWallet from '@/components/CtmModal/modals/ModalConnectWallet/index';
-import modalDeletePool from '@/components/CtmModal/modals/ModalDeletePool/index';
-import modalDepositPool from '@/components/CtmModal/modals/ModalDepositPool/index';
-import modalEditPool from '@/components/CtmModal/modals/ModalEditPool/index';
-import modalStatus from '@/components/CtmModal/modals/ModalStatus/index';
-import modalWithdrawPool from '@/components/CtmModal/modals/ModalWithdrawPool/index';
+import modalAddPool from '@/components/CtmModal/Modals/ModalAddPool/index';
+import modalClaimPool from '@/components/CtmModal/Modals/ModalClaimPool/index';
+import modalConnectWallet from '@/components/CtmModal/Modals/ModalConnectWallet/index';
+import modalDeletePool from '@/components/CtmModal/Modals/ModalDeletePool/index';
+import modalDepositPool from '@/components/CtmModal/Modals/ModalDepositPool/index';
+import modalEditPool from '@/components/CtmModal/Modals/ModalEditPool/index';
+import modalStatus from '@/components/CtmModal/Modals/ModalStatus/index';
+import modalWithdrawPool from '@/components/CtmModal/Modals/ModalWithdrawPool/index';
 
 export default {
   components: {

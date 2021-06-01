@@ -11,67 +11,68 @@
           </base-btn>
         </div>
       </div>
-      <!--      <div-->
-      <!--        v-for="(poolAddress, i) in Object.keys(poolsMap)"-->
-      <!--        :key="`pool__item-${i}`"-->
-      <!--      >-->
-      <!--        {{ poolsMap[poolAddress].totalStaked }} {{ tokensMap[poolsMap[poolAddress].childAddress].balance }} {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}-->
-      <!--        <img-->
-      <!--          :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"-->
-      <!--          alt=""-->
-      <!--        >-->
-      <!--      </div>-->
-      <b-table
-        v-for="(poolAddress, i) in Object.keys(poolsMap)"
-        :key="`pool__item-${i}`"
-        class="pools__table table"
-        :items="items"
-        :fields="fields"
-        borderless
-        thead-class="table__header"
-      >
-        <template #head()="title">
-          <div
-            class="table__title"
-            @click="getPools"
-          >
-            {{ title.label }}
-          </div>
-        </template>
-        <template #cell(currency)="">
-          <div class="table__col currency">
-            <span class="currency__img">
-              <img
-                :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
-                alt=""
-              >
-            </span>
-            <span class="currency__value">
-              {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
-            </span>
-          </div>
-        </template>
-        <template #cell(apy)="data">
-          <div class="table__col">
-            {{ data.value }}
-          </div>
-        </template>
-        <template #cell(liquidity)="">
-          <div class="table__col">
-            {{ poolsMap[poolAddress].totalStaked }}
-          </div>
-        </template>
-        <template #cell(balance)="">
-          <div class="table__col balance">
-            {{ tokensMap[poolsMap[poolAddress].childAddress].balance }}
-          </div>
-        </template>
-        <template #cell(status)="data">
-          <div class="table__col">
-            {{ data.value }}
-          </div>
-        </template>
-      </b-table>
+      <client-only>
+        <div class="pools__table table-main">
+          <b-thead>
+            <b-th
+              v-for="(field,i) in fields"
+              :key="`table__title-${i}`"
+            >
+              {{ field.label }}
+            </b-th>
+          </b-thead>
+          <b-tbody>
+            <nuxt-link
+              v-for="(poolAddress, i) in Object.keys(poolsMap)"
+              :key="`pool__item-${i}`"
+              to="/pools"
+              class="table-main__link"
+            >
+              <b-tr>
+                <b-td>
+                  <div class="table-main__col currency">
+                    <span class="currency__img">
+                      <img
+                        :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
+                        alt=""
+                      >
+                    </span>
+                    <span class="currency__value">
+                      {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
+                    </span>
+                  </div>
+                </b-td>
+                <b-td>
+                  <div class="table-main__col">
+                    --
+                  </div>
+                </b-td>
+                <b-td>
+                  <div class="table-main__col">
+                    {{ poolsMap[poolAddress].totalStaked }}
+                  </div>
+                </b-td>
+                <b-td>
+                  <div class="table-main__col balance">
+                    {{ tokensMap[poolsMap[poolAddress].childAddress].balance }}
+                  </div>
+                </b-td>
+                <b-td>
+                  <div class="table-main__col status">
+                    <span
+                      class="status__dot"
+                      :class="{'slide__dot_active': poolsMap[poolAddress].status === true}"
+                    />
+                    <span>
+                      Inactive
+                    </span>
+                  </div>
+                </b-td>
+              </b-tr>
+            </nuxt-link>
+          </b-tbody>
+        </div>
+      </client-only>
     </div>
   </div>
 </template>
@@ -106,23 +107,6 @@ export default {
         { key: 'balance', label: 'Balance' },
         { key: 'status', label: 'Status' },
       ],
-      items: [
-        {
-          currency: '', apy: '-', liquidity: '', balance: '', status: true,
-        },
-        // {
-        //   id: 1, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
-        // },
-        // {
-        //   id: 2, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
-        // },
-        // {
-        //   id: 3, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: true,
-        // },
-        // {
-        //   id: 4, currency: 'ETH', apy: '15.25%', liquidity: '$ 15 256 547', balance: '23 025', status: false,
-        // },
-      ],
     };
   },
   computed: {
@@ -137,9 +121,6 @@ export default {
         text: 'WalletConnect',
         key: modals.addPool,
       });
-    },
-    getPools() {
-      console.log(this.poolsMap);
     },
   },
 };
@@ -178,34 +159,43 @@ export default {
     }
   }
 }
-.pools::v-deep {
-  .table {
-    margin: 20px 0 0 0;
-    thead {
-      background: rgba(36, 11, 54, 0.04);
+.table-main {
+  margin: 20px 0 0 0;
+  thead {
+    background: rgba(36, 11, 54, 0.04);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #7B6C86;
+  }
+  thead, tbody tr {
+    display: grid;
+    min-width: 1130px;
+    grid-template-columns: repeat(5, 1fr);
+  }
+  th, td {
+    padding: 14px 20px;
+    vertical-align: inherit;
+    border: none;
+  }
+  td {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+    display: flex;
+    align-items: center;
+  }
+  &__link {
+    text-decoration: none;
+  }
+  &__link:hover {
+    tr {
       border-radius: 10px;
-      font-weight: bold;
-      font-size: 10px;
-      line-height: 12px;
-      letter-spacing: 0.105em;
-      text-transform: uppercase;
-      color: #7B6C86;
-    }
-    th, td {
-      padding: 14px 20px;
-      vertical-align: inherit;
-    }
-    td {
-      font-weight: normal;
-      font-size: 16px;
-      line-height: 20px;
-      color: #7B6C86;
-    }
-    th:first-child {
-      border-radius: 10px 0 0 10px;
-    }
-    th:last-child {
-      border-radius: 0 10px 10px 0;
+      background: #F6F5F7;
     }
   }
 }
@@ -225,5 +215,27 @@ export default {
   font-size: 16px;
   line-height: 20px;
   color: #240A36;
+}
+.status {
+  display: flex;
+  grid-gap: 10px;
+  align-items: center;
+  &__dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    &:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #C31432;
+      transition: 0.3s ease-in-out;
+    }
+    &_active:before {
+      background: #2DCE89;
+    }
+  }
 }
 </style>

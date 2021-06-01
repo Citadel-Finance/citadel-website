@@ -9,14 +9,14 @@
         </div>
       </div>
       <div class="balance__card">
-        Your Balance
+        Your earnings
         <hr class="balance__hr">
         <div class="balance__number">
           10.26000000 ETH
         </div>
       </div>
       <div class="balance__card">
-        Your Balance
+        Total borrowed
         <hr class="balance__hr">
         <div class="balance__number">
           10.26000000 ETH

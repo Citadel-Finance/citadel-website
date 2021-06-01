@@ -10,7 +10,7 @@ export default {
     console.log(r);
     if (!r.ok) {
       // TODO show modal
-      // await dispatch('modals/show', {
+      // await dispatch('Modals/show', {
       //   //
       // }, { root: true });
 

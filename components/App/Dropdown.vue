@@ -1,46 +1,36 @@
 <template>
-  <div class="dropdown__container">
-    <div class="dropdown__button">
+  <div class="dropdown__container container">
+    <div class="container__back back">
       <n-link to="/">
         <button
-          class="dropdown__button"
+          class="back__button"
         >
           <img
             src="../../assets/back_arrow.svg"
             alt="back"
+            class="back__img"
           >
           Back
         </button>
       </n-link>
     </div>
-    <div class="dropdown__menu">
-      <div class="dropdown__menu_container">
-        <img
-          src="../../assets/Ethereum.svg"
-          alt="logo"
-        > ETH POOL
-        <!--        <div class="dropdown__menu_title">-->
-        <!--            <b-dropdown id="dropdown-offset" offset="-50" text="ETH POOL" class="dropdown__menu_title">-->
-        <!--              <b-dropdown-item href="#">Action</b-dropdown-item>-->
-        <!--              <b-dropdown-item href="#">Another action</b-dropdown-item>-->
-        <!--              <b-dropdown-item href="#">Something else here</b-dropdown-item>-->
-        <!--            </b-dropdown>-->
-        <!--        </div>-->
-        <img
-          src="../../assets/dropdown_arrow.svg"
-          alt="dropdown"
-        >
-      </div>
+    <div class="container__menu menu">
+      <base-dropdown
+        v-model="selected"
+        :options="options"
+        :mode="'bg-transparent'"
+        class="menu__dd"
+      />
+      <Edit />
+      <Delete />
     </div>
-    <Edit />
-    <Delete />
-    <div class="dropdown__info">
-      <div class="dropdown__info_title">
-        ANNUAL PERCENTAGE RATE
+    <div class="container__info info">
+      <div class="info__title">
+        {{ titleRate }}
       </div>
-      <hr class="dropdown__hr">
-      <div class="dropdown__info_percents">
-        20.06%
+      <hr class="info__line">
+      <div class="info__percents">
+        {{ percents }}
       </div>
     </div>
   </div>
@@ -57,53 +47,70 @@ export default {
     Delete,
   },
   props: {},
+  data() {
+    return {
+      titleRate: 'Annual percentage rate',
+      percents: '20.06%',
+      options: [
+        { label: 'ETH Pool 1', value: 1 },
+        { label: 'ETH Pool 2', value: 2 },
+        { label: 'ETH Pool 3', value: 3 },
+        { label: 'ETH Pool 4', value: 4 },
+      ],
+      selected: 0,
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .dropdown__container {
-  width: 1170px;
-  height: 113px;
   background: #FFFFFF;
   align-items: center;
-  justify-content: space-between;
-  display: flex;
-  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto 30px;
+  width: 100%;
   max-width: 1170px;
   border-radius: 10px;
-  margin-bottom: 30px;
-  padding-right: 20px;
+  padding: 20px;
 }
-.dropdown__menu {
-  border-radius: 10px;
-  background-color: #F6F5F7;
-  height: 66px;
-  width: 220px;
+.back {
+  &__img {
+    margin-right: 20px;
+  }
 }
-.dropdown__button {
-  width: 122px;
-  height: 52px;
-}
-.dropdown__menu_container {
-  padding: 15px;
+.menu {
   display: flex;
-  justify-content: space-between;
+  grid-gap: 20px;
+  justify-items: center;
   align-items: center;
 }
-.dropdown__hr {
-  border: 2px solid #C31433;
-  justify-content: right;
-  color: darkred;
-  width: 40px;
-  margin: 20px 0;
-}
-.dropdown__info {
-  display: block;
-  justify-content: flex-end;
-}
-.dropdown__info_title {
-  font-size: 10px;
-  font-weight: 700;
-  color: #7B6C86;
+.info {
+  display: grid;
+  justify-content: end;
+  &__title {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #7B6C86;
+  }
+  &__line {
+    width: 40px;
+    margin: 20px 0 20px auto;
+    border: none;
+    background-color: #C31433;
+    color: #C31433;
+    height: 3px;
+  }
+  &__percents {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    text-align: right;
+    color: #240B36;
+  }
 }
 </style>
