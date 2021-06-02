@@ -86,7 +86,8 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     async withdraw() {
-      const { amount } = this;
+      // const { amount } = this;
+      const amount = 11;
       const poolAddress = this.$route.params.address;
       this.SetLoader(true);
       await this.$store.dispatch('user/poolWithdraw', {

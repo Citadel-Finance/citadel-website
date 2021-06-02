@@ -95,7 +95,7 @@ export default {
     console.log(depositRes);
     console.log('DONE');
   },
-  async poolWithdraw({ getters }, { amount, poolAddress }) {
+  async poolWithdrawOld({ getters }, { amount, poolAddress }) {
     const poolsMap = getters.getPoolsMap;
     const tokensMap = getters.getTokensMap;
     const pool = poolsMap[poolAddress];
@@ -116,5 +116,13 @@ export default {
     // const depositRes = await pool.withdraw(bnAmount);
     // console.log(depositRes);
     // console.log('DONE');
+  },
+  async poolWithdraw({ getters }, { amount, poolAddress }) {
+    const poolsMap = getters.getPoolsMap;
+    const pool = poolsMap[poolAddress];
+    const bnAmount = new BigNumber(amount).shiftedBy(+pool.decimals).toString();
+    const withdrawRes = await pool.withdraw(bnAmount);
+    console.log(withdrawRes);
+    console.log('DONE');
   },
 };
