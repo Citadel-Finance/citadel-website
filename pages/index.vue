@@ -38,7 +38,6 @@ export default {
     }),
   },
   async mounted() {
-    this.SetLoader(true);
     // const r = await this.$store.dispatch('user/connectWallet');
     // console.log('DONE');
     // console.log(this.tokensMap);
@@ -47,12 +46,14 @@ export default {
   },
   methods: {
     async testDeposit() {
-      const amount = 15;
+      const amount = 3;
       const poolAddress = Object.keys(this.poolsMap)[1];
+      this.SetLoader(true);
       await this.$store.dispatch('user/poolDeposit', {
         amount,
         poolAddress,
       });
+      this.SetLoader(false);
     },
   },
 };
