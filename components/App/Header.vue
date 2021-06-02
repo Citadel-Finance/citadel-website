@@ -8,7 +8,17 @@
         >
       </div>
       <div>
+        <div
+          v-if="isConnected"
+          class="header__connected"
+        >
+          <span class="header__dot" />
+          <span class="header__address">
+            {{ userAddress }}
+          </span>
+        </div>
         <base-btn
+          v-if="!isConnected"
           @click="openModalConnect"
         >
           Connect Wallet
@@ -19,10 +29,17 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import modals from '~/store/modals/modals';
 
 export default {
   name: 'Header',
+  computed: {
+    ...mapGetters({
+      userAddress: 'user/getUserAddress',
+      isConnected: 'user/getIsConnected',
+    }),
+  },
   methods: {
     openModalConnect() {
       this.ShowModal({
@@ -38,15 +55,40 @@ export default {
 .header {
   width: 100%;
   background: #FFFFFF;
-  height: 80px;
+  padding: 15px;
   margin-bottom: 30px;
-}
-.header__wrapper {
-  max-width: 1170px;
-  background: #FFFFFF;
-  display: flex;
-  margin: auto;
-  justify-content: space-between;
-  padding: 15px 0 0 0;
+  &__wrapper {
+    max-width: 1170px;
+    background: #FFFFFF;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__connected {
+    background: #F6F5F7;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    grid-gap: 15px;
+  }
+  &__dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    &:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #C31432;
+    }
+  }
+  &__address {
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    color: #240B36;
+  }
 }
 </style>

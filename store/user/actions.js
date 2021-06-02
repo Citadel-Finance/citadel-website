@@ -5,7 +5,7 @@ import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
 
 export default {
-  async connectWallet({ dispatch }) {
+  async connectWallet({ dispatch, commit }) {
     const r = await initWeb3Provider();
     console.log(r);
     if (!r.ok) {
@@ -16,11 +16,14 @@ export default {
 
       return r;
     }
+    commit('setIsConnected', true);
     await dispatch('initFactory');
     await Promise.all([
       dispatch('initPoolsAndTokens'),
       dispatch('initCtlToken'),
     ]);
+    const { userAddress } = r.result;
+    commit('setUserAddress', userAddress);
     return r;
   },
   async initFactory({ commit }) {
