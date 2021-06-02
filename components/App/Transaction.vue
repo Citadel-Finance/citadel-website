@@ -3,6 +3,9 @@
     <div class="transactions__wrapper">
       <div class="transactions__title">
         Transactions
+        <!--        <div>-->
+        <!--          {{ poolsEventsAll.length }}-->
+        <!--        </div>-->
       </div>
       <div class="transactions__table table-main">
         <div class="table-main__head">
@@ -16,18 +19,18 @@
         </div>
         <div class="table-main__body">
           <div
-            v-for="(transaction, i) in transactions"
+            v-for="(event, i) in poolsEventsAll"
             :key="`position__item-${i}`"
             class="table-main__tr"
           >
             <div class="table-main__col date">
-              {{ transaction.date }}
+              {{ event.amount }} {{ event.event }}
             </div>
             <div class="table-main__col change">
-              {{ transaction.change }}
+              -
             </div>
             <div class="table-main__col hash">
-              {{ transaction.hash }}
+              {{ event.transactionHash }}
             </div>
           </div>
         </div>
@@ -37,6 +40,8 @@
 </template>
 
 <script>
+
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Transaction',
@@ -50,46 +55,55 @@ export default {
       default: false,
     },
   },
-  data() {
-    return {
-      fields: [
-        { key: 'date', label: 'Date' },
-        { key: 'change', label: 'Change' },
-        { key: 'hash', label: 'TX Hash' },
-      ],
-      transactions: [
-        {
-          id: 0,
-          date: '02.06.2021',
-          change: '$ 15 256 547',
-          hash: 'dgdg5s6...sgsgsf465s',
-        },
-        {
-          id: 1,
-          date: '02.06.2021',
-          change: '$ 15 256 547',
-          hash: 'dgdg5s6...sgsgsf465s',
-        },
-        {
-          id: 2,
-          date: '02.06.2021',
-          change: '$ 15 256 547',
-          hash: 'dgdg5s6...sgsgsf465s',
-        },
-        {
-          id: 3,
-          date: '02.06.2021',
-          change: '$ 15 256 547',
-          hash: 'dgdg5s6...sgsgsf465s',
-        },
-        {
-          id: 4,
-          date: '02.06.2021',
-          change: '$ 15 256 547',
-          hash: 'dgdg5s6...sgsgsf465s',
-        },
-      ],
-    };
+  data: () => ({
+    fields: [
+      { key: 'date', label: 'Date' },
+      { key: 'change', label: 'Change' },
+      { key: 'hash', label: 'TX Hash' },
+    ],
+    transactions: [
+      {
+        id: 0,
+        date: '02.06.2021',
+        change: '$ 15 256 547',
+        hash: 'dgdg5s6...sgsgsf465s',
+      },
+      {
+        id: 1,
+        date: '02.06.2021',
+        change: '$ 15 256 547',
+        hash: 'dgdg5s6...sgsgsf465s',
+      },
+      {
+        id: 2,
+        date: '02.06.2021',
+        change: '$ 15 256 547',
+        hash: 'dgdg5s6...sgsgsf465s',
+      },
+      {
+        id: 3,
+        date: '02.06.2021',
+        change: '$ 15 256 547',
+        hash: 'dgdg5s6...sgsgsf465s',
+      },
+      {
+        id: 4,
+        date: '02.06.2021',
+        change: '$ 15 256 547',
+        hash: 'dgdg5s6...sgsgsf465s',
+      },
+    ],
+  }),
+  computed: {
+    ...mapGetters({
+      poolsEventsAll: 'user/getPoolsEventsAll',
+    }),
+  },
+  mounted() {
+
+  },
+  methods: {
+
   },
 };
 </script>

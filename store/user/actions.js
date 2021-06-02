@@ -45,7 +45,7 @@ export default {
     await ctlToken.fetchAll();
     commit('setCtlToken', ctlToken);
   },
-  async initPoolsAndTokens({ getters, commit }) {
+  async initPoolsAndTokens({ getters, commit, dispatch }) {
     const { poolData } = getters.getFactory;
     const tokensAddresses = poolData.map((pair) => pair.token);
     const poolsAddresses = poolData.map((pair) => pair.pool);
@@ -56,9 +56,6 @@ export default {
       token.setParrentAddress(poolsAddresses[i]);
     });
 
-    await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]);
-    await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
-
     const poolsMap = {};
     pools.forEach((pool) => {
       poolsMap[pool.address] = pool;
@@ -68,9 +65,19 @@ export default {
     tokens.forEach((token) => {
       tokensMap[token.address] = token;
     });
-
     commit('setPoolsMap', poolsMap);
     commit('setTokensMap', tokensMap);
+
+    await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]);
+    await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
+
+    dispatch('subscribeAllPools');
+
+    // dispatch('subscribeAllPools');
+    // setTimeout(() => {
+    //   commit('setPoolsEventsMap', {});
+    //   dispatch('subscribeAllPools');
+    // }, 5000);
   },
 
   async poolDeposit({ getters }, { amount, poolAddress }) {
@@ -124,5 +131,24 @@ export default {
     const withdrawRes = await pool.withdraw(bnAmount);
     console.log(withdrawRes);
     console.log('DONE');
+  },
+
+  subscribeAllPools({ getters, commit }) {
+    const poolsMap = getters.getPoolsMap;
+    Object.keys(poolsMap).forEach((address) => {
+      const pool = poolsMap[address];
+      pool.subscribeEvents('Deposited', (r) => {
+        commit('pushPoolsEventsMap', {
+          key: address,
+          value: r,
+        });
+      });
+      pool.subscribeEvents('Withdrew', (r) => {
+        commit('pushPoolsEventsMap', {
+          key: address,
+          value: r,
+        });
+      });
+    });
   },
 };

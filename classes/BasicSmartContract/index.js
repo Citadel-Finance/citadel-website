@@ -1,5 +1,6 @@
+import BigNumber from 'bignumber.js';
 import {
-  createInst, error, fetchContractData, output,
+  createInst, error, fetchContractData, getWeb3, output,
 } from '~/utils/web3';
 
 const insts = {};
@@ -25,6 +26,28 @@ export default class BasicSmartContract {
 
   inst() {
     return insts[this.address];
+  }
+
+  subscribeEvents(eventName, callback = () => {}) {
+    const rand = Math.random();
+    this.session = { ...this.session, [eventName]: rand };
+    const session = this.session[eventName];
+    const web3 = getWeb3();
+    const inst = new web3.eth.Contract(this.abi, this.address);
+    // console.log('subscribeEvents', eventName, this.address);
+    inst.events[eventName]({
+      fromBlock: 0,
+      filter: {},
+    }, (e, r) => {
+      if (e) {
+        console.log(e);
+        return;
+      }
+      if (session !== this.session[eventName]) {
+        return;
+      }
+      callback(r);
+    });
   }
 
   fetchContractData(_method, _params) {

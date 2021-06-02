@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js';
 import BasicSmartContract from '~/classes/BasicSmartContract';
 import { Pool as PoolAbi } from '~/abis';
-import { error, output } from '~/utils/web3';
+import { error, getWeb3, output } from '~/utils/web3';
 
 export default class Pool extends BasicSmartContract {
   constructor({
@@ -36,17 +36,6 @@ export default class Pool extends BasicSmartContract {
     }
   }
 
-  async fetchTotalStaked() {
-    try {
-      const totalStaked = await this.fetchContractData('totalStaked');
-      console.log(totalStaked);
-      return output({ totalStaked });
-    } catch (e) {
-      console.log('fetchTotalStaked error', e, this);
-      return error(500, 'fetchTotalStaked error', e);
-    }
-  }
-
   async deposit(amount) {
     try {
       const r = await this.inst().deposit(amount);
@@ -67,7 +56,16 @@ export default class Pool extends BasicSmartContract {
     }
   }
 
-  setChildAddress(value) {
-    this.childAddress = value;
+  eventCallback(item) {
+    return {
+      amount: new BigNumber(item.returnValues.amount).shiftedBy(-this.decimals).toString(),
+      ...item,
+    };
+  }
+
+  subscribeEvents(eventName, callback = () => {}) {
+    super.subscribeEvents(eventName, (r) => {
+      callback(this.eventCallback(r));
+    });
   }
 }

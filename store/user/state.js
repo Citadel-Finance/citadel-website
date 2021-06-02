@@ -8,4 +8,8 @@ export default () => ({
   tokensMap: {},
 
   ctlToken: {},
+
+  isUserAdmin: false,
+
+  poolsEventsMap: {},
 });

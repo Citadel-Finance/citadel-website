@@ -1,5 +1,6 @@
 import Web3 from 'web3';
 import Web4 from '@cryptonteam/web4';
+import BigNumber from 'bignumber.js';
 
 let web3;
 let web4;
@@ -17,6 +18,8 @@ export const error = (code, msg, data) => ({
   msg,
   data,
 });
+
+BigNumber.config({ EXPONENTIAL_AT: 60 });
 
 export const initWeb3Provider = async () => {
   try {
@@ -48,5 +51,7 @@ export const createInst = async (abi, address) => {
   const abs = web4.getContractAbstraction(abi);
   return await abs.getInstance(address);
 };
+
+export const getWeb3 = () => web3;
 
 export const getUserAddress = () => userAddress;
