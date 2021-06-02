@@ -1,77 +1,37 @@
 <template>
-  <div>
-    <div class="transaction__wrapper">
-      <div class="transaction__title__wrapper">
-        <div class="transaction__title">
-          Transaction
+  <div class="transactions">
+    <div class="transactions__wrapper">
+      <div class="transactions__title">
+        Transactions
+      </div>
+      <div class="transactions__table table-main">
+        <div class="table-main__head">
+          <div
+            v-for="(field,i) in fields"
+            :key="`table__title-${i}`"
+            class="table-main__th"
+          >
+            {{ field.label }}
+          </div>
+        </div>
+        <div class="table-main__body">
+          <div
+            v-for="(transaction, i) in transactions"
+            :key="`position__item-${i}`"
+            class="table-main__tr"
+          >
+            <div class="table-main__col date">
+              {{ transaction.date }}
+            </div>
+            <div class="table-main__col change">
+              {{ transaction.change }}
+            </div>
+            <div class="table-main__col hash">
+              {{ transaction.hash }}
+            </div>
+          </div>
         </div>
       </div>
-      <b-row class="transaction__header">
-        <b-col class="transaction__header_title">
-          Date
-        </b-col>
-        <b-col class="transaction__header_title">
-          Change
-        </b-col>
-        <b-col class="transaction__header_title">
-          TX HASH
-        </b-col>
-      </b-row>
-      <b-row class="transaction__header__items">
-        <b-col class="transaction__header__items_title_01">
-          15.25%
-        </b-col>
-        <b-col class="transaction__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col class="transaction__header__items_title_01">
-          dgdg5s6...sgsgsf465s
-        </b-col>
-      </b-row>
-      <b-row class="transaction__header__items">
-        <b-col class="transaction__header__items_title_01">
-          15.25%
-        </b-col>
-        <b-col class="transaction__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col class="transaction__header__items_title_01">
-          dgdg5s6...sgsgsf465s
-        </b-col>
-      </b-row>
-      <b-row class="transaction__header__items">
-        <b-col class="transaction__header__items_title_01">
-          15.25%
-        </b-col>
-        <b-col class="transaction__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col class="transaction__header__items_title_01">
-          dgdg5s6...sgsgsf465s
-        </b-col>
-      </b-row>
-      <b-row class="transaction__header__items">
-        <b-col class="transaction__header__items_title_01">
-          15.25%
-        </b-col>
-        <b-col class="transaction__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col class="transaction__header__items_title_01">
-          dgdg5s6...sgsgsf465s
-        </b-col>
-      </b-row>
-      <b-row class="transaction__header__items">
-        <b-col class="transaction__header__items_title_01">
-          15.25%
-        </b-col>
-        <b-col class="transaction__header__items_title_02">
-          $ 15 256 547
-        </b-col>
-        <b-col class="transaction__header__items_title_01">
-          dgdg5s6...sgsgsf465s
-        </b-col>
-      </b-row>
     </div>
   </div>
 </template>
@@ -90,63 +50,106 @@ export default {
       default: false,
     },
   },
+  data() {
+    return {
+      fields: [
+        { key: 'date', label: 'Date' },
+        { key: 'change', label: 'Change' },
+        { key: 'hash', label: 'TX Hash' },
+      ],
+      transactions: [
+        {
+          id: 0,
+          date: '02.06.2021',
+          change: '$ 15 256 547',
+          hash: 'dgdg5s6...sgsgsf465s',
+        },
+        {
+          id: 1,
+          date: '02.06.2021',
+          change: '$ 15 256 547',
+          hash: 'dgdg5s6...sgsgsf465s',
+        },
+        {
+          id: 2,
+          date: '02.06.2021',
+          change: '$ 15 256 547',
+          hash: 'dgdg5s6...sgsgsf465s',
+        },
+        {
+          id: 3,
+          date: '02.06.2021',
+          change: '$ 15 256 547',
+          hash: 'dgdg5s6...sgsgsf465s',
+        },
+        {
+          id: 4,
+          date: '02.06.2021',
+          change: '$ 15 256 547',
+          hash: 'dgdg5s6...sgsgsf465s',
+        },
+      ],
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.transaction__wrapper {
-  margin: auto;
-  background: #FFFFFF;
-  max-width: 1170px;
-  height: 466px;
-  border-radius: 10px;
-  align-items: center;
-  margin-top: 30px;
-}
-.transaction__title__wrapper {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-  text-align: center;
-}
-.transaction__title {
-  margin: 20px;
-  font-size: 21px;
-}
-.transaction__header {
-  align-items: center;
-  justify-content: space-between;
-  height: 40px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  margin: 0px 20px 24px 20px;
-}
-.transaction__header_title {
-  font-size: 10px;
-  font-weight: 700;
-  color: #7B6C86;
-  &:last-child {
-    text-align: right;
+.transactions {
+  padding: 30px 0;
+  &__wrapper {
+    margin: auto;
+    background: #FFFFFF;
+    max-width: 1170px;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  &__title {
+    font-size: 21px;
+    line-height: 25px;
+    color: #240A36;
+    font-family: sans-serif, 'Conto-Medium';
   }
 }
-.transaction__header__items {
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  margin: 20px 20px 40px 20px;
-}
-.transaction__header__items_title_01 {
-  font-size: 16px;
-  font-weight: 400;
-  color: #7B6C86;
-  &:last-child {
-    text-align: right;
-    //margin-right: 50px;
+.table-main {
+  margin: 20px 0 0 0;
+  &__head {
+    background: rgba(36, 11, 54, 0.04);
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #7B6C86;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-bottom: 20px;
+  }
+  &__th {
+    padding: 14px 20px;
+    border: none;
+  }
+  &__tr {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin: 14px 0;
+  }
+  &__col {
+    padding: 14px 20px;
+    border: none;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+    display: flex;
+    align-items: center;
   }
 }
-.transaction__header__items_title_02 {
-  font-size: 16px;
+.change {
   font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
   color: #240A36;
 }
 </style>

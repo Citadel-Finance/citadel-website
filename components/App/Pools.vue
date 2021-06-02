@@ -136,6 +136,7 @@ export default {
     font-size: 21px;
     font-family: sans-serif, 'Conto-Medium';
     line-height: 25px;
+    font-weight: 500;
     color: #240A36;
     display: flex;
     align-items: center;

@@ -91,7 +91,7 @@ export default {
   padding: 20px;
   &__title {
     font-size: 21px;
-    font-weight: 500;
+    font-family: sans-serif, 'Conto-Medium';
     line-height: 25px;
     color: #240A36;
   }
