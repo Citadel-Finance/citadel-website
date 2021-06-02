@@ -57,6 +57,16 @@ export default class Pool extends BasicSmartContract {
     }
   }
 
+  async withdraw(amount) {
+    try {
+      const r = await this.inst().withdraw(amount);
+      return output({ r });
+    } catch (e) {
+      console.log('withdraw error', e, this);
+      return error(500, 'withdraw error', e);
+    }
+  }
+
   setChildAddress(value) {
     this.childAddress = value;
   }

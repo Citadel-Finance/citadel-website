@@ -44,7 +44,7 @@
         >
           Close
         </base-btn>
-        <base-btn>
+        <base-btn @click="withdraw">
           Withdraw
         </base-btn>
       </div>
@@ -73,6 +73,7 @@ export default {
     return {
       depositText: 'To withdraw ETH, you will first be asked to approve a transfer of kETH',
       balance: '23.25640000 ETH',
+      amount: '',
     };
   },
   computed: {
@@ -83,6 +84,17 @@ export default {
   methods: {
     close() {
       this.$store.dispatch('modals/hide');
+    },
+    async withdraw() {
+      const { amount } = this;
+      const poolAddress = this.$route.params.address;
+      this.SetLoader(true);
+      await this.$store.dispatch('user/poolWithdraw', {
+        amount,
+        poolAddress,
+      });
+      this.close();
+      this.SetLoader(false);
     },
   },
 };
