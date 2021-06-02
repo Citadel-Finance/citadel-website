@@ -26,6 +26,7 @@
         Amount
       </div>
       <base-input
+        v-model="amount"
         :placeholder="'Amount in ETH'"
         :description="'MAX'"
       />
@@ -44,7 +45,7 @@
         >
           Close
         </base-btn>
-        <base-btn>
+        <base-btn @click="deposit">
           Deposit
         </base-btn>
       </div>
@@ -73,6 +74,7 @@ export default {
     return {
       depositText: 'To deposit ETH, you will be prompted to confirm the deposit.',
       balance: '23.25640000 ETH',
+      amount: '',
     };
   },
   computed: {
@@ -83,6 +85,17 @@ export default {
   methods: {
     close() {
       this.$store.dispatch('modals/hide');
+    },
+    async deposit() {
+      const { amount } = this;
+      const poolAddress = this.$route.params.address;
+      this.SetLoader(true);
+      await this.$store.dispatch('user/poolDeposit', {
+        amount,
+        poolAddress,
+      });
+      this.close();
+      this.SetLoader(false);
     },
   },
 };

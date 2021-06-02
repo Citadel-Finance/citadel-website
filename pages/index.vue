@@ -38,27 +38,12 @@ export default {
     }),
   },
   async mounted() {
-    // console.log('DONE');
-    // console.log(this.tokensMap);
-    // console.log(this.poolsMap);
-    // this.SetLoader(true);
+    this.SetLoader(true);
     const r = await this.$store.dispatch('user/connectWallet');
     if (!r.ok) {
       return;
     }
     this.SetLoader(false);
-  },
-  methods: {
-    async testDeposit() {
-      const amount = 3;
-      const poolAddress = Object.keys(this.poolsMap)[1];
-      this.SetLoader(true);
-      await this.$store.dispatch('user/poolDeposit', {
-        amount,
-        poolAddress,
-      });
-      this.SetLoader(false);
-    },
   },
 };
 </script>
