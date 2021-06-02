@@ -61,7 +61,7 @@ export default {
 <style lang="scss" scoped>
 .index__container {
   display: flex;
-  justify-content: space-between;
+  grid-gap: 30px;
   margin: auto;
   max-width: 1170px;
 }

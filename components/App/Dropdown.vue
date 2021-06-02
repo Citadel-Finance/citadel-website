@@ -10,7 +10,7 @@
             alt="back"
             class="back__img"
           >
-          Back
+          <span>Back</span>
         </button>
       </n-link>
     </div>

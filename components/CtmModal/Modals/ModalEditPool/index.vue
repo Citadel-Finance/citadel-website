@@ -23,11 +23,11 @@
         Liquidity mining reward
       </div>
       <base-input
-        :placeholder="'20.06%'"
+        :placeholder="'1000'"
         class="edit-modal__input"
       />
       <div class="edit-modal__title">
-        APE tax
+        APY tax
       </div>
       <base-input
         :placeholder="'0.7%'"

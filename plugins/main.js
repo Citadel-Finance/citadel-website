@@ -17,7 +17,7 @@ Vue.mixin({
       });
     },
     SetLoader(value) {
-      this.$store.dispatch('main/setLoading', value);
+      this.$store.dispatch('loader/setLoading', value);
     },
     CloseModal() {
       this.$store.dispatch('modals/hide');

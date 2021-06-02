@@ -5,11 +5,9 @@
         <nuxt />
       </div>
     </div>
-    <transition name="fade">
-      <!--      <loader v-if="isLoading" />-->
-      <!--      loader-->
-    </transition>
+    <transition name="fade" />
     <ctm-modal />
+    <loader-screen />
   </div>
 </template>
 <script>
@@ -35,5 +33,4 @@ export default {
     height: 100%;
   }
 }
-
 </style>

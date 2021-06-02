@@ -92,7 +92,7 @@ export default {
 .base-dropdown {
   position: relative;
   width: 100%;
-  font-size: 21px;
+  font-size: 18px;
   line-height: 21px;
   color: #240A36;
 

@@ -13,74 +13,66 @@
       </div>
       <client-only>
         <div class="pools__table table-main">
-          <b-thead>
-            <b-th
+          <div class="table-main__head">
+            <div
               v-for="(field,i) in fields"
               :key="`table__title-${i}`"
+              class="table-main__th"
             >
               {{ field.label }}
-            </b-th>
-          </b-thead>
-          <b-tbody>
-            <nuxt-link
+            </div>
+          </div>
+          <div class="table-main__body">
+            <div
               v-for="(poolAddress, i) in Object.keys(poolsMap)"
               :key="`pool__item-${i}`"
-              to="/pools"
-              class="table-main__link"
+              class="table-main__tr"
             >
-              <b-tr>
-                <b-td>
-                  <div class="table-main__col currency">
-                    <span class="currency__img">
-                      <img
-                        :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
-                        alt=""
-                      >
-                    </span>
-                    <span class="currency__value">
-                      {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
-                    </span>
-                  </div>
-                </b-td>
-                <b-td>
-                  <div class="table-main__col">
-                    --
-                  </div>
-                </b-td>
-                <b-td>
-                  <div class="table-main__col">
-                    {{ poolsMap[poolAddress].totalStaked }}
-                  </div>
-                </b-td>
-                <b-td>
-                  <div class="table-main__col balance">
-                    {{ tokensMap[poolsMap[poolAddress].childAddress].balance }}
-                  </div>
-                </b-td>
-                <b-td>
-                  <div class="table-main__col status">
-                    <span
-                      class="status__dot"
-                      :class="{'slide__dot_active': poolsMap[poolAddress].status === true}"
-                    />
-                    <span>
-                      Inactive
-                    </span>
-                  </div>
-                </b-td>
-                <b-td>
-                  <base-dd-settings
-                    :options="options"
-                    class="table-main__settings"
+              <nuxt-link
+                to="/pools"
+                class="table-main__link"
+              >
+                <div class="table-main__col currency">
+                  <span class="currency__img">
+                    <img
+                      :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
+                      alt=""
+                    >
+                  </span>
+                  <span class="currency__value">
+                    {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
+                  </span>
+                </div>
+                <div class="table-main__col">
+                  --
+                </div>
+                <div class="table-main__col">
+                  {{ poolsMap[poolAddress].totalStaked }}
+                </div>
+                <div class="table-main__col balance">
+                  {{ tokensMap[poolsMap[poolAddress].childAddress].balance }}
+                </div>
+                <div class="table-main__col status">
+                  <span
+                    class="status__dot"
+                    :class="{'slide__dot_active': poolsMap[poolAddress].status === true}"
                   />
-                </b-td>
-              </b-tr>
-            </nuxt-link>
-          </b-tbody>
+                  <span>
+                    Inactive
+                  </span>
+                </div>
+              </nuxt-link>
+              <div class="table-main__col settings">
+                <base-dd-settings
+                  :options="options"
+                  class="table-main__settings"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </client-only>
     </div>
-    <loader-screen />
   </div>
 </template>
 
@@ -116,7 +108,6 @@ export default {
   },
   methods: {
     openAddModal() {
-      this.SetLoader(true);
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.addPool,
@@ -161,7 +152,7 @@ export default {
 }
 .table-main {
   margin: 20px 0 0 0;
-  thead {
+  &__head {
     background: rgba(36, 11, 54, 0.04);
     border-radius: 10px;
     font-weight: bold;
@@ -170,17 +161,23 @@ export default {
     letter-spacing: 0.105em;
     text-transform: uppercase;
     color: #7B6C86;
-  }
-  thead, tbody tr {
     display: grid;
     min-width: 1130px;
-    grid-template-columns: repeat(5, 1fr) 0.3fr;
+    grid-template-columns: repeat(5, 1fr) 60px;
   }
-  th, td {
+  &__th {
     padding: 14px 20px;
     border: none;
   }
-  td {
+  &__tr {
+    display: grid;
+    min-width: 1130px;
+    grid-template-columns: 1fr 60px;
+    margin: 14px 0;
+  }
+  &__col {
+    padding: 14px 20px;
+    border: none;
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
@@ -189,6 +186,8 @@ export default {
     align-items: center;
   }
   &__link {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     text-decoration: none;
   }
 }
@@ -230,5 +229,9 @@ export default {
       background: #2DCE89;
     }
   }
+}
+.settings {
+  padding: 0;
+  justify-content: center;
 }
 </style>

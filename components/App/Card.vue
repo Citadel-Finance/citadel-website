@@ -47,7 +47,6 @@ export default {
   height: 145px;
   background: #F6F5F7;
   border-radius: 10px;
-  margin: 5px;
 }
 .balance__card_title {
   font-size: 10px;
