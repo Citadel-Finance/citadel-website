@@ -38,10 +38,14 @@ export default {
     }),
   },
   async mounted() {
-    // const r = await this.$store.dispatch('user/connectWallet');
     // console.log('DONE');
     // console.log(this.tokensMap);
     // console.log(this.poolsMap);
+    // this.SetLoader(true);
+    const r = await this.$store.dispatch('user/connectWallet');
+    if (!r.ok) {
+      return;
+    }
     this.SetLoader(false);
   },
   methods: {

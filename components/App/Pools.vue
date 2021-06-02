@@ -29,7 +29,7 @@
               class="table-main__tr"
             >
               <nuxt-link
-                to="/pools"
+                :to="`/pool/${poolAddress}`"
                 class="table-main__link"
               >
                 <div class="table-main__col currency">
@@ -80,7 +80,6 @@
 
 import { mapGetters } from 'vuex';
 import modals from '~/store/modals/modals';
-import pools from '~/pages/pools';
 
 export default {
   name: 'Pools',

@@ -1,24 +1,30 @@
 <template>
-  <div class="deposit__container">
-    <div class="deposit__container_cards">
-      <div class="balance__card">
-        Your Balance
-        <hr class="balance__hr">
-        <div class="balance__number">
+  <div class="deposit">
+    <div class="deposit__balance-card balance-card">
+      <div class="balance-card__container">
+        <div class="balance-card__title">
+          Your Balance
+        </div>
+        <hr class="balance-card__line">
+        <div class="balance-card__value">
+          {{ balance }}
+        </div>
+      </div>
+      <div class="balance-card__container">
+        <div class="balance-card__title">
+          Your earnings
+        </div>
+        <hr class="balance-card__line">
+        <div class="balance-card__value">
           10.26000000 ETH
         </div>
       </div>
-      <div class="balance__card">
-        Your earnings
-        <hr class="balance__hr">
-        <div class="balance__number">
-          10.26000000 ETH
+      <div class="balance-card__container">
+        <div class="balance-card__title">
+          Total borrowed
         </div>
-      </div>
-      <div class="balance__card">
-        Total borrowed
-        <hr class="balance__hr">
-        <div class="balance__number">
+        <hr class="balance-card__line">
+        <div class="balance-card__value">
           10.26000000 ETH
         </div>
       </div>
@@ -42,13 +48,9 @@ export default {
   components: {
   },
   props: {
-    title: {
+    balance: {
       default: '',
       type: String,
-    },
-    active: {
-      type: Boolean,
-      default: false,
     },
   },
   methods: {
@@ -70,55 +72,54 @@ export default {
 
 <style lang="scss" scoped>
 .deposit {
+  max-width: 1170px;
+  background: #FFFFFF;
+  margin: auto;
+  border-radius: 10px;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  grid-gap: 30px;
+  &__balance-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
   &__buttons {
-    width: 100%;
     display: grid;
     grid-gap: 12px;
+    width: 100%;
+    align-content: center;
   }
 }
-.deposit__container {
-  padding: 20px;
-  width: 1170px;
-  height: 154px;
-  background: #FFFFFF;
-  align-items: center;
-  justify-content: space-between;
-  display: flex;
-  margin: auto;
-  max-width: 1170px;
-  border-radius: 10px;
-}
-.deposit__container_cards {
-  margin: 0px 20px 0px 20px;
-  display: flex;
-}
-.deposit__card {
-  padding: 0px 20px;
-  height: 114px;
-  width: 236px;
-  max-width: 236px;
-}
-.balance__card{
-  padding-top: 20px;
-  padding-left: 15px;
-  font-size: 10px;
-  width: 234px;
-  max-width: 234px;
-  height: 114px;
-  background: #F6F5F7;
-  border-radius: 10px;
-  margin: 0px 20px 0px 0px;
-}
-.balance__hr {
-  border: 2px solid #C31433;
-  color: darkred;
-  background: black;
-  width: 40px;
-  margin: 20px 0px 0px 0px;
-}
-.balance__number {
-  padding: 10px 0px 10px 0px;
-  font-size: 20px;
-  color: #240B36;
+.balance-card {
+  &__container {
+    padding: 20px 15px;
+    width: 100%;
+    background: #F6F5F7;
+    border-radius: 10px;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #7B6C86;
+  }
+  &__line {
+    width: 40px;
+    margin: 20px auto 20px 0;
+    border: none;
+    background-color: #C31433;
+    color: #C31433;
+    height: 3px;
+  }
+  &__value {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #240B36;
+  }
 }
 </style>

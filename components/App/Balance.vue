@@ -49,6 +49,7 @@ export default {
   background: #FFFFFF;
   border-radius: 10px;
   padding: 20px;
+  min-height: 466px;
   &__title {
     font-size: 21px;
     line-height: 25px;

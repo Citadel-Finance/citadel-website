@@ -1,10 +1,10 @@
 <template>
-  <div class="balance__card">
-    <div class="balance__card_title">
+  <div class="card-container">
+    <div class="card-container__title">
       {{ title }}
     </div>
-    <hr class="balance__hr">
-    <div class="balance__number">
+    <hr class="card-container__line">
+    <div class="card-container__value">
       {{ number }}
     </div>
   </div>
@@ -38,32 +38,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.balance__card{
-  padding-top: 20px;
-  padding-left: 15px;
-  font-size: 10px;
-  width: 160px;
-  max-width: 160px;
-  height: 145px;
+.card-container {
+  padding: 20px 15px;
+  min-width: 160px;
+  min-height: 145px;
   background: #F6F5F7;
   border-radius: 10px;
-}
-.balance__card_title {
-  font-size: 10px;
-  font-weight: 600;
-  color: #7B6C86;
-}
-.balance__hr {
-  border: 2px solid #C31433;
-  color: darkred;
-  background: black;
-  width: 40px;
-  margin: 50px 0px 0px 0px;
-}
-.balance__number {
-  padding: 10px 0px 10px 0px;
-  font-size: 20px;
-  font-weight: 550;
-  color: #240B36;
+  &__title {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #7B6C86;
+  }
+  &__line {
+    width: 40px;
+    margin: 51px auto 18px 0;
+    border: none;
+    background-color: #C31433;
+    color: #C31433;
+    height: 3px;
+  }
+  &__value {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #240B36;
+  }
 }
 </style>

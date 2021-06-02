@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="keepers__wrapper wrapper">
-      <div class="wrapper__title">
+    <div class="keepers">
+      <div class="keepers__title">
         Top liquidity providers
       </div>
       <div class="keepers__table table-main">
@@ -82,14 +82,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.keepers__wrapper {
+.keepers {
   background: #FFFFFF;
   width: 100%;
   min-width: 770px;
+  min-height: 466px;
   border-radius: 10px;
   padding: 20px;
-}
-.wrapper {
   &__title {
     font-size: 21px;
     font-weight: 500;
