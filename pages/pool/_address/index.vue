@@ -4,7 +4,10 @@
     <Settings />
     <Chart />
     <div class="main">
-      <Deposit :balance="`${Floor(balance, 4)} ${symbol}`" />
+      <Deposit
+        :balance="`${Floor(balance, 4)} ${symbol}`"
+        :title="`${balance}`"
+      />
       <Keepers />
     </div>
     <Transaction />

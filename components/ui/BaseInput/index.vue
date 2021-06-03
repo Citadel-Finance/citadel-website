@@ -5,7 +5,7 @@
     >
       <input
         v-model="value"
-        type="text"
+        type="number"
         class="base-field__input"
         :placeholder="placeholder"
         @input="input(value)"

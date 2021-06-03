@@ -19,9 +19,6 @@
       </button>
     </div>
     <div class="deposit-modal__main">
-      <div class="deposit-modal__text">
-        {{ `To deposit ${symbol}, you will be prompted to confirm the deposit.` }}
-      </div>
       <div class="deposit-modal__title">
         Amount
       </div>
@@ -108,15 +105,8 @@ export default {
   &__main {
     padding: 20px;
   }
-  &__text {
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    font-size: 16px;
-    line-height: 20px;
-    color: #7B6C86;
-  }
   &__title {
-    margin: 30px 0 10px;
+    margin: 0 0 10px;
     color: #240A36;
     font-weight: 500;
     font-size: 16px;

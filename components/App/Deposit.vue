@@ -9,7 +9,10 @@
           Your Deposit
         </div>
         <hr class="balance-card__line">
-        <div class="balance-card__value">
+        <div
+          class="balance-card__value"
+          :title="`${title}`"
+        >
           {{ balance }}
         </div>
       </div>
@@ -52,6 +55,10 @@ export default {
   },
   props: {
     balance: {
+      default: '',
+      type: String,
+    },
+    title: {
       default: '',
       type: String,
     },

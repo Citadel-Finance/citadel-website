@@ -43,6 +43,7 @@ export default class Pool extends BasicSmartContract {
     try {
       const userData = await this.fetchContractData('getUserData', [getUserAddress()]);
       const commonData = await this.fetchContractData('getCommonData');
+      console.log(userData);
       const { totalStaked } = userData;
       const {
         decimals, symbol,
