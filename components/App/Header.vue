@@ -59,7 +59,6 @@ export default {
   width: 100%;
   background: #FFFFFF;
   padding: 15px;
-  margin-bottom: 30px;
   &__wrapper {
     max-width: 1170px;
     background: #FFFFFF;

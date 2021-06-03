@@ -6,11 +6,10 @@
           class="back__button"
         >
           <img
-            src="../../assets/back_arrow.svg"
+            src="../../assets/arrow_back.svg"
             alt="back"
             class="back__img"
-          >
-          <span>Back</span>
+          >Back
         </button>
       </n-link>
     </div>
@@ -25,7 +24,6 @@
       <div class="info__title">
         {{ titleRate }}
       </div>
-      <hr class="info__line">
       <div class="info__percents">
         {{ percents }}
       </div>
@@ -68,21 +66,28 @@ export default {
 
 <style lang="scss" scoped>
 .settings__container {
-  background: #FFFFFF;
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto 30px;
   width: 100%;
   max-width: 1170px;
-  border-radius: 10px;
-  padding: 20px;
+  padding: 30px 0;
 }
 .back {
   min-width: 180px;
-  &__img {
-    margin-right: 20px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 18px;
+  color: #240A36;
+  padding: 13px 15px;
+  &__button {
+    display: flex;
+    align-items: center;
+    grid-gap: 15px;
   }
+}
+.back a:hover {
+  text-decoration: none;
 }
 .menu {
   display: flex;
@@ -98,25 +103,19 @@ export default {
   &__title {
     font-weight: bold;
     font-size: 10px;
-    line-height: 12px;
+    line-height: 11px;
     letter-spacing: 0.105em;
     text-transform: uppercase;
     color: #7B6C86;
-  }
-  &__line {
-    width: 40px;
-    margin: 20px 0 20px auto;
-    border: none;
-    background-color: #C31433;
-    color: #C31433;
-    height: 3px;
+    margin-bottom: 10px;
   }
   &__percents {
-    font-weight: 600;
+    font-weight: bold;
     font-size: 20px;
-    line-height: 24px;
+    line-height: 23px;
     text-align: right;
-    color: #240B36;
+    letter-spacing: 0.05em;
+    color: #240A36;
   }
 }
 </style>

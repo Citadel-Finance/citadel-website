@@ -39,12 +39,6 @@
         </div>
       </div>
       <div class="deposit-modal__buttons">
-        <base-btn
-          :mode="'secondary'"
-          @click="close()"
-        >
-          Close
-        </base-btn>
         <base-btn @click="deposit">
           Deposit
         </base-btn>
@@ -127,11 +121,6 @@ export default {
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-  }
-  &__buttons {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 20px;
   }
 }
 .balance {

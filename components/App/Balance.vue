@@ -49,6 +49,7 @@ export default {
 
 <style lang="scss" scoped>
 .balance {
+  margin-top: 30px;
   background: #FFFFFF;
   border-radius: 10px;
   padding: 20px;

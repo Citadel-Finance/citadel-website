@@ -39,12 +39,6 @@
         </div>
       </div>
       <div class="withdraw-modal__buttons">
-        <base-btn
-          :mode="'secondary'"
-          @click="close()"
-        >
-          Close
-        </base-btn>
         <base-btn @click="withdraw">
           Withdraw
         </base-btn>
@@ -71,8 +65,6 @@ export default {
     },
   },
   data: () => ({
-    // depositText: 'To withdraw ETH, you will first be asked to approve a transfer of kETH',
-    // balance: '23.25640000 ETH',
     amount: '',
     poolAddress: '',
     balance: '',
@@ -129,11 +121,6 @@ export default {
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
-  }
-  &__buttons {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 20px;
   }
 }
 .max {
