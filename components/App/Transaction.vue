@@ -7,17 +7,18 @@
         <!--          {{ poolsEventsAll.length }}-->
         <!--        </div>-->
       </div>
-      <client-only>
-        <div class="transactions__table table-main">
-          <div class="table-main__head">
-            <div
-              v-for="(field,i) in fields"
-              :key="`table__title-${i}`"
-              class="table-main__th"
-            >
-              {{ field.label }}
-            </div>
+
+      <div class="transactions__table table-main">
+        <div class="table-main__head">
+          <div
+            v-for="(field,i) in fields"
+            :key="`table__title-${i}`"
+            class="table-main__th"
+          >
+            {{ field.label }}
           </div>
+        </div>
+        <client-only>
           <div class="table-main__body">
             <div
               v-for="(event, i) in poolsEventsAll"
@@ -35,8 +36,8 @@
               </div>
             </div>
           </div>
-        </div>
-      </client-only>
+        </client-only>
+      </div>
     </div>
   </div>
 </template>

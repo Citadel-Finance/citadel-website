@@ -20,14 +20,14 @@
     </div>
     <div class="withdraw-modal__main">
       <div class="withdraw-modal__text">
-        {{ depositText }}
+        {{ `To withdraw ${symbol}, you will first be asked to approve a transfer of kETH.` }}
       </div>
       <div class="withdraw-modal__title">
         Amount
       </div>
       <base-input
         v-model="amount"
-        :placeholder="'Amount in ETH'"
+        :placeholder="`Amount in ${symbol}`"
         :description="'MAX'"
       />
       <div class="withdraw-modal__balance max">
@@ -35,7 +35,7 @@
           Max:
         </div>
         <div class="max__value">
-          {{ balance }}
+          {{ balance + ' ' + symbol }}
         </div>
       </div>
       <div class="withdraw-modal__buttons">
@@ -70,17 +70,25 @@ export default {
       default: true,
     },
   },
-  data() {
-    return {
-      depositText: 'To withdraw ETH, you will first be asked to approve a transfer of kETH',
-      balance: '23.25640000 ETH',
-      amount: '',
-    };
-  },
+  data: () => ({
+    // depositText: 'To withdraw ETH, you will first be asked to approve a transfer of kETH',
+    // balance: '23.25640000 ETH',
+    amount: '',
+    poolAddress: '',
+    balance: '',
+    symbol: '',
+  }),
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
+      poolsMap: 'user/getPoolsMap',
+      tokensMap: 'user/getTokensMap',
     }),
+  },
+  mounted() {
+    this.poolAddress = this.$route.params.address;
+    this.balance = this.poolsMap[this.poolAddress].userStaked;
+    this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
   },
   methods: {
     close() {

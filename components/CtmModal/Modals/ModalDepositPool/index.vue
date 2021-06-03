@@ -20,14 +20,14 @@
     </div>
     <div class="deposit-modal__main">
       <div class="deposit-modal__text">
-        {{ depositText }}
+        {{ `To deposit ${symbol}, you will be prompted to confirm the deposit.` }}
       </div>
       <div class="deposit-modal__title">
         Amount
       </div>
       <base-input
         v-model="amount"
-        :placeholder="'Amount in ETH'"
+        :placeholder="`Amount in ${symbol}`"
         :description="'MAX'"
       />
       <div class="deposit-modal__balance balance">
@@ -35,7 +35,7 @@
           Your balance:
         </div>
         <div class="balance__value">
-          {{ balance }}
+          {{ balance + ' ' + symbol }}
         </div>
       </div>
       <div class="deposit-modal__buttons">
@@ -70,17 +70,23 @@ export default {
       default: true,
     },
   },
-  data() {
-    return {
-      depositText: 'To deposit ETH, you will be prompted to confirm the deposit.',
-      balance: '23.25640000 ETH',
-      amount: '',
-    };
-  },
+  data: () => ({
+    amount: '',
+    poolAddress: '',
+    balance: '',
+    symbol: '',
+  }),
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
+      poolsMap: 'user/getPoolsMap',
+      tokensMap: 'user/getTokensMap',
     }),
+  },
+  mounted() {
+    this.poolAddress = this.$route.params.address;
+    this.balance = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].balance;
+    this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
   },
   methods: {
     close() {

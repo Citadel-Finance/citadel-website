@@ -28,7 +28,7 @@ export default {
   },
   async initFactory({ commit }) {
     const factory = new Factory({
-      address: '0x35d3763CA5d3Db55D363354aD08cb125eCE502b3', // TODO remove to env
+      address: process.env.ADDRESS_FACTORY,
     });
     await factory.initInst();
     const r = await factory.fetchPoolsData();
