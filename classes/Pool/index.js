@@ -16,8 +16,22 @@ export default class Pool extends BasicSmartContract {
   }
 
   async fetchAll() {
-    await this.fetchCommonData();
+    await Promise.all([
+      this.fetchCommonData(),
+      this.fetchTop(),
+    ]);
     await this.fetchUserData();
+  }
+
+  async fetchTop() {
+    try {
+      const top = await this.fetchContractData('getTopProviders');
+      this.top = top;
+      return output({ top });
+    } catch (e) {
+      console.log('fetchTop error', e, this);
+      return error(500, 'fetchTop error', e);
+    }
   }
 
   async fetchCommonData() {
@@ -40,7 +54,7 @@ export default class Pool extends BasicSmartContract {
   async fetchUserData() {
     try {
       const userData = await this.fetchContractData('getUserData', [getUserAddress()]);
-      // console.log('userData', userData);
+      console.log('userData', userData);
       const { totalStaked, availableReward } = userData;
       this.availableReward = new BigNumber(availableReward).shiftedBy(-this.decimals).toString();
       this.userStaked = new BigNumber(totalStaked).shiftedBy(-this.decimals).toString();

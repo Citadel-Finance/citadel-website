@@ -689,6 +689,12 @@ export const Pool = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
+      {
         indexed: true,
         internalType: 'address',
         name: 'depositor',
@@ -713,6 +719,12 @@ export const Pool = [
   {
     anonymous: false,
     inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
       {
         indexed: true,
         internalType: 'address',
@@ -744,6 +756,12 @@ export const Pool = [
   {
     anonymous: false,
     inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
       {
         indexed: true,
         internalType: 'address',
@@ -870,6 +888,12 @@ export const Pool = [
     anonymous: false,
     inputs: [
       {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
+      {
         indexed: true,
         internalType: 'address',
         name: 'receiver',
@@ -890,6 +914,19 @@ export const Pool = [
     ],
     name: 'Withdrew',
     type: 'event',
+  },
+  {
+    inputs: [],
+    name: 'ADMIN_ROLE',
+    outputs: [
+      {
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [],
@@ -1397,6 +1434,56 @@ export const Pool = [
     type: 'function',
   },
   {
+    inputs: [],
+    name: 'getTopKeepers',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'user',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'staked',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct CitadelPool.Top[10]',
+        name: '',
+        type: 'tuple[10]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getTopProviders',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'user',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'staked',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct CitadelPool.Top[10]',
+        name: '',
+        type: 'tuple[10]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [
       {
         internalType: 'address',
@@ -1411,6 +1498,11 @@ export const Pool = [
           {
             internalType: 'uint256',
             name: 'totalStaked',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'balanceOf',
             type: 'uint256',
           },
           {
@@ -1795,19 +1887,6 @@ export const Pool = [
   {
     inputs: [
       {
-        internalType: 'contract CTLToken',
-        name: 'ctlToken_',
-        type: 'address',
-      },
-    ],
-    name: 'updateCTLToken',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
         internalType: 'uint256',
         name: 'premiumCoeff_',
         type: 'uint256',
@@ -2033,6 +2112,19 @@ export const Factory = [
     ],
     name: 'RoleRevoked',
     type: 'event',
+  },
+  {
+    inputs: [],
+    name: 'ADMIN_ROLE',
+    outputs: [
+      {
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [],
