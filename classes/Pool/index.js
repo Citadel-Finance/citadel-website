@@ -54,7 +54,7 @@ export default class Pool extends BasicSmartContract {
   async fetchUserData() {
     try {
       const userData = await this.fetchContractData('getUserData', [getUserAddress()]);
-      console.log('userData', userData);
+      // console.log('userData', userData);
       const { totalStaked, availableReward } = userData;
       this.availableReward = new BigNumber(availableReward).shiftedBy(-this.decimals).toString();
       this.userStaked = new BigNumber(totalStaked).shiftedBy(-this.decimals).toString();
