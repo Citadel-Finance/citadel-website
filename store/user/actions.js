@@ -65,12 +65,11 @@ export default {
     tokens.forEach((token) => {
       tokensMap[token.address] = token;
     });
-    commit('setPoolsMap', poolsMap);
-    commit('setTokensMap', tokensMap);
 
     await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]);
     await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
-
+    commit('setPoolsMap', poolsMap);
+    commit('setTokensMap', tokensMap);
     dispatch('subscribeAllPools');
 
     // dispatch('subscribeAllPools');
