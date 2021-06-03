@@ -16,10 +16,8 @@ export default class Pool extends BasicSmartContract {
   }
 
   async fetchAll() {
-    await Promise.all([
-      this.fetchCommonData(),
-      this.fetchUserData(),
-    ]);
+    await this.fetchCommonData();
+    await this.fetchUserData();
   }
 
   async fetchCommonData() {
@@ -42,15 +40,10 @@ export default class Pool extends BasicSmartContract {
   async fetchUserData() {
     try {
       const userData = await this.fetchContractData('getUserData', [getUserAddress()]);
-      const commonData = await this.fetchContractData('getCommonData');
-      console.log(userData);
-      const { totalStaked } = userData;
-      const {
-        decimals, symbol,
-      } = commonData;
-      this.decimals = decimals;
-      this.symbol = symbol;
-      this.userStaked = new BigNumber(totalStaked).shiftedBy(-decimals).toString();
+      // console.log('userData', userData);
+      const { totalStaked, availableReward } = userData;
+      this.availableReward = new BigNumber(availableReward).shiftedBy(-this.decimals).toString();
+      this.userStaked = new BigNumber(totalStaked).shiftedBy(-this.decimals).toString();
       return output({ userData });
     } catch (e) {
       console.log('fetchUserData error', e, this);

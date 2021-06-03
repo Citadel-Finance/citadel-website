@@ -39,7 +39,7 @@ export default {
   },
   async initCtlToken({ getters, commit }) {
     const { ctlTokenAddress } = getters.getFactory;
-    console.log('ctlTokenAddress', ctlTokenAddress);
+    // console.log('ctlTokenAddress', ctlTokenAddress);
     const ctlToken = new Token({ address: ctlTokenAddress });
     await ctlToken.initInst();
     await ctlToken.fetchAll();

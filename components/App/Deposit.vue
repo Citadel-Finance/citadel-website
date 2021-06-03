@@ -13,7 +13,7 @@
           class="balance-card__value"
           :title="`${title}`"
         >
-          {{ balance }}
+          {{ Floor(pool.userStaked) }} {{ pool.symbol }}
         </div>
       </div>
       <div class="balance-card__container">
@@ -22,7 +22,7 @@
         </div>
         <hr class="balance-card__line">
         <div class="balance-card__value">
-          {{ balance }}
+          {{ Floor(pool.availableReward) }} {{ pool.symbol }}
         </div>
       </div>
       <div class="balance-card__container">
@@ -31,7 +31,7 @@
         </div>
         <hr class="balance-card__line">
         <div class="balance-card__value">
-          {{ balance }}
+          -
         </div>
       </div>
     </div>
@@ -48,10 +48,14 @@
 
 <script>
 import modals from '@/store/modals/modals';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Deposit',
   components: {
+    ...mapGetters({
+      poolsMap: 'user/getPoolsMap',
+    }),
   },
   props: {
     balance: {
@@ -61,6 +65,18 @@ export default {
     title: {
       default: '',
       type: String,
+    },
+  },
+  computed: {
+    ...mapGetters({
+      poolsMap: 'user/getPoolsMap',
+      tokensMap: 'user/getTokensMap',
+    }),
+    poolAddress() {
+      return this.$route.params.address;
+    },
+    pool() {
+      return this.poolsMap[this.poolAddress] || {};
     },
   },
   methods: {

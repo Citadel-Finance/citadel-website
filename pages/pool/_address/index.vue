@@ -34,7 +34,6 @@ export default {
     Transaction,
   },
   data: () => ({
-    poolAddress: '',
     balance: '',
     symbol: '',
   }),
@@ -43,6 +42,9 @@ export default {
       poolsMap: 'user/getPoolsMap',
       tokensMap: 'user/getTokensMap',
     }),
+    poolAddress() {
+      return this.$route.params.address;
+    },
   },
   async mounted() {
     this.SetLoader(true);
@@ -50,7 +52,7 @@ export default {
     if (!r.ok) {
       return;
     }
-    this.poolAddress = this.$route.params.address;
+    // this.poolAddress = this.$route.params.address;
     this.balance = this.poolsMap[this.poolAddress].userStaked;
     this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
     this.SetLoader(false);

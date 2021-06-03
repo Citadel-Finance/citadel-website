@@ -12,7 +12,7 @@ export default {
       ...accumulator,
       ...poolsEventsMap[address],
     ].sort((a, b) => b.blockNumber - a.blockNumber), []);
-    console.log(r);
+    // console.log(r);
     return r;
   },
 };

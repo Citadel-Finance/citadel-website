@@ -2,82 +2,80 @@
   <div class="pools">
     <div class="pools__wrapper">
       <div class="pools__header header">
-        <div class="header__title">
+        <div class="pools__title">
           Pools
         </div>
-        <div class="header__button">
+        <div class="pools__button">
           <base-btn @click="openAddModal">
             Add new pool
           </base-btn>
         </div>
       </div>
-      <client-only>
-        <div class="pools__table table-main">
-          <div class="table-main__head">
-            <div
-              v-for="(field,i) in fields"
-              :key="`table__title-${i}`"
-              class="table-main__th"
-            >
-              {{ field.label }}
-            </div>
+      <div class="pools__table table-main">
+        <div class="table-main__head">
+          <div
+            v-for="(field,i) in fields"
+            :key="`table__title-${i}`"
+            class="table-main__th"
+          >
+            {{ field.label }}
           </div>
-          <div class="table-main__body">
-            <div
-              v-for="(poolAddress, i) in Object.keys(poolsMap)"
-              :key="`pool__item-${i}`"
-              class="table-main__tr"
+        </div>
+        <div class="table-main__body">
+          <div
+            v-for="(poolAddress, i) in Object.keys(poolsMap)"
+            :key="`pool__item-${i}`"
+            class="table-main__tr"
+          >
+            <nuxt-link
+              :to="`/pool/${poolAddress}`"
+              class="table-main__link"
             >
-              <nuxt-link
-                :to="`/pool/${poolAddress}`"
-                class="table-main__link"
-              >
-                <div class="table-main__col currency">
-                  <span class="currency__img">
-                    <img
-                      :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
-                      alt=""
-                    >
-                  </span>
-                  <span class="currency__value">
-                    {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
-                  </span>
-                </div>
-                <div class="table-main__col">
-                  --
-                </div>
-                <div
-                  class="table-main__col"
-                  :title="poolsMap[poolAddress].totalStaked"
-                >
-                  {{ Floor(poolsMap[poolAddress].totalStaked, 4) }}
-                </div>
-                <div
-                  class="table-main__col balance"
-                  :title="poolsMap[poolAddress].userStaked"
-                >
-                  {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
-                </div>
-                <div class="table-main__col status">
-                  <span
-                    class="status__dot"
-                    :class="{'slide__dot_active': poolsMap[poolAddress].status === true}"
-                  />
-                  <span>
-                    Inactive
-                  </span>
-                </div>
-              </nuxt-link>
-              <div class="table-main__col settings">
-                <base-dd-settings
-                  :options="options"
-                  class="table-main__settings"
-                />
+              <div class="table-main__col currency">
+                <span class="currency__img">
+                  <img
+                    :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
+                    alt=""
+                  >
+                </span>
+                <span class="currency__value">
+                  {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
+                </span>
               </div>
+              <div class="table-main__col">
+                --
+              </div>
+              <div
+                class="table-main__col"
+                :title="poolsMap[poolAddress].totalStaked"
+              >
+                {{ Floor(poolsMap[poolAddress].totalStaked, 4) }}
+              </div>
+              <div
+                class="table-main__col balance"
+                :title="poolsMap[poolAddress].userStaked"
+              >
+                {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
+              </div>
+              <div class="table-main__col status">
+                <span
+                  class="status__dot"
+                  :class="{'slide__dot_active': poolsMap[poolAddress].status === true}"
+                />
+                <span>
+                  Inactive
+                </span>
+              </div>
+            </nuxt-link>
+            <div class="table-main__col settings">
+              <base-dd-settings
+                :options="options"
+                class="table-main__settings"
+              />
             </div>
           </div>
         </div>
-      </client-only>
+      </div>
     </div>
   </div>
 </template>
@@ -137,8 +135,6 @@ export default {
     display: flex;
     justify-content: space-between;
   }
-}
-.header {
   &__title {
     font-size: 21px;
     font-family: sans-serif, 'Conto-Medium';
