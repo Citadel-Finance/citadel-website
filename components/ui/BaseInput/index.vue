@@ -4,11 +4,11 @@
       class="base-field__control"
     >
       <input
-        v-model="value"
+        :value="value"
         type="number"
         class="base-field__input"
         :placeholder="placeholder"
-        @input="input(value)"
+        @input="input"
       >
       <span
         class="base-field__description"
@@ -26,6 +26,10 @@
 <script>
 export default {
   props: {
+    value: {
+      type: String,
+      default: '',
+    },
     placeholder: {
       type: String,
       default: '',
@@ -43,14 +47,11 @@ export default {
       default: false,
     },
   },
-  data: () => ({
-    value: '',
-  }),
   computed: {
   },
   methods: {
-    input(value) {
-      this.$emit('input', value);
+    input($event) {
+      this.$emit('input', $event.target.value, $event.target);
     },
   },
 };
