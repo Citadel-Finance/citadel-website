@@ -22,6 +22,9 @@ Vue.mixin({
     CloseModal() {
       this.$store.dispatch('modals/hide');
     },
+    SubstrString(value, from, length) {
+      return value.substr(from, length);
+    },
     ShowError(label) {
       this.$bvToast.toast(label, {
         title: 'Ошибка',

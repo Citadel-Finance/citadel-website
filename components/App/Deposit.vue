@@ -19,7 +19,7 @@
         </div>
         <hr class="balance-card__line">
         <div class="balance-card__value">
-          10.26000000 ETH
+          {{ balance }}
         </div>
       </div>
       <div class="balance-card__container">
@@ -28,7 +28,7 @@
         </div>
         <hr class="balance-card__line">
         <div class="balance-card__value">
-          10.26000000 ETH
+          {{ balance }}
         </div>
       </div>
     </div>
@@ -76,6 +76,7 @@ export default {
 <style lang="scss" scoped>
 .deposit {
   max-width: 1170px;
+  width: 100%;
   background: #FFFFFF;
   margin: auto;
   border-radius: 10px;

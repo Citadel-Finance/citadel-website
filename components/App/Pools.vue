@@ -46,11 +46,17 @@
                 <div class="table-main__col">
                   --
                 </div>
-                <div class="table-main__col">
-                  {{ poolsMap[poolAddress].totalStaked }}
+                <div
+                  class="table-main__col"
+                  :title="poolsMap[poolAddress].totalStaked"
+                >
+                  {{ Floor(poolsMap[poolAddress].totalStaked, 4) }}
                 </div>
-                <div class="table-main__col balance">
-                  {{ poolsMap[poolAddress].userStaked }}
+                <div
+                  class="table-main__col balance"
+                  :title="poolsMap[poolAddress].userStaked"
+                >
+                  {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
                 </div>
                 <div class="table-main__col status">
                   <span

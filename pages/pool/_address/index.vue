@@ -4,7 +4,7 @@
     <Settings />
     <Chart />
     <div class="main">
-      <Deposit :balance="`${balance} ${symbol}`" />
+      <Deposit :balance="`${Floor(balance, 4)} ${symbol}`" />
       <Keepers />
     </div>
     <Transaction />
@@ -58,9 +58,9 @@ export default {
 <style lang="scss" scoped>
 
 .main {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   grid-gap: 30px;
-  justify-content: space-between;
   margin: auto;
   max-width: 1170px;
 }

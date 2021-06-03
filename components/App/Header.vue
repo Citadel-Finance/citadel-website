@@ -13,8 +13,11 @@
           class="header__connected"
         >
           <span class="header__dot" />
-          <span class="header__address">
-            {{ userAddress }}
+          <span
+            class="header__address"
+            :title="userAddress"
+          >
+            {{ SubstrString(userAddress, 0, 6) + '...' + SubstrString(userAddress, userAddress.length - 4, 4) }}
           </span>
         </div>
         <base-btn
