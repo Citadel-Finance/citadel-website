@@ -1,5 +1,5 @@
 <template>
-  <div class="dropdown__container container">
+  <div class="settings__container container">
     <div class="container__back back">
       <n-link to="/">
         <button
@@ -67,11 +67,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.dropdown__container {
+.settings__container {
   background: #FFFFFF;
   align-items: center;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-between;
   margin: 0 auto 30px;
   width: 100%;
   max-width: 1170px;
@@ -79,6 +79,7 @@ export default {
   padding: 20px;
 }
 .back {
+  min-width: 180px;
   &__img {
     margin-right: 20px;
   }
@@ -88,10 +89,12 @@ export default {
   grid-gap: 20px;
   align-items: center;
   justify-content: center;
+  min-width: 180px;
 }
 .info {
   display: grid;
   justify-content: end;
+  min-width: 180px;
   &__title {
     font-weight: bold;
     font-size: 10px;

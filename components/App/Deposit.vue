@@ -3,7 +3,7 @@
     <div class="deposit__balance-card balance-card">
       <div class="balance-card__container">
         <div class="balance-card__title">
-          Your Balance
+          Your Deposit
         </div>
         <hr class="balance-card__line">
         <div class="balance-card__value">

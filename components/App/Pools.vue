@@ -50,7 +50,7 @@
                   {{ poolsMap[poolAddress].totalStaked }}
                 </div>
                 <div class="table-main__col balance">
-                  {{ tokensMap[poolsMap[poolAddress].childAddress].balance }}
+                  {{ poolsMap[poolAddress].userStaked }}
                 </div>
                 <div class="table-main__col status">
                   <span

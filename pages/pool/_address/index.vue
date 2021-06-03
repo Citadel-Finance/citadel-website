@@ -43,7 +43,7 @@ export default {
       return;
     }
     this.poolAddress = this.$route.params.address;
-    this.balance = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].balance;
+    this.balance = this.poolsMap[this.poolAddress].userStaked;
     this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
     this.SetLoader(false);
   },

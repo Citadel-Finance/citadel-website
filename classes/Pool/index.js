@@ -1,7 +1,9 @@
 import BigNumber from 'bignumber.js';
 import BasicSmartContract from '~/classes/BasicSmartContract';
 import { Pool as PoolAbi } from '~/abis';
-import { error, getWeb3, output } from '~/utils/web3';
+import {
+  error, getUserAddress, getWeb3, output,
+} from '~/utils/web3';
 
 export default class Pool extends BasicSmartContract {
   constructor({
@@ -16,6 +18,7 @@ export default class Pool extends BasicSmartContract {
   async fetchAll() {
     await Promise.all([
       this.fetchCommonData(),
+      this.fetchUserData(),
     ]);
   }
 
@@ -33,6 +36,24 @@ export default class Pool extends BasicSmartContract {
     } catch (e) {
       console.log('fetchCommonData error', e, this);
       return error(500, 'fetchCommonData error', e);
+    }
+  }
+
+  async fetchUserData() {
+    try {
+      const userData = await this.fetchContractData('getUserData', [getUserAddress()]);
+      const commonData = await this.fetchContractData('getCommonData');
+      const { totalStaked } = userData;
+      const {
+        decimals, symbol,
+      } = commonData;
+      this.decimals = decimals;
+      this.symbol = symbol;
+      this.userStaked = new BigNumber(totalStaked).shiftedBy(-decimals).toString();
+      return output({ userData });
+    } catch (e) {
+      console.log('fetchUserData error', e, this);
+      return error(500, 'fetchUserData error', e);
     }
   }
 
