@@ -18,25 +18,25 @@
             {{ field.label }}
           </div>
         </div>
-        <client-only>
-          <div class="table-main__body">
-            <div
-              v-for="(event, i) in poolsEventsAll"
-              :key="`position__item-${i}`"
-              class="table-main__tr"
-            >
-              <div class="table-main__col date">
-                {{ event.amount }} {{ event.event }}
-              </div>
-              <div class="table-main__col change">
-                -
-              </div>
-              <div class="table-main__col hash">
-                {{ event.transactionHash }}
-              </div>
+        <!--        <client-only>-->
+        <div class="table-main__body">
+          <div
+            v-for="(event, i) in poolsEventsAll"
+            :key="`position__item-${i}`"
+            class="table-main__tr"
+          >
+            <div class="table-main__col date">
+              {{ event.amount }} {{ event.event }}
+            </div>
+            <div class="table-main__col change">
+              -
+            </div>
+            <div class="table-main__col hash">
+              {{ event.transactionHash }}
             </div>
           </div>
-        </client-only>
+        </div>
+        <!--        </client-only>-->
       </div>
     </div>
   </div>

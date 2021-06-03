@@ -47,11 +47,11 @@ export default {
     },
   },
   async mounted() {
-    this.SetLoader(true);
-    const r = await this.$store.dispatch('user/connectWallet');
-    if (!r.ok) {
-      return;
-    }
+    // this.SetLoader(true);
+    // const r = await this.$store.dispatch('user/connectWallet');
+    // if (!r.ok) {
+    //   return;
+    // }
     // this.poolAddress = this.$route.params.address;
     this.balance = this.poolsMap[this.poolAddress].userStaked;
     this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;

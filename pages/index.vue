@@ -29,11 +29,11 @@ export default {
     }),
   },
   async mounted() {
-    this.SetLoader(true);
-    const r = await this.$store.dispatch('user/connectWallet');
-    if (!r.ok) {
-      return;
-    }
+    // this.SetLoader(true);
+    // const r = await this.$store.dispatch('user/connectWallet');
+    // if (!r.ok) {
+    //   return;
+    // }
     this.SetLoader(false);
   },
 };

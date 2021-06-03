@@ -12,6 +12,13 @@
 </template>
 <script>
 export default {
+  async mounted() {
+    const r = await this.$store.dispatch('user/connectWallet');
+    if (!r.ok) {
+      return;
+    }
+    this.SetLoader(false);
+  },
 };
 </script>
 <style lang="scss" scoped>
