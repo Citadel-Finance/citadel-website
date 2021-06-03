@@ -11,7 +11,7 @@
         <hr class="balance-card__line">
         <div
           class="balance-card__value"
-          :title="`${title}`"
+          :title="`${pool.userStaked}`"
         >
           {{ Floor(pool.userStaked) }} {{ pool.symbol }}
         </div>
