@@ -1,7 +1,7 @@
 <template>
   <div>
     <Header />
-    <Dropdown />
+    <Settings />
     <Chart />
     <Deposit :balance="`${balance} ${symbol}`" />
     <Transaction />
@@ -11,7 +11,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import Header from '~/components/App/Header';
-import Dropdown from '~/components/App/Dropdown';
+import Settings from '~/components/App/Settings';
 import Deposit from '~/components/App/Deposit';
 import Transaction from '~/components/App/Transaction';
 import Chart from '~/components/App/Chart';
@@ -20,7 +20,7 @@ export default {
   name: 'Pool',
   components: {
     Chart,
-    Dropdown,
+    Settings,
     Header,
     Deposit,
     Transaction,

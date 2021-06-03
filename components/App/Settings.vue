@@ -14,12 +14,10 @@
         </button>
       </n-link>
     </div>
-    <div class="container__menu menu">
-      <base-dropdown
-        v-model="selected"
-        :options="options"
-        class="menu__dd"
-      />
+    <div
+      v-if="isUserAdmin"
+      class="container__menu menu"
+    >
       <Edit />
       <Delete />
     </div>
@@ -36,6 +34,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Edit from './Admin/Edit';
 import Delete from './Admin/Delete';
 
@@ -58,6 +57,11 @@ export default {
       ],
       selected: 0,
     };
+  },
+  computed: {
+    ...mapGetters({
+      isUserAdmin: 'user/getIsUserAdmin',
+    }),
   },
 };
 </script>
@@ -82,8 +86,8 @@ export default {
 .menu {
   display: flex;
   grid-gap: 20px;
-  justify-items: center;
   align-items: center;
+  justify-content: center;
 }
 .info {
   display: grid;

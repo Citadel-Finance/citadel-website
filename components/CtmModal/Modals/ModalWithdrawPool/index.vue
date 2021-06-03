@@ -26,6 +26,7 @@
         Amount
       </div>
       <base-input
+        v-model="amount"
         :placeholder="'Amount in ETH'"
         :description="'MAX'"
       />
@@ -86,8 +87,7 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     async withdraw() {
-      // const { amount } = this;
-      const amount = 11;
+      const { amount } = this;
       const poolAddress = this.$route.params.address;
       this.SetLoader(true);
       await this.$store.dispatch('user/poolWithdraw', {
