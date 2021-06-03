@@ -4,10 +4,24 @@
       {{ title }}
     </div>
     <div class="balance__card">
-      <Card title="SUPPLY CITADEL" />
-      <Card title="BALANCE CITADEL" />
-      <Card title="REWARDS CITADEL" />
-      <Card title="PRICE CITADEL" />
+      <div>
+        supply: {{ ctlToken.totalSupply }}
+      </div>
+      <div>
+        balance: {{ ctlToken.balance }}
+      </div>
+      <div>
+        rewards: -
+        <!--        нужен метод getAvailableRewards-->
+        <!--        нужен метод claimAllPools-->
+      </div>
+      <div>
+        price: -
+      </div>
+      <!--      <Card title="SUPPLY CITADEL" />-->
+      <!--      <Card title="BALANCE CITADEL" />-->
+      <!--      <Card title="REWARDS CITADEL" />-->
+      <!--      <Card title="PRICE CITADEL" />-->
     </div>
     <div class="balance__button">
       <base-btn
@@ -22,14 +36,18 @@
 
 <script>
 import modals from '@/store/modals/modals';
-import Card from '~/components/App/Card';
+import { mapGetters } from 'vuex';
+// import Card from '~/components/App/Card';
 
 export default {
   name: 'Balance',
   components: {
-    Card,
+    // Card,
   },
-  props: {
+  computed: {
+    ...mapGetters({
+      ctlToken: 'user/getCtlToken',
+    }),
   },
   data() {
     return {

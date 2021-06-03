@@ -43,6 +43,7 @@ export default {
     const ctlToken = new Token({ address: ctlTokenAddress });
     await ctlToken.initInst();
     await ctlToken.fetchAll();
+    await ctlToken.fetchTotalSupply();
     commit('setCtlToken', ctlToken);
   },
   async initPoolsAndTokens({ getters, commit, dispatch }) {

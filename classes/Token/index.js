@@ -15,10 +15,6 @@ export default class Token extends BasicSmartContract {
     });
   }
 
-  setParrentAddress(value) {
-    this.parrentAddress = value;
-  }
-
   async fetchBalance() {
     try {
       let balance = await this.fetchContractData('balanceOf', [getUserAddress()]);
@@ -54,6 +50,20 @@ export default class Token extends BasicSmartContract {
     }
   }
 
+  async fetchTotalSupply() {
+    try {
+      let totalSupply = +(await this.fetchContractData('totalSupply'));
+      totalSupply = new BigNumber(totalSupply).shiftedBy(-this.decimals).toString();
+      this.totalSupply = totalSupply;
+      return output({
+        totalSupply,
+      });
+    } catch (e) {
+      console.log('fetchDecimals error', e, this);
+      return error(500, 'fetchDecimals error', e);
+    }
+  }
+
   async fetchSymbol() {
     try {
       const symbol = await this.fetchContractData('symbol');
@@ -69,7 +79,7 @@ export default class Token extends BasicSmartContract {
 
   async allowance(recipient, owner = getUserAddress()) {
     try {
-      const r = await await this.fetchContractData('allowance', [
+      const r = await this.fetchContractData('allowance', [
         owner, recipient,
       ]);
       console.log(r);

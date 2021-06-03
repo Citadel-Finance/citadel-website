@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js';
 import BasicSmartContract from '~/classes/BasicSmartContract';
 import { Pool as PoolAbi } from '~/abis';
 import {
-  error, getUserAddress, getWeb3, output,
+  error, getUserAddress, output,
 } from '~/utils/web3';
 
 export default class Pool extends BasicSmartContract {
