@@ -1,5 +1,8 @@
 <template>
   <div class="deposit">
+    <div class="deposit__title">
+      Your stats
+    </div>
     <div class="deposit__balance-card balance-card">
       <div class="balance-card__container">
         <div class="balance-card__title">
@@ -78,16 +81,25 @@ export default {
   border-radius: 10px;
   padding: 20px;
   display: grid;
-  grid-template-columns: 1fr 350px;
-  grid-gap: 30px;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  &__title {
+    font-family: sans-serif, 'Conto-Medium';
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.03em;
+    color: #240A36;
+  }
   &__balance-card {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
+    grid-gap: 15px;
   }
   &__buttons {
     display: grid;
-    grid-gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
     width: 100%;
     align-content: center;
   }
@@ -109,7 +121,7 @@ export default {
   }
   &__line {
     width: 40px;
-    margin: 20px auto 20px 0;
+    margin: 66px auto 15px 0;
     border: none;
     background-color: #C31433;
     color: #C31433;

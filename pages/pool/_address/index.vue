@@ -3,7 +3,10 @@
     <Header />
     <Settings />
     <Chart />
-    <Deposit :balance="`${balance} ${symbol}`" />
+    <div class="main">
+      <Deposit :balance="`${balance} ${symbol}`" />
+      <Keepers />
+    </div>
     <Transaction />
   </div>
 </template>
@@ -12,6 +15,7 @@
 import { mapGetters } from 'vuex';
 import Header from '~/components/App/Header';
 import Settings from '~/components/App/Settings';
+import Keepers from '~/components/App/Keepers';
 import Deposit from '~/components/App/Deposit';
 import Transaction from '~/components/App/Transaction';
 import Chart from '~/components/App/Chart';
@@ -21,6 +25,7 @@ export default {
   components: {
     Chart,
     Settings,
+    Keepers,
     Header,
     Deposit,
     Transaction,
@@ -51,8 +56,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.index__container {
+
+.main {
   display: flex;
+  grid-gap: 30px;
   justify-content: space-between;
   margin: auto;
   max-width: 1170px;

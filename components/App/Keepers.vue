@@ -5,15 +5,15 @@
         Top liquidity providers
       </div>
       <div class="keepers__table table-main">
-        <div class="table-main__head">
-          <div
-            v-for="(field,i) in fields"
-            :key="`table__title-${i}`"
-            class="table-main__th"
-          >
-            {{ field.label }}
-          </div>
-        </div>
+        <!--        <div class="table-main__head">-->
+        <!--          <div-->
+        <!--            v-for="(field,i) in fields"-->
+        <!--            :key="`table__title-${i}`"-->
+        <!--            class="table-main__th"-->
+        <!--          >-->
+        <!--            {{ field.label }}-->
+        <!--          </div>-->
+        <!--        </div>-->
         <div class="table-main__body">
           <div
             v-for="(provider, i) in providers"
@@ -65,16 +65,16 @@ export default {
           address: 'dgdg5s6...sgsgsf465s',
           contributions: '$ 15 256 547',
         },
-        {
-          id: 4,
-          address: 'dgdg5s6...sgsgsf465s',
-          contributions: '$ 15 256 547',
-        },
-        {
-          id: 5,
-          address: 'dgdg5s6...sgsgsf465s',
-          contributions: '$ 15 256 547',
-        },
+        // {
+        //   id: 4,
+        //   address: 'dgdg5s6...sgsgsf465s',
+        //   contributions: '$ 15 256 547',
+        // },
+        // {
+        //   id: 5,
+        //   address: 'dgdg5s6...sgsgsf465s',
+        //   contributions: '$ 15 256 547',
+        // },
       ],
     };
   },
@@ -85,8 +85,6 @@ export default {
 .keepers {
   background: #FFFFFF;
   width: 100%;
-  min-width: 770px;
-  min-height: 466px;
   border-radius: 10px;
   padding: 20px;
   &__title {

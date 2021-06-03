@@ -10,7 +10,10 @@
       <Card title="PRICE CITADEL" />
     </div>
     <div class="balance__button">
-      <base-btn @click="openClaimModal">
+      <base-btn
+        class="balance__base-btn"
+        @click="openClaimModal"
+      >
         Claim
       </base-btn>
     </div>
@@ -49,7 +52,6 @@ export default {
   background: #FFFFFF;
   border-radius: 10px;
   padding: 20px;
-  min-height: 466px;
   &__title {
     font-size: 21px;
     font-family: sans-serif, 'Conto-Medium';
@@ -59,11 +61,18 @@ export default {
   }
   &__card {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
   }
   &__button {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 15px;
     margin-top: 20px;
+  }
+  &__base-btn {
+    grid-column: 4 / 5;
+    grid-row: 1 / 2;
   }
 }
 </style>

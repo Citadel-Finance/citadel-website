@@ -3,7 +3,6 @@
     <Header />
     <div class="index__container">
       <Balance />
-      <Keepers />
     </div>
     <Pools />
   </div>
@@ -14,11 +13,9 @@ import { mapGetters } from 'vuex';
 import Header from '../components/App/Header';
 import Balance from '../components/App/Balance';
 import Pools from '../components/App/Pools';
-import Keepers from '../components/App/Keepers';
 
 export default {
   components: {
-    Keepers,
     Header,
     Balance,
     Pools,
@@ -44,8 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 .index__container {
-  display: flex;
-  grid-gap: 30px;
+  width: 100%;
   margin: auto;
   max-width: 1170px;
 }
