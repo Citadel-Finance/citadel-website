@@ -5,12 +5,6 @@
       <Balance />
       <Keepers />
     </div>
-    <!--    <button-->
-    <!--      class="btn btn-primary"-->
-    <!--      @click="testDeposit"-->
-    <!--    >-->
-    <!--      test-->
-    <!--    </button>-->
     <Pools />
   </div>
 </template>

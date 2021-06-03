@@ -101,28 +101,28 @@ export default {
     console.log(depositRes);
     console.log('DONE');
   },
-  async poolWithdrawOld({ getters }, { amount, poolAddress }) {
-    const poolsMap = getters.getPoolsMap;
-    const tokensMap = getters.getTokensMap;
-    const pool = poolsMap[poolAddress];
-    const tokenAddress = pool.childAddress;
-    const token = tokensMap[tokenAddress];
-    const bnAmount = new BigNumber(amount).shiftedBy(token.decimals).toString();
-    const { result } = await token.allowance(poolAddress);
-    const { allowance } = result;
-    console.log('allowance', allowance, amount);
-    // if (+allowance < +amount) {
-    //   const approveRes = await token.approve(poolAddress, bnAmount);
-    //   if (!approveRes.ok) {
-    //     console.log('approve error');
-    //     return;
-    //   }
-    //   console.log(approveRes);
-    // }
-    // const depositRes = await pool.withdraw(bnAmount);
-    // console.log(depositRes);
-    // console.log('DONE');
-  },
+  // async poolWithdrawOld({ getters }, { amount, poolAddress }) {
+  //   const poolsMap = getters.getPoolsMap;
+  //   const tokensMap = getters.getTokensMap;
+  //   const pool = poolsMap[poolAddress];
+  //   const tokenAddress = pool.childAddress;
+  //   const token = tokensMap[tokenAddress];
+  //   const bnAmount = new BigNumber(amount).shiftedBy(token.decimals).toString();
+  //   const { result } = await token.allowance(poolAddress);
+  //   const { allowance } = result;
+  //   console.log('allowance', allowance, amount);
+  // if (+allowance < +amount) {
+  //   const approveRes = await token.approve(poolAddress, bnAmount);
+  //   if (!approveRes.ok) {
+  //     console.log('approve error');
+  //     return;
+  //   }
+  //   console.log(approveRes);
+  // }
+  // const depositRes = await pool.withdraw(bnAmount);
+  // console.log(depositRes);
+  // console.log('DONE');
+  // },
   async poolWithdraw({ getters }, { amount, poolAddress }) {
     const poolsMap = getters.getPoolsMap;
     const pool = poolsMap[poolAddress];

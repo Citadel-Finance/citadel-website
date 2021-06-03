@@ -7,34 +7,36 @@
         <!--          {{ poolsEventsAll.length }}-->
         <!--        </div>-->
       </div>
-      <div class="transactions__table table-main">
-        <div class="table-main__head">
-          <div
-            v-for="(field,i) in fields"
-            :key="`table__title-${i}`"
-            class="table-main__th"
-          >
-            {{ field.label }}
-          </div>
-        </div>
-        <div class="table-main__body">
-          <div
-            v-for="(event, i) in poolsEventsAll"
-            :key="`position__item-${i}`"
-            class="table-main__tr"
-          >
-            <div class="table-main__col date">
-              {{ event.amount }} {{ event.event }}
-            </div>
-            <div class="table-main__col change">
-              -
-            </div>
-            <div class="table-main__col hash">
-              {{ event.transactionHash }}
+      <client-only>
+        <div class="transactions__table table-main">
+          <div class="table-main__head">
+            <div
+              v-for="(field,i) in fields"
+              :key="`table__title-${i}`"
+              class="table-main__th"
+            >
+              {{ field.label }}
             </div>
           </div>
+          <div class="table-main__body">
+            <div
+              v-for="(event, i) in poolsEventsAll"
+              :key="`position__item-${i}`"
+              class="table-main__tr"
+            >
+              <div class="table-main__col date">
+                {{ event.amount }} {{ event.event }}
+              </div>
+              <div class="table-main__col change">
+                -
+              </div>
+              <div class="table-main__col hash">
+                {{ event.transactionHash }}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </client-only>
     </div>
   </div>
 </template>
@@ -60,38 +62,6 @@ export default {
       { key: 'date', label: 'Date' },
       { key: 'change', label: 'Change' },
       { key: 'hash', label: 'TX Hash' },
-    ],
-    transactions: [
-      {
-        id: 0,
-        date: '02.06.2021',
-        change: '$ 15 256 547',
-        hash: 'dgdg5s6...sgsgsf465s',
-      },
-      {
-        id: 1,
-        date: '02.06.2021',
-        change: '$ 15 256 547',
-        hash: 'dgdg5s6...sgsgsf465s',
-      },
-      {
-        id: 2,
-        date: '02.06.2021',
-        change: '$ 15 256 547',
-        hash: 'dgdg5s6...sgsgsf465s',
-      },
-      {
-        id: 3,
-        date: '02.06.2021',
-        change: '$ 15 256 547',
-        hash: 'dgdg5s6...sgsgsf465s',
-      },
-      {
-        id: 4,
-        date: '02.06.2021',
-        change: '$ 15 256 547',
-        hash: 'dgdg5s6...sgsgsf465s',
-      },
     ],
   }),
   computed: {

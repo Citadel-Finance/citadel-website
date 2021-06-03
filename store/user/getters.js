@@ -5,6 +5,7 @@ export default {
   getPoolsMap: (state) => state.poolsMap,
   getTokensMap: (state) => state.tokensMap,
   getCtlToken: (state) => state.ctlToken,
+  getIsUserAdmin: (state) => state.isUserAdmin,
   getPoolsEventsMap: (state) => state.poolsEventsMap,
   getPoolsEventsAll: ({ poolsEventsMap }) => {
     const r = Object.keys(poolsEventsMap).reduce((accumulator, address) => [

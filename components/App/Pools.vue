@@ -103,6 +103,7 @@ export default {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
       tokensMap: 'user/getTokensMap',
+      isUserAdmin: 'user/getIsUserAdmin',
     }),
   },
   methods: {
