@@ -34,7 +34,7 @@ export default {
     // if (!r.ok) {
     //   return;
     // }
-    this.SetLoader(false);
+    // this.SetLoader(false);
   },
 };
 </script>
