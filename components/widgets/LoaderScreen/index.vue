@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div
-      v-if="true"
+      v-if="isLoading"
       class="loader"
       :class="{'loader_hider': false}"
     >
