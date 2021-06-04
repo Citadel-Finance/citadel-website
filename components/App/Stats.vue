@@ -37,10 +37,16 @@
         </div>
       </div>
       <div class="deposit__buttons">
-        <base-btn @click="openDepositModal">
+        <base-btn
+          mode="primary"
+          @click="openDepositModal"
+        >
           Deposit
         </base-btn>
-        <base-btn @click="openWithdrawModal">
+        <base-btn
+          mode="primary"
+          @click="openWithdrawModal"
+        >
           Withdraw
         </base-btn>
       </div>

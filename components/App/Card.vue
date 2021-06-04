@@ -1,11 +1,11 @@
 <template>
-  <div class="card-container">
-    <div class="card-container__title">
+  <div class="cards__wrapper">
+    <div class="cards__title">
       {{ title }}
     </div>
-    <hr class="card-container__line">
-    <div class="card-container__value">
-      {{ number }}
+    <hr class="cards__line">
+    <div class="cards__value">
+      {{ value }}
     </div>
   </div>
 </template>
@@ -18,25 +18,26 @@ export default {
       default: '',
       type: String,
     },
-    number: {
-      type: Number,
-      default: 0,
+    value: {
+      type: String,
+      default: '',
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.card-container {
-  padding: 20px 15px;
-  min-width: 160px;
-  min-height: 145px;
-  background: #F6F5F7;
-  border-radius: 10px;
+.cards {
+  &__wrapper {
+    padding: 20px 15px;
+    width: 100%;
+    background: #F6F5F7;
+    border-radius: 10px;
+  }
   &__title {
     font-weight: bold;
     font-size: 10px;
-    line-height: 12px;
+    line-height: 11px;
     display: flex;
     align-items: center;
     letter-spacing: 0.105em;
@@ -44,8 +45,8 @@ export default {
     color: #7B6C86;
   }
   &__line {
-    width: 40px;
-    margin: 51px auto 18px 0;
+    width: 68px;
+    margin: 35px auto 15px 0;
     border: none;
     background-color: #C31433;
     color: #C31433;

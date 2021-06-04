@@ -40,7 +40,7 @@
         >
           Close
         </base-btn>
-        <base-btn>
+        <base-btn mode="primary">
           Claim all
         </base-btn>
       </div>

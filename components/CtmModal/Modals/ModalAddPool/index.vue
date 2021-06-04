@@ -15,7 +15,7 @@
         >
           Close
         </base-btn>
-        <base-btn>
+        <base-btn mode="primary">
           Save
         </base-btn>
       </div>

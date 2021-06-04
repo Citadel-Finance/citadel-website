@@ -4,32 +4,30 @@
       <div class="balance__title">
         {{ title }}
       </div>
-      <div class="balance__card">
-        <div>
-          supply: {{ ctlToken.totalSupply }}
-        </div>
-        <div>
-          balance: {{ ctlToken.balance }}
-        </div>
-        <div>
-          rewards: -
-          <!--        нужен метод getAvailableRewards-->
-          <!--        нужен метод claimAllPools-->
-        </div>
-        <div>
-          price: -
-        </div>
-        <!--      <Card title="SUPPLY CITADEL" />-->
-        <!--      <Card title="BALANCE CITADEL" />-->
-        <!--      <Card title="REWARDS CITADEL" />-->
-        <!--      <Card title="PRICE CITADEL" />-->
-      </div>
-      <div class="balance__button">
+      <div class="balance__cards cards">
+        <Card
+          title="Supply CitaDEL"
+          :value="`${ctlToken.totalSupply}`"
+        />
+        <Card
+          title="Balance CitaDEL"
+          :value="`${ctlToken.balance}`"
+        />
+        <Card
+          title="Rewards CitaDEL"
+          value="-"
+        />
+        <Card
+          title="Price CitaDEL"
+          value="-"
+        />
         <base-btn
           class="balance__base-btn"
+          mode="backImg"
           @click="openClaimModal"
         >
-          Claim
+          Claim your tokens
+          <span class="icon-sub_right" />
         </base-btn>
       </div>
     </div>
@@ -39,22 +37,22 @@
 <script>
 import modals from '@/store/modals/modals';
 import { mapGetters } from 'vuex';
-// import Card from '~/components/App/Card';
+import Card from '~/components/App/Card';
 
 export default {
   name: 'Balance',
   components: {
-    // Card,
-  },
-  computed: {
-    ...mapGetters({
-      ctlToken: 'user/getCtlToken',
-    }),
+    Card,
   },
   data() {
     return {
       title: 'Balance CitaDEL',
     };
+  },
+  computed: {
+    ...mapGetters({
+      ctlToken: 'user/getCtlToken',
+    }),
   },
   methods: {
     openClaimModal() {
@@ -82,20 +80,17 @@ export default {
     line-height: 25px;
     color: #240A36;
   }
-  &__card {
+  &__cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 15px;
-  }
-  &__button {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 15px;
-    margin-top: 20px;
   }
   &__base-btn {
-    grid-column: 4 / 5;
-    grid-row: 1 / 2;
+    width: 100%;
+    span::before {
+      color: #FFFFFF;
+      font-size: 24px;
+    }
   }
 }
 </style>
