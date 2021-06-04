@@ -1,28 +1,11 @@
 <template>
-  <div class="ctm-modal__box">
-    <div
-      v-if="isHeader === true"
-      class="ctm-modal__header"
-    >
-      <div class="ctm-modal__title">
-        {{ title || options.title || 'Claim' }}
-      </div>
-      <button
-        v-if="!options.isUnclosable"
-        class="ctm-modal__x"
-        @click="close()"
-      >
-        <img
-          :src="Require('x.svg')"
-          alt="x"
-        >
-      </button>
-    </div>
-    <div class="claim-modal__main">
-      <div class="claim-modal__text">
+  <ctm-modal-box title="Claim">
+    <!--    <div class="ctm-modal__box">-->
+    <div class="ctm-modal__main main">
+      <div class="main__text">
         {{ claimText }}
       </div>
-      <div class="claim-modal__rewards rewards">
+      <div class="main__rewards rewards">
         <div class="rewards__titles">
           <span
             v-for="(item, i) in rewardsTitle"
@@ -42,7 +25,7 @@
           </span>
         </div>
       </div>
-      <div class="claim-modal__amount amount">
+      <div class="main__amount amount">
         <div class="amount__title">
           Total amount:
         </div>
@@ -50,7 +33,7 @@
           {{ amount }}
         </div>
       </div>
-      <div class="claim-modal__buttons">
+      <div class="main__buttons">
         <base-btn
           :mode="'secondary'"
           @click="close()"
@@ -62,7 +45,8 @@
         </base-btn>
       </div>
     </div>
-  </div>
+    <!--    </div>-->
+  </ctm-modal-box>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -116,10 +100,8 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.claim-modal {
-  &__main {
-    padding: 20px;
-  }
+.main {
+  padding: 20px;
   &__text {
     font-weight: 300;
     letter-spacing: 0.05em;

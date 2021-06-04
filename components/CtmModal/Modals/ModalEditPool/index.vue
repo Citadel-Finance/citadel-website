@@ -1,46 +1,28 @@
 <template>
-  <div class="ctm-modal__box">
-    <div
-      v-if="isHeader === true"
-      class="ctm-modal__header"
-    >
-      <div class="ctm-modal__title">
-        {{ title || options.title || 'Edit Pool' }}
-      </div>
-      <button
-        v-if="!options.isUnclosable"
-        class="ctm-modal__x"
-        @click="close()"
-      >
-        <img
-          :src="Require('x.svg')"
-          alt="x"
-        >
-      </button>
-    </div>
-    <div class="edit-modal__main">
-      <div class="edit-modal__title">
+  <ctm-modal-box title="Edit pool">
+    <div class="ctm-modal__main main">
+      <div class="main__title">
         Liquidity mining reward
       </div>
       <base-input
         :placeholder="'1000'"
-        class="edit-modal__input"
+        class="main__input"
       />
-      <div class="edit-modal__title">
+      <div class="main__title">
         APY tax
       </div>
       <base-input
         :placeholder="'0.7%'"
-        class="edit-modal__input"
+        class="main__input"
       />
-      <div class="edit-modal__title">
+      <div class="main__title">
         Status
       </div>
       <base-radio
         :options="optionsRadio"
-        class="edit-modal__radio"
+        class="main__radio"
       />
-      <div class="edit-modal__buttons">
+      <div class="main__buttons">
         <base-btn
           :mode="'secondary'"
           @click="close()"
@@ -52,7 +34,7 @@
         </base-btn>
       </div>
     </div>
-  </div>
+  </ctm-modal-box>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -96,10 +78,8 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.edit-modal {
-  &__main {
-    padding: 20px;
-  }
+.main {
+  padding: 20px;
   &__title {
     margin-bottom: 10px;
     color: #240A36;

@@ -1,25 +1,7 @@
 <template>
-  <div class="ctm-modal__box">
-    <div
-      v-if="isHeader === true"
-      class="ctm-modal__header"
-    >
-      <div class="ctm-modal__title">
-        {{ title || options.title || 'Deposit' }}
-      </div>
-      <button
-        v-if="!options.isUnclosable"
-        class="ctm-modal__x"
-        @click="close()"
-      >
-        <img
-          :src="Require('x.svg')"
-          alt="x"
-        >
-      </button>
-    </div>
-    <div class="deposit-modal__main">
-      <div class="deposit-modal__title">
+  <ctm-modal-box title="Deposit">
+    <div class="ctm-modal__main main">
+      <div class="main__title">
         Amount
       </div>
       <base-input
@@ -28,7 +10,7 @@
         :description="'MAX'"
         @handleClickBtn="setMax"
       />
-      <div class="deposit-modal__balance balance">
+      <div class="main__balance balance">
         <div class="balance__title">
           Your balance:
         </div>
@@ -36,7 +18,7 @@
           {{ balance }} {{ symbol }}
         </div>
       </div>
-      <div class="deposit-modal__buttons">
+      <div class="main__buttons">
         <base-btn
           mode="secondary"
           @click="close"
@@ -48,7 +30,7 @@
         </base-btn>
       </div>
     </div>
-  </div>
+  </ctm-modal-box>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -118,10 +100,8 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.deposit-modal {
-  &__main {
-    padding: 20px;
-  }
+.main {
+  padding: 20px;
   &__title {
     margin: 0 0 10px;
     color: #240A36;

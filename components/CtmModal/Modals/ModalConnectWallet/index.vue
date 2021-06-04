@@ -1,25 +1,7 @@
 <template>
-  <div class="ctm-modal__box">
-    <div
-      v-if="isHeader === true"
-      class="ctm-modal__header"
-    >
-      <div class="ctm-modal__title">
-        {{ title || options.title || 'Connect wallet' }}
-      </div>
-      <button
-        v-if="!options.isUnclosable"
-        class="ctm-modal__x"
-        @click="close()"
-      >
-        <img
-          :src="Require('x.svg')"
-          alt="x"
-        >
-      </button>
-    </div>
-    <div class="connect-modal__main">
-      <div class="connect-modal__buttons">
+  <ctm-modal-box title="Connect wallet">
+    <div class="ctm-modal__main main">
+      <div class="main__buttons">
         <base-btn
           :mode="'secondary'"
           @click="handleConnectWallet"
@@ -28,7 +10,7 @@
         </base-btn>
       </div>
     </div>
-  </div>
+  </ctm-modal-box>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -73,10 +55,8 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.connect-modal {
-  &__main {
-    padding: 20px;
-  }
+.main {
+  padding: 20px;
   &__buttons {
     display: grid;
     grid-gap: 15px;

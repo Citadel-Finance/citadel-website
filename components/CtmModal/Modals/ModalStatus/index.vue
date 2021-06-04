@@ -1,28 +1,13 @@
 <template>
-  <div class="ctm-modal__box">
-    <div
-      v-if="isHeader === true"
-      class="ctm-modal__header"
-    >
-      <button
-        v-if="!options.isUnclosable"
-        class="ctm-modal__x"
-        @click="close()"
-      >
-        <img
-          :src="Require('x.svg')"
-          alt="x"
-        >
-      </button>
-    </div>
-    <div class="status-modal__main">
-      <div class="status-modal__title">
+  <ctm-modal-box>
+    <div class="ctm-modal__main main">
+      <div class="main__title">
         {{ title }}
       </div>
-      <div class="status-modal__text">
+      <div class="main__text">
         {{ text }}
       </div>
-      <div class="status-modal__buttons">
+      <div class="main__buttons">
         <base-btn
           :mode="'secondary'"
           @click="close()"
@@ -31,7 +16,7 @@
         </base-btn>
       </div>
     </div>
-  </div>
+  </ctm-modal-box>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -65,15 +50,13 @@ export default {
 <style lang="scss" scoped>
 .ctm-modal {
   @include modalKit;
-  &__header {
-    display: grid;
-    justify-content: end;
-  }
+  //&__header {
+  //  display: grid;
+  //  justify-content: end;
+  //}
 }
-.status-modal {
-  &__main {
-    padding: 20px;
-  }
+.main {
+  padding: 20px;
   &__title {
     margin: 20px 0;
     color: #240A36;

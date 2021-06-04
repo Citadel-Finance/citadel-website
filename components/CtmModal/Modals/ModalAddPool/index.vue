@@ -1,14 +1,14 @@
 <template>
-  <ctm-modal-box title="Add new pool">
-    <div class="add-modal__main">
-      <div class="add-modal__title">
+  <ctm-modal-box title="Add pool">
+    <div class="ctm-modal__main main">
+      <div class="main__title">
         Something
       </div>
       <base-input
         :placeholder="'20.06%'"
-        class="add-modal__input"
+        class="main__input"
       />
-      <div class="add-modal__buttons">
+      <div class="main__buttons">
         <base-btn
           :mode="'secondary'"
           @click="close()"
@@ -56,10 +56,8 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.add-modal {
-  &__main {
-    padding: 20px;
-  }
+.main {
+  padding: 20px;
   &__title {
     margin-bottom: 10px;
     color: #240A36;

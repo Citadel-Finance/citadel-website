@@ -1,28 +1,10 @@
 <template>
-  <div class="ctm-modal__box">
-    <div
-      v-if="isHeader === true"
-      class="ctm-modal__header"
-    >
-      <div class="ctm-modal__title">
-        {{ title || options.title || 'Delete pool' }}
-      </div>
-      <button
-        v-if="!options.isUnclosable"
-        class="ctm-modal__x"
-        @click="close()"
-      >
-        <img
-          :src="Require('x.svg')"
-          alt="x"
-        >
-      </button>
-    </div>
-    <div class="delete-modal__main">
-      <div class="delete-modal__text">
+  <ctm-modal-box title="Delete pool">
+    <div class="ctm-modal__main main">
+      <div class="main__text">
         Are you sure you want to delete pool?
       </div>
-      <div class="delete-modal__buttons">
+      <div class="main__buttons">
         <base-btn
           :mode="'secondary'"
           @click="close()"
@@ -34,7 +16,7 @@
         </base-btn>
       </div>
     </div>
-  </div>
+  </ctm-modal-box>
 </template>
 <script>
 import { mapGetters } from 'vuex';
@@ -70,10 +52,8 @@ export default {
 .ctm-modal {
   @include modalKit;
 }
-.delete-modal {
-  &__main {
-    padding: 20px;
-  }
+.main {
+  padding: 20px;
   &__text {
     margin: 20px 0 50px;
     font-weight: 300;
