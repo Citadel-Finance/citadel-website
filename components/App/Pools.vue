@@ -1,11 +1,17 @@
 <template>
-  <div class="content__pools pools">
+  <div
+    class="content__pools pools"
+    :class="{ 'pools_admin' : isUserAdmin }"
+  >
     <div class="pools__wrapper">
-      <div class="pools__header header">
+      <div class="pools__header">
         <div class="pools__title">
           Pools
         </div>
-        <div class="pools__button">
+        <div
+          v-if="isUserAdmin"
+          class="pools__button"
+        >
           <base-btn @click="openAddModal">
             Add new pool
           </base-btn>
@@ -20,6 +26,18 @@
           >
             {{ field.label }}
           </div>
+          <!--          { key: 'status', label: 'Status' },-->
+          <!--          { key: 'settings', label: '' },-->
+          <div
+            v-if="isUserAdmin"
+            class="table-main__th"
+          >
+            Status
+          </div>
+          <div
+            v-if="isUserAdmin"
+            class="table-main__th"
+          />
         </div>
         <div class="table-main__body">
           <div
@@ -57,7 +75,10 @@
               >
                 {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
               </div>
-              <div class="table-main__col status">
+              <div
+                v-if="isUserAdmin"
+                class="table-main__col status"
+              >
                 <span
                   class="status__dot"
                   :class="{'slide__dot_active': poolsMap[poolAddress].status === true}"
@@ -67,7 +88,10 @@
                 </span>
               </div>
             </nuxt-link>
-            <div class="table-main__col settings">
+            <div
+              v-if="isUserAdmin"
+              class="table-main__col settings"
+            >
               <base-dd-settings
                 :options="options"
                 class="table-main__settings"
@@ -98,8 +122,6 @@ export default {
         { key: 'apy', label: 'APY' },
         { key: 'liquidity', label: 'Liquidity (USD)' },
         { key: 'balance', label: 'Balance' },
-        { key: 'status', label: 'Status' },
-        { key: 'settings', label: '' },
       ],
     };
   },
@@ -123,6 +145,19 @@ export default {
 
 <style lang="scss" scoped>
 .pools {
+  &_admin {
+    .table-main {
+      &__head {
+        grid-template-columns: repeat(5, 1fr) 60px;
+      }
+      &__tr {
+        grid-template-columns: 1fr 60px;
+      }
+      &__link {
+        grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  }
   &__wrapper {
     margin: auto;
     background: #FFFFFF;
@@ -166,7 +201,7 @@ export default {
     color: #7B6C86;
     display: grid;
     min-width: 1130px;
-    grid-template-columns: repeat(5, 1fr) 60px;
+    grid-template-columns: repeat(4, 1fr);
   }
   &__th {
     padding: 14px 20px;
@@ -175,7 +210,7 @@ export default {
   &__tr {
     display: grid;
     min-width: 1130px;
-    grid-template-columns: 1fr 60px;
+    grid-template-columns: 1fr;
     margin: 14px 0;
   }
   &__col {
@@ -190,7 +225,7 @@ export default {
   }
   &__link {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     text-decoration: none;
   }
 }
