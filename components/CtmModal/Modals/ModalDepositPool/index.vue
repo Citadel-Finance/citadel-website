@@ -20,13 +20,12 @@
     </div>
     <div class="deposit-modal__main">
       <div class="deposit-modal__title">
-        Amount {{ amount }}
+        Amount
       </div>
       <base-input
         v-model="amount"
         :placeholder="`Amount in ${symbol}`"
         :description="'MAX'"
-        :max="balance"
         @handleClickBtn="setMax"
       />
       <div class="deposit-modal__balance balance">

@@ -26,6 +26,7 @@
         v-model="amount"
         :placeholder="`Amount in ${symbol}`"
         :description="'MAX'"
+        @handleClickBtn="setMax"
       />
       <div class="withdraw-modal__balance max">
         <div class="max__title">
@@ -86,6 +87,9 @@ export default {
     this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
   },
   methods: {
+    setMax() {
+      this.amount = this.balance;
+    },
     close() {
       this.$store.dispatch('modals/hide');
     },

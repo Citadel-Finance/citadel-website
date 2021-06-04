@@ -39,10 +39,6 @@ export default {
       type: String,
       default: '',
     },
-    max: {
-      type: String,
-      default: '',
-    },
     errorText: {
       type: String,
       default: '',
