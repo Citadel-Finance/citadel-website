@@ -1,13 +1,13 @@
 <template>
   <div class="content__container">
-    <Settings />
+    <Menu />
     <Chart />
-    <div class="main">
-      <Deposit
+    <div class="content__main">
+      <Stats
         :balance="`${Floor(balance, 4)} ${symbol}`"
         :title="`${balance}`"
       />
-      <Keepers />
+      <Providers />
     </div>
     <Transaction />
   </div>
@@ -15,19 +15,19 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Settings from '~/components/App/Settings';
-import Keepers from '~/components/App/Keepers';
-import Deposit from '~/components/App/Deposit';
-import Transaction from '~/components/App/Transaction';
+import Menu from '~/components/App/Menu';
 import Chart from '~/components/App/Chart';
+import Stats from '~/components/App/Stats';
+import Providers from '~/components/App/Providers';
+import Transaction from '~/components/App/Transaction';
 
 export default {
   name: 'Pool',
   components: {
+    Menu,
     Chart,
-    Settings,
-    Keepers,
-    Deposit,
+    Stats,
+    Providers,
     Transaction,
   },
   data: () => ({
@@ -56,12 +56,12 @@ export default {
     margin: auto;
     max-width: 1170px;
   }
-}
-.main {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
-  margin: auto;
-  max-width: 1170px;
+  &__main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+    margin: auto;
+    max-width: 1170px;
+  }
 }
 </style>
