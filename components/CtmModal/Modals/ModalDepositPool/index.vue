@@ -25,7 +25,10 @@
         >
           Close
         </base-btn>
-        <base-btn @click="deposit">
+        <base-btn
+          mode="primary"
+          @click="deposit"
+        >
           Deposit
         </base-btn>
       </div>

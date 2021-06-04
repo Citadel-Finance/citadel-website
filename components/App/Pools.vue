@@ -12,7 +12,10 @@
           v-if="isUserAdmin"
           class="pools__button"
         >
-          <base-btn @click="openAddModal">
+          <base-btn
+            mode="primary"
+            @click="openAddModal"
+          >
             Add new pool
           </base-btn>
         </div>

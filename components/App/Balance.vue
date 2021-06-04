@@ -4,32 +4,34 @@
       <div class="balance__title">
         {{ title }}
       </div>
-      <div class="balance__card">
-        <div>
-          supply: {{ ctlToken.totalSupply }}
-        </div>
-        <div>
-          balance: {{ ctlToken.balance }}
-        </div>
-        <div>
-          rewards: -
-          <!--        нужен метод getAvailableRewards-->
-          <!--        нужен метод claimAllPools-->
-        </div>
-        <div>
-          price: -
-        </div>
-        <!--      <Card title="SUPPLY CITADEL" />-->
-        <!--      <Card title="BALANCE CITADEL" />-->
-        <!--      <Card title="REWARDS CITADEL" />-->
-        <!--      <Card title="PRICE CITADEL" />-->
-      </div>
-      <div class="balance__button">
+      <div class="balance__cards cards">
+        <Card
+          title="Supply CitaDEL"
+          :value="`${ctlToken.totalSupply}`"
+        />
+        <Card
+          title="Balance CitaDEL"
+          :value="`${ctlToken.balance}`"
+        />
+        <Card
+          title="Rewards CitaDEL"
+          value="-"
+        />
+        <Card
+          title="Price CitaDEL"
+          value="-"
+        />
         <base-btn
-          class="balance__base-btn"
+          class="balance__btn claim"
+          mode="backImg"
           @click="openClaimModal"
         >
-          Claim
+          <span class="claim__top">
+            Claim your tokens
+          </span>
+          <span class="claim__bottom">
+            <span class="icon-sub_right" />
+          </span>
         </base-btn>
       </div>
     </div>
@@ -39,22 +41,22 @@
 <script>
 import modals from '@/store/modals/modals';
 import { mapGetters } from 'vuex';
-// import Card from '~/components/App/Card';
+import Card from '~/components/App/Card';
 
 export default {
   name: 'Balance',
   components: {
-    // Card,
-  },
-  computed: {
-    ...mapGetters({
-      ctlToken: 'user/getCtlToken',
-    }),
+    Card,
   },
   data() {
     return {
       title: 'Balance CitaDEL',
     };
+  },
+  computed: {
+    ...mapGetters({
+      ctlToken: 'user/getCtlToken',
+    }),
   },
   methods: {
     openClaimModal() {
@@ -82,20 +84,29 @@ export default {
     line-height: 25px;
     color: #240A36;
   }
-  &__card {
+  &__cards {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 15px;
   }
-  &__button {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 15px;
-    margin-top: 20px;
+  &__btn {
+    width: 100%;
+    span::before {
+      color: #FFFFFF;
+      font-size: 24px;
+    }
   }
-  &__base-btn {
-    grid-column: 4 / 5;
-    grid-row: 1 / 2;
+}
+
+.claim {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__bottom {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
   }
 }
 </style>

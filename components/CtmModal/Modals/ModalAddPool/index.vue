@@ -15,7 +15,7 @@
         >
           Close
         </base-btn>
-        <base-btn @click="handleCreatePool">
+        <base-btn mode="primary" @click="handleCreatePool">
           Save
         </base-btn>
       </div>

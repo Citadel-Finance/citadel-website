@@ -11,7 +11,7 @@
         >
           Cancel
         </base-btn>
-        <base-btn>
+        <base-btn mode="primary">
           Delete
         </base-btn>
       </div>

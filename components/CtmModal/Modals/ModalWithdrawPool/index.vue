@@ -25,7 +25,10 @@
         >
           Close
         </base-btn>
-        <base-btn @click="withdraw">
+        <base-btn
+          mode="primary"
+          @click="withdraw"
+        >
           Withdraw
         </base-btn>
       </div>

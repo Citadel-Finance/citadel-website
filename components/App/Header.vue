@@ -22,6 +22,7 @@
         </div>
         <base-btn
           v-if="!isConnected"
+          mode="primary"
           @click="openModalConnect"
         >
           Connect Wallet
