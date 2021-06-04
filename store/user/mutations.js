@@ -27,7 +27,18 @@ export default {
     state.poolsEventsMap = payload;
   },
   pushPoolsEventsMap(state, payload) {
-    // TODO check hash
+    const { poolsEventsMap } = state;
+    const items = Object.keys(poolsEventsMap).reduce((accumulator, address) => [
+      ...accumulator,
+      ...poolsEventsMap[address],
+    ], []);
+    let isHashExists = false;
+    items.forEach((item) => {
+      isHashExists = item.transactionHash === payload.value.transactionHash;
+    });
+    if (isHashExists) {
+      return;
+    }
     let events;
     if (state.poolsEventsMap[payload.key]) {
       events = [...state.poolsEventsMap[payload.key], payload.value];

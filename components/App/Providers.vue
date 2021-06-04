@@ -7,18 +7,18 @@
       <div class="providers__table table-main">
         <div class="table-main__body">
           <div
-            v-for="(provider, i) in providers"
+            v-for="(provider, i) in top"
             :key="`position__item-${i}`"
             class="table-main__tr"
           >
             <div class="table-main__col position">
-              {{ provider.id }}
+              {{ i + 1 }}
             </div>
             <div class="table-main__col address">
-              {{ provider.address }}
+              {{ provider.user }}
             </div>
             <div class="table-main__col contribution">
-              {{ provider.contributions }}
+              {{ provider.staked }}
             </div>
           </div>
         </div>
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Keepers',
@@ -58,6 +60,21 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    ...mapGetters({
+      poolsMap: 'user/getPoolsMap',
+      tokensMap: 'user/getTokensMap',
+    }),
+    poolAddress() {
+      return this.$route.params.address;
+    },
+    pool() {
+      return this.poolsMap[this.poolAddress] || {};
+    },
+    top() {
+      return (this.pool.top || []).slice(0, 3);
+    },
   },
 };
 </script>

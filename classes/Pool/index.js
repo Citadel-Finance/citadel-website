@@ -4,6 +4,7 @@ import { Pool as PoolAbi } from '~/abis';
 import {
   error, getUserAddress, output,
 } from '~/utils/web3';
+import { shiftedBy } from '~/utils/helpers';
 
 export default class Pool extends BasicSmartContract {
   constructor({
@@ -16,17 +17,22 @@ export default class Pool extends BasicSmartContract {
   }
 
   async fetchAll() {
+    this.fetchCommonData();
     await Promise.all([
-      this.fetchCommonData(),
       this.fetchTop(),
+      this.fetchUserData(),
     ]);
-    await this.fetchUserData();
   }
 
   async fetchTop() {
     try {
-      const top = await this.fetchContractData('getTopProviders');
+      let top = await this.fetchContractData('getTopProviders');
+      top = top.map((item) => ({
+        ...item,
+        staked: shiftedBy(item.staked, -this.decimals),
+      }));
       this.top = top;
+      // console.log(top);
       return output({ top });
     } catch (e) {
       console.log('fetchTop error', e, this);
@@ -40,11 +46,12 @@ export default class Pool extends BasicSmartContract {
       const {
         decimals, token, totalStaked, symbol, apyTax,
       } = commonData;
-      console.log('commonData', commonData);
+      // console.log('commonData', commonData);
       this.decimals = decimals;
       this.symbol = symbol;
       this.childAddress = token;
-      this.totalStaked = new BigNumber(totalStaked).shiftedBy(-decimals).toString();
+      this.apyTax = shiftedBy(apyTax, -decimals);
+      this.totalStaked = shiftedBy(totalStaked, -decimals);
       return output({ commonData });
     } catch (e) {
       console.log('fetchCommonData error', e, this);

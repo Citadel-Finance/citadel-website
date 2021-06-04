@@ -61,7 +61,7 @@
                 </span>
               </div>
               <div class="table-main__col">
-                --
+                {{ Floor(poolsMap[poolAddress].apyTax, 4) }}
               </div>
               <div
                 class="table-main__col"
