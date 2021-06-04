@@ -53,4 +53,9 @@ export default class BasicSmartContract {
   fetchContractData(_method, _params) {
     return fetchContractData(_method, this.abi, this.address, _params);
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  shiftedBy(value, decimals) {
+    return new BigNumber(value).shiftedBy(decimals).toString();
+  }
 }

@@ -34,6 +34,7 @@ export const initWeb3Provider = async () => {
     if (+chainId !== 97) {
       return error(1, 'invalid chain', chainId);
     }
+    // const testTime = new Dat
     web4 = new Web4();
     await web4.setProvider(window.ethereum, userAddress);
     return output({ userAddress });
@@ -43,8 +44,8 @@ export const initWeb3Provider = async () => {
 };
 
 export const fetchContractData = async (_method, _abi, _address, _params, _provider = web3) => {
-  const Contract = new _provider.eth.Contract(_abi, _address);
-  return await Contract.methods[_method].apply(this, _params).call();
+  const contract = new _provider.eth.Contract(_abi, _address);
+  return await contract.methods[_method].apply(this, _params).call();
 };
 
 export const createInst = async (abi, address) => {

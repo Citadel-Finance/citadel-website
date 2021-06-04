@@ -1,23 +1,5 @@
 <template>
-  <div class="ctm-modal__box">
-    <!--    <div-->
-    <!--      v-if="isHeader === true"-->
-    <!--      class="ctm-modal__header"-->
-    <!--    >-->
-    <!--      <div class="ctm-modal__title">-->
-    <!--        {{ title || options.title || 'Add new pool' }}-->
-    <!--      </div>-->
-    <!--      <button-->
-    <!--        v-if="!options.isUnclosable"-->
-    <!--        class="ctm-modal__x"-->
-    <!--        @click="close()"-->
-    <!--      >-->
-    <!--        <img-->
-    <!--          :src="Require('x.svg')"-->
-    <!--          alt="x"-->
-    <!--        >-->
-    <!--      </button>-->
-    <!--    </div>-->
+  <ctm-modal-box title="Add new pool">
     <div class="add-modal__main">
       <div class="add-modal__title">
         Something
@@ -38,7 +20,7 @@
         </base-btn>
       </div>
     </div>
-  </div>
+  </ctm-modal-box>
 </template>
 <script>
 import { mapGetters } from 'vuex';
