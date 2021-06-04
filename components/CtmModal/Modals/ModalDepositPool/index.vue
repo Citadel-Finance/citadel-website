@@ -20,14 +20,14 @@
     </div>
     <div class="deposit-modal__main">
       <div class="deposit-modal__title">
-        Amount
+        Amount {{ amount }}
       </div>
       <base-input
         v-model="amount"
         :placeholder="`Amount in ${symbol}`"
         :description="'MAX'"
         :max="balance"
-        @handleClick="setMax()"
+        @handleClickBtn="setMax"
       />
       <div class="deposit-modal__balance balance">
         <div class="balance__title">
@@ -95,7 +95,9 @@ export default {
     },
   },
   methods: {
-
+    setMax() {
+      this.amount = this.balance;
+    },
     close() {
       this.$store.dispatch('modals/hide');
     },

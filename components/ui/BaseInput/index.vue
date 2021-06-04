@@ -10,7 +10,7 @@
       >
       <span
         class="base-field__description"
-        @click="setMax()"
+        @click="$emit('handleClickBtn')"
       >
         {{ description }}
       </span>
@@ -55,9 +55,6 @@ export default {
   computed: {
   },
   methods: {
-    setMax() {
-      this.value = this.max;
-    },
     input($event) {
       this.$emit('input', $event.target.value, $event.target);
     },
