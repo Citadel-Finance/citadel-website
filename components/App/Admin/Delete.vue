@@ -2,7 +2,7 @@
   <button @click="openDeleteModal">
     <div class="admin__delete">
       <img
-        src="@/assets/delete.svg"
+        :src="Require('delete.svg')"
         alt="edit"
       >
     </div>

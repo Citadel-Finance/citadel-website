@@ -3,7 +3,7 @@
     <div class="header__wrapper">
       <div class="header__logo">
         <img
-          src="../../assets/Logo.svg"
+          :src="Require('logo.svg')"
           alt="logo"
         >
       </div>

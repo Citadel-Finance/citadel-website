@@ -9,7 +9,6 @@
       @click="toggleDropdown()"
     >
       <img
-        src="../../../assets/Ethereum.svg"
         alt="logo"
       >
       <p class="base-dropdown__title">
@@ -17,7 +16,6 @@
       </p>
       <img
         class="base-dropdown__icon"
-        src="../../../assets/dropdown_arrow.svg"
         alt="dropdown"
       >
     </div>

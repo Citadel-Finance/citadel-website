@@ -13,7 +13,7 @@
         @click="close()"
       >
         <img
-          src="~/assets/x.svg"
+          :src="Require('x.svg')"
           alt="x"
         >
       </button>

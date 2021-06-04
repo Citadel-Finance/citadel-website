@@ -5,7 +5,7 @@
       class="ctm-modal__header"
     >
       <div class="ctm-modal__title">
-        {{ title || options.title }}
+        {{ title || options.title || 'Default' }}
       </div>
       <button
         v-if="!options.isUnclosable"
@@ -13,11 +13,12 @@
         @click="close()"
       >
         <img
-          src="../../../assets/x.svg"
+          :src="Require('x.svg')"
           alt="x"
         >
       </button>
     </div>
+    <slot />
   </div>
 </template>
 <script>

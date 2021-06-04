@@ -18,20 +18,9 @@ export default {
       default: '',
       type: String,
     },
-    active: {
-      type: Boolean,
-      default: false,
-    },
     number: {
       type: Number,
       default: 0,
-    },
-  },
-  methods: {
-    openTestModal() {
-      this.ShowModal({
-        text: 'test',
-      });
     },
   },
 };

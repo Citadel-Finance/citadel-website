@@ -2,7 +2,7 @@
   <button @click="openEditModal">
     <div class="admin__edit">
       <img
-        src="@/assets/edit.svg"
+        :src="Require('edit.svg')"
         alt="edit"
       >
     </div>

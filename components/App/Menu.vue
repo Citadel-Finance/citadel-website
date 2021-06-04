@@ -6,7 +6,7 @@
           class="back__button"
         >
           <img
-            src="../../assets/arrow_back.svg"
+            :src="Require('arrow_back.svg')"
             alt="back"
             class="back__img"
           >Back

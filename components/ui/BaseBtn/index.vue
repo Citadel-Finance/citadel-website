@@ -31,6 +31,7 @@ export default {
           'base-btn_disabled': disabled,
           'base-btn__secondary': mode === 'secondary',
           'base-btn__secondary_disabled': mode === 'secondary' && disabled,
+          'base-btn__back-image': mode === 'backImage',
         },
       ];
     },
@@ -73,6 +74,9 @@ export default {
       color: #D4CED7;
       pointer-events: none;
     }
+  }
+  &__back-image {
+    //background-image: ;
   }
 }
 </style>
