@@ -22,12 +22,16 @@
           value="-"
         />
         <base-btn
-          class="balance__base-btn"
+          class="balance__btn claim"
           mode="backImg"
           @click="openClaimModal"
         >
-          Claim your tokens
-          <span class="icon-sub_right" />
+          <span class="claim__top">
+            Claim your tokens
+          </span>
+          <span class="claim__bottom">
+            <span class="icon-sub_right" />
+          </span>
         </base-btn>
       </div>
     </div>
@@ -85,12 +89,24 @@ export default {
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 15px;
   }
-  &__base-btn {
+  &__btn {
     width: 100%;
     span::before {
       color: #FFFFFF;
       font-size: 24px;
     }
+  }
+}
+
+.claim {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &__bottom {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
   }
 }
 </style>
