@@ -1,47 +1,49 @@
 <template>
-  <div class="deposit">
-    <div class="deposit__title">
-      Your stats
-    </div>
-    <div class="deposit__balance-card balance-card">
-      <div class="balance-card__container">
-        <div class="balance-card__title">
-          Your Deposit
+  <div class="main__deposit deposit">
+    <div class="deposit__wrapper">
+      <div class="deposit__title">
+        Your stats
+      </div>
+      <div class="deposit__balance-card balance-card">
+        <div class="balance-card__container">
+          <div class="balance-card__title">
+            Your Deposit
+          </div>
+          <hr class="balance-card__line">
+          <div
+            class="balance-card__value"
+            :title="`${pool.userStaked}`"
+          >
+            {{ Floor(pool.userStaked) }} {{ pool.symbol }}
+          </div>
         </div>
-        <hr class="balance-card__line">
-        <div
-          class="balance-card__value"
-          :title="`${pool.userStaked}`"
-        >
-          {{ Floor(pool.userStaked) }} {{ pool.symbol }}
+        <div class="balance-card__container">
+          <div class="balance-card__title">
+            Your earnings
+          </div>
+          <hr class="balance-card__line">
+          <div class="balance-card__value">
+            {{ Floor(pool.availableReward) }} {{ pool.symbol }}
+          </div>
+        </div>
+        <div class="balance-card__container">
+          <div class="balance-card__title">
+            Total borrowed
+          </div>
+          <hr class="balance-card__line">
+          <div class="balance-card__value">
+            -
+          </div>
         </div>
       </div>
-      <div class="balance-card__container">
-        <div class="balance-card__title">
-          Your earnings
-        </div>
-        <hr class="balance-card__line">
-        <div class="balance-card__value">
-          {{ Floor(pool.availableReward) }} {{ pool.symbol }}
-        </div>
+      <div class="deposit__buttons">
+        <base-btn @click="openDepositModal">
+          Deposit
+        </base-btn>
+        <base-btn @click="openWithdrawModal">
+          Withdraw
+        </base-btn>
       </div>
-      <div class="balance-card__container">
-        <div class="balance-card__title">
-          Total borrowed
-        </div>
-        <hr class="balance-card__line">
-        <div class="balance-card__value">
-          -
-        </div>
-      </div>
-    </div>
-    <div class="deposit__buttons">
-      <base-btn @click="openDepositModal">
-        Deposit
-      </base-btn>
-      <base-btn @click="openWithdrawModal">
-        Withdraw
-      </base-btn>
     </div>
   </div>
 </template>
@@ -98,15 +100,17 @@ export default {
 
 <style lang="scss" scoped>
 .deposit {
-  max-width: 1170px;
-  width: 100%;
-  background: #FFFFFF;
-  margin: auto;
-  border-radius: 10px;
-  padding: 20px;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 20px;
+  &__wrapper {
+    max-width: 1170px;
+    width: 100%;
+    background: #FFFFFF;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+  }
   &__title {
     font-family: sans-serif, 'Conto-Medium';
     font-weight: normal;

@@ -44,29 +44,33 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 51px;
-  max-height: 100%;
   width: 100%;
   padding: 15px 30px;
-  cursor: pointer;
   font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-  transition: 0.2s ease-in-out;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 18px;
+  transition: 0.3s ease-out;
   border-radius: 10px;
   background: #C31433;
   color: #FFFFFF;
-  text-decoration: none;
+  &:hover {
+    background: #9F0923;
+  }
   &_disabled {
-    background: #E6A1AE;
+    background: #F3EFF3;
+    color: #D4CED7;
     pointer-events: none;
   }
   &__secondary {
-    background: #F6F5F7;
-    color: #240A36;
+    background: #FDEFF2;
+    color: #C31433;
+    &:hover {
+      background: #F3D0D7;
+    }
     &_disabled {
-      opacity: 0.5;
+      background: #F3EFF3;
+      color: #D4CED7;
       pointer-events: none;
     }
   }

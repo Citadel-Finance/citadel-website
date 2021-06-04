@@ -9,7 +9,7 @@ export default () => ({
 
   ctlToken: {},
 
-  isUserAdmin: false,
+  isUserAdmin: true,
 
   poolsEventsMap: {},
 });

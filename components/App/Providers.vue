@@ -1,19 +1,10 @@
 <template>
-  <div>
-    <div class="keepers">
-      <div class="keepers__title">
+  <div class="main__providers providers">
+    <div class="providers__wrapper">
+      <div class="providers__title">
         Top liquidity providers
       </div>
-      <div class="keepers__table table-main">
-        <!--        <div class="table-main__head">-->
-        <!--          <div-->
-        <!--            v-for="(field,i) in fields"-->
-        <!--            :key="`table__title-${i}`"-->
-        <!--            class="table-main__th"-->
-        <!--          >-->
-        <!--            {{ field.label }}-->
-        <!--          </div>-->
-        <!--        </div>-->
+      <div class="providers__table table-main">
         <div class="table-main__body">
           <div
             v-for="(provider, i) in providers"
@@ -65,16 +56,6 @@ export default {
           address: 'dgdg5s6...sgsgsf465s',
           contributions: '$ 15 256 547',
         },
-        // {
-        //   id: 4,
-        //   address: 'dgdg5s6...sgsgsf465s',
-        //   contributions: '$ 15 256 547',
-        // },
-        // {
-        //   id: 5,
-        //   address: 'dgdg5s6...sgsgsf465s',
-        //   contributions: '$ 15 256 547',
-        // },
       ],
     };
   },
@@ -82,11 +63,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.keepers {
-  background: #FFFFFF;
-  width: 100%;
-  border-radius: 10px;
-  padding: 20px;
+.providers {
+  &__wrapper {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 1170px;
+    margin: auto;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-gap: 20px;
+  }
   &__title {
     font-size: 21px;
     font-family: sans-serif, 'Conto-Medium';
@@ -95,7 +82,6 @@ export default {
   }
 }
 .table-main {
-  margin: 20px 0 0 0;
   &__head {
     background: rgba(36, 11, 54, 0.04);
     border-radius: 10px;

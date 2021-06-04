@@ -1,8 +1,6 @@
 <template>
   <div class="base-field">
-    <div
-      class="base-field__control"
-    >
+    <div class="base-field__control">
       <input
         :value="value"
         type="number"
@@ -12,7 +10,10 @@
       >
       <span
         class="base-field__description"
-      >{{ description }}</span>
+        @click="$emit('handleClickBtn')"
+      >
+        {{ description }}
+      </span>
     </div>
     <div
       v-if="!isHideError"
@@ -35,6 +36,10 @@ export default {
       default: '',
     },
     description: {
+      type: String,
+      default: '',
+    },
+    max: {
       type: String,
       default: '',
     },
@@ -80,12 +85,15 @@ export default {
     color: #7B6C86;
   }
   &__description {
-    font-weight: 500;
     font-size: 16px;
-    line-height: 20px;
     text-align: right;
     min-width: 73px;
     color: #C31433;
+    font-weight: bold;
+    line-height: 18px;
+    &:hover {
+      cursor: pointer;
+    }
   }
   &__error {
     display: flex;

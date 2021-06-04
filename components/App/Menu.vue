@@ -1,6 +1,6 @@
 <template>
-  <div class="settings__container container">
-    <div class="container__back back">
+  <div class="content__menu menu">
+    <div class="menu__back back">
       <n-link to="/">
         <button
           class="back__button"
@@ -15,12 +15,12 @@
     </div>
     <div
       v-if="isUserAdmin"
-      class="container__menu menu"
+      class="menu__settings settings"
     >
       <Edit />
       <Delete />
     </div>
-    <div class="container__info info">
+    <div class="menu__info info">
       <div class="info__title">
         {{ titleRate }}
       </div>
@@ -65,13 +65,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.settings__container {
+.menu {
   align-items: center;
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 1170px;
-  padding: 30px 0;
 }
 .back {
   min-width: 180px;
@@ -85,11 +84,11 @@ export default {
     align-items: center;
     grid-gap: 15px;
   }
+  a:hover {
+    text-decoration: none;
+  }
 }
-.back a:hover {
-  text-decoration: none;
-}
-.menu {
+.settings {
   display: flex;
   grid-gap: 20px;
   align-items: center;

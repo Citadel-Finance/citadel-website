@@ -1,14 +1,13 @@
 <template>
-  <div>
-    <Header />
-    <Settings />
+  <div class="content__container">
+    <Menu />
     <Chart />
-    <div class="main">
-      <Deposit
+    <div class="content__main">
+      <Stats
         :balance="`${Floor(balance, 4)} ${symbol}`"
         :title="`${balance}`"
       />
-      <Keepers />
+      <Providers />
     </div>
     <Transaction />
   </div>
@@ -16,21 +15,19 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Header from '~/components/App/Header';
-import Settings from '~/components/App/Settings';
-import Keepers from '~/components/App/Keepers';
-import Deposit from '~/components/App/Deposit';
-import Transaction from '~/components/App/Transaction';
+import Menu from '~/components/App/Menu';
 import Chart from '~/components/App/Chart';
+import Stats from '~/components/App/Stats';
+import Providers from '~/components/App/Providers';
+import Transaction from '~/components/App/Transaction';
 
 export default {
   name: 'Pool',
   components: {
+    Menu,
     Chart,
-    Settings,
-    Keepers,
-    Header,
-    Deposit,
+    Stats,
+    Providers,
     Transaction,
   },
   data: () => ({
@@ -46,27 +43,25 @@ export default {
       return this.$route.params.address;
     },
   },
-  async mounted() {
-    // this.SetLoader(true);
-    // const r = await this.$store.dispatch('user/connectWallet');
-    // if (!r.ok) {
-    //   return;
-    // }
-    // this.poolAddress = this.$route.params.address;
-    // this.balance = this.poolsMap[this.poolAddress].userStaked;
-    // this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
-    // this.SetLoader(false);
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 
-.main {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 30px;
-  margin: auto;
-  max-width: 1170px;
+.content {
+  &__container {
+    display: grid;
+    grid-gap: 30px;
+    width: 100%;
+    margin: auto;
+    max-width: 1170px;
+  }
+  &__main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 30px;
+    margin: auto;
+    max-width: 1170px;
+  }
 }
 </style>

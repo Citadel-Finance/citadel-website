@@ -1,13 +1,9 @@
 <template>
-  <div class="transactions">
+  <div class="content__transactions transactions">
     <div class="transactions__wrapper">
       <div class="transactions__title">
         Transactions
-        <!--        <div>-->
-        <!--          {{ poolsEventsAll.length }}-->
-        <!--        </div>-->
       </div>
-
       <div class="transactions__table table-main">
         <div class="table-main__head">
           <div
@@ -18,7 +14,6 @@
             {{ field.label }}
           </div>
         </div>
-        <!--        <client-only>-->
         <div class="table-main__body">
           <div
             v-for="(event, i) in poolsEventsAll"
@@ -36,7 +31,6 @@
             </div>
           </div>
         </div>
-        <!--        </client-only>-->
       </div>
     </div>
   </div>
@@ -70,24 +64,19 @@ export default {
       poolsEventsAll: 'user/getPoolsEventsAll',
     }),
   },
-  mounted() {
-
-  },
-  methods: {
-
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 .transactions {
-  padding: 30px 0;
   &__wrapper {
     margin: auto;
     background: #FFFFFF;
     max-width: 1170px;
     padding: 20px;
     border-radius: 10px;
+    display: grid;
+    grid-gap: 20px;
   }
   &__title {
     font-size: 21px;
@@ -97,7 +86,8 @@ export default {
   }
 }
 .table-main {
-  margin: 20px 0 0 0;
+  display: grid;
+  grid-gap: 20px;
   &__head {
     background: rgba(36, 11, 54, 0.04);
     border-radius: 10px;
@@ -109,7 +99,6 @@ export default {
     color: #7B6C86;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 20px;
   }
   &__th {
     padding: 14px 20px;

@@ -1,17 +1,22 @@
 <template>
   <div class="primary">
     <div class="primary__template template">
-      <div class="template__content">
+      <Header />
+      <div class="template__content content">
         <nuxt />
       </div>
+      <ctm-modal />
+      <loader-screen />
     </div>
-    <transition name="fade" />
-    <ctm-modal />
-    <loader-screen />
   </div>
 </template>
 <script>
+import Header from '../components/App/Header';
+
 export default {
+  components: {
+    Header,
+  },
   async mounted() {
     const r = await this.$store.dispatch('user/connectWallet');
     if (!r.ok) {
@@ -25,19 +30,13 @@ export default {
 
 .primary {
   font-family: Montserrat, sans-serif;
-  height: 100vh;
+  background-color: #F6F5F7;
   overflow-y: auto;
+  height: 100vh;
 }
 .template {
-  min-height: 100vh;
-  overflow: hidden;
-  &__content {
-    align-items: center;
-    position: relative;
-    z-index: 120;
-    background-color: #F6F5F7;
-    justify-content: space-between;
-    height: 100%;
-  }
+  display: grid;
+  grid-gap: 30px;
+  margin-bottom: 30px;
 }
 </style>
