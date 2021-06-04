@@ -15,7 +15,7 @@
         >
           Close
         </base-btn>
-        <base-btn>
+        <base-btn @click="handleCreatePool">
           Save
         </base-btn>
       </div>
@@ -40,6 +40,12 @@ export default {
       default: true,
     },
   },
+  data: () => ({
+    tokenAddress: '0x3281b72e55d1dbe9d63395dedeae0bbe8b4dc6d9',
+    tokensPerBlock: '12',
+    apyTax: '10',
+    premiumCoeff: '1',
+  }),
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
@@ -48,6 +54,18 @@ export default {
   methods: {
     close() {
       this.$store.dispatch('modals/hide');
+    },
+    handleCreatePool() {
+      const {
+        tokenAddress, tokensPerBlock, apyTax, premiumCoeff,
+      } = this;
+      this.$store.dispatch('user/createPool', {
+        tokenAddress,
+        startTime: '0', // always 0
+        tokensPerBlock,
+        apyTax,
+        premiumCoeff,
+      });
     },
   },
 };

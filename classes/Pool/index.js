@@ -17,7 +17,7 @@ export default class Pool extends BasicSmartContract {
   }
 
   async fetchAll() {
-    this.fetchCommonData();
+    await this.fetchCommonData();
     await Promise.all([
       this.fetchTop(),
       this.fetchUserData(),
@@ -86,7 +86,7 @@ export default class Pool extends BasicSmartContract {
   async withdraw(amount) {
     try {
       const r = await this.inst().withdraw(amount);
-      return output({ r });
+      return output(r);
     } catch (e) {
       console.log('withdraw error', e, this);
       return error(500, 'withdraw error', e);
