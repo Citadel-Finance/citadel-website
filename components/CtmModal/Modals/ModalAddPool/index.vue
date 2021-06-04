@@ -41,7 +41,7 @@ export default {
     },
   },
   data: () => ({
-    tokenAddress: '0x3281b72e55d1dbe9d63395dedeae0bbe8b4dc6d9',
+    tokenAddress: '0x4B1308749dD122844A3527704c117c3Cb9d9D30C',
     tokensPerBlock: '12',
     apyTax: '10',
     premiumCoeff: '1',
