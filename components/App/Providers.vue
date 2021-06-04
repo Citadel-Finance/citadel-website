@@ -42,29 +42,11 @@ export default {
         { key: 'address', label: 'Address' },
         { key: 'contributions', label: 'Contributions (USD)' },
       ],
-      providers: [
-        {
-          id: 1,
-          address: 'dgdg5s6...sgsgsf465s',
-          contributions: '$ 15 256 547',
-        },
-        {
-          id: 2,
-          address: 'dgdg5s6...sgsgsf465s',
-          contributions: '$ 15 256 547',
-        },
-        {
-          id: 3,
-          address: 'dgdg5s6...sgsgsf465s',
-          contributions: '$ 15 256 547',
-        },
-      ],
     };
   },
   computed: {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
-      tokensMap: 'user/getTokensMap',
     }),
     poolAddress() {
       return this.$route.params.address;

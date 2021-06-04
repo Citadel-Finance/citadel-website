@@ -25,7 +25,7 @@
         {{ titleRate }}
       </div>
       <div class="info__percents">
-        {{ percents }}
+        {{ pool.apyTax }} %
       </div>
     </div>
   </div>
@@ -58,8 +58,16 @@ export default {
   },
   computed: {
     ...mapGetters({
+      poolsMap: 'user/getPoolsMap',
       isUserAdmin: 'user/getIsUserAdmin',
+
     }),
+    poolAddress() {
+      return this.$route.params.address;
+    },
+    pool() {
+      return this.poolsMap[this.poolAddress] || {};
+    },
   },
 };
 </script>

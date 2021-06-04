@@ -5,7 +5,7 @@
         Available
       </div>
       <div class="chart__number">
-        37 411.69 ETH
+        -
       </div>
       <hr class="chart__hr">
       <hr class="chart__hr">
@@ -36,7 +36,7 @@
         Available
       </div>
       <div class="chart__number">
-        37 411.69 ETH
+        -
       </div>
       <hr class="chart__hr">
       <hr class="chart__hr">
@@ -67,7 +67,7 @@
         Available
       </div>
       <div class="chart__number">
-        37 411.69 ETH
+        -
       </div>
       <hr class="chart__hr">
       <hr class="chart__hr">
