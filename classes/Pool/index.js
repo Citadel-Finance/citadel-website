@@ -40,6 +40,7 @@ export default class Pool extends BasicSmartContract {
       const {
         decimals, token, totalStaked, symbol,
       } = commonData;
+      console.log('commonData', commonData);
       this.decimals = decimals;
       this.symbol = symbol;
       this.childAddress = token;
