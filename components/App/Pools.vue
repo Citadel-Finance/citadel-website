@@ -1,5 +1,5 @@
 <template>
-  <div class="pools">
+  <div class="content__pools pools">
     <div class="pools__wrapper">
       <div class="pools__header header">
         <div class="pools__title">
@@ -123,13 +123,14 @@ export default {
 
 <style lang="scss" scoped>
 .pools {
-  padding: 30px 0 44px;
   &__wrapper {
     margin: auto;
     background: #FFFFFF;
     max-width: 1170px;
     border-radius: 10px;
     padding: 20px;
+    display: grid;
+    grid-gap: 20px;
   }
   &__header {
     display: flex;
@@ -154,7 +155,6 @@ export default {
   }
 }
 .table-main {
-  margin: 20px 0 0 0;
   &__head {
     background: rgba(36, 11, 54, 0.04);
     border-radius: 10px;

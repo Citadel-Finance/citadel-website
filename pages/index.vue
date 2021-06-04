@@ -1,22 +1,17 @@
 <template>
-  <div>
-    <Header />
-    <div class="index__container">
-      <Balance />
-    </div>
+  <div class="content__container">
+    <Balance />
     <Pools />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Header from '../components/App/Header';
 import Balance from '../components/App/Balance';
 import Pools from '../components/App/Pools';
 
 export default {
   components: {
-    Header,
     Balance,
     Pools,
   },
@@ -28,21 +23,17 @@ export default {
       ctlToken: 'user/getCtlToken',
     }),
   },
-  async mounted() {
-    // this.SetLoader(true);
-    // const r = await this.$store.dispatch('user/connectWallet');
-    // if (!r.ok) {
-    //   return;
-    // }
-    // this.SetLoader(false);
-  },
 };
 </script>
 
 <style lang="scss" scoped>
-.index__container {
-  width: 100%;
-  margin: auto;
-  max-width: 1170px;
+.content {
+  &__container {
+    display: grid;
+    grid-gap: 30px;
+    width: 100%;
+    margin: auto;
+    max-width: 1170px;
+  }
 }
 </style>

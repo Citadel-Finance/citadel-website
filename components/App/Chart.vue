@@ -111,7 +111,7 @@ export default {
 .chart__wrapper {
   align-items: center;
   justify-content: space-between;
-  margin: auto;
+  grid-gap: 30px;
   max-width: 1170px;
   display: flex;
 }
@@ -123,7 +123,6 @@ export default {
   justify-content: space-between;
   max-width: 1170px;
   border-radius: 10px;
-  margin-bottom: 30px;
 }
 .chart__title {
   font-size: 10px;

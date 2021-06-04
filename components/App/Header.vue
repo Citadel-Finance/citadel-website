@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="template__header header">
     <div class="header__wrapper">
       <div class="header__logo">
         <img
@@ -58,12 +58,12 @@ export default {
 .header {
   width: 100%;
   background: #FFFFFF;
-  padding: 15px;
   &__wrapper {
     max-width: 1170px;
     background: #FFFFFF;
     display: flex;
     margin: auto;
+    padding: 15px 0;
     align-items: center;
     justify-content: space-between;
   }

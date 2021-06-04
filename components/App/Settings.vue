@@ -71,7 +71,6 @@ export default {
   justify-content: space-between;
   width: 100%;
   max-width: 1170px;
-  padding: 30px 0;
 }
 .back {
   min-width: 180px;

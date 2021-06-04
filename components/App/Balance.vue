@@ -1,35 +1,37 @@
 <template>
-  <div class="balance">
-    <div class="balance__title">
-      {{ title }}
-    </div>
-    <div class="balance__card">
-      <div>
-        supply: {{ ctlToken.totalSupply }}
+  <div class="content__balance balance">
+    <div class="balance__wrapper">
+      <div class="balance__title">
+        {{ title }}
       </div>
-      <div>
-        balance: {{ ctlToken.balance }}
+      <div class="balance__card">
+        <div>
+          supply: {{ ctlToken.totalSupply }}
+        </div>
+        <div>
+          balance: {{ ctlToken.balance }}
+        </div>
+        <div>
+          rewards: -
+          <!--        нужен метод getAvailableRewards-->
+          <!--        нужен метод claimAllPools-->
+        </div>
+        <div>
+          price: -
+        </div>
+        <!--      <Card title="SUPPLY CITADEL" />-->
+        <!--      <Card title="BALANCE CITADEL" />-->
+        <!--      <Card title="REWARDS CITADEL" />-->
+        <!--      <Card title="PRICE CITADEL" />-->
       </div>
-      <div>
-        rewards: -
-        <!--        нужен метод getAvailableRewards-->
-        <!--        нужен метод claimAllPools-->
+      <div class="balance__button">
+        <base-btn
+          class="balance__base-btn"
+          @click="openClaimModal"
+        >
+          Claim
+        </base-btn>
       </div>
-      <div>
-        price: -
-      </div>
-      <!--      <Card title="SUPPLY CITADEL" />-->
-      <!--      <Card title="BALANCE CITADEL" />-->
-      <!--      <Card title="REWARDS CITADEL" />-->
-      <!--      <Card title="PRICE CITADEL" />-->
-    </div>
-    <div class="balance__button">
-      <base-btn
-        class="balance__base-btn"
-        @click="openClaimModal"
-      >
-        Claim
-      </base-btn>
     </div>
   </div>
 </template>
@@ -67,16 +69,18 @@ export default {
 
 <style lang="scss" scoped>
 .balance {
-  margin-top: 30px;
-  background: #FFFFFF;
-  border-radius: 10px;
-  padding: 20px;
+  &__wrapper {
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    display: grid;
+    grid-gap: 20px;
+  }
   &__title {
     font-size: 21px;
     font-family: sans-serif, 'Conto-Medium';
     line-height: 25px;
     color: #240A36;
-    margin-bottom: 20px;
   }
   &__card {
     display: grid;

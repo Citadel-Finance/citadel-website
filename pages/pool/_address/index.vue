@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <Header />
+  <div class="content__container">
     <Settings />
     <Chart />
     <div class="main">
@@ -16,7 +15,6 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Header from '~/components/App/Header';
 import Settings from '~/components/App/Settings';
 import Keepers from '~/components/App/Keepers';
 import Deposit from '~/components/App/Deposit';
@@ -29,7 +27,6 @@ export default {
     Chart,
     Settings,
     Keepers,
-    Header,
     Deposit,
     Transaction,
   },
@@ -46,22 +43,20 @@ export default {
       return this.$route.params.address;
     },
   },
-  async mounted() {
-    // this.SetLoader(true);
-    // const r = await this.$store.dispatch('user/connectWallet');
-    // if (!r.ok) {
-    //   return;
-    // }
-    // this.poolAddress = this.$route.params.address;
-    // this.balance = this.poolsMap[this.poolAddress].userStaked;
-    // this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
-    // this.SetLoader(false);
-  },
 };
 </script>
 
 <style lang="scss" scoped>
 
+.content {
+  &__container {
+    display: grid;
+    grid-gap: 30px;
+    width: 100%;
+    margin: auto;
+    max-width: 1170px;
+  }
+}
 .main {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
