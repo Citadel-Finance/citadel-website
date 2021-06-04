@@ -26,12 +26,11 @@
         v-model="amount"
         :placeholder="`Amount in ${symbol}`"
         :description="'MAX'"
+        :max="balance"
+        @handleClick="setMax()"
       />
       <div class="deposit-modal__balance balance">
-        <div
-          class="balance__title"
-          @click="setMax()"
-        >
+        <div class="balance__title">
           Your balance:
         </div>
         <div class="balance__value">
@@ -39,6 +38,12 @@
         </div>
       </div>
       <div class="deposit-modal__buttons">
+        <base-btn
+          mode="secondary"
+          @click="close"
+        >
+          Close
+        </base-btn>
         <base-btn @click="deposit">
           Deposit
         </base-btn>
@@ -90,9 +95,7 @@ export default {
     },
   },
   methods: {
-    setMax() {
-      this.amount = this.balance;
-    },
+
     close() {
       this.$store.dispatch('modals/hide');
     },
@@ -125,10 +128,15 @@ export default {
     font-size: 16px;
     line-height: 20px;
   }
+  &__buttons {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 15px;
+  }
 }
 .balance {
   display: flex;
-  justify-content: space-between;
+  grid-gap: 8px;
   margin-bottom: 30px;
   &__title {
     font-size: 16px;

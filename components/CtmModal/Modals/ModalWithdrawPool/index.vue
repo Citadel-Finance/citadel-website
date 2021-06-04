@@ -36,6 +36,12 @@
         </div>
       </div>
       <div class="withdraw-modal__buttons">
+        <base-btn
+          mode="secondary"
+          @click="close"
+        >
+          Close
+        </base-btn>
         <base-btn @click="withdraw">
           Withdraw
         </base-btn>
@@ -112,10 +118,15 @@ export default {
     font-size: 16px;
     line-height: 20px;
   }
+  &__buttons {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 15px;
+  }
 }
 .max {
   display: flex;
-  justify-content: space-between;
+  grid-gap: 8px;
   margin-bottom: 30px;
   &__title {
     font-size: 16px;
