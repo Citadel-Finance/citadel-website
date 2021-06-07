@@ -38,18 +38,12 @@ import { mapGetters } from 'vuex';
 import modals from '~/store/modals/modals';
 
 export default {
-  name: 'Dropdown',
+  name: 'Menu',
   props: {},
   data() {
     return {
       titleRate: 'Annual percentage rate',
       percents: '20.06%',
-      options: [
-        { label: 'ETH Pool 1', value: 1 },
-        { label: 'ETH Pool 2', value: 2 },
-        { label: 'ETH Pool 3', value: 3 },
-        { label: 'ETH Pool 4', value: 4 },
-      ],
       selected: 0,
     };
   },
