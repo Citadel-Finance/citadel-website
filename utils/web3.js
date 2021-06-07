@@ -1,8 +1,10 @@
 import Web3 from 'web3';
 import Web4 from '@cryptonteam/web4';
 import BigNumber from 'bignumber.js';
+import { Factory, Pool } from '~/abis';
 
 let web3;
+let web3Anon;
 let web4;
 let userAddress;
 let chainId;
@@ -20,6 +22,23 @@ export const error = (code, msg, data) => ({
 });
 
 BigNumber.config({ EXPONENTIAL_AT: 60 });
+
+export const initWeb3ProviderAnon = async () => {
+  try {
+    // const infuraKeyBsc = process.env.NODE_KEY_BSC;
+    let bscUrl;
+    if (+process.env.CHAIN_TYPE === 1) {
+      bscUrl = 'https://bsc-dataseed.binance.org/';
+    } else {
+      bscUrl = 'https://data-seed-prebsc-1-s1.binance.org:8545/';
+    }
+    const providerBsc = new Web3.providers.HttpProvider(bscUrl);
+    web3Anon = new Web3(providerBsc);
+    return output();
+  } catch (e) {
+    return error(500, 'connection error', e);
+  }
+};
 
 export const initWeb3Provider = async () => {
   try {
@@ -43,8 +62,13 @@ export const initWeb3Provider = async () => {
   }
 };
 
-export const fetchContractData = async (_method, _abi, _address, _params, _provider = web3) => {
-  const contract = new _provider.eth.Contract(_abi, _address);
+export const fetchContractData = async (_method, _abi, _address, _params) => {
+  const contract = new web3.eth.Contract(_abi, _address);
+  return await contract.methods[_method].apply(this, _params).call();
+};
+
+export const fetchContractDataAnon = async (_method, _abi, _address, _params) => {
+  const contract = new web3Anon.eth.Contract(_abi, _address);
   return await contract.methods[_method].apply(this, _params).call();
 };
 

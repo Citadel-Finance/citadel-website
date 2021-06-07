@@ -18,11 +18,22 @@ export default {
     Header,
   },
   async mounted() {
-    const r = await this.$store.dispatch('user/connectWallet');
-    if (!r.ok) {
-      return;
-    }
+    await this.connectAnonNode();
+    // await this.connectWallet();
     this.SetLoader(false);
+  },
+  methods: {
+    // async connectWallet() {
+    //   const r = await this.$store.dispatch('user/connectWallet');
+    //   // if (!r.ok) {
+    //   //   return;
+    //   // }
+    //   return r;
+    // },
+    async connectAnonNode() {
+      const r = await this.$store.dispatch('user/connectAnonNode');
+      return r;
+    },
   },
 };
 </script>
