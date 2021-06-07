@@ -13,10 +13,11 @@
           class="pools__button"
         >
           <base-btn
-            mode="primary"
+            mode="txt-icon"
             @click="openAddModal"
           >
-            Add new pool
+            <span>Add pool</span>
+            <span class="icon-plus" />
           </base-btn>
         </div>
       </div>
@@ -29,8 +30,6 @@
           >
             {{ field.label }}
           </div>
-          <!--          { key: 'status', label: 'Status' },-->
-          <!--          { key: 'settings', label: '' },-->
           <div
             v-if="isUserAdmin"
             class="table-main__th"
@@ -185,10 +184,13 @@ export default {
   }
   &__button {
     .base-btn {
-      font-size: 14px;
-      line-height: 17px;
-      padding: 10px 15px;
-      max-height: 38px;
+      padding: 13px 15px;
+      display: flex;
+      grid-gap: 10px;
+      span::before {
+        font-size: 24px;
+        color: #C31433;
+      }
     }
   }
 }

@@ -13,35 +13,32 @@
         </button>
       </n-link>
     </div>
-    <div
-      v-if="isUserAdmin"
-      class="menu__settings settings"
-    >
-      <Edit />
-      <Delete />
-    </div>
     <div class="menu__info info">
-      <div class="info__title">
-        {{ titleRate }}
+      <div class="info__main">
+        <div class="info__title">
+          {{ titleRate }}
+        </div>
+        <div class="info__percents">
+          {{ pool.apyTax }} %
+        </div>
       </div>
-      <div class="info__percents">
-        {{ pool.apyTax }} %
-      </div>
+      <base-btn
+        v-if="isUserAdmin"
+        mode="icon"
+        @click="openEditModal"
+      >
+        <span class="icon-settings" />
+      </base-btn>
     </div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import Edit from './Admin/Edit';
-import Delete from './Admin/Delete';
+import modals from '~/store/modals/modals';
 
 export default {
   name: 'Dropdown',
-  components: {
-    Edit,
-    Delete,
-  },
   props: {},
   data() {
     return {
@@ -67,6 +64,14 @@ export default {
     },
     pool() {
       return this.poolsMap[this.poolAddress] || {};
+    },
+  },
+  methods: {
+    openEditModal() {
+      this.ShowModal({
+        text: 'WalletConnect',
+        key: modals.editPool,
+      });
     },
   },
 };
@@ -96,17 +101,15 @@ export default {
     text-decoration: none;
   }
 }
-.settings {
-  display: flex;
-  grid-gap: 20px;
-  align-items: center;
-  justify-content: center;
-  min-width: 180px;
-}
 .info {
-  display: grid;
-  justify-content: end;
-  min-width: 180px;
+  display: flex;
+  grid-gap: 30px;
+  &__main {
+    display: grid;
+    text-align: right;
+    width: 100%;
+    min-width: 215px;
+  }
   &__title {
     font-weight: bold;
     font-size: 10px;
@@ -114,15 +117,19 @@ export default {
     letter-spacing: 0.105em;
     text-transform: uppercase;
     color: #7B6C86;
-    margin-bottom: 10px;
   }
   &__percents {
     font-weight: bold;
     font-size: 20px;
     line-height: 23px;
-    text-align: right;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
     letter-spacing: 0.05em;
     color: #240A36;
+  }
+  span::before {
+    font-size: 24px;
   }
 }
 </style>
