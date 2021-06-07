@@ -105,15 +105,13 @@ export default {
 <style lang="scss" scoped>
 .deposit {
   &__wrapper {
-    max-width: 570px;
     width: 100%;
     background: #FFFFFF;
-    margin: auto;
     border-radius: 10px;
     padding: 20px;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   &__title {
     font-family: sans-serif, 'Arial';

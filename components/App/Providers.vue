@@ -79,7 +79,6 @@ export default {
   &__wrapper {
     background: #FFFFFF;
     width: 100%;
-    max-width: 570px;
     margin: auto;
     border-radius: 10px;
     padding: 20px;
@@ -107,9 +106,9 @@ export default {
     grid-gap: 35px;
     background: #F6F5F7;
     border-radius: 10px;
+    padding: 15px;
   }
   &__col {
-    padding: 15px;
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;

@@ -20,14 +20,17 @@
             :key="`position__item-${i}`"
             class="table-main__tr"
           >
-            <div class="table-main__col date">
-              {{ event.amount }} {{ event.event }}
+            <div
+              class="table-main__col date"
+              @click="check(event)"
+            >
+              --
             </div>
             <div class="table-main__col change">
-              -
+              {{ event.amount }} {{ event.event }}
             </div>
             <div class="table-main__col hash">
-              {{ event.transactionHash }}
+              {{ SubstrString(event.transactionHash, 0, 10) + '...' + SubstrString(event.transactionHash, event.transactionHash.length - 10, 10) }}
             </div>
           </div>
         </div>
@@ -68,6 +71,11 @@ export default {
       return this.$route.params?.address ?? '';
     },
   },
+  methods: {
+    check(value) {
+      console.log(value);
+    },
+  },
 };
 </script>
 
@@ -91,7 +99,7 @@ export default {
 }
 .table-main {
   display: grid;
-  grid-gap: 20px;
+  grid-gap: 10px;
   &__head {
     background: rgba(36, 11, 54, 0.04);
     border-radius: 10px;
@@ -103,18 +111,21 @@ export default {
     color: #7B6C86;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    padding: 14px 20px;
   }
   &__th {
-    padding: 14px 20px;
     border: none;
   }
   &__tr {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    margin: 14px 0;
+    padding: 22px 20px;
+    &:hover {
+      background: #FBFAFB;
+      border-radius: 10px;
+    }
   }
   &__col {
-    padding: 14px 20px;
     border: none;
     font-weight: normal;
     font-size: 16px;
@@ -124,10 +135,29 @@ export default {
     align-items: center;
   }
 }
-.change {
-  font-weight: 500;
+.date {
+  font-family: sans-serif, 'Arial';
+  font-style: normal;
+  font-weight: normal;
   font-size: 16px;
-  line-height: 20px;
+  line-height: 18px;
   color: #240A36;
+}
+.change {
+  font-family: sans-serif, 'Arial';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  color: #240A36;
+}
+.hash {
+  font-family: sans-serif, 'Arial';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 18px;
+  letter-spacing: 0.05em;
+  color: #7B6C86;
 }
 </style>
