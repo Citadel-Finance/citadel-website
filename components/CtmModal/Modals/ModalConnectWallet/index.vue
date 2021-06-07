@@ -42,10 +42,10 @@ export default {
     async handleConnectWallet() {
       this.SetLoader(true);
       const r = await this.$store.dispatch('user/connectWallet');
+      this.SetLoader(false);
       if (!r.ok) {
         return;
       }
-      this.SetLoader(false);
       this.CloseModal();
     },
   },

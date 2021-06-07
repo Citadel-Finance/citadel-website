@@ -21,11 +21,19 @@ export default {
     console.log(r);
     if (!r.ok) {
       // TODO show modal
-      await dispatch('modals/show', {
-        key: modals.default,
-        title: 'Error',
-        text: 'Invalid chain',
-      }, { root: true });
+      if (r.code === 4001) {
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          text: 'User rejected the request.',
+        }, { root: true });
+      } else if (r.code === 1) {
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          text: 'Invalid chain',
+        }, { root: true });
+      }
       return r;
     }
     const { userAddress } = r.result;
