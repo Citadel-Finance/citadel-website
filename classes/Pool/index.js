@@ -17,22 +17,24 @@ export default class Pool extends BasicSmartContract {
   }
 
   async fetchAll() {
-    await this.fetchCommonData();
     await Promise.all([
+      this.fetchCommonData(),
       this.fetchTop(),
-      // this.fetchUserData(),
     ]);
+  }
+
+  getTop() {
+    return (JSON.parse(this.top)).map((item) => ({
+      ...item,
+      staked: shiftedBy(item.staked, -this.decimals),
+    }));
   }
 
   async fetchTop() {
     try {
       let top = await this.fetchContractData('getTopProviders');
-      top = top.map((item) => ({
-        ...item,
-        staked: shiftedBy(item.staked, -this.decimals),
-      }));
-      this.top = top;
-      // console.log(top);
+      top = top.reduce((accumulator, { user, staked }) => [...accumulator, { user, staked }], []);
+      this.top = JSON.stringify(top);
       return output({ top });
     } catch (e) {
       console.log('fetchTop error', e, this);
