@@ -607,21 +607,6 @@ export const Pool = [
   {
     inputs: [
       {
-        internalType: 'string',
-        name: 'name_',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: 'symbol_',
-        type: 'string',
-      },
-      {
-        internalType: 'uint256',
-        name: 'decimals_',
-        type: 'uint256',
-      },
-      {
         internalType: 'contract IBEP20',
         name: 'token_',
         type: 'address',
@@ -653,8 +638,13 @@ export const Pool = [
       },
       {
         internalType: 'address',
-        name: 'admin',
+        name: 'admin_',
         type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: 'enabled_',
+        type: 'bool',
       },
     ],
     stateMutability: 'nonpayable',
@@ -916,6 +906,43 @@ export const Pool = [
     type: 'event',
   },
   {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'date',
+        type: 'uint256',
+      },
+      {
+        indexed: true,
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'totalDeposited',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'totalBorrowed',
+        type: 'uint256',
+      },
+      {
+        indexed: false,
+        internalType: 'uint256',
+        name: 'totalProfit',
+        type: 'uint256',
+      },
+    ],
+    name: 'totalHistory',
+    type: 'event',
+  },
+  {
     inputs: [],
     name: 'ADMIN_ROLE',
     outputs: [
@@ -1088,9 +1115,9 @@ export const Pool = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
+        internalType: 'address',
+        name: 'spender',
+        type: 'address',
       },
     ],
     name: 'claimCtl',
@@ -1101,12 +1128,12 @@ export const Pool = [
   {
     inputs: [
       {
-        internalType: 'uint256',
-        name: 'amount',
-        type: 'uint256',
+        internalType: 'address',
+        name: 'spender',
+        type: 'address',
       },
     ],
-    name: 'claimReward',
+    name: 'claimRewards',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -1302,6 +1329,11 @@ export const Pool = [
           {
             internalType: 'uint256',
             name: 'receiptProfit',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'totalBorrowed',
             type: 'uint256',
           },
           {
@@ -1524,6 +1556,16 @@ export const Pool = [
             internalType: 'uint256',
             name: 'availableCtl',
             type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'totalBorrowed',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bool',
+            name: 'is_admin',
+            type: 'bool',
           },
         ],
         internalType: 'struct CitadelPool.UserData',
@@ -1878,34 +1920,23 @@ export const Pool = [
         name: 'apyTax_',
         type: 'uint256',
       },
-    ],
-    name: 'updateApyTax',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
       {
         internalType: 'uint256',
         name: 'premiumCoeff_',
         type: 'uint256',
       },
-    ],
-    name: 'updatePremiumCoeff',
-    outputs: [],
-    stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [
       {
         internalType: 'uint256',
         name: 'tokensPerBlock_',
         type: 'uint256',
       },
+      {
+        internalType: 'bool',
+        name: 'enabled_',
+        type: 'bool',
+      },
     ],
-    name: 'updateTokensPerBlock',
+    name: 'updatePool',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -2166,6 +2197,11 @@ export const Factory = [
         name: 'premiumCoeff',
         type: 'uint256',
       },
+      {
+        internalType: 'bool',
+        name: 'enabled',
+        type: 'bool',
+      },
     ],
     name: 'addPool',
     outputs: [],
@@ -2188,6 +2224,26 @@ export const Factory = [
             name: 'token',
             type: 'address',
           },
+          {
+            internalType: 'bool',
+            name: 'enabled',
+            type: 'bool',
+          },
+          {
+            internalType: 'uint256',
+            name: 'availableReward',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'availableCtl',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bool',
+            name: 'isAdmin',
+            type: 'bool',
+          },
         ],
         internalType: 'struct CitadelFactory.PoolInfo[]',
         name: '',
@@ -2195,6 +2251,13 @@ export const Factory = [
       },
     ],
     stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'claimAllRewards',
+    outputs: [],
+    stateMutability: 'nonpayable',
     type: 'function',
   },
   {
@@ -2343,6 +2406,25 @@ export const Factory = [
   {
     inputs: [
       {
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
+      },
+    ],
+    name: 'isAdmin',
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'contract IBEP20',
         name: 'token',
         type: 'address',
@@ -2412,6 +2494,31 @@ export const Factory = [
     name: 'revokeRole',
     outputs: [],
     stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'totalAvailableReward',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'availableReward',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'availableCtl',
+            type: 'uint256',
+          },
+        ],
+        internalType: 'struct CitadelFactory.RewardInfo',
+        name: '',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
     type: 'function',
   },
 ];
