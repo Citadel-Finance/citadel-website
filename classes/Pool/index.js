@@ -107,4 +107,24 @@ export default class Pool extends BasicSmartContract {
       callback(this.eventCallback(r));
     });
   }
+
+  async editPool({
+    apyTax,
+    premiumCoeff,
+    tokensPerBlock,
+    isEnable,
+  }) {
+    try {
+      const r = await this.inst().updatePool(
+        apyTax,
+        premiumCoeff,
+        tokensPerBlock,
+        isEnable,
+      );
+      return output(r);
+    } catch (e) {
+      console.log('editPool error', e, this);
+      return error(500, 'editPool error', e);
+    }
+  }
 }

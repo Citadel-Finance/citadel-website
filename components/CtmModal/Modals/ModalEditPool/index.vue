@@ -29,7 +29,10 @@
         >
           Close
         </base-btn>
-        <base-btn mode="primary">
+        <base-btn
+          mode="primary"
+          @click="handleEditPool"
+        >
           Save
         </base-btn>
       </div>
@@ -70,6 +73,15 @@ export default {
   methods: {
     close() {
       this.$store.dispatch('modals/hide');
+    },
+    handleEditPool() {
+      this.$store.dispatch('user/editPool', {
+        poolAddress: '0x9A2b6F7943F1a212391aDe10d58548B1B9e2d868', //
+        tokensPerBlock: '0',
+        apyTax: '0',
+        premiumCoeff: '0',
+        isEnable: true,
+      });
     },
   },
 };

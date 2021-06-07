@@ -86,7 +86,7 @@
                   :class="{'slide__dot_active': poolsMap[poolAddress].isEnabled}"
                 />
                 <span>
-                  Inactive
+                  Inactive {{ poolsMap[poolAddress].isEnabled }}
                 </span>
               </div>
             </nuxt-link>

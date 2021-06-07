@@ -157,7 +157,13 @@ export default {
   },
 
   createPool({ getters }, payload) {
-    const factory = getters.getFactory;
+    const { getFactory: factory } = getters;
     factory.createPool(payload);
+  },
+  editPool({ getters }, payload) {
+    const { poolAddress } = payload;
+    const { getPoolsMap: poolsMap } = getters;
+    const pool = poolsMap[poolAddress];
+    pool.editPool(payload);
   },
 };
