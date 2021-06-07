@@ -181,4 +181,9 @@ export default {
     await pool.editPool(payload);
     await dispatch('updatePoolsAndBalances');
   },
+
+  async claimAll({ getters }) {
+    const { getFactory: factory } = getters;
+    // factory.
+  },
 };

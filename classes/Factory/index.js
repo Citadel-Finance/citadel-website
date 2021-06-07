@@ -57,4 +57,14 @@ export default class Factory extends BasicSmartContract {
       return error(500, 'createPool error', e);
     }
   }
+
+  // async claimAll() {
+  //   try {
+  //     const r = await this.inst().addPool();
+  //     return output(r);
+  //   } catch (e) {
+  //     console.log('createPool error', e, this);
+  //     return error(500, 'createPool error', e);
+  //   }
+  // }
 }
