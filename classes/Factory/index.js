@@ -1,3 +1,4 @@
+import BigNumber from 'bignumber.js';
 import BasicSmartContract from '~/classes/BasicSmartContract';
 import { Factory as FactoryAbi } from '~/abis';
 import { error, output } from '~/utils/web3';
@@ -10,6 +11,16 @@ export default class Factory extends BasicSmartContract {
       address,
       abi: FactoryAbi,
     });
+  }
+
+  async fetchIsUserAdmin() {
+    try {
+      const r = await this.fetchContractData('hasRole');
+      return output({ r });
+    } catch (e) {
+      console.log('fetchUserData error', e, this);
+      return error(500, 'fetchUserData error', e);
+    }
   }
 
   async fetchPoolsData() {
@@ -31,6 +42,28 @@ export default class Factory extends BasicSmartContract {
     } catch (e) {
       console.log('fetchPoolsData error', e, this);
       return error(500, 'fetchPoolsData error', e);
+    }
+  }
+
+  async createPool({
+    tokenAddress,
+    startTime,
+    tokensPerBlock,
+    apyTax,
+    premiumCoeff,
+  }) {
+    try {
+      const r = await this.inst().addPool(
+        tokenAddress,
+        startTime,
+        tokensPerBlock,
+        apyTax,
+        premiumCoeff,
+      );
+      return output(r);
+    } catch (e) {
+      console.log('createPool error', e, this);
+      return error(500, 'createPool error', e);
     }
   }
 }

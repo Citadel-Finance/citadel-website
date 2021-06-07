@@ -30,11 +30,10 @@ export default {
     const factory = new Factory({
       address: process.env.ADDRESS_FACTORY,
     });
-    await factory.initInst();
-    const r = await factory.fetchPoolsData();
-    if (!r.ok) {
-      return;
-    }
+    await Promise.all([
+      factory.initInst(),
+      factory.fetchPoolsData(),
+    ]);
     commit('setFactory', factory);
   },
   async initCtlToken({ getters, commit }) {
@@ -129,5 +128,11 @@ export default {
         });
       });
     });
+  },
+
+  createPool({ getters }, payload) {
+    const factory = getters.getFactory;
+    factory.createPool(payload);
+    // console.log('create', payload);
   },
 };
