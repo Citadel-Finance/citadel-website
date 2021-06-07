@@ -83,7 +83,7 @@
               >
                 <span
                   class="status__dot"
-                  :class="{'slide__dot_active': poolsMap[poolAddress].status === true}"
+                  :class="{'slide__dot_active': poolsMap[poolAddress].isEnabled}"
                 />
                 <span>
                   Inactive
@@ -91,7 +91,7 @@
               </div>
             </nuxt-link>
             <div
-              v-if="isUserAdmin"
+              v-if="poolsMap[poolAddress].isAdmin"
               class="table-main__col settings"
               @click="openEditModal"
             >

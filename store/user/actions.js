@@ -1,10 +1,20 @@
 import BigNumber from 'bignumber.js';
-import { initWeb3Provider } from '~/utils/web3';
+import { initWeb3Provider, initWeb3ProviderAnon } from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
 
 export default {
+  async connectAnonNode({ dispatch }) {
+    const r = await initWeb3ProviderAnon();
+    console.log(r);
+    await dispatch('initFactory');
+    await Promise.all([
+      dispatch('initPoolsAndTokens'),
+      dispatch('initCtlToken'),
+    ]);
+    return r;
+  },
   async connectWallet({ dispatch, commit }) {
     const r = await initWeb3Provider();
     console.log(r);
@@ -13,34 +23,62 @@ export default {
       // await dispatch('Modals/show', {
       //   //
       // }, { root: true });
-
       return r;
     }
-    commit('setIsConnected', true);
-    await dispatch('initFactory');
-    await Promise.all([
-      dispatch('initPoolsAndTokens'),
-      dispatch('initCtlToken'),
-    ]);
     const { userAddress } = r.result;
     commit('setUserAddress', userAddress);
+    commit('setIsConnected', true);
+    dispatch('subscribeAllPools');
+
+    await Promise.all([
+      dispatch('initInstsAll'),
+      dispatch('fetchPoolsUserData'),
+      dispatch('fetchAllBalances'),
+    ]);
+
     return r;
+  },
+  async fetchAllBalances({ getters, commit }) {
+    const { getTokensMap: tokensMap, getCtlToken: ctlToken } = getters;
+    const r = await Promise.all([
+      ...Object.keys(tokensMap).map((address) => tokensMap[address].fetchBalance()),
+      ctlToken.fetchBalance(),
+    ]);
+    commit('setTokensMap', tokensMap);
+    commit('setCtlToken', {});
+    commit('setCtlToken', ctlToken);
+  },
+  async fetchPoolsUserData({ getters, commit }) {
+    const { getPoolsMap: poolsMap } = getters;
+    await Promise.all([
+      ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
+    ]);
+    commit('setPoolsMap', poolsMap);
+  },
+  async initInstsAll({ getters }) {
+    const {
+      getFactory: factory,
+      getPoolsMap: poolsMap,
+      getTokensMap: tokensMap,
+    } = getters;
+    console.log(factory, poolsMap, tokensMap);
+
+    await Promise.all([
+      ...Object.keys(poolsMap).map((address) => poolsMap[address].initInst()),
+      ...Object.keys(tokensMap).map((address) => tokensMap[address].initInst()),
+      factory.initInst(),
+    ]);
   },
   async initFactory({ commit }) {
     const factory = new Factory({
       address: process.env.ADDRESS_FACTORY,
     });
-    await Promise.all([
-      factory.initInst(),
-      factory.fetchPoolsData(),
-    ]);
+    await factory.fetchPoolsData();
     commit('setFactory', factory);
   },
   async initCtlToken({ getters, commit }) {
     const { ctlTokenAddress } = getters.getFactory;
-    // console.log('ctlTokenAddress', ctlTokenAddress);
     const ctlToken = new Token({ address: ctlTokenAddress });
-    await ctlToken.initInst();
     await ctlToken.fetchAll();
     await ctlToken.fetchTotalSupply();
     commit('setCtlToken', ctlToken);
@@ -51,32 +89,20 @@ export default {
     const poolsAddresses = poolData.map((pair) => pair.pool);
     const tokens = tokensAddresses.map((address) => new Token({ address }));
     const pools = poolsAddresses.map((address) => new Pool({ address }));
-
     tokens.forEach((token, i) => {
       token.setParrentAddress(poolsAddresses[i]);
     });
-
     const poolsMap = {};
     pools.forEach((pool) => {
       poolsMap[pool.address] = pool;
     });
-
     const tokensMap = {};
     tokens.forEach((token) => {
       tokensMap[token.address] = token;
     });
-
-    await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]);
     await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
     commit('setPoolsMap', poolsMap);
     commit('setTokensMap', tokensMap);
-    dispatch('subscribeAllPools');
-
-    // dispatch('subscribeAllPools');
-    // setTimeout(() => {
-    //   commit('setPoolsEventsMap', {});
-    //   dispatch('subscribeAllPools');
-    // }, 5000);
   },
 
   async poolDeposit({ getters }, { amount, poolAddress }) {
@@ -133,6 +159,5 @@ export default {
   createPool({ getters }, payload) {
     const factory = getters.getFactory;
     factory.createPool(payload);
-    // console.log('create', payload);
   },
 };

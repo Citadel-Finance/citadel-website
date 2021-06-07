@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import {
-  createInst, error, fetchContractData, getWeb3, output,
+  createInst, error, fetchContractData, fetchContractDataAnon, getWeb3, output,
 } from '~/utils/web3';
 
 const insts = {};
@@ -51,6 +51,10 @@ export default class BasicSmartContract {
   }
 
   fetchContractData(_method, _params) {
-    return fetchContractData(_method, this.abi, this.address, _params);
+    return fetchContractDataAnon(_method, this.abi, this.address, _params);
   }
+
+  // fetchContractDataAnon(_method, _params) {
+  //   return fetchContractDataAnon(_method, this.abi, this.address, _params);
+  // }
 }
