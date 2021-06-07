@@ -8,6 +8,7 @@
         v-model="amount"
         :placeholder="`Amount in ${symbol}`"
         :description="'MAX'"
+        mode="desc"
         @handleClickBtn="setMax"
       />
       <div class="main__balance max">
