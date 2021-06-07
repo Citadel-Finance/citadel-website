@@ -33,25 +33,29 @@ export default {
     await Promise.all([
       dispatch('initInstsAll'),
       dispatch('fetchPoolsUserData'),
+      dispatch('fetchAllBalances'),
     ]);
 
-    // initInsts: Factory, Pool, Tokens
-    // fetchPoolsData
-    // fetchBalances
-
-    // await dispatch('initFactory');
-    // await Promise.all([
-    //   dispatch('initPoolsAndTokens'),
-    //   dispatch('initCtlToken'),
-    // ]);
+    dispatch('subscribeAllPools');
 
     return r;
   },
-  async fetchPoolsUserData({ getters }) {
+  async fetchAllBalances({ getters, commit }) {
+    const { getTokensMap: tokensMap, getCtlToken: ctlToken } = getters;
+    const r = await Promise.all([
+      ...Object.keys(tokensMap).map((address) => tokensMap[address].fetchBalance()),
+      ctlToken.fetchBalance(),
+    ]);
+    console.log(123123, r);
+    commit('setTokensMap', tokensMap);
+    commit('setCtlToken', ctlToken);
+  },
+  async fetchPoolsUserData({ getters, commit }) {
     const { getPoolsMap: poolsMap } = getters;
     await Promise.all([
       ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
     ]);
+    commit('setPoolsMap', poolsMap);
   },
   // async fetchPoolsData({ getters }) {
   //   const { getPoolsMap: poolsMap } = getters;
@@ -78,17 +82,11 @@ export default {
       address: process.env.ADDRESS_FACTORY,
     });
     await factory.fetchPoolsData();
-    // await Promise.all([
-    //   factory.initInst(), // TODO metamask
-    //   factory.fetchPoolsData(), // TODO refrash with metamask
-    // ]);
     commit('setFactory', factory);
   },
   async initCtlToken({ getters, commit }) {
     const { ctlTokenAddress } = getters.getFactory;
-    // console.log('ctlTokenAddress', ctlTokenAddress);
     const ctlToken = new Token({ address: ctlTokenAddress });
-    // await ctlToken.initInst();
     await ctlToken.fetchAll();
     await ctlToken.fetchTotalSupply();
     commit('setCtlToken', ctlToken);
@@ -114,11 +112,9 @@ export default {
       tokensMap[token.address] = token;
     });
 
-    // await Promise.all([...tokens.map((token) => token.initInst()), ...pools.map((pool) => pool.initInst())]); // TODO metamask
     await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
     commit('setPoolsMap', poolsMap);
     commit('setTokensMap', tokensMap);
-    // dispatch('subscribeAllPools');
   },
 
   async poolDeposit({ getters }, { amount, poolAddress }) {
@@ -175,6 +171,5 @@ export default {
   createPool({ getters }, payload) {
     const factory = getters.getFactory;
     factory.createPool(payload);
-    // console.log('create', payload);
   },
 };
