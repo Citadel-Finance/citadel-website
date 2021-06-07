@@ -55,9 +55,6 @@ export default {
   },
   data: () => ({
     amount: '',
-    poolAddress: '',
-    balance: '',
-    symbol: '',
   }),
   computed: {
     ...mapGetters({
@@ -65,15 +62,25 @@ export default {
       poolsMap: 'user/getPoolsMap',
       tokensMap: 'user/getTokensMap',
     }),
-  },
-  mounted() {
-    this.poolAddress = this.$route.params.address;
-    this.balance = this.poolsMap[this.poolAddress].userStaked;
-    this.symbol = this.tokensMap[this.poolsMap[this.poolAddress].childAddress].symbol;
+    poolAddress() {
+      return this.$route.params?.address ?? '';
+    },
+    pool() {
+      return this.poolsMap[this.poolAddress];
+    },
+    token() {
+      return this.tokensMap[this.pool.childAddress];
+    },
+    balance() {
+      return this.token.balance;
+    },
+    symbol() {
+      return this.token.symbol;
+    },
   },
   methods: {
     setMax() {
-      this.amount = this.balance;
+      this.amount = this.pool.userStaked;
     },
     close() {
       this.$store.dispatch('modals/hide');
