@@ -12,6 +12,10 @@
             class="table-main__tr"
           >
             <div class="table-main__col position">
+              <img
+                :src="Require(`providers/rate_${ i + 1 }.svg`)"
+                alt=""
+              >
               {{ i + 1 }}
             </div>
             <div class="table-main__col address">
@@ -81,27 +85,6 @@ export default {
   }
 }
 .table-main {
-  &__head {
-    background: rgba(36, 11, 54, 0.04);
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 10px;
-    line-height: 12px;
-    letter-spacing: 0.105em;
-    text-transform: uppercase;
-    color: #7B6C86;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-bottom: 20px;
-  }
-  &__th {
-    padding: 14px 20px;
-    border: none;
-  }
-  &__th:last-child {
-    display: grid;
-    justify-items: end;
-  }
   &__tr {
     display: grid;
     grid-template-columns: repeat(3, 1fr);

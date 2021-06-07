@@ -5,11 +5,8 @@
         <button
           class="back__button"
         >
-          <img
-            :src="Require('arrow_back.svg')"
-            alt="back"
-            class="back__img"
-          >Back
+          <span class="icon-chevron_left" />
+          <span>Back</span>
         </button>
       </n-link>
     </div>
@@ -79,19 +76,28 @@ export default {
   max-width: 1170px;
 }
 .back {
-  min-width: 180px;
   font-weight: bold;
   font-size: 16px;
   line-height: 18px;
   color: #240A36;
   padding: 13px 15px;
+  transition: 0.3s ease-out;
   &__button {
     display: flex;
     align-items: center;
-    grid-gap: 15px;
+    grid-gap: 5px;
   }
   a:hover {
     text-decoration: none;
+  }
+  &:hover {
+    background: #FFFFFF;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  span::before {
+    font-size: 24px;
+    color: #C31433;
   }
 }
 .info {
