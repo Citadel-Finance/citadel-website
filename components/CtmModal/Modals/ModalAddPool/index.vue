@@ -5,6 +5,7 @@
         Token address
       </div>
       <base-input
+        v-model="tokenAddress"
         :placeholder="'0x0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoO'"
         class="main__input"
       />
@@ -12,20 +13,23 @@
         Tokens per block
       </div>
       <base-input
+        v-model="tokensPerBlock"
         :placeholder="'1000'"
         class="main__input"
       />
       <div class="main__title">
-        Something
+        APY tax
       </div>
       <base-input
+        v-model="apyTax"
         :placeholder="'0.07%'"
         class="main__input"
       />
       <div class="main__title">
-        Reward ratio
+        Pool rewards
       </div>
       <base-input
+        v-model="premiumCoeff"
         :placeholder="'20.06%'"
         class="main__input"
       />

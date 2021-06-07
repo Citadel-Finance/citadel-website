@@ -44,7 +44,6 @@ export default {
     return {
       titleRate: 'Annual percentage rate',
       percents: '20.06%',
-      selected: 0,
     };
   },
   computed: {
