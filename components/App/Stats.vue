@@ -107,7 +107,7 @@ export default {
 <style lang="scss" scoped>
 .deposit {
   &__wrapper {
-    max-width: 1170px;
+    max-width: 570px;
     width: 100%;
     background: #FFFFFF;
     margin: auto;
@@ -118,7 +118,8 @@ export default {
     grid-gap: 20px;
   }
   &__title {
-    font-family: sans-serif, 'Conto-Medium';
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 23px;
@@ -146,22 +147,26 @@ export default {
     border-radius: 10px;
   }
   &__title {
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
     font-weight: bold;
     font-size: 10px;
-    line-height: 12px;
+    line-height: 11px;
     letter-spacing: 0.105em;
     text-transform: uppercase;
     color: #7B6C86;
   }
   &__line {
-    width: 40px;
-    margin: 66px auto 15px 0;
+    width: 68px;
+    margin: 41px auto 15px 0;
     border: none;
     background-color: #C31433;
     color: #C31433;
     height: 3px;
   }
   &__value {
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;

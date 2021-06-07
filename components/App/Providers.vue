@@ -11,18 +11,27 @@
             :key="`position__item-${i}`"
             class="table-main__tr"
           >
-            <div class="table-main__col position">
+            <div class="table-main__col address">
               <img
                 :src="Require(`providers/rate_${ i + 1 }.svg`)"
                 alt=""
               >
-              {{ i + 1 }}
-            </div>
-            <div class="table-main__col address">
-              {{ provider.user }}
+              <div class="address__main">
+                <span class="address__title">Address</span>
+                <span
+                  class="address__value"
+                  :title="provider.user"
+                >
+                  {{ SubstrString(provider.user, 0, 6) + '...' + SubstrString(provider.user, provider.user.length - 4, 4) }}
+                </span>
+              </div>
             </div>
             <div class="table-main__col contribution">
-              {{ provider.staked }}
+              <span class="contribution__title">Contributions (USD)</span>
+              <span
+                class="contribution__value"
+                :title="provider.staked"
+              >{{ Floor(provider.staked, 8) }}</span>
             </div>
           </div>
         </div>
@@ -70,7 +79,7 @@ export default {
   &__wrapper {
     background: #FFFFFF;
     width: 100%;
-    max-width: 1170px;
+    max-width: 570px;
     margin: auto;
     border-radius: 10px;
     padding: 20px;
@@ -78,21 +87,29 @@ export default {
     grid-gap: 20px;
   }
   &__title {
-    font-size: 21px;
-    font-family: sans-serif, 'Conto-Medium';
-    line-height: 25px;
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.03em;
     color: #240A36;
   }
 }
 .table-main {
+  &__body {
+    display: grid;
+    grid-gap: 10px;
+  }
   &__tr {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin: 14px 0;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 35px;
+    background: #F6F5F7;
+    border-radius: 10px;
   }
   &__col {
-    padding: 14px 20px;
-    border: none;
+    padding: 15px;
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;
@@ -101,18 +118,41 @@ export default {
     align-items: center;
   }
 }
-.position {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  color: #240A36;
+.address {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-gap: 35px;
+  &__title {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 11px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #7B6C86;
+  }
+  &__value {;
+    font-size: 16px;
+    line-height: 18px;
+    color: #240A36;
+  }
 }
 .contribution {
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
   display: grid;
-  justify-items: end;
-  color: #C31433;
+  &__title {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 11px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #7B6C86;
+  }
+  &__value {;
+    font-size: 16px;
+    line-height: 18px;
+    color: #240A36;
+  }
 }
 </style>
