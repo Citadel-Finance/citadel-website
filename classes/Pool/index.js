@@ -20,7 +20,7 @@ export default class Pool extends BasicSmartContract {
     await this.fetchCommonData();
     await Promise.all([
       this.fetchTop(),
-      this.fetchUserData(),
+      // this.fetchUserData(),
     ]);
   }
 
