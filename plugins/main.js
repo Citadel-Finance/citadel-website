@@ -44,8 +44,8 @@ Vue.mixin({
     },
     GetFormTimestamp(timestamp, format = 'DD.MM.YY H:mm') {
       if (timestamp !== 0 && timestamp !== '-' && timestamp !== '' && timestamp !== undefined) {
-        // timestamp = +timestamp * 1000;
-        timestamp = +timestamp;
+        timestamp = +timestamp * 1000;
+        // timestamp = +timestamp;
         return moment(new Date(timestamp)).format(format);
       }
       return '-';

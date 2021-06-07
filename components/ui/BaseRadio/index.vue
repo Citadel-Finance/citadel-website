@@ -6,6 +6,7 @@
       class="radio"
       value-field="item"
       text-field="label"
+      stacked
     />
   </div>
 </template>
@@ -45,7 +46,8 @@ export default {
   }
   .radio {
     display: flex;
-    grid-gap: 111px;
+    flex-direction: column;
+    grid-gap: 15px;
   }
   .custom-control-label {
     padding-left: 14px;
