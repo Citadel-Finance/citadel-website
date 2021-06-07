@@ -16,7 +16,7 @@
         </div>
         <div class="table-main__body">
           <div
-            v-for="(event, i) in poolsEventsAll"
+            v-for="(event, i) in poolsEventsMap[poolAddress]"
             :key="`position__item-${i}`"
             class="table-main__tr"
           >
@@ -62,7 +62,11 @@ export default {
   computed: {
     ...mapGetters({
       poolsEventsAll: 'user/getPoolsEventsAll',
+      poolsEventsMap: 'user/getPoolsEventsMap',
     }),
+    poolAddress() {
+      return this.$route.params?.address ?? '';
+    },
   },
 };
 </script>
