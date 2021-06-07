@@ -1,15 +1,19 @@
 <template>
-  <div class="base-field">
-    <div class="base-field__control">
+  <div class="base-input">
+    <div
+      class="base-input__control"
+      :class="inputClass"
+    >
       <input
         :value="value"
-        type="number"
-        class="base-field__input"
+        type="text"
+        class="base-input__input"
         :placeholder="placeholder"
         @input="input"
       >
       <span
-        class="base-field__description"
+        v-if="mode === 'desc'"
+        class="base-input__description"
         @click="$emit('handleClickBtn')"
       >
         {{ description }}
@@ -17,7 +21,7 @@
     </div>
     <div
       v-if="!isHideError"
-      class="base-field__error"
+      class="base-input__error"
     >
       {{ errorText }}
     </div>
@@ -27,6 +31,10 @@
 <script>
 export default {
   props: {
+    mode: {
+      type: String,
+      default: '',
+    },
     value: {
       type: String,
       default: '',
@@ -49,6 +57,18 @@ export default {
     },
   },
   computed: {
+    inputClass() {
+      const {
+        disabled,
+        mode,
+      } = this;
+      return [
+        {
+          'base-input_disabled': disabled,
+          'base-input_desc': mode === 'desc',
+        },
+      ];
+    },
   },
   methods: {
     input($event) {
@@ -59,7 +79,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.base-field {
+.base-input {
   &__control {
     display: flex;
     width: 100%;

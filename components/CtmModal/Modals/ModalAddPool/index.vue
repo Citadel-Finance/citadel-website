@@ -2,7 +2,28 @@
   <ctm-modal-box title="Add pool">
     <div class="ctm-modal__main main">
       <div class="main__title">
+        Token address
+      </div>
+      <base-input
+        :placeholder="'0x0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoO'"
+        class="main__input"
+      />
+      <div class="main__title">
+        Tokens per block
+      </div>
+      <base-input
+        :placeholder="'1000'"
+        class="main__input"
+      />
+      <div class="main__title">
         Something
+      </div>
+      <base-input
+        :placeholder="'0.07%'"
+        class="main__input"
+      />
+      <div class="main__title">
+        Reward ratio
       </div>
       <base-input
         :placeholder="'20.06%'"
@@ -15,7 +36,10 @@
         >
           Close
         </base-btn>
-        <base-btn mode="primary" @click="handleCreatePool">
+        <base-btn
+          mode="primary"
+          @click="handleCreatePool"
+        >
           Save
         </base-btn>
       </div>
@@ -83,13 +107,11 @@ export default {
     font-size: 16px;
     line-height: 20px;
   }
-  &__input {
-    margin-bottom: 140px;
-  }
   &__buttons {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 20px;
+    margin-top: 20px;
   }
 }
 </style>

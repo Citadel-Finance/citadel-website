@@ -13,10 +13,11 @@
           class="pools__button"
         >
           <base-btn
-            mode="primary"
+            mode="txt-icon"
             @click="openAddModal"
           >
-            Add new pool
+            <span>Add pool</span>
+            <span class="icon-plus" />
           </base-btn>
         </div>
       </div>
@@ -29,8 +30,6 @@
           >
             {{ field.label }}
           </div>
-          <!--          { key: 'status', label: 'Status' },-->
-          <!--          { key: 'settings', label: '' },-->
           <div
             v-if="isUserAdmin"
             class="table-main__th"
@@ -94,11 +93,9 @@
             <div
               v-if="isUserAdmin"
               class="table-main__col settings"
+              @click="openEditModal"
             >
-              <base-dd-settings
-                :options="options"
-                class="table-main__settings"
-              />
+              <span class="icon-more_vertical" />
             </div>
           </div>
         </div>
@@ -116,10 +113,6 @@ export default {
   name: 'Pools',
   data() {
     return {
-      options: [
-        { label: 'Edit pool', value: 1 },
-        { label: 'Delete', value: 2 },
-      ],
       fields: [
         { key: 'currency', label: 'Currency' },
         { key: 'apy', label: 'APY' },
@@ -140,6 +133,12 @@ export default {
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.addPool,
+      });
+    },
+    openEditModal() {
+      this.ShowModal({
+        text: 'WalletConnect',
+        key: modals.editPool,
       });
     },
   },
@@ -185,10 +184,13 @@ export default {
   }
   &__button {
     .base-btn {
-      font-size: 14px;
-      line-height: 17px;
-      padding: 10px 15px;
-      max-height: 38px;
+      padding: 13px 15px;
+      display: flex;
+      grid-gap: 10px;
+      span::before {
+        font-size: 24px;
+        color: #C31433;
+      }
     }
   }
 }
@@ -204,6 +206,7 @@ export default {
     color: #7B6C86;
     display: grid;
     min-width: 1130px;
+    margin-bottom: 10px;
     grid-template-columns: repeat(4, 1fr);
   }
   &__th {
@@ -214,7 +217,12 @@ export default {
     display: grid;
     min-width: 1130px;
     grid-template-columns: 1fr;
-    margin: 14px 0;
+    padding: 14px 0;
+    transition: 0.3s ease-out;
+    &:hover {
+      background: #FBFAFB;
+      border-radius: 10px;
+    }
   }
   &__col {
     padding: 14px 20px;
@@ -272,7 +280,27 @@ export default {
   }
 }
 .settings {
-  padding: 0;
+  display: flex;
   justify-content: center;
+  justify-items: center;
+  align-content: center;
+  align-items: center;
+  span {
+    padding: 5px;
+
+    transition: 0.3s ease-in-out;
+    cursor: pointer;
+    border-radius: 7px;
+    &:hover {
+      background: #F3EFF3;
+    }
+  }
+  span::before {
+    font-size: 24px;
+    color: #A89DAF;
+    &:hover {
+      color: #7B6C86;
+    }
+  }
 }
 </style>

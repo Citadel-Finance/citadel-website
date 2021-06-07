@@ -29,10 +29,11 @@ export default {
       return [
         {
           'base-btn_disabled': disabled,
-          'base-btn__primary': mode === 'primary',
-          'base-btn__secondary': mode === 'secondary',
-          'base-btn__secondary_disabled': mode === 'secondary' && disabled,
-          'base-btn__back-image': mode === 'backImg',
+          'base-btn_primary': mode === 'primary',
+          'base-btn_secondary': mode === 'secondary',
+          'base-btn_back-image': mode === 'backImg',
+          'base-btn_txt-icon': mode === 'txt-icon',
+          'base-btn_icon': mode === 'icon',
         },
       ];
     },
@@ -60,28 +61,40 @@ export default {
     color: #D4CED7;
     pointer-events: none;
   }
-  &__primary {
+  &_primary {
     background: #C31433;
     &:hover {
       background: #9F0923;
     }
   }
-  &__secondary {
+  &_secondary {
     background: #FDEFF2;
     color: #C31433;
     &:hover {
       background: #F3D0D7;
     }
-    &_disabled {
-      background: #F3EFF3;
-      color: #D4CED7;
-      pointer-events: none;
-    }
   }
-  &__back-image {
+  &_back-image {
     background-image: url(~assets/img/button_bg.svg);
     justify-content: start;
     align-items: start;
+  }
+  &_txt-icon {
+    background: #FFFFFF;
+    color: #240A36;
+    border: 1px solid #F3EFF3;
+    &:hover {
+      background: #FDEFF2;
+      border: 1px solid #C31433;
+    }
+  }
+  &_icon {
+    background: #FFFFFF;
+    color: #C31433;
+    &:hover {
+      background: #C31433;
+      color: #FFFFFF;
+    }
   }
 }
 </style>

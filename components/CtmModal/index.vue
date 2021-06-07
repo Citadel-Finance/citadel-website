@@ -14,7 +14,6 @@
       </ctm-modal-box>
       <modal-add-pool v-if="modals.addPool === currentModalKey" />
       <modal-connect-wallet v-if="modals.connectWallet === currentModalKey" />
-      <modal-delete-pool v-if="modals.deletePool === currentModalKey" />
       <modal-deposit-pool v-if="modals.depositPool === currentModalKey" />
       <modal-edit-pool v-if="modals.editPool === currentModalKey" />
       <modal-status v-if="modals.status === currentModalKey" />
@@ -29,7 +28,6 @@ import modals from '@/store/modals/modals';
 import modalAddPool from '@/components/CtmModal/Modals/ModalAddPool/index';
 import modalClaimPool from '@/components/CtmModal/Modals/ModalClaimPool/index';
 import modalConnectWallet from '@/components/CtmModal/Modals/ModalConnectWallet/index';
-import modalDeletePool from '@/components/CtmModal/Modals/ModalDeletePool/index';
 import modalDepositPool from '@/components/CtmModal/Modals/ModalDepositPool/index';
 import modalEditPool from '@/components/CtmModal/Modals/ModalEditPool/index';
 import modalStatus from '@/components/CtmModal/Modals/ModalStatus/index';
@@ -40,7 +38,6 @@ export default {
     'modal-add-pool': modalAddPool,
     'modal-claim-pool': modalClaimPool,
     'modal-connect-wallet': modalConnectWallet,
-    'modal-delete-pool': modalDeletePool,
     'modal-deposit-pool': modalDepositPool,
     'modal-edit-pool': modalEditPool,
     'modal-status': modalStatus,

@@ -9,13 +9,10 @@
       </div>
       <button
         v-if="!options.isUnclosable"
-        class="ctm-modal__x"
+        class="ctm-modal__close"
         @click="close()"
       >
-        <img
-          :src="Require('x.svg')"
-          alt="x"
-        >
+        <span class="icon-close_big" />
       </button>
     </div>
     <slot />
@@ -54,5 +51,9 @@ export default {
 <style lang="scss" scoped>
 .ctm-modal {
   @include modalKit;
+  &__close {
+    font-size: 24px;
+    color: #C31433;
+  }
 }
 </style>
