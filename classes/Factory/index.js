@@ -59,6 +59,7 @@ export default class Factory extends BasicSmartContract {
         tokensPerBlock,
         apyTax,
         premiumCoeff,
+        true,
       );
       return output(r);
     } catch (e) {

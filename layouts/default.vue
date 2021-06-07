@@ -23,13 +23,13 @@ export default {
     this.SetLoader(false);
   },
   methods: {
-    async connectWallet() {
-      const r = await this.$store.dispatch('user/connectWallet');
-      // if (!r.ok) {
-      //   return;
-      // }
-      return r;
-    },
+    // async connectWallet() {
+    //   const r = await this.$store.dispatch('user/connectWallet');
+    //   // if (!r.ok) {
+    //   //   return;
+    //   // }
+    //   return r;
+    // },
     async connectAnonNode() {
       const r = await this.$store.dispatch('user/connectAnonNode');
       return r;

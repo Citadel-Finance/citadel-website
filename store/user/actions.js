@@ -23,20 +23,18 @@ export default {
       // await dispatch('Modals/show', {
       //   //
       // }, { root: true });
-
       return r;
     }
     const { userAddress } = r.result;
     commit('setUserAddress', userAddress);
     commit('setIsConnected', true);
+    dispatch('subscribeAllPools');
 
     await Promise.all([
       dispatch('initInstsAll'),
       dispatch('fetchPoolsUserData'),
       dispatch('fetchAllBalances'),
     ]);
-
-    dispatch('subscribeAllPools');
 
     return r;
   },
@@ -46,8 +44,8 @@ export default {
       ...Object.keys(tokensMap).map((address) => tokensMap[address].fetchBalance()),
       ctlToken.fetchBalance(),
     ]);
-    console.log(123123, r);
     commit('setTokensMap', tokensMap);
+    commit('setCtlToken', {});
     commit('setCtlToken', ctlToken);
   },
   async fetchPoolsUserData({ getters, commit }) {
@@ -57,12 +55,6 @@ export default {
     ]);
     commit('setPoolsMap', poolsMap);
   },
-  // async fetchPoolsData({ getters }) {
-  //   const { getPoolsMap: poolsMap } = getters;
-  //   await Promise.all([
-  //     ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
-  //   ]);
-  // },
   async initInstsAll({ getters }) {
     const {
       getFactory: factory,
@@ -97,21 +89,17 @@ export default {
     const poolsAddresses = poolData.map((pair) => pair.pool);
     const tokens = tokensAddresses.map((address) => new Token({ address }));
     const pools = poolsAddresses.map((address) => new Pool({ address }));
-
     tokens.forEach((token, i) => {
       token.setParrentAddress(poolsAddresses[i]);
     });
-
     const poolsMap = {};
     pools.forEach((pool) => {
       poolsMap[pool.address] = pool;
     });
-
     const tokensMap = {};
     tokens.forEach((token) => {
       tokensMap[token.address] = token;
     });
-
     await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
     commit('setPoolsMap', poolsMap);
     commit('setTokensMap', tokensMap);
