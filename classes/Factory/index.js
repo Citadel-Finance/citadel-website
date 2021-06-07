@@ -13,16 +13,6 @@ export default class Factory extends BasicSmartContract {
     });
   }
 
-  async fetchIsUserAdmin() {
-    try {
-      const r = await this.fetchContractData('hasRole');
-      return output({ r });
-    } catch (e) {
-      console.log('fetchUserData error', e, this);
-      return error(500, 'fetchUserData error', e);
-    }
-  }
-
   async fetchPoolsData() {
     try {
       const [
