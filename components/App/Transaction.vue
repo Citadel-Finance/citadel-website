@@ -24,8 +24,7 @@
               class="table-main__col date"
               @click="check(event)"
             >
-              {{ event.returnValues.date }}
-              {{ new Date(event.returnValues.date * 1000) }}
+              {{ GetFormTimestamp(event.returnValues.date, format = 'L') }}
             </div>
             <div class="table-main__col change">
               {{ event.amount }} {{ event.event }}

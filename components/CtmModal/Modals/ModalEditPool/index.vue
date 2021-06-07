@@ -58,7 +58,7 @@ export default {
     return {
       optionsRadio: [
         { label: 'Active', item: 'active', isActive: false },
-        { label: 'Inactive', tem: 'inactive', isActive: false },
+        { label: 'Inactive', item: 'inactive', isActive: false },
       ],
     };
   },

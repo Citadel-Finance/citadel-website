@@ -33,6 +33,13 @@
         :placeholder="'20.06%'"
         class="main__input"
       />
+      <div class="main__title">
+        Status
+      </div>
+      <base-radio
+        :options="optionsRadio"
+        class="main__radio"
+      />
       <div class="main__buttons">
         <base-btn
           :mode="'secondary'"
@@ -73,6 +80,10 @@ export default {
     tokensPerBlock: '12',
     apyTax: '10',
     premiumCoeff: '1',
+    optionsRadio: [
+      { label: 'Active', item: 'active', isActive: false },
+      { label: 'Inactive', item: 'inactive', isActive: false },
+    ],
   }),
   computed: {
     ...mapGetters({
