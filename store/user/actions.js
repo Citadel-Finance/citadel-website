@@ -38,6 +38,20 @@ export default {
 
     return r;
   },
+  async updatePoolsAndBalances({ dispatch }) {
+    await Promise.all([
+      dispatch('fetchPools'),
+      dispatch('fetchAllBalances'),
+    ]);
+  },
+  async fetchPools({ getters, commit }) {
+    const { getPoolsMap: poolsMap } = getters;
+    await Promise.all([
+      ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
+      ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchAll()),
+    ]);
+    commit('setPoolsMap', poolsMap);
+  },
   async fetchAllBalances({ getters, commit }) {
     const { getTokensMap: tokensMap, getCtlToken: ctlToken } = getters;
     const r = await Promise.all([
@@ -61,7 +75,6 @@ export default {
       getPoolsMap: poolsMap,
       getTokensMap: tokensMap,
     } = getters;
-    console.log(factory, poolsMap, tokensMap);
 
     await Promise.all([
       ...Object.keys(poolsMap).map((address) => poolsMap[address].initInst()),
@@ -100,7 +113,8 @@ export default {
     tokens.forEach((token) => {
       tokensMap[token.address] = token;
     });
-    await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchAll())]);
+    await Promise.all([...tokens.map((token) => token.fetchAll()), ...pools.map((pool) => pool.fetchCommonData())]);
+    await Promise.all([...pools.map((pool) => pool.fetchTop())]);
     commit('setPoolsMap', poolsMap);
     commit('setTokensMap', tokensMap);
   },
@@ -160,10 +174,11 @@ export default {
     const { getFactory: factory } = getters;
     factory.createPool(payload);
   },
-  editPool({ getters }, payload) {
+  async editPool({ getters, dispatch }, payload) {
     const { poolAddress } = payload;
     const { getPoolsMap: poolsMap } = getters;
     const pool = poolsMap[poolAddress];
-    pool.editPool(payload);
+    await pool.editPool(payload);
+    await dispatch('updatePoolsAndBalances');
   },
 };

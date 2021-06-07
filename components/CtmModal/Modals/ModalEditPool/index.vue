@@ -74,8 +74,8 @@ export default {
     close() {
       this.$store.dispatch('modals/hide');
     },
-    handleEditPool() {
-      this.$store.dispatch('user/editPool', {
+    async handleEditPool() {
+      await this.$store.dispatch('user/editPool', {
         poolAddress: '0x9A2b6F7943F1a212391aDe10d58548B1B9e2d868', //
         tokensPerBlock: '0',
         apyTax: '0',
