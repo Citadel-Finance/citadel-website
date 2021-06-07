@@ -32,7 +32,7 @@ export default {
 
     await Promise.all([
       dispatch('initInstsAll'),
-      dispatch('fetchPoolsData'),
+      dispatch('fetchPoolsUserData'),
     ]);
 
     // initInsts: Factory, Pool, Tokens
@@ -47,13 +47,18 @@ export default {
 
     return r;
   },
-  async fetchPoolsData({ getters }) {
+  async fetchPoolsUserData({ getters }) {
     const { getPoolsMap: poolsMap } = getters;
-
     await Promise.all([
       ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
     ]);
   },
+  // async fetchPoolsData({ getters }) {
+  //   const { getPoolsMap: poolsMap } = getters;
+  //   await Promise.all([
+  //     ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
+  //   ]);
+  // },
   async initInstsAll({ getters }) {
     const {
       getFactory: factory,
