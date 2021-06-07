@@ -3,6 +3,7 @@ import { initWeb3Provider, initWeb3ProviderAnon } from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
+import modals from '~/store/modals/modals';
 
 export default {
   async connectAnonNode({ dispatch }) {
@@ -20,9 +21,11 @@ export default {
     console.log(r);
     if (!r.ok) {
       // TODO show modal
-      // await dispatch('Modals/show', {
-      //   //
-      // }, { root: true });
+      await dispatch('modals/show', {
+        key: modals.default,
+        title: 'Error',
+        text: 'Invalid chain',
+      }, { root: true });
       return r;
     }
     const { userAddress } = r.result;
