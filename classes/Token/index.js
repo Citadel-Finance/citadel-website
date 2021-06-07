@@ -34,10 +34,9 @@ export default class Token extends BasicSmartContract {
   }
 
   async fetchAll() {
-    await this.fetchDecimals();
     return Promise.all([
+      this.fetchDecimals(),
       this.fetchSymbol(),
-      this.fetchBalance(),
     ]);
   }
 
