@@ -24,7 +24,8 @@
               class="table-main__col date"
               @click="check(event)"
             >
-              --
+              {{ event.returnValues.date }}
+              {{ new Date(event.returnValues.date * 1000) }}
             </div>
             <div class="table-main__col change">
               {{ event.amount }} {{ event.event }}
