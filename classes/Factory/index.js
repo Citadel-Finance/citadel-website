@@ -1,7 +1,8 @@
 import BigNumber from 'bignumber.js';
 import BasicSmartContract from '~/classes/BasicSmartContract';
 import { Factory as FactoryAbi } from '~/abis';
-import { error, output } from '~/utils/web3';
+import { error, getUserAddress, output } from '~/utils/web3';
+import { shiftedBy } from '~/utils/helpers';
 
 export default class Factory extends BasicSmartContract {
   constructor({
@@ -29,6 +30,7 @@ export default class Factory extends BasicSmartContract {
   async fetchPoolsData() {
     try {
       const poolData = await this.fetchContractData('allPools');
+      console.log('poolData', poolData);
       return output({
         poolData,
       });
@@ -63,11 +65,23 @@ export default class Factory extends BasicSmartContract {
 
   async fetchTotalAvailableReward() {
     try {
-      const totalAvailableReward = await this.fetchContractData('totalAvailableReward');
-      console.log('totalAvailableReward', totalAvailableReward);
-      return output({
-        totalAvailableReward,
-      });
+      const totalAvailableReward = await this.fetchContractData('totalAvailableReward', [getUserAddress()]);
+      return output(totalAvailableReward);
+    } catch (e) {
+      console.log('fetchTotalAvailableReward error', e, this);
+      return error(500, 'fetchTotalAvailableReward error', e);
+    }
+  }
+
+  async fetchPoolsAvailableReward() {
+    try {
+      let poolsAvailableReward = await this.fetchContractData('poolsAvailableReward', [getUserAddress()]);
+      // console.log('poolsAvailableReward', poolsAvailableReward);
+      poolsAvailableReward = poolsAvailableReward.map((item) => ({
+        ...item,
+        reward: shiftedBy(item.availableReward, -item.decimals),
+      }));
+      return output(poolsAvailableReward);
     } catch (e) {
       console.log('fetchTotalAvailableReward error', e, this);
       return error(500, 'fetchTotalAvailableReward error', e);

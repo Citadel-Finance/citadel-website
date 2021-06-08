@@ -16,4 +16,6 @@ export default {
     return r;
   },
   getPoolsData: (state) => state.poolsData,
+  getAvailableCtlReward: (state) => state.availableCtlReward,
+  getAvailablePoolsReward: (state) => state.availablePoolsReward,
 };

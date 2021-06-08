@@ -14,4 +14,7 @@ export default () => ({
   poolsEventsMap: {},
 
   poolsData: {},
+
+  availableCtlReward: 0,
+  availabelPoolsReward: [],
 });

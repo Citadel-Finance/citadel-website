@@ -53,4 +53,10 @@ export default {
   setPoolsData(state, payload) {
     state.poolsData = payload;
   },
+  setAvailableCtlReward(state, payload) {
+    state.availableCtlReward = payload;
+  },
+  setAvailablePoolsReward(state, payload) {
+    state.availablePoolsReward = payload;
+  },
 };

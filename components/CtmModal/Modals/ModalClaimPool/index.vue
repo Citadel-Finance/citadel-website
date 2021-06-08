@@ -6,31 +6,37 @@
         {{ claimText }}
       </div>
       <div class="main__rewards rewards">
-        <div class="rewards__titles">
-          <span
-            v-for="(item, i) in rewardsTitle"
-            :key="i"
-            class="rewards__title"
-          >
-            {{ item }}
-          </span>
+        <div
+          v-for="(item, i) in availablePoolsReward"
+          :key="i"
+        >
+          {{ item }}
         </div>
-        <div class="rewards__values">
-          <span
-            v-for="(item, i) in rewardsValues"
-            :key="i"
-            class="rewards__value"
-          >
-            {{ item }}
-          </span>
-        </div>
+        <!--        <div class="rewards__titles">-->
+        <!--          <span-->
+        <!--            v-for="(item, i) in rewardsTitle"-->
+        <!--            :key="i"-->
+        <!--            class="rewards__title"-->
+        <!--          >-->
+        <!--            {{ item }}-->
+        <!--          </span>-->
+        <!--        </div>-->
+        <!--        <div class="rewards__values">-->
+        <!--          <span-->
+        <!--            v-for="(item, i) in rewardsValues"-->
+        <!--            :key="i"-->
+        <!--            class="rewards__value"-->
+        <!--          >-->
+        <!--            {{ item }}-->
+        <!--          </span>-->
+        <!--        </div>-->
       </div>
       <div class="main__amount amount">
         <div class="amount__title">
           Total amount:
         </div>
         <div class="amount__value">
-          {{ amount }}
+          {{ Floor(availableCtlReward) }}
         </div>
       </div>
       <div class="main__buttons">
@@ -90,6 +96,8 @@ export default {
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
+      availableCtlReward: 'user/getAvailableCtlReward',
+      availablePoolsReward: 'user/getAvailablePoolsReward',
     }),
   },
   methods: {

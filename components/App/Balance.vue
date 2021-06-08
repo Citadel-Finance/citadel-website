@@ -61,11 +61,11 @@ export default {
   methods: {
     ...mapActions({
       updatePoolsData: 'user/updatePoolsData',
-      updateTotalAvailableReward: 'user/updateTotalAvailableReward',
+      updateRewardData: 'user/updateRewardData',
     }),
     async openClaimModal() {
-      await this.updatePoolsData();
-      await this.updateTotalAvailableReward();
+      // await this.updatePoolsData();
+      await this.updateRewardData();
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.claimPool,

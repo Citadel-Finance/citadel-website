@@ -2229,21 +2229,6 @@ export const Factory = [
             name: 'enabled',
             type: 'bool',
           },
-          {
-            internalType: 'uint256',
-            name: 'availableReward',
-            type: 'uint256',
-          },
-          {
-            internalType: 'uint256',
-            name: 'availableCtl',
-            type: 'uint256',
-          },
-          {
-            internalType: 'bool',
-            name: 'isAdmin',
-            type: 'bool',
-          },
         ],
         internalType: 'struct CitadelFactory.PoolInfo[]',
         name: '',
@@ -2463,6 +2448,62 @@ export const Factory = [
   {
     inputs: [
       {
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
+      },
+    ],
+    name: 'poolsAvailableReward',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'contract CitadelPool',
+            name: 'pool',
+            type: 'address',
+          },
+          {
+            internalType: 'uint256',
+            name: 'decimals',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'symbol',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'availableReward',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'availableCtl',
+            type: 'uint256',
+          },
+          {
+            internalType: 'bool',
+            name: 'isAdmin',
+            type: 'bool',
+          },
+        ],
+        internalType: 'struct CitadelFactory.PoolsRewardInfo[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
         internalType: 'bytes32',
         name: 'role',
         type: 'bytes32',
@@ -2497,25 +2538,19 @@ export const Factory = [
     type: 'function',
   },
   {
-    inputs: [],
+    inputs: [
+      {
+        internalType: 'address',
+        name: 'user',
+        type: 'address',
+      },
+    ],
     name: 'totalAvailableReward',
     outputs: [
       {
-        components: [
-          {
-            internalType: 'uint256',
-            name: 'availableReward',
-            type: 'uint256',
-          },
-          {
-            internalType: 'uint256',
-            name: 'availableCtl',
-            type: 'uint256',
-          },
-        ],
-        internalType: 'struct CitadelFactory.RewardInfo',
+        internalType: 'uint256',
         name: '',
-        type: 'tuple',
+        type: 'uint256',
       },
     ],
     stateMutability: 'view',

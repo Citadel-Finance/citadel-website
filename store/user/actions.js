@@ -3,11 +3,12 @@ import { initWeb3Provider, initWeb3ProviderAnon } from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
+import { shiftedBy } from '~/utils/helpers';
 
 export default {
   async connectAnonNode({ dispatch }) {
     const r = await initWeb3ProviderAnon();
-    console.log(r);
+    // console.log(r);
     await dispatch('initFactory');
     await Promise.all([
       dispatch('initPoolsAndTokens'),
@@ -17,7 +18,7 @@ export default {
   },
   async connectWallet({ dispatch, commit }) {
     const r = await initWeb3Provider();
-    console.log(r);
+    // console.log(r);
     if (!r.ok) {
       // TODO show modal
       // await dispatch('Modals/show', {
@@ -88,9 +89,16 @@ export default {
     console.log('updatePoolsData', r.result.poolData);
     commit('setPoolsData', r.result.poolData);
   },
-  async updateTotalAvailableReward({ commit, getters }) {
-    const { getFactory: factory } = getters;
-    const r = await factory.fetchTotalAvailableReward();
+  async updateRewardData({ commit, getters }) {
+    const { getFactory: factory, getCtlToken: ctlToken } = getters;
+    const r = await Promise.all([
+      factory.fetchTotalAvailableReward(),
+      factory.fetchPoolsAvailableReward(),
+    ]);
+    console.log('fetchPoolsAvailableReward', r[1].result);
+    const availableCtlReward = shiftedBy(r[0].result, -ctlToken.decimals);
+    commit('setAvailableCtlReward', availableCtlReward);
+    commit('setAvailablePoolsReward', r[1].result);
   },
   async initFactory({ commit }) {
     const factory = new Factory({
