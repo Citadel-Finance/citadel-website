@@ -83,9 +83,12 @@
               >
                 <span
                   class="status__dot"
-                  :class="{'slide__dot_active': poolsMap[poolAddress].isEnabled}"
+                  :class="{'status__dot_active': poolsMap[poolAddress].isEnabled}"
                 />
-                <span>
+                <span v-if="poolsMap[poolAddress].isEnabled">
+                  Active
+                </span>
+                <span v-else>
                   Inactive
                 </span>
               </div>
@@ -93,7 +96,7 @@
             <div
               v-if="poolsMap[poolAddress].isAdmin"
               class="table-main__col settings"
-              @click="openEditModal"
+              @click="openEditModal(poolAddress)"
             >
               <span class="icon-more_vertical" />
             </div>
@@ -135,10 +138,11 @@ export default {
         key: modals.addPool,
       });
     },
-    openEditModal() {
+    openEditModal(poolAddress) {
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.editPool,
+        poolAddress,
       });
     },
   },
@@ -272,7 +276,6 @@ export default {
       height: 8px;
       border-radius: 50%;
       background: #C31432;
-      transition: 0.3s ease-in-out;
     }
     &_active:before {
       background: #2DCE89;

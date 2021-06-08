@@ -57,17 +57,19 @@ export default class Pool extends BasicSmartContract {
     try {
       const commonData = await this.fetchContractData('getCommonData');
       const {
-        decimals, token, totalStaked, symbol, apyTax, enabled,
+        decimals, token, totalStaked, symbol, apyTax, enabled, tokensPerBlock, premiumCoeff,
       } = commonData;
       // console.log('commonData', commonData);
       this.decimals = decimals;
       this.symbol = symbol;
       this.childAddress = token;
+      this.tokensPerBlock = shiftedBy(tokensPerBlock, -decimals);
+      this.premiumCoeff = premiumCoeff;
 
       this.isEnabled = enabled;
       this.apyTax = shiftedBy(apyTax, -decimals);
       totalStakedByAddress[this.address] = shiftedBy(totalStaked, -decimals);
-      // this.totalStaked = shiftedBy(totalStaked, -decimals);
+
       return output({ commonData });
     } catch (e) {
       console.log('fetchCommonData error', e, this);
