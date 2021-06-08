@@ -40,7 +40,7 @@
 
 <script>
 import modals from '@/store/modals/modals';
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import Card from '~/components/App/Card';
 
 export default {
@@ -59,7 +59,13 @@ export default {
     }),
   },
   methods: {
-    openClaimModal() {
+    ...mapActions({
+      updatePoolsData: 'user/updatePoolsData',
+      updateTotalAvailableReward: 'user/updateTotalAvailableReward',
+    }),
+    async openClaimModal() {
+      await this.updatePoolsData();
+      await this.updateTotalAvailableReward();
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.claimPool,

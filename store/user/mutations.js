@@ -50,4 +50,7 @@ export default {
       [payload.key]: events,
     };
   },
+  setPoolsData(state, payload) {
+    state.poolsData = payload;
+  },
 };

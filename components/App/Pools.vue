@@ -67,9 +67,9 @@
               </div>
               <div
                 class="table-main__col"
-                :title="poolsMap[poolAddress].totalStaked"
+                :title="poolsMap[poolAddress].getTotalStaked()"
               >
-                {{ Floor(poolsMap[poolAddress].totalStaked, 4) }}
+                {{ Floor(poolsMap[poolAddress].getTotalStaked(), 4) }}
               </div>
               <div
                 class="table-main__col balance"

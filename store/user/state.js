@@ -12,4 +12,6 @@ export default () => ({
   isUserAdmin: true,
 
   poolsEventsMap: {},
+
+  poolsData: {},
 });
