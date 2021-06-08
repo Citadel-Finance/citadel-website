@@ -18,11 +18,18 @@ export default {
       type: Array,
       default: () => [],
     },
+    value: {
+      type: String,
+      default: '',
+    },
   },
-  data() {
-    return {
-      selected: '',
-    };
+  data: () => ({
+    selected: '',
+  }),
+  watch: {
+    selected(value) {
+      this.$emit('input', value);
+    },
   },
 };
 </script>

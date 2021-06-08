@@ -3,6 +3,7 @@ import { initWeb3Provider, initWeb3ProviderAnon } from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
+import modals from '~/store/modals/modals';
 import { shiftedBy } from '~/utils/helpers';
 
 export default {
@@ -21,9 +22,21 @@ export default {
     // console.log(r);
     if (!r.ok) {
       // TODO show modal
-      // await dispatch('Modals/show', {
-      //   //
-      // }, { root: true });
+      if (r.code === 4001) {
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'User rejected the request.',
+        }, { root: true });
+      } else if (r.code === 1) {
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'Invalid chain.',
+        }, { root: true });
+      }
       return r;
     }
     const { userAddress } = r.result;
@@ -141,7 +154,7 @@ export default {
     commit('setTokensMap', tokensMap);
   },
 
-  async poolDeposit({ getters }, { amount, poolAddress }) {
+  async poolDeposit({ getters, dispatch }, { amount, poolAddress }) {
     const poolsMap = getters.getPoolsMap;
     const tokensMap = getters.getTokensMap;
     const pool = poolsMap[poolAddress];
@@ -154,23 +167,55 @@ export default {
     if (+allowance < +amount) {
       const approveRes = await token.approve(poolAddress, bnAmount);
       if (!approveRes.ok) {
-        console.log('approve error');
-        return;
+        if (approveRes.code === 500) {
+          console.log('approve error');
+          await dispatch('modals/show', {
+            key: modals.status,
+            title: 'Error',
+            status: 'error',
+            text: 'User denied transaction signature.',
+          }, { root: true });
+          return;
+        }
       }
       console.log(approveRes);
     }
     const depositRes = await pool.deposit(bnAmount);
     console.log(depositRes);
     console.log('DONE');
+    await dispatch('modals/show', {
+      key: modals.status,
+      title: 'Success',
+      status: 'success',
+      text: 'Your funds are deposited.',
+    }, { root: true });
   },
 
-  async poolWithdraw({ getters }, { amount, poolAddress }) {
+  async poolWithdraw({ getters, dispatch }, { amount, poolAddress }) {
     const poolsMap = getters.getPoolsMap;
     const pool = poolsMap[poolAddress];
     const bnAmount = new BigNumber(amount).shiftedBy(+pool.decimals).toString();
     const withdrawRes = await pool.withdraw(bnAmount);
     console.log(withdrawRes);
+    if (!withdrawRes.ok) {
+      if (withdrawRes.code === 500) {
+        console.log('withdraw error');
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'User denied transaction signature.',
+        }, { root: true });
+        return;
+      }
+    }
     console.log('DONE');
+    await dispatch('modals/show', {
+      key: modals.status,
+      title: 'Success',
+      status: 'success',
+      text: 'Your funds are withdrew.',
+    }, { root: true });
   },
 
   subscribeAllPools({ getters, commit }) {

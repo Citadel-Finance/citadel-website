@@ -2,9 +2,10 @@
   <ctm-modal-box title="Edit pool">
     <div class="ctm-modal__main main">
       <div class="main__title">
-        Liquidity mining reward
+        Tokens per block
       </div>
       <base-input
+        v-model="tokensPerBlock"
         :placeholder="'1000'"
         class="main__input"
       />
@@ -12,13 +13,15 @@
         APY tax
       </div>
       <base-input
+        v-model="apyTax"
         :placeholder="'0.7%'"
         class="main__input"
       />
       <div class="main__title">
-        Status
+        Status {{ selected }}
       </div>
       <base-radio
+        v-model="selected"
         :options="optionsRadio"
         class="main__radio"
       />
@@ -57,31 +60,41 @@ export default {
       default: true,
     },
   },
-  data() {
-    return {
-      optionsRadio: [
-        { label: 'Active', item: 'active', isActive: false },
-        { label: 'Inactive', item: 'inactive', isActive: false },
-      ],
-    };
-  },
+  data: () => ({
+    optionsRadio: [
+      { label: 'Active', item: 'true', isActive: false },
+      { label: 'Inactive', item: 'false', isActive: false },
+    ],
+    selected: '',
+  }),
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
     }),
+    poolAddress() {
+      return this.$route.params?.address ?? '';
+    },
+    // tokensPerBlock: '0',
+    // apyTax: '0',
+    // premiumCoeff: '0',
+    // selected: true,
   },
   methods: {
     close() {
       this.$store.dispatch('modals/hide');
     },
     async handleEditPool() {
-      await this.$store.dispatch('user/editPool', {
-        poolAddress: '0x9A2b6F7943F1a212391aDe10d58548B1B9e2d868', //
-        tokensPerBlock: '0',
-        apyTax: '0',
-        premiumCoeff: '0',
-        isEnable: true,
-      });
+      console.log(this.poolAddress);
+      // const {
+      //   poolAddress, tokensPerBlock, apyTax, premiumCoeff, selected,
+      // } = this;
+      // await this.$store.dispatch('user/editPool', {
+      //   poolAddress,
+      //   tokensPerBlock,
+      //   apyTax,
+      //   premiumCoeff,
+      //   selected,
+      // });
     },
   },
 };

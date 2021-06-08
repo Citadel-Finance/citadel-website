@@ -34,9 +34,10 @@
         class="main__input"
       />
       <div class="main__title">
-        Status
+        Status {{ selected }}
       </div>
       <base-radio
+        v-model="selected"
         :options="optionsRadio"
         class="main__radio"
       />
@@ -77,13 +78,20 @@ export default {
   },
   data: () => ({
     tokenAddress: '0x4B1308749dD122844A3527704c117c3Cb9d9D30C',
+    startTime: '0',
     tokensPerBlock: '12',
     apyTax: '10',
     premiumCoeff: '1',
+    // tokenAddress: '',
+    // startTime: '0',
+    // tokensPerBlock: '',
+    // apyTax: '',
+    // premiumCoeff: '',
     optionsRadio: [
-      { label: 'Active', item: 'active', isActive: false },
-      { label: 'Inactive', item: 'inactive', isActive: false },
+      { label: 'Active', item: 'true', isActive: false },
+      { label: 'Inactive', item: 'false', isActive: false },
     ],
+    selected: '',
   }),
   computed: {
     ...mapGetters({
@@ -96,14 +104,15 @@ export default {
     },
     handleCreatePool() {
       const {
-        tokenAddress, tokensPerBlock, apyTax, premiumCoeff,
+        tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, selected,
       } = this;
       this.$store.dispatch('user/createPool', {
         tokenAddress,
-        startTime: '0', // always 0
+        startTime,
         tokensPerBlock,
         apyTax,
         premiumCoeff,
+        selected,
       });
     },
   },

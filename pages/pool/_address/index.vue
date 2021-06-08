@@ -57,10 +57,9 @@ export default {
     max-width: 1170px;
   }
   &__main {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
     grid-gap: 30px;
-    margin: auto;
+    justify-content: space-between;
     max-width: 1170px;
   }
 }
