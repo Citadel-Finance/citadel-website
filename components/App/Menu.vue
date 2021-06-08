@@ -1,15 +1,15 @@
 <template>
   <div class="content__menu menu">
-    <div class="menu__back back">
-      <n-link to="/">
+    <n-link to="/">
+      <div class="menu__back back">
         <button
           class="back__button"
         >
           <span class="icon-chevron_left" />
           <span>Back</span>
         </button>
-      </n-link>
-    </div>
+      </div>
+    </n-link>
     <div class="menu__info info">
       <div class="info__main">
         <div class="info__title">
@@ -75,6 +75,9 @@ export default {
   justify-content: space-between;
   width: 100%;
   max-width: 1170px;
+  a:hover {
+    text-decoration: none;
+  }
 }
 .back {
   font-weight: bold;
@@ -83,13 +86,11 @@ export default {
   color: #240A36;
   padding: 13px 15px;
   transition: 0.3s ease-out;
+  text-decoration: none;
   &__button {
     display: flex;
     align-items: center;
     grid-gap: 5px;
-  }
-  a:hover {
-    text-decoration: none;
   }
   &:hover {
     background: #FFFFFF;
