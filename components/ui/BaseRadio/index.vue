@@ -8,6 +8,7 @@
       text-field="label"
       stacked
     />
+    {{ selected }}
   </div>
 </template>
 
@@ -18,12 +19,16 @@ export default {
       type: Array,
       default: () => [],
     },
+    selected: {
+      type: String,
+      default: '',
+    },
   },
-  data() {
-    return {
-      selected: '',
-    };
-  },
+  // methods: {
+  //   input($event) {
+  //     this.$emit('input', $event.target.selected, $event.target);
+  //   },
+  // },
 };
 </script>
 

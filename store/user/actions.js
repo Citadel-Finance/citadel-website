@@ -159,14 +159,16 @@ export default {
     if (+allowance < +amount) {
       const approveRes = await token.approve(poolAddress, bnAmount);
       if (!approveRes.ok) {
-        console.log('approve error');
-        await dispatch('modals/show', {
-          key: modals.status,
-          title: 'Error',
-          status: 'error',
-          text: 'User denied transaction signature.',
-        }, { root: true });
-        return;
+        if (approveRes.code === 500) {
+          console.log('approve error');
+          await dispatch('modals/show', {
+            key: modals.status,
+            title: 'Error',
+            status: 'error',
+            text: 'User denied transaction signature.',
+          }, { root: true });
+          return;
+        }
       }
       console.log(approveRes);
     }
@@ -188,14 +190,16 @@ export default {
     const withdrawRes = await pool.withdraw(bnAmount);
     console.log(withdrawRes);
     if (!withdrawRes.ok) {
-      console.log('withdraw error');
-      await dispatch('modals/show', {
-        key: modals.status,
-        title: 'Error',
-        status: 'error',
-        text: 'User denied transaction signature.',
-      }, { root: true });
-      return;
+      if (withdrawRes.code === 500) {
+        console.log('withdraw error');
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'User denied transaction signature.',
+        }, { root: true });
+        return;
+      }
     }
     console.log('DONE');
     await dispatch('modals/show', {

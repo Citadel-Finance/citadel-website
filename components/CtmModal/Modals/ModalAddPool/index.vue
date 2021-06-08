@@ -34,9 +34,10 @@
         class="main__input"
       />
       <div class="main__title">
-        Status
+        Status {{ selected }}
       </div>
       <base-radio
+        v-model="selected"
         :options="optionsRadio"
         class="main__radio"
       />
@@ -84,6 +85,7 @@ export default {
       { label: 'Active', item: 'active', isActive: false },
       { label: 'Inactive', item: 'inactive', isActive: false },
     ],
+    selected: '',
   }),
   computed: {
     ...mapGetters({
