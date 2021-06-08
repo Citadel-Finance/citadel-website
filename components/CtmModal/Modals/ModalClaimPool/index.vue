@@ -63,36 +63,22 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    isUnclosable: {
-      type: Boolean,
-      default: false,
-    },
-    isHeader: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data() {
     return {
       claimText: 'To deposit ETH, you will be prompted to confirm the deposit. ',
-      amount: '100.26000000 ETH',
-      rewardsTitle: {
-        earlyRewards: 'Early rewards:',
-        lp1Rewards: 'LP1 rewards:',
-        lp2Rewards: 'LP2 rewards:',
-        hidingGameRewards: 'Hiding game rewards:',
-      },
-      rewardsValues: {
-        earlyRewards: '23.25640000 ETH',
-        lp1Rewards: '23.25640000 ETH',
-        lp2Rewards: '23.25640000 ETH',
-        hidingGameRewards: '23.25640000 ETH',
-      },
+      // amount: '100.26000000 ETH',
+      // rewardsTitle: {
+      //   earlyRewards: 'Early rewards:',
+      //   lp1Rewards: 'LP1 rewards:',
+      //   lp2Rewards: 'LP2 rewards:',
+      //   hidingGameRewards: 'Hiding game rewards:',
+      // },
+      // rewardsValues: {
+      //   earlyRewards: '23.25640000 ETH',
+      //   lp1Rewards: '23.25640000 ETH',
+      //   lp2Rewards: '23.25640000 ETH',
+      //   hidingGameRewards: '23.25640000 ETH',
+      // },
     };
   },
   computed: {
@@ -114,9 +100,6 @@ export default {
     }),
     getSymbolByPool(address) {
       return this.poolsMap[address].symbol;
-    },
-    close() {
-      this.$store.dispatch('modals/hide');
     },
     async handleClaimAll() {
       this.SetLoader(true);

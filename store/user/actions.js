@@ -48,6 +48,7 @@ export default {
       dispatch('initInstsAll'),
       dispatch('fetchPoolsUserData'),
       dispatch('fetchAllBalances'),
+      dispatch('updateRewardData'),
     ]);
 
     return r;
@@ -108,7 +109,7 @@ export default {
       factory.fetchTotalAvailableReward(),
       factory.fetchPoolsAvailableReward(),
     ]);
-    console.log('fetchPoolsAvailableReward', r[1].result);
+    // console.log('fetchPoolsAvailableReward', r[1].result);
     const availableCtlReward = shiftedBy(r[0].result, -ctlToken.decimals);
     commit('setAvailableCtlReward', availableCtlReward);
     commit('setAvailablePoolsReward', r[1].result);

@@ -37,7 +37,7 @@
   </ctm-modal-box>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   props: {
@@ -80,6 +80,11 @@ export default {
     },
   },
   methods: {
+    ...mapActions({
+      updateRewardData: 'user/updateRewardData',
+      updatePoolsAndBalances: 'user/updatePoolsAndBalances',
+      poolDeposit: 'user/poolDeposit',
+    }),
     setMax() {
       this.amount = this.balance;
     },
@@ -90,11 +95,16 @@ export default {
       const { amount } = this;
       const poolAddress = this.$route.params.address;
       this.SetLoader(true);
-      await this.$store.dispatch('user/poolDeposit', {
+      await this.poolDeposit({
         amount,
         poolAddress,
       });
-      await this.$store.dispatch('user/updatePoolsAndBalances');
+
+      await Promise.all([
+        this.updatePoolsAndBalances(),
+        this.updateRewardData(),
+      ]);
+
       this.SetLoader(false);
     },
   },

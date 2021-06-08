@@ -87,15 +87,19 @@ export default {
   },
   methods: {
     openWithdrawModal() {
-      this.ShowModal({
-        text: 'WalletConnect',
-        key: modals.withdrawPool,
+      this.Signer(() => {
+        this.ShowModal({
+          text: 'WalletConnect',
+          key: modals.withdrawPool,
+        });
       });
     },
     openDepositModal() {
-      this.ShowModal({
-        text: 'WalletConnect',
-        key: modals.depositPool,
+      this.Signer(() => {
+        this.ShowModal({
+          text: 'WalletConnect',
+          key: modals.depositPool,
+        });
       });
     },
   },

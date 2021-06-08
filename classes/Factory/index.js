@@ -30,7 +30,7 @@ export default class Factory extends BasicSmartContract {
   async fetchPoolsData() {
     try {
       const poolData = await this.fetchContractData('allPools');
-      console.log('poolData', poolData);
+      // console.log('poolData', poolData);
       return output({
         poolData,
       });
@@ -76,7 +76,7 @@ export default class Factory extends BasicSmartContract {
   async fetchPoolsAvailableReward() {
     try {
       let poolsAvailableReward = await this.fetchContractData('poolsAvailableReward', [getUserAddress()]);
-      console.log('poolsAvailableReward', poolsAvailableReward);
+      // console.log('poolsAvailableReward', poolsAvailableReward);
       poolsAvailableReward = poolsAvailableReward.map((item) => ({
         ...item,
         reward: shiftedBy(item.availableReward, -item.decimals),

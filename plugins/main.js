@@ -19,7 +19,10 @@ Vue.mixin({
       if (this.isConnected) {
         callback();
       } else {
-        console.log('connect wallet');
+        // console.log('connect wallet');
+        this.ShowModal({
+          key: modals.connectWallet,
+        });
       }
     },
     ShowModal(payload) {

@@ -15,7 +15,7 @@
         />
         <Card
           title="Rewards CitaDEL"
-          value="-"
+          :value="`${Floor(availableCtlReward)}`"
         />
         <Card
           title="Price CitaDEL"
@@ -56,6 +56,7 @@ export default {
   computed: {
     ...mapGetters({
       ctlToken: 'user/getCtlToken',
+      availableCtlReward: 'user/getAvailableCtlReward',
     }),
   },
   methods: {
@@ -64,13 +65,15 @@ export default {
       updateRewardData: 'user/updateRewardData',
     }),
     async openClaimModal() {
-      // await this.updatePoolsData();
-      this.SetLoader(true);
-      await this.updateRewardData();
-      this.SetLoader(false);
-      this.ShowModal({
-        text: 'WalletConnect',
-        key: modals.claimPool,
+      this.Signer(async () => {
+        // await this.updatePoolsData();
+        this.SetLoader(true);
+        await this.updateRewardData();
+        this.SetLoader(false);
+        this.ShowModal({
+          text: 'WalletConnect',
+          key: modals.claimPool,
+        });
       });
     },
   },
