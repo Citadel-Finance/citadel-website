@@ -8,7 +8,6 @@
       text-field="label"
       stacked
     />
-    {{ selected }}
   </div>
 </template>
 
@@ -19,10 +18,10 @@ export default {
       type: Array,
       default: () => [],
     },
-    // value: {
-    //   type: String,
-    //   default: '',
-    // },
+    value: {
+      type: String,
+      default: '',
+    },
   },
   data: () => ({
     selected: '',

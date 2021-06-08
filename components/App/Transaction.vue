@@ -20,10 +20,7 @@
             :key="`position__item-${i}`"
             class="table-main__tr"
           >
-            <div
-              class="table-main__col date"
-              @click="check(event)"
-            >
+            <div class="table-main__col date">
               {{ GetFormTimestamp(event.returnValues.date, format = 'L') }}
             </div>
             <div class="table-main__col change">
@@ -76,9 +73,6 @@ export default {
     },
   },
   methods: {
-    check(value) {
-      console.log(value);
-    },
   },
 };
 </script>
