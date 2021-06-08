@@ -1,7 +1,9 @@
 <template>
   <ctm-modal-box :is-header="false">
     <div class="ctm-modal__main main">
-      <div class="main__title">
+      <div
+        class="main__title"
+      >
         {{ options.title }}
       </div>
       <div class="main__text">
@@ -26,6 +28,18 @@ export default {
     ...mapGetters({
       options: 'modals/getOptions',
     }),
+    // statusClass() {
+    //   const {
+    //     title,
+    //   } = this;
+    //   return [
+    //     {
+    //       'main__title_error': title === 'Error',
+    //       'main__title_success': title === 'Success',
+    //       'main__title_notification': title === 'Notification',
+    //     },
+    //   ];
+    // },
   },
   methods: {
     close() {
