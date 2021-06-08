@@ -1,11 +1,11 @@
 <template>
-  <ctm-modal-box>
+  <ctm-modal-box :is-header="false">
     <div class="ctm-modal__main main">
       <div class="main__title">
-        {{ title }}
+        {{ options.title }}
       </div>
       <div class="main__text">
-        {{ text }}
+        {{ options.text }}
       </div>
       <div class="main__buttons">
         <base-btn
@@ -22,19 +22,6 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  props: {
-    isHeader: {
-      type: Boolean,
-      default: true,
-    },
-  },
-  data() {
-    return {
-      title: 'Error',
-      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit sagittis et egestas vestibulum.'
-        + 'Suspendisse facilisi dictum urna, lorem imperdiet dignissim. ',
-    };
-  },
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
@@ -50,30 +37,34 @@ export default {
 <style lang="scss" scoped>
 .ctm-modal {
   @include modalKit;
-  //&__header {
-  //  display: grid;
-  //  justify-content: end;
-  //}
+  &__box {
+    width: 300px !important;
+  }
 }
 .main {
-  padding: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
   &__title {
-    margin: 20px 0;
-    color: #240A36;
-    font-weight: 500;
-    font-size: 21px;
-    line-height: 25px;
-    display: flex;
-    justify-content: center;
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    color: #F00917;
   }
   &__text {
-    font-weight: 300;
-    letter-spacing: 0.05em;
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
+    font-weight: normal;
     font-size: 16px;
-    line-height: 20px;
-    color: #7B6C86;
+    line-height: 120%;
     text-align: center;
-    margin-bottom: 40px;
+    letter-spacing: 0.05em;
+    color: #A89DAF;
   }
   &__buttons {
     display: grid;

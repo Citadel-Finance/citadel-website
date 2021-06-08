@@ -3,7 +3,7 @@
     <div class="ctm-modal__main main">
       <div class="main__buttons">
         <base-btn
-          :mode="'secondary'"
+          :mode="'connect'"
           @click="handleConnectWallet"
         >
           Metamask

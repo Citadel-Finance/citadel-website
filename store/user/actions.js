@@ -31,7 +31,7 @@ export default {
         await dispatch('modals/show', {
           key: modals.status,
           title: 'Error',
-          text: 'Invalid chain',
+          text: 'Invalid chain.',
         }, { root: true });
       }
       return r;

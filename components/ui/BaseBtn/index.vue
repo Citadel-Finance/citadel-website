@@ -34,6 +34,7 @@ export default {
           'base-btn_back-image': mode === 'backImg',
           'base-btn_txt-icon': mode === 'txt-icon',
           'base-btn_icon': mode === 'icon',
+          'base-btn_connect': mode === 'connect',
         },
       ];
     },
@@ -43,6 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .base-btn {
+  height: 48px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -94,6 +96,15 @@ export default {
     &:hover {
       background: #C31433;
       color: #FFFFFF;
+    }
+  }
+  &_connect {
+    height: 59px;
+    background: #F6F5F7;
+    letter-spacing: 0.05em;
+    color: #240A36;
+    &:hover {
+      background: #F3EFF3;
     }
   }
 }
