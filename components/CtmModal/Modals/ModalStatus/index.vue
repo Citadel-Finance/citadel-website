@@ -2,6 +2,7 @@
   <ctm-modal-box :is-header="false">
     <div class="ctm-modal__main main">
       <div
+        :class="statusClass"
         class="main__title"
       >
         {{ options.title }}
@@ -28,18 +29,18 @@ export default {
     ...mapGetters({
       options: 'modals/getOptions',
     }),
-    // statusClass() {
-    //   const {
-    //     title,
-    //   } = this;
-    //   return [
-    //     {
-    //       'main__title_error': title === 'Error',
-    //       'main__title_success': title === 'Success',
-    //       'main__title_notification': title === 'Notification',
-    //     },
-    //   ];
-    // },
+    statusClass() {
+      const {
+        status,
+      } = this.options;
+      return [
+        {
+          main__title_error: status === 'error',
+          main__title_success: status === 'success',
+          main__title_notification: status === 'notification',
+        },
+      ];
+    },
   },
   methods: {
     close() {
@@ -68,7 +69,15 @@ export default {
     line-height: 23px;
     text-align: center;
     letter-spacing: 0.03em;
-    color: #F00917;
+    &_error {
+      color: #F00917;
+    }
+    &_success {
+      color: #09A022;
+    }
+    &_notification {
+      color: #7B6C86;
+    }
   }
   &__text {
     font-family: sans-serif, 'Arial';

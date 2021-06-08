@@ -94,7 +94,6 @@ export default {
         amount,
         poolAddress,
       });
-      this.close();
       this.SetLoader(false);
     },
   },

@@ -17,21 +17,27 @@
                 alt=""
               >
               <div class="address__main">
-                <span class="address__title">Address</span>
-                <span
+                <div class="address__title">
+                  Address
+                </div>
+                <div
                   class="address__value"
                   :title="provider.user"
                 >
                   {{ SubstrString(provider.user, 0, 6) + '...' + SubstrString(provider.user, provider.user.length - 4, 4) }}
-                </span>
+                </div>
               </div>
             </div>
             <div class="table-main__col contribution">
-              <span class="contribution__title">Contributions (USD)</span>
-              <span
+              <div class="contribution__title">
+                Contributions (USD)
+              </div>
+              <div
                 class="contribution__value"
                 :title="provider.staked"
-              >{{ Floor(provider.staked, 8) }}</span>
+              >
+                {{ Floor(provider.staked, 8) }}
+              </div>
             </div>
           </div>
         </div>
@@ -76,6 +82,7 @@ export default {
 
 <style lang="scss" scoped>
 .providers {
+  width: 100%;
   &__wrapper {
     background: #FFFFFF;
     width: 100%;
