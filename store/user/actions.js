@@ -182,8 +182,8 @@ export default {
     await dispatch('updatePoolsAndBalances');
   },
 
-  async claimAll({ getters }) {
+  claimAll({ getters }) {
     const { getFactory: factory } = getters;
-    // factory.
+    return factory.claimAll();
   },
 };

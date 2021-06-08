@@ -49,7 +49,7 @@
   </ctm-modal-box>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -90,8 +90,14 @@ export default {
     }),
   },
   methods: {
+    ...mapActions({
+      claimAll: 'user/claimAll',
+    }),
     close() {
       this.$store.dispatch('modals/hide');
+    },
+    async handleClaimAll() {
+      await this.claimAll();
     },
   },
 };
