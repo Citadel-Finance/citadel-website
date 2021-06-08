@@ -2468,16 +2468,6 @@ export const Factory = [
             type: 'uint256',
           },
           {
-            internalType: 'string',
-            name: 'name',
-            type: 'string',
-          },
-          {
-            internalType: 'string',
-            name: 'symbol',
-            type: 'string',
-          },
-          {
             internalType: 'uint256',
             name: 'availableReward',
             type: 'uint256',

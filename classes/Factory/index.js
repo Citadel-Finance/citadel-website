@@ -76,15 +76,15 @@ export default class Factory extends BasicSmartContract {
   async fetchPoolsAvailableReward() {
     try {
       let poolsAvailableReward = await this.fetchContractData('poolsAvailableReward', [getUserAddress()]);
-      // console.log('poolsAvailableReward', poolsAvailableReward);
+      console.log('poolsAvailableReward', poolsAvailableReward);
       poolsAvailableReward = poolsAvailableReward.map((item) => ({
         ...item,
         reward: shiftedBy(item.availableReward, -item.decimals),
       }));
       return output(poolsAvailableReward);
     } catch (e) {
-      console.log('fetchTotalAvailableReward error', e, this);
-      return error(500, 'fetchTotalAvailableReward error', e);
+      console.log('fetchPoolsAvailableReward error', e, this);
+      return error(500, 'fetchPoolsAvailableReward error', e);
     }
   }
 

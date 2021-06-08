@@ -11,7 +11,7 @@
             v-for="(item, i) in availablePoolsRewardNoZero"
             :key="i"
           >
-            {{ item.symbol }} {{ Floor(item.reward) }}
+            {{ getSymbolByPool(item.pool) }} {{ Floor(item.reward) }}
           </div>
         </div>
         <!--        <div class="rewards__titles">-->
@@ -101,20 +101,28 @@ export default {
       availableCtlReward: 'user/getAvailableCtlReward',
       availablePoolsReward: 'user/getAvailablePoolsReward',
       ctl: 'user/getCtlToken',
+      poolsMap: 'user/getPoolsMap',
     }),
     availablePoolsRewardNoZero() {
-      return this.availablePoolsReward.filter((item) => +item.reward !== 0);
+      return this.availablePoolsReward;
     },
   },
   methods: {
     ...mapActions({
       claimAll: 'user/claimAll',
+      updateRewardData: 'user/updateRewardData',
     }),
+    getSymbolByPool(address) {
+      return this.poolsMap[address].symbol;
+    },
     close() {
       this.$store.dispatch('modals/hide');
     },
     async handleClaimAll() {
+      this.SetLoader(true);
       await this.claimAll();
+      await this.updateRewardData();
+      this.SetLoader(false);
     },
   },
 };

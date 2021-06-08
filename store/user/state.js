@@ -16,5 +16,5 @@ export default () => ({
   poolsData: {},
 
   availableCtlReward: 0,
-  availabelPoolsReward: [],
+  availablePoolsReward: [],
 });

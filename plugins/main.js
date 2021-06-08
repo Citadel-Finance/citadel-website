@@ -9,8 +9,19 @@ Vue.use(VueTippy);
 Vue.component('tippy', TippyComponent);
 
 Vue.mixin({
-
+  computed: {
+    ...mapGetters({
+      isConnected: 'user/getIsConnected',
+    }),
+  },
   methods: {
+    Signer(callback) {
+      if (this.isConnected) {
+        callback();
+      } else {
+        console.log('connect wallet');
+      }
+    },
     ShowModal(payload) {
       this.$store.dispatch('modals/show', {
         key: modals.default,

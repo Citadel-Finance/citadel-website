@@ -11,7 +11,7 @@
         />
         <Card
           title="Balance CitaDEL"
-          :value="`${ctlToken.balance}`"
+          :value="`${Floor(ctlToken.balance)}`"
         />
         <Card
           title="Rewards CitaDEL"
@@ -60,12 +60,14 @@ export default {
   },
   methods: {
     ...mapActions({
-      updatePoolsData: 'user/updatePoolsData',
+      // updatePoolsData: 'user/updatePoolsData',
       updateRewardData: 'user/updateRewardData',
     }),
     async openClaimModal() {
       // await this.updatePoolsData();
+      this.SetLoader(true);
       await this.updateRewardData();
+      this.SetLoader(false);
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.claimPool,
