@@ -88,8 +88,8 @@ export default {
     apyTax: '',
     premiumCoeff: '',
     optionsRadio: [
-      { label: 'Active', item: 'true', isActive: false },
-      { label: 'Inactive', item: 'false', isActive: false },
+      { label: 'Active', item: true, isActive: false },
+      { label: 'Inactive', item: false, isActive: false },
     ],
     selected: '',
   }),
@@ -103,18 +103,18 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     handleCreatePool() {
-      console.log(this.poolAddress, this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.selected);
-      // const {
-      //   tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, selected,
-      // } = this;
-      // this.$store.dispatch('user/createPool', {
-      //   tokenAddress,
-      //   startTime,
-      //   tokensPerBlock,
-      //   apyTax,
-      //   premiumCoeff,
-      //   selected,
-      // });
+      // console.log(this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.selected);
+      const {
+        tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, selected,
+      } = this;
+      this.$store.dispatch('user/createPool', {
+        tokenAddress,
+        startTime,
+        tokensPerBlock,
+        apyTax,
+        premiumCoeff,
+        isEnabled: selected,
+      });
     },
   },
 };

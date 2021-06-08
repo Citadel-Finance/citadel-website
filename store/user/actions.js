@@ -240,7 +240,13 @@ export default {
 
   createPool({ getters }, payload) {
     const { getFactory: factory } = getters;
-    factory.createPool(payload);
+    const { tokenAddress } = payload;
+    // TODO get decimals from token (tokenAddress)
+
+    factory.createPool({
+      ...payload,
+      decimals: 18,
+    });
   },
   async editPool({ getters, dispatch }, payload) {
     const { poolAddress } = payload;

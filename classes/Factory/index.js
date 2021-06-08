@@ -46,15 +46,28 @@ export default class Factory extends BasicSmartContract {
     tokensPerBlock,
     apyTax,
     premiumCoeff,
+    isEnabled,
+    decimals,
   }) {
     try {
+      console.log(tokenAddress,
+        startTime,
+        tokensPerBlock,
+        apyTax,
+        premiumCoeff,
+        isEnabled);
+
+      tokensPerBlock = shiftedBy(tokensPerBlock, +decimals);
+      apyTax = shiftedBy(apyTax, +decimals);
+      premiumCoeff = shiftedBy(premiumCoeff, +decimals);
+
       const r = await this.inst().addPool(
         tokenAddress,
         startTime,
         tokensPerBlock,
         apyTax,
         premiumCoeff,
-        true,
+        isEnabled,
       );
       return output(r);
     } catch (e) {
