@@ -6,7 +6,7 @@
       </div>
       <base-input
         v-model="tokenAddress"
-        :placeholder="'0x0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNoO'"
+        :placeholder="'0x000000000000000000000000000000000000000O'"
         class="main__input"
       />
       <div class="main__title">
@@ -34,7 +34,7 @@
         class="main__input"
       />
       <div class="main__title">
-        Status {{ selected }}
+        Status
       </div>
       <base-radio
         v-model="selected"
@@ -77,16 +77,16 @@ export default {
     },
   },
   data: () => ({
-    tokenAddress: '0x4B1308749dD122844A3527704c117c3Cb9d9D30C',
-    startTime: '0',
-    tokensPerBlock: '12',
-    apyTax: '10',
-    premiumCoeff: '1',
-    // tokenAddress: '',
+    // tokenAddress: '0x4B1308749dD122844A3527704c117c3Cb9d9D30C',
     // startTime: '0',
-    // tokensPerBlock: '',
-    // apyTax: '',
-    // premiumCoeff: '',
+    // tokensPerBlock: '12',
+    // apyTax: '10',
+    // premiumCoeff: '1',
+    tokenAddress: '',
+    startTime: '0',
+    tokensPerBlock: '',
+    apyTax: '',
+    premiumCoeff: '',
     optionsRadio: [
       { label: 'Active', item: 'true', isActive: false },
       { label: 'Inactive', item: 'false', isActive: false },
@@ -103,17 +103,18 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     handleCreatePool() {
-      const {
-        tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, selected,
-      } = this;
-      this.$store.dispatch('user/createPool', {
-        tokenAddress,
-        startTime,
-        tokensPerBlock,
-        apyTax,
-        premiumCoeff,
-        selected,
-      });
+      console.log(this.poolAddress, this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.selected);
+      // const {
+      //   tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, selected,
+      // } = this;
+      // this.$store.dispatch('user/createPool', {
+      //   tokenAddress,
+      //   startTime,
+      //   tokensPerBlock,
+      //   apyTax,
+      //   premiumCoeff,
+      //   selected,
+      // });
     },
   },
 };

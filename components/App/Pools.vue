@@ -93,7 +93,7 @@
             <div
               v-if="poolsMap[poolAddress].isAdmin"
               class="table-main__col settings"
-              @click="openEditModal"
+              @click="openEditModal(poolAddress)"
             >
               <span class="icon-more_vertical" />
             </div>
@@ -135,10 +135,11 @@ export default {
         key: modals.addPool,
       });
     },
-    openEditModal() {
+    openEditModal(poolAddress) {
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.editPool,
+        poolAddress,
       });
     },
   },

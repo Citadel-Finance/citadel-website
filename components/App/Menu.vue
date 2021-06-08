@@ -22,7 +22,7 @@
       <base-btn
         v-if="isUserAdmin"
         mode="icon"
-        @click="openEditModal"
+        @click="openEditModal(poolAddress)"
       >
         <span class="icon-settings" />
       </base-btn>
@@ -57,10 +57,11 @@ export default {
     },
   },
   methods: {
-    openEditModal() {
+    openEditModal(poolAddress) {
       this.ShowModal({
         text: 'WalletConnect',
         key: modals.editPool,
+        poolAddress,
       });
     },
   },

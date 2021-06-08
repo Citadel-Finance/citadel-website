@@ -18,7 +18,7 @@
         class="main__input"
       />
       <div class="main__title">
-        Status {{ selected }}
+        Status
       </div>
       <base-radio
         v-model="selected"
@@ -65,26 +65,37 @@ export default {
       { label: 'Active', item: 'true', isActive: false },
       { label: 'Inactive', item: 'false', isActive: false },
     ],
-    selected: '',
   }),
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
+      poolsMap: 'user/getPoolsMap',
     }),
     poolAddress() {
-      return this.$route.params?.address ?? '';
+      return this.options.poolAddress;
     },
-    // tokensPerBlock: '0',
-    // apyTax: '0',
-    // premiumCoeff: '0',
-    // selected: true,
+    pool() {
+      return this.poolsMap[this.poolAddress];
+    },
+    tokensPerBlock() {
+      return this.pool.tokensPerBlock;
+    },
+    apyTax() {
+      return this.pool.apyTax;
+    },
+    premiumCoeff() {
+      return this.pool.premiumCoeff;
+    },
+    selected() {
+      return this.pool.isEnabled;
+    },
   },
   methods: {
     close() {
       this.$store.dispatch('modals/hide');
     },
     async handleEditPool() {
-      console.log(this.poolAddress);
+      console.log(this.poolAddress, this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.selected);
       // const {
       //   poolAddress, tokensPerBlock, apyTax, premiumCoeff, selected,
       // } = this;
