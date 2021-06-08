@@ -94,6 +94,7 @@ export default {
         amount,
         poolAddress,
       });
+      await this.$store.dispatch('user/updatePoolsAndBalances');
       this.SetLoader(false);
     },
   },

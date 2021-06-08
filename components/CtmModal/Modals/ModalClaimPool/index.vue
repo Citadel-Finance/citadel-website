@@ -40,7 +40,10 @@
         >
           Close
         </base-btn>
-        <base-btn mode="primary">
+        <base-btn
+          mode="primary"
+          @click="handleClaimAll"
+        >
           Claim all
         </base-btn>
       </div>
@@ -49,7 +52,7 @@
   </ctm-modal-box>
 </template>
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -90,8 +93,14 @@ export default {
     }),
   },
   methods: {
+    ...mapActions({
+      claimAll: 'user/claimAll',
+    }),
     close() {
       this.$store.dispatch('modals/hide');
+    },
+    async handleClaimAll() {
+      await this.claimAll();
     },
   },
 };

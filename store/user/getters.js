@@ -15,4 +15,5 @@ export default {
     // console.log(r);
     return r;
   },
+  getPoolsData: (state) => state.poolsData,
 };

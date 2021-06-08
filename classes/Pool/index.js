@@ -6,6 +6,9 @@ import {
 } from '~/utils/web3';
 import { shiftedBy } from '~/utils/helpers';
 
+const topByAddress = {};
+const totalStakedByAddress = {};
+
 export default class Pool extends BasicSmartContract {
   constructor({
     address,
@@ -24,7 +27,10 @@ export default class Pool extends BasicSmartContract {
   }
 
   getTop() {
-    return (JSON.parse(this.top)).map((item) => ({
+    if (!topByAddress[this.address]) {
+      return [];
+    }
+    return (JSON.parse(topByAddress[this.address])).map((item) => ({
       ...item,
       staked: shiftedBy(item.staked, -this.decimals),
     }));
@@ -34,12 +40,17 @@ export default class Pool extends BasicSmartContract {
     try {
       let top = await this.fetchContractData('getTopProviders');
       top = top.reduce((accumulator, { user, staked }) => [...accumulator, { user, staked }], []);
-      this.top = JSON.stringify(top);
+      topByAddress[this.address] = JSON.stringify(top);
+      // this.top = JSON.stringify(top);
       return output({ top });
     } catch (e) {
       console.log('fetchTop error', e, this);
       return error(500, 'fetchTop error', e);
     }
+  }
+
+  getTotalStaked() {
+    return totalStakedByAddress[this.address];
   }
 
   async fetchCommonData() {
@@ -51,10 +62,12 @@ export default class Pool extends BasicSmartContract {
       // console.log('commonData', commonData);
       this.decimals = decimals;
       this.symbol = symbol;
-      this.isEnabled = enabled;
       this.childAddress = token;
+
+      this.isEnabled = enabled;
       this.apyTax = shiftedBy(apyTax, -decimals);
-      this.totalStaked = shiftedBy(totalStaked, -decimals);
+      totalStakedByAddress[this.address] = shiftedBy(totalStaked, -decimals);
+      // this.totalStaked = shiftedBy(totalStaked, -decimals);
       return output({ commonData });
     } catch (e) {
       console.log('fetchCommonData error', e, this);

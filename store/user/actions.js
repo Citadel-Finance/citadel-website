@@ -57,7 +57,7 @@ export default {
       dispatch('fetchAllBalances'),
     ]);
   },
-  async fetchPools({ getters, commit }) {
+  async fetchPools({ getters, commit, state }) {
     const { getPoolsMap: poolsMap } = getters;
     await Promise.all([
       ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
@@ -95,11 +95,25 @@ export default {
       factory.initInst(),
     ]);
   },
+  async updatePoolsData({ commit, getters }) {
+    const { getFactory: factory } = getters;
+    const r = await factory.fetchPoolsData();
+    console.log('updatePoolsData', r.result.poolData);
+    commit('setPoolsData', r.result.poolData);
+  },
+  async updateTotalAvailableReward({ commit, getters }) {
+    const { getFactory: factory } = getters;
+    const r = await factory.fetchTotalAvailableReward();
+  },
   async initFactory({ commit }) {
     const factory = new Factory({
       address: process.env.ADDRESS_FACTORY,
     });
-    await factory.fetchPoolsData();
+    const r = await Promise.all([
+      factory.fetchPoolsData(),
+      factory.fetchCtlAddress(),
+    ]);
+    commit('setPoolsData', r[0].result.poolData);
     commit('setFactory', factory);
   },
   async initCtlToken({ getters, commit }) {
@@ -109,8 +123,8 @@ export default {
     await ctlToken.fetchTotalSupply();
     commit('setCtlToken', ctlToken);
   },
-  async initPoolsAndTokens({ getters, commit, dispatch }) {
-    const { poolData } = getters.getFactory;
+  async initPoolsAndTokens({ getters, commit }) {
+    const { getPoolsData: poolData } = getters;
     const tokensAddresses = poolData.map((pair) => pair.token);
     const poolsAddresses = poolData.map((pair) => pair.pool);
     const tokens = tokensAddresses.map((address) => new Token({ address }));
@@ -221,5 +235,10 @@ export default {
     const pool = poolsMap[poolAddress];
     await pool.editPool(payload);
     await dispatch('updatePoolsAndBalances');
+  },
+
+  claimAll({ getters }) {
+    const { getFactory: factory } = getters;
+    return factory.claimAll();
   },
 };

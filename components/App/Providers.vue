@@ -74,7 +74,7 @@ export default {
       return this.poolsMap[this.poolAddress] || {};
     },
     top() {
-      return (this.pool.top ? this.pool.getTop() : []).slice(0, 3);
+      return this.pool.getTop && this.pool.getTop().slice(0, 3);
     },
   },
 };
