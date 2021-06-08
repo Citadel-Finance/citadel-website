@@ -83,9 +83,12 @@
               >
                 <span
                   class="status__dot"
-                  :class="{'slide__dot_active': poolsMap[poolAddress].isEnabled}"
+                  :class="{'status__dot_active': poolsMap[poolAddress].isEnabled}"
                 />
-                <span>
+                <span v-if="poolsMap[poolAddress].isEnabled">
+                  Active
+                </span>
+                <span v-else>
                   Inactive
                 </span>
               </div>
@@ -273,7 +276,6 @@ export default {
       height: 8px;
       border-radius: 50%;
       background: #C31432;
-      transition: 0.3s ease-in-out;
     }
     &_active:before {
       background: #2DCE89;
