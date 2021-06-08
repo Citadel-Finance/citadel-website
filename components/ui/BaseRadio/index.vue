@@ -19,16 +19,19 @@ export default {
       type: Array,
       default: () => [],
     },
-    selected: {
-      type: String,
-      default: '',
+    // value: {
+    //   type: String,
+    //   default: '',
+    // },
+  },
+  data: () => ({
+    selected: '',
+  }),
+  watch: {
+    selected(value) {
+      this.$emit('input', value);
     },
   },
-  // methods: {
-  //   input($event) {
-  //     this.$emit('input', $event.target.selected, $event.target);
-  //   },
-  // },
 };
 </script>
 

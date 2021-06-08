@@ -40,6 +40,7 @@
         v-model="selected"
         :options="optionsRadio"
         class="main__radio"
+        @input="selected"
       />
       <div class="main__buttons">
         <base-btn
