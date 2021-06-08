@@ -6,11 +6,13 @@
         {{ claimText }}
       </div>
       <div class="main__rewards rewards">
-        <div
-          v-for="(item, i) in availablePoolsReward"
-          :key="i"
-        >
-          {{ item }}
+        <div>
+          <div
+            v-for="(item, i) in availablePoolsRewardNoZero"
+            :key="i"
+          >
+            {{ item.symbol }} {{ Floor(item.reward) }}
+          </div>
         </div>
         <!--        <div class="rewards__titles">-->
         <!--          <span-->
@@ -36,7 +38,7 @@
           Total amount:
         </div>
         <div class="amount__value">
-          {{ Floor(availableCtlReward) }}
+          {{ Floor(availableCtlReward) }} {{ ctl.symbol }}
         </div>
       </div>
       <div class="main__buttons">
@@ -98,7 +100,11 @@ export default {
       options: 'modals/getOptions',
       availableCtlReward: 'user/getAvailableCtlReward',
       availablePoolsReward: 'user/getAvailablePoolsReward',
+      ctl: 'user/getCtlToken',
     }),
+    availablePoolsRewardNoZero() {
+      return this.availablePoolsReward.filter((item) => +item.reward !== 0);
+    },
   },
   methods: {
     ...mapActions({

@@ -16,7 +16,7 @@
           Your balance:
         </div>
         <div class="balance__value">
-          {{ balance }} {{ symbol }}
+          {{ Floor(balance, 8) }} {{ symbol }}
         </div>
       </div>
       <div class="main__buttons">
