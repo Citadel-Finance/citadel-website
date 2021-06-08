@@ -63,13 +63,13 @@ export default class Pool extends BasicSmartContract {
       this.decimals = decimals;
       this.symbol = symbol;
       this.childAddress = token;
-      this.tokensPerBlock = tokensPerBlock;
+      this.tokensPerBlock = shiftedBy(tokensPerBlock, -decimals);
       this.premiumCoeff = premiumCoeff;
 
       this.isEnabled = enabled;
       this.apyTax = shiftedBy(apyTax, -decimals);
       totalStakedByAddress[this.address] = shiftedBy(totalStaked, -decimals);
-      // this.totalStaked = shiftedBy(totalStaked, -decimals);
+
       return output({ commonData });
     } catch (e) {
       console.log('fetchCommonData error', e, this);

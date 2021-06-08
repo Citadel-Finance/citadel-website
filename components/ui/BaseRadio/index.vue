@@ -19,14 +19,20 @@ export default {
       default: () => [],
     },
     value: {
-      type: String,
-      default: '',
+      type: Boolean,
+      default: false,
     },
   },
   data: () => ({
-    selected: '',
+    selected: false,
   }),
   watch: {
+    value: {
+      immediate: true,
+      handler(value) {
+        this.selected = value;
+      },
+    },
     selected(value) {
       this.$emit('input', value);
     },

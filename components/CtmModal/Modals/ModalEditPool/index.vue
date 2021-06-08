@@ -5,7 +5,7 @@
         Tokens per block
       </div>
       <base-input
-        v-model="tokensPerBlock"
+        v-model="tokensPerBlockClone"
         :placeholder="'1000'"
         class="main__input"
       />
@@ -13,7 +13,7 @@
         APY tax
       </div>
       <base-input
-        v-model="apyTax"
+        v-model="apyTaxClone"
         :placeholder="'0.7%'"
         class="main__input"
       />
@@ -21,7 +21,7 @@
         Status
       </div>
       <base-radio
-        v-model="selected"
+        v-model="isEnabledClone"
         :options="optionsRadio"
         class="main__radio"
       />
@@ -46,25 +46,18 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    isUnclosable: {
-      type: Boolean,
-      default: false,
-    },
-    isHeader: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data: () => ({
     optionsRadio: [
-      { label: 'Active', item: 'true', isActive: false },
-      { label: 'Inactive', item: 'false', isActive: false },
+      {
+        label: 'Active', item: true,
+      },
+      {
+        label: 'Inactive', item: false,
+      },
     ],
+    isEnabledClone: false,
+    tokensPerBlockClone: false,
+    apyTaxClone: false,
   }),
   computed: {
     ...mapGetters({
@@ -86,8 +79,28 @@ export default {
     premiumCoeff() {
       return this.pool.premiumCoeff;
     },
-    selected() {
+    isEnabled() {
       return this.pool.isEnabled;
+    },
+  },
+  watch: {
+    isEnabled: {
+      immediate: true,
+      handler(value) {
+        this.isEnabledClone = value;
+      },
+    },
+    apyTax: {
+      immediate: true,
+      handler(value) {
+        this.apyTaxClone = value;
+      },
+    },
+    tokensPerBlock: {
+      immediate: true,
+      handler(value) {
+        this.tokensPerBlockClone = value;
+      },
     },
   },
   methods: {
