@@ -9,6 +9,7 @@
         type="text"
         class="base-input__input"
         :placeholder="placeholder"
+        :class="{'base-input__input_desc' : mode === 'desc'}"
         required
         @input="input"
       >
@@ -105,6 +106,9 @@ export default {
     background: transparent;
     border: 1px solid #F6F5F7;
     transition: 0.2s ease-in-out;
+    &_desc {
+      padding-right: 73px;
+    }
     &:hover {
       background: #F6F5F7;
       border: 1px solid #DA7284;
@@ -121,7 +125,7 @@ export default {
   &__description {
     font-size: 16px;
     text-align: right;
-    min-width: 73px;
+    min-width: 53px;
     color: #C31433;
     font-weight: bold;
     line-height: 18px;
