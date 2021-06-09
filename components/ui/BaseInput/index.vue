@@ -9,6 +9,7 @@
         type="text"
         class="base-input__input"
         :placeholder="placeholder"
+        required
         @input="input"
       >
       <span
@@ -84,21 +85,38 @@ export default {
     display: flex;
     width: 100%;
     height: 59px;
-    padding: 20px;
     background: #F6F5F7;
     border-radius: 10px;
     font-size: 16px;
-    line-height: 20px;
-    transition: 0.2s ease-in-out;
-    &:focus-within {
-      border-color:  #C31433;
-    }
+    box-sizing: border-box;
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 18px;
+    align-items: center;
+    letter-spacing: 0.05em;
+    color: #A89DAF;
+    position: relative;
   }
   &__input {
     width: 100%;
-    border: none;
+    padding: 20px;
+    border-radius: 10px;
     background: transparent;
-    color: #7B6C86;
+    border: 1px solid #F6F5F7;
+    transition: 0.2s ease-in-out;
+    &:hover {
+      background: #F6F5F7;
+      border: 1px solid #DA7284;
+    }
+    &:focus-within {
+      background: #FFFFFF;
+      border: 1px solid #DA7284;
+    }
+    &:valid {
+      background: #FFFFFF;
+      border: 1px solid #D4CED7;
+    }
   }
   &__description {
     font-size: 16px;
@@ -107,6 +125,8 @@ export default {
     color: #C31433;
     font-weight: bold;
     line-height: 18px;
+    position: absolute;
+    right: 20px;
     &:hover {
       cursor: pointer;
     }

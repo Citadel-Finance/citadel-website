@@ -6,7 +6,7 @@
       </div>
       <base-input
         v-model="tokenAddress"
-        :placeholder="'0x000000000000000000000000000000000000000O'"
+        :placeholder="'0x0000000000000000000000000000000000000000'"
         class="main__input"
       />
       <div class="main__title">

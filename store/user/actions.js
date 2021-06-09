@@ -251,7 +251,7 @@ export default {
     //   key: modals.status,
     //   title: 'Success',
     //   status: 'success',
-    //   text: 'Pool was added.',
+    //   text: 'Pool has been added.',
     // }, { root: true });
   },
   async editPool({ getters, dispatch }, payload) {
@@ -264,7 +264,7 @@ export default {
     //   key: modals.status,
     //   title: 'Success',
     //   status: 'success',
-    //   text: 'Pool was edited.',
+    //   text: 'Pool has been edited.',
     // }, { root: true });
   },
 
