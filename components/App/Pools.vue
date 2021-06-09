@@ -69,7 +69,7 @@
                 </span>
               </div>
               <div class="table-main__col">
-                {{ Floor(poolsMap[poolAddress].apyTax, 4) }}
+                {{ Floor(poolsMap[poolAddress].getApyTax(), 4) }}
               </div>
               <div
                 class="table-main__col"
@@ -90,9 +90,9 @@
               >
                 <span
                   class="status__dot"
-                  :class="{'status__dot_active': poolsMap[poolAddress].isEnabled}"
+                  :class="{'status__dot_active': getIsEnabledByAddress(poolAddress)}"
                 />
-                <span v-if="poolsMap[poolAddress].isEnabled">
+                <span v-if="getIsEnabledByAddress(poolAddress)">
                   Active
                 </span>
                 <span v-else>
@@ -139,6 +139,9 @@ export default {
     }),
   },
   methods: {
+    getIsEnabledByAddress(poolAddress) {
+      return this.poolsMap[poolAddress].getIsEnabled();
+    },
     openAddModal() {
       this.ShowModal({
         text: 'WalletConnect',

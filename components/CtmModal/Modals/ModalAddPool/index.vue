@@ -87,13 +87,13 @@ export default {
     close() {
       this.$store.dispatch('modals/hide');
     },
-    handleCreatePool() {
+    async handleCreatePool() {
       this.SetLoader(true);
       console.log(this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.isEnabled);
       const {
         tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, isEnabled,
       } = this;
-      this.$store.dispatch('user/createPool', {
+      await this.$store.dispatch('user/createPool', {
         tokenAddress,
         startTime,
         tokensPerBlock,
@@ -101,6 +101,7 @@ export default {
         premiumCoeff,
         isEnabled,
       });
+      await this.$store.dispatch('user/updatePoolsAndBalances');
       this.SetLoader(false);
     },
   },

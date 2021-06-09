@@ -80,16 +80,16 @@ export default {
       return this.poolsMap[this.poolAddress];
     },
     tokensPerBlock() {
-      return this.pool.tokensPerBlock;
+      return this.pool.getTokensPerBlock();
     },
     apyTax() {
-      return this.pool.apyTax;
+      return this.pool.getApyTax();
     },
     premiumCoeff() {
-      return this.pool.premiumCoeff;
+      return this.pool.getPremiumCoeff();
     },
     isEnabled() {
-      return this.pool.isEnabled;
+      return this.pool.getIsEnabled();
     },
   },
   watch: {
@@ -131,10 +131,10 @@ export default {
       } = this;
       await this.$store.dispatch('user/editPool', {
         poolAddress,
-        tokensPerBlockClone,
-        apyTaxClone,
-        premiumCoeffClone,
-        isEnabledClone,
+        tokensPerBlock: tokensPerBlockClone,
+        apyTax: apyTaxClone,
+        premiumCoeff: premiumCoeffClone,
+        isEnabled: isEnabledClone,
       });
       this.SetLoader(false);
     },

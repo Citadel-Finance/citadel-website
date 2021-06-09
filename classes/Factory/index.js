@@ -1,7 +1,9 @@
 import BigNumber from 'bignumber.js';
 import BasicSmartContract from '~/classes/BasicSmartContract';
-import { Factory as FactoryAbi } from '~/abis';
-import { error, getUserAddress, output } from '~/utils/web3';
+import { BEP20, Factory as FactoryAbi } from '~/abis';
+import {
+  error, fetchContractData, getUserAddress, output,
+} from '~/utils/web3';
 import { shiftedBy } from '~/utils/helpers';
 
 export default class Factory extends BasicSmartContract {
@@ -47,20 +49,12 @@ export default class Factory extends BasicSmartContract {
     apyTax,
     premiumCoeff,
     isEnabled,
-    decimals,
   }) {
     try {
-      console.log(tokenAddress,
-        startTime,
-        tokensPerBlock,
-        apyTax,
-        premiumCoeff,
-        isEnabled);
-
+      const decimals = await fetchContractData('decimals', BEP20, tokenAddress);
       tokensPerBlock = shiftedBy(tokensPerBlock, +decimals);
       apyTax = shiftedBy(apyTax, +decimals);
       premiumCoeff = shiftedBy(premiumCoeff, +decimals);
-
       const r = await this.inst().addPool(
         tokenAddress,
         startTime,

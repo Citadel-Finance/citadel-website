@@ -90,7 +90,7 @@ export default {
       poolsMap: 'user/getPoolsMap',
     }),
     availablePoolsRewardNoZero() {
-      return this.availablePoolsReward;
+      return this.availablePoolsReward.filter((item) => +item.reward !== 0);
     },
   },
   methods: {

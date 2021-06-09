@@ -21,6 +21,10 @@ export default {
     await this.connectAnonNode();
     // await this.connectWallet();
     this.SetLoader(false);
+    setInterval(() => {
+      this.$store.dispatch('user/updatePoolsData');
+      this.$store.dispatch('user/updatePoolsAndBalances');
+    }, 15000);
   },
   methods: {
     // async connectWallet() {
