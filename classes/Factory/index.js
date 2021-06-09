@@ -104,4 +104,8 @@ export default class Factory extends BasicSmartContract {
       return error(500, 'claimAll error', e);
     }
   }
+
+  async fetchIsUserAdmin() {
+    return this;
+  }
 }
