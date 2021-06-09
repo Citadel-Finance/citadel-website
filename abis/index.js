@@ -1166,37 +1166,6 @@ export const Pool = [
   },
   {
     inputs: [],
-    name: 'curDay',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'dailyStaked',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'decimals',
     outputs: [
       {
@@ -1318,17 +1287,7 @@ export const Pool = [
           },
           {
             internalType: 'uint256',
-            name: 'dailyStaked',
-            type: 'uint256',
-          },
-          {
-            internalType: 'uint256',
             name: 'totalProfit',
-            type: 'uint256',
-          },
-          {
-            internalType: 'uint256',
-            name: 'receiptProfit',
             type: 'uint256',
           },
           {
@@ -1364,11 +1323,6 @@ export const Pool = [
           {
             internalType: 'bool',
             name: 'enabled',
-            type: 'bool',
-          },
-          {
-            internalType: 'bool',
-            name: 'signDailyStaked',
             type: 'bool',
           },
           {
@@ -1671,32 +1625,6 @@ export const Pool = [
   {
     inputs: [],
     name: 'prevMintingBlock',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'prevTps',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'receiptProfit',
     outputs: [
       {
         internalType: 'uint256',

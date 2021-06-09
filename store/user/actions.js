@@ -62,14 +62,22 @@ export default {
   async fetchPools({ getters, commit, state }) {
     const { getPoolsMap: poolsMap } = getters;
     await Promise.all([
-      ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData()),
+      ...(() => {
+        if (!getters.getIsConnected) {
+          return [];
+        }
+        return Object.keys(poolsMap).map((address) => poolsMap[address].fetchUserData());
+      })(),
       ...Object.keys(poolsMap).map((address) => poolsMap[address].fetchAll()),
     ]);
     commit('setPoolsMap', poolsMap);
   },
   async fetchAllBalances({ getters, commit }) {
     const { getTokensMap: tokensMap, getCtlToken: ctlToken } = getters;
-    const r = await Promise.all([
+    if (!getters.getIsConnected) {
+      return;
+    }
+    await Promise.all([
       ...Object.keys(tokensMap).map((address) => tokensMap[address].fetchBalance()),
       ctlToken.fetchBalance(),
     ]);
@@ -97,11 +105,61 @@ export default {
       factory.initInst(),
     ]);
   },
-  async updatePoolsData({ commit, getters }) {
-    const { getFactory: factory } = getters;
+  async updatePoolsData({ commit, getters, dispatch }) {
+    const { getFactory: factory, getPoolsMap: poolsMap } = getters;
     const r = await factory.fetchPoolsData();
-    console.log('updatePoolsData', r.result.poolData);
-    commit('setPoolsData', r.result.poolData);
+    const { poolData } = r.result;
+    // console.log('updatePoolsData', poolData);
+    commit('setPoolsData', poolData);
+
+    const poolsAddresses = Object.keys(poolsMap);
+    const newAddresses = poolData.map(({ pool, token }) => ({ pool, token }));
+    const missingAddresses = newAddresses.reduce((accumulator, el) => {
+      if (poolsAddresses.includes(el.pool)) {
+        return accumulator;
+      }
+      return [...accumulator, el];
+    }, []);
+    if (missingAddresses.length !== 0) {
+      dispatch('initPoolsByAddresses', { addresses: missingAddresses });
+    }
+  },
+  async initPoolsByAddresses({ commit, getters }, payload) {
+    const { addresses } = payload;
+    const { getIsConnected: isConnected } = getters;
+    console.log('initPoolsByAddresses', addresses);
+    const tokensAddresses = addresses.map((pair) => pair.token);
+    const poolsAddresses = addresses.map((pair) => pair.pool);
+    const tokens = tokensAddresses.map((address) => new Token({ address }));
+    const pools = poolsAddresses.map((address) => new Pool({ address }));
+    tokens.forEach((token, i) => {
+      token.setParrentAddress(poolsAddresses[i]);
+    });
+    const poolsMap = {};
+    pools.forEach((pool) => {
+      poolsMap[pool.address] = pool;
+    });
+    const tokensMap = {};
+    tokens.forEach((token) => {
+      tokensMap[token.address] = token;
+    });
+    await Promise.all([
+      ...tokens.map((token) => token.fetchAll()),
+      ...pools.map((pool) => pool.fetchCommonData()),
+      ...pools.map((pool) => pool.fetchTop()),
+    ]);
+    if (isConnected) {
+      await Promise.all([
+        ...pools.map((pool) => pool.initInst()),
+        ...tokens.map((token) => token.initInst()),
+        ...pools.map((pool) => pool.fetchUserData()),
+        ...tokens.map((token) => token.fetchBalance()),
+      ]);
+    }
+    console.log('poolsMap', poolsMap);
+    console.log('tokensMap', tokensMap);
+    commit('setPoolsMap', poolsMap);
+    commit('setTokensMap', tokensMap);
   },
   async updateRewardData({ commit, getters }) {
     const { getFactory: factory, getCtlToken: ctlToken } = getters;
@@ -235,31 +293,20 @@ export default {
           value: r,
         });
       });
+      // pool.subscribeEvents('totalHistory', (r) => {
+      //   console.log(r);
+      // });
     });
   },
-
-  createPool({ getters, dispatch }, payload) {
+  async createPool({ getters }, payload) {
     const { getFactory: factory } = getters;
-    const { tokenAddress } = payload;
-    // TODO get decimals from token (tokenAddress)
-
-    factory.createPool({
-      ...payload,
-      decimals: 18,
-    });
-    // dispatch('modals/show', {
-    //   key: modals.status,
-    //   title: 'Success',
-    //   status: 'success',
-    //   text: 'Pool has been added.',
-    // }, { root: true });
+    await factory.createPool(payload);
   },
   async editPool({ getters, dispatch }, payload) {
     const { poolAddress } = payload;
     const { getPoolsMap: poolsMap } = getters;
     const pool = poolsMap[poolAddress];
     await pool.editPool(payload);
-    await dispatch('updatePoolsAndBalances');
     // await dispatch('modals/show', {
     //   key: modals.status,
     //   title: 'Success',

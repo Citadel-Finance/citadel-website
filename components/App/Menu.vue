@@ -16,7 +16,7 @@
           {{ titleRate }}
         </div>
         <div class="info__percents">
-          {{ pool.apyTax }} %
+          {{ apyTax }} %
         </div>
       </div>
       <base-btn
@@ -54,6 +54,9 @@ export default {
     },
     pool() {
       return this.poolsMap[this.poolAddress] || {};
+    },
+    apyTax() {
+      return this.pool.getApyTax && this.pool.getApyTax();
     },
   },
   methods: {

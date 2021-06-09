@@ -48,7 +48,6 @@ export const initWeb3Provider = async () => {
       await window.ethereum.enable();
       userAddress = await web3.eth.getCoinbase();
     }
-    // TODO check chainId
     chainId = await web3.eth.net.getId();
     if (+chainId !== 97) {
       return error(1, 'invalid chain', chainId);

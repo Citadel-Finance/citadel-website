@@ -8,6 +8,11 @@ import { shiftedBy } from '~/utils/helpers';
 
 const topByAddress = {};
 const totalStakedByAddress = {};
+const apyTaxByAddress = {};
+
+const tokensPerBlockByAddress = {};
+const premiumCoeffByAddress = {};
+const isEnabledByAddress = {};
 
 export default class Pool extends BasicSmartContract {
   constructor({
@@ -32,7 +37,7 @@ export default class Pool extends BasicSmartContract {
     }
     return (JSON.parse(topByAddress[this.address])).map((item) => ({
       ...item,
-      staked: shiftedBy(item.staked, -this.decimals),
+      staked: shiftedBy(item.staked, -this.decimals || 0),
     }));
   }
 
@@ -53,21 +58,38 @@ export default class Pool extends BasicSmartContract {
     return totalStakedByAddress[this.address];
   }
 
+  getApyTax() {
+    return apyTaxByAddress[this.address];
+  }
+
+  getTokensPerBlock() {
+    return tokensPerBlockByAddress[this.address];
+  }
+
+  getPremiumCoeff() {
+    return premiumCoeffByAddress[this.address];
+  }
+
+  getIsEnabled() {
+    return isEnabledByAddress[this.address];
+  }
+
   async fetchCommonData() {
     try {
       const commonData = await this.fetchContractData('getCommonData');
       const {
         decimals, token, totalStaked, symbol, apyTax, enabled, tokensPerBlock, premiumCoeff,
       } = commonData;
-      // console.log('commonData', commonData);
-      this.decimals = decimals;
+      this.decimals = +decimals;
       this.symbol = symbol;
       this.childAddress = token;
-      this.tokensPerBlock = shiftedBy(tokensPerBlock, -decimals);
-      this.premiumCoeff = premiumCoeff;
 
-      this.isEnabled = enabled;
-      this.apyTax = shiftedBy(apyTax, -decimals);
+      tokensPerBlockByAddress[this.address] = shiftedBy(tokensPerBlock, -decimals);
+      premiumCoeffByAddress[this.address] = shiftedBy(premiumCoeff, -decimals);
+
+      // this.isEnabled = enabled;
+      isEnabledByAddress[this.address] = enabled;
+      apyTaxByAddress[this.address] = shiftedBy(apyTax, -decimals);
       totalStakedByAddress[this.address] = shiftedBy(totalStaked, -decimals);
 
       return output({ commonData });
@@ -129,14 +151,22 @@ export default class Pool extends BasicSmartContract {
     apyTax,
     premiumCoeff,
     tokensPerBlock,
-    isEnable,
+    isEnabled,
   }) {
+    // console.log(apyTax,
+    //   premiumCoeff,
+    //   tokensPerBlock,
+    //   isEnabled);
     try {
+      apyTax = shiftedBy(apyTax, this.decimals);
+      premiumCoeff = shiftedBy(premiumCoeff, this.decimals);
+      tokensPerBlock = shiftedBy(tokensPerBlock, this.decimals);
+
       const r = await this.inst().updatePool(
         apyTax,
         premiumCoeff,
         tokensPerBlock,
-        isEnable,
+        isEnabled,
       );
       return output(r);
     } catch (e) {
