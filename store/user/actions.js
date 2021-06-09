@@ -49,15 +49,16 @@ export default {
       dispatch('fetchPoolsUserData'),
       dispatch('fetchAllBalances'),
       dispatch('updateRewardData'),
-      // fetchIsUserAdmin
+      dispatch('fetchIsUserAdmin'),
     ]);
 
     return r;
   },
   async fetchIsUserAdmin({ getters, commit }) {
     const { getFactory: factory } = getters;
-    // fetch is user admin
-    commit('setIsUserAdmin', true);
+    const r = await factory.fetchIsUserAdmin();
+    const adminStatus = r.result.isUserAdmin;
+    commit('setIsUserAdmin', adminStatus);
   },
   async updatePoolsAndBalances({ dispatch }) {
     await Promise.all([
