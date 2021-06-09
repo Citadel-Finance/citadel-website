@@ -18,6 +18,14 @@
         class="main__input"
       />
       <div class="main__title">
+        Pool rewards
+      </div>
+      <base-input
+        v-model="premiumCoeffClone"
+        :placeholder="'20.06%'"
+        class="main__input"
+      />
+      <div class="main__title">
         Status
       </div>
       <base-radio
@@ -58,6 +66,7 @@ export default {
     isEnabledClone: false,
     tokensPerBlockClone: false,
     apyTaxClone: false,
+    premiumCoeffClone: false,
   }),
   computed: {
     ...mapGetters({
@@ -96,6 +105,12 @@ export default {
         this.apyTaxClone = value;
       },
     },
+    premiumCoeff: {
+      immediate: true,
+      handler(value) {
+        this.premiumCoeffClone = value;
+      },
+    },
     isEnabled: {
       immediate: true,
       handler(value) {
@@ -112,13 +127,13 @@ export default {
       // console.log(this.poolAddress, this.tokensPerBlockClone, this.apyTaxClone, this.premiumCoeff, this.isEnabledClone);
       this.SetLoader(true);
       const {
-        poolAddress, tokensPerBlockClone, apyTaxClone, premiumCoeff, isEnabledClone,
+        poolAddress, tokensPerBlockClone, apyTaxClone, premiumCoeffClone, isEnabledClone,
       } = this;
       await this.$store.dispatch('user/editPool', {
         poolAddress,
         tokensPerBlockClone,
         apyTaxClone,
-        premiumCoeff,
+        premiumCoeffClone,
         isEnabledClone,
       });
       this.SetLoader(false);
