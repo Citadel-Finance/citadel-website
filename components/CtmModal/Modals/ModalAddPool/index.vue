@@ -37,7 +37,7 @@
         Status
       </div>
       <base-radio
-        v-model="selected"
+        v-model="isEnabled"
         :options="optionsRadio"
         class="main__radio"
       />
@@ -52,7 +52,7 @@
           mode="primary"
           @click="handleCreatePool"
         >
-          Save
+          Add
         </base-btn>
       </div>
     </div>
@@ -62,36 +62,21 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    isUnclosable: {
-      type: Boolean,
-      default: false,
-    },
-    isHeader: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data: () => ({
-    // tokenAddress: '0x4B1308749dD122844A3527704c117c3Cb9d9D30C',
-    // startTime: '0',
-    // tokensPerBlock: '12',
-    // apyTax: '10',
-    // premiumCoeff: '1',
     tokenAddress: '',
     startTime: '0',
     tokensPerBlock: '',
     apyTax: '',
     premiumCoeff: '',
     optionsRadio: [
-      { label: 'Active', item: true, isActive: false },
-      { label: 'Inactive', item: false, isActive: false },
+      {
+        label: 'Active', item: true,
+      },
+      {
+        label: 'Inactive', item: false,
+      },
     ],
-    selected: '',
+    isEnabled: true,
   }),
   computed: {
     ...mapGetters({
@@ -103,9 +88,10 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     handleCreatePool() {
-      // console.log(this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.selected);
+      this.SetLoader(true);
+      console.log(this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.isEnabled);
       const {
-        tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, selected,
+        tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, isEnabled,
       } = this;
       this.$store.dispatch('user/createPool', {
         tokenAddress,
@@ -113,8 +99,9 @@ export default {
         tokensPerBlock,
         apyTax,
         premiumCoeff,
-        isEnabled: selected,
+        isEnabled,
       });
+      this.SetLoader(false);
     },
   },
 };

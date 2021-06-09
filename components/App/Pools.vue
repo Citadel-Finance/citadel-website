@@ -1,7 +1,7 @@
 <template>
   <div
     class="content__pools pools"
-    :class="{ 'pools_admin' : isUserAdmin }"
+    :class="{ 'pools_admin' : isUserAdmin && isConnected }"
   >
     <div class="pools__wrapper">
       <div class="pools__header">
@@ -9,7 +9,7 @@
           Pools
         </div>
         <div
-          v-if="isUserAdmin"
+          v-if="isUserAdmin && isConnected"
           class="pools__button"
         >
           <base-btn
@@ -31,13 +31,13 @@
             {{ field.label }}
           </div>
           <div
-            v-if="isUserAdmin"
+            v-if="isUserAdmin && isConnected"
             class="table-main__th"
           >
             Status
           </div>
           <div
-            v-if="isUserAdmin"
+            v-if="isUserAdmin && isConnected"
             class="table-main__th"
           />
         </div>
@@ -78,7 +78,7 @@
                 {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
               </div>
               <div
-                v-if="isUserAdmin"
+                v-if="isUserAdmin && isConnected"
                 class="table-main__col status"
               >
                 <span
@@ -129,6 +129,7 @@ export default {
       poolsMap: 'user/getPoolsMap',
       tokensMap: 'user/getTokensMap',
       isUserAdmin: 'user/getIsUserAdmin',
+      isConnected: 'user/getIsConnected',
     }),
   },
   methods: {

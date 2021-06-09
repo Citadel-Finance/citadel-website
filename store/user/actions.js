@@ -238,7 +238,7 @@ export default {
     });
   },
 
-  createPool({ getters }, payload) {
+  createPool({ getters, dispatch }, payload) {
     const { getFactory: factory } = getters;
     const { tokenAddress } = payload;
     // TODO get decimals from token (tokenAddress)
@@ -247,6 +247,12 @@ export default {
       ...payload,
       decimals: 18,
     });
+    // dispatch('modals/show', {
+    //   key: modals.status,
+    //   title: 'Success',
+    //   status: 'success',
+    //   text: 'Pool was added.',
+    // }, { root: true });
   },
   async editPool({ getters, dispatch }, payload) {
     const { poolAddress } = payload;
@@ -254,6 +260,12 @@ export default {
     const pool = poolsMap[poolAddress];
     await pool.editPool(payload);
     await dispatch('updatePoolsAndBalances');
+    // await dispatch('modals/show', {
+    //   key: modals.status,
+    //   title: 'Success',
+    //   status: 'success',
+    //   text: 'Pool was edited.',
+    // }, { root: true });
   },
 
   claimAll({ getters }) {

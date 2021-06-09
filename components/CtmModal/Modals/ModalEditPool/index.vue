@@ -84,10 +84,10 @@ export default {
     },
   },
   watch: {
-    isEnabled: {
+    tokensPerBlock: {
       immediate: true,
       handler(value) {
-        this.isEnabledClone = value;
+        this.tokensPerBlockClone = value;
       },
     },
     apyTax: {
@@ -96,10 +96,10 @@ export default {
         this.apyTaxClone = value;
       },
     },
-    tokensPerBlock: {
+    isEnabled: {
       immediate: true,
       handler(value) {
-        this.tokensPerBlockClone = value;
+        this.isEnabledClone = value;
       },
     },
   },
@@ -108,17 +108,20 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     async handleEditPool() {
-      console.log(this.poolAddress, this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.selected);
-      // const {
-      //   poolAddress, tokensPerBlock, apyTax, premiumCoeff, selected,
-      // } = this;
-      // await this.$store.dispatch('user/editPool', {
-      //   poolAddress,
-      //   tokensPerBlock,
-      //   apyTax,
-      //   premiumCoeff,
-      //   selected,
-      // });
+      // console.log(this.poolAddress, this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.isEnabled);
+      // console.log(this.poolAddress, this.tokensPerBlockClone, this.apyTaxClone, this.premiumCoeff, this.isEnabledClone);
+      this.SetLoader(true);
+      const {
+        poolAddress, tokensPerBlockClone, apyTaxClone, premiumCoeff, isEnabledClone,
+      } = this;
+      await this.$store.dispatch('user/editPool', {
+        poolAddress,
+        tokensPerBlockClone,
+        apyTaxClone,
+        premiumCoeff,
+        isEnabledClone,
+      });
+      this.SetLoader(false);
     },
   },
 };

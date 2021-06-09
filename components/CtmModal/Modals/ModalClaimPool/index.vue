@@ -98,6 +98,9 @@ export default {
       claimAll: 'user/claimAll',
       updateRewardData: 'user/updateRewardData',
     }),
+    close() {
+      this.$store.dispatch('modals/hide');
+    },
     getSymbolByPool(address) {
       return this.poolsMap[address].symbol;
     },

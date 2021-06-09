@@ -40,20 +40,6 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    isUnclosable: {
-      type: Boolean,
-      default: false,
-    },
-    isHeader: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data: () => ({
     amount: '',
   }),

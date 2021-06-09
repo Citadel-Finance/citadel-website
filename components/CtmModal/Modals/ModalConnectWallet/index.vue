@@ -16,20 +16,6 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  props: {
-    title: {
-      type: String,
-      default: '',
-    },
-    isUnclosable: {
-      type: Boolean,
-      default: false,
-    },
-    isHeader: {
-      type: Boolean,
-      default: true,
-    },
-  },
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',

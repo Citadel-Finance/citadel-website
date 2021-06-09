@@ -20,7 +20,7 @@
         </div>
       </div>
       <base-btn
-        v-if="isUserAdmin"
+        v-if="isUserAdmin && isConnected"
         mode="icon"
         @click="openEditModal(poolAddress)"
       >
@@ -47,7 +47,7 @@ export default {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
       isUserAdmin: 'user/getIsUserAdmin',
-
+      isConnected: 'user/getIsConnected',
     }),
     poolAddress() {
       return this.$route.params.address;

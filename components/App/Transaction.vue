@@ -21,7 +21,7 @@
             class="table-main__tr"
           >
             <div class="table-main__col date">
-              {{ GetFormTimestamp(event.returnValues.date, format = 'L') }}
+              {{ GetFormTimestamp(event.returnValues.date, format = 'LLL') }}
             </div>
             <div class="table-main__col change">
               {{ event.amount }} {{ event.event }}
