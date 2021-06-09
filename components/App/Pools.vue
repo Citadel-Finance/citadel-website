@@ -137,6 +137,9 @@ export default {
       isUserAdmin: 'user/getIsUserAdmin',
       isConnected: 'user/getIsConnected',
     }),
+    // isUserAdminOfAnyPool() {
+    //
+    // },
   },
   methods: {
     getIsEnabledByAddress(poolAddress) {
