@@ -1,7 +1,7 @@
 <template>
   <div
     class="content__pools pools"
-    :class="{ 'pools_admin' : isUserAdmin && isConnected }"
+    :class="{ 'pools_admin' : isUserAdmin && isConnected, 'pools_auth' : isConnected && !isUserAdmin }"
   >
     <div class="pools__wrapper">
       <div class="pools__header">
@@ -29,6 +29,12 @@
             class="table-main__th"
           >
             {{ field.label }}
+          </div>
+          <div
+            v-if="isConnected"
+            class="table-main__th"
+          >
+            Balance
           </div>
           <div
             v-if="isUserAdmin && isConnected"
@@ -72,6 +78,7 @@
                 {{ Floor(poolsMap[poolAddress].getTotalStaked(), 4) }}
               </div>
               <div
+                v-if="isConnected"
                 class="table-main__col balance"
                 :title="poolsMap[poolAddress].userStaked"
               >
@@ -94,7 +101,7 @@
               </div>
             </nuxt-link>
             <div
-              v-if="poolsMap[poolAddress].isAdmin"
+              v-if="poolsMap[poolAddress].isAdmin && isUserAdmin"
               class="table-main__col settings"
               @click="openEditModal(poolAddress)"
             >
@@ -120,7 +127,6 @@ export default {
         { key: 'currency', label: 'Currency' },
         { key: 'apy', label: 'APY' },
         { key: 'liquidity', label: 'Liquidity (USD)' },
-        { key: 'balance', label: 'Balance' },
       ],
     };
   },
@@ -162,6 +168,16 @@ export default {
       }
       &__link {
         grid-template-columns: repeat(5, 1fr);
+      }
+    }
+  }
+  &_auth {
+    .table-main {
+      &__head {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      &__link {
+        grid-template-columns: repeat(4, 1fr);
       }
     }
   }
@@ -212,7 +228,7 @@ export default {
     display: grid;
     min-width: 1130px;
     margin-bottom: 10px;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   &__th {
     padding: 14px 20px;
@@ -241,7 +257,7 @@ export default {
   }
   &__link {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     text-decoration: none;
   }
 }
