@@ -6,7 +6,7 @@
     <div class="pools__wrapper">
       <div class="pools__header">
         <div class="pools__title">
-          Pools
+          Pools {{ isUserAdminOfAnyPool }}
         </div>
         <div
           v-if="isUserAdmin && isConnected"
@@ -137,9 +137,13 @@ export default {
       isUserAdmin: 'user/getIsUserAdmin',
       isConnected: 'user/getIsConnected',
     }),
-    // isUserAdminOfAnyPool() {
-    //
-    // },
+    isUserAdminOfAnyPool() {
+      const { poolsMap } = this;
+      const isAdminArray = Object.keys(poolsMap)
+        .reduce((accumulator, address) => [...accumulator, poolsMap[address].isAdmin], []);
+
+      return isAdminArray.includes(true);
+    },
   },
   methods: {
     getIsEnabledByAddress(poolAddress) {
