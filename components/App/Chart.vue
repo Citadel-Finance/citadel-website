@@ -8,32 +8,32 @@
         37 411.69 ETH
       </div>
       <line-chart
-        :data="chartData"
-        :options="options"
+        :data="chartDataAvailable"
+        :options="optionsAvailable"
       />
     </div>
     <div class="charts__container">
       <div class="charts__title">
-        total earnings
+        Total earnings
       </div>
       <div class="charts__value">
         37 411.69 ETH
       </div>
       <line-chart
-        :data="chartData"
-        :options="options"
+        :data="chartDataEarnings"
+        :options="optionsEarnings"
       />
     </div>
     <div class="charts__container">
       <div class="charts__title">
-        total borrowed
+        Total borrowed
       </div>
       <div class="charts__value">
         37 411.69 ETH
       </div>
       <line-chart
-        :data="chartData"
-        :options="options"
+        :data="chartDataBorrowed"
+        :options="optionsBorrowed"
       />
     </div>
   </div>
@@ -48,21 +48,92 @@ export default {
     LineChart,
   },
   data: () => ({
-    chartData: {
+    chartDataAvailable: {
       labels: ['3 Aug', '28 Sep', '23 Nov', '18 Jan', '15 Mar'],
       datasets: [
         {
-          label: 'Data One',
+          label: 'Available',
           borderColor: '#C31433',
           borderWidth: 2,
-          data: [10, 30, 25, 45, 30],
+          data: [10, 30, 25, 45, 5],
           fill: false,
+          pointBackgroundColor: '#FFFFFF',
+          pointHoverBackgroundColor: '#C31433',
+          pointRadius: 5,
+          pointHoverRadius: 5,
+          pointHitRadius: 30,
         },
       ],
     },
-    options: {
+    optionsAvailable: {
       responsive: true,
       maintainAspectRatio: false,
+      legend: {
+        display: false,
+      },
+      tooltips: {
+        displayColors: false,
+        bodyFontFamily: "sans-serif, 'Arial'",
+        bodyFontSize: 14,
+      },
+    },
+    chartDataEarnings: {
+      labels: ['3 Aug', '28 Sep', '23 Nov', '18 Jan', '15 Mar'],
+      datasets: [
+        {
+          label: 'Total earnings',
+          borderColor: '#C31433',
+          borderWidth: 2,
+          data: [10, 20, 25, 25, 30],
+          fill: false,
+          pointBackgroundColor: '#FFFFFF',
+          pointHoverBackgroundColor: '#C31433',
+          pointRadius: 5,
+          pointHoverRadius: 5,
+          pointHitRadius: 30,
+        },
+      ],
+    },
+    optionsEarnings: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: false,
+      },
+      tooltips: {
+        displayColors: false,
+        bodyFontFamily: "sans-serif, 'Arial'",
+        bodyFontSize: 14,
+      },
+    },
+    chartDataBorrowed: {
+      labels: ['3 Aug', '28 Sep', '23 Nov', '18 Jan', '15 Mar'],
+      datasets: [
+        {
+          label: 'Total borrowed',
+          borderColor: '#C31433',
+          borderWidth: 2,
+          data: [20, 30, 25, 45, 30],
+          fill: false,
+          pointBackgroundColor: '#FFFFFF',
+          pointHoverBackgroundColor: '#C31433',
+          pointRadius: 5,
+          pointHoverRadius: 5,
+          pointHitRadius: 30,
+        },
+      ],
+    },
+    optionsBorrowed: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: false,
+      },
+      tooltips: {
+        displayColors: false,
+        bodyFontFamily: "sans-serif, 'Arial'",
+        bodyFontSize: 14,
+      },
     },
   }),
 };
