@@ -20,7 +20,7 @@
         </div>
       </div>
       <base-btn
-        v-if="poolsMap[poolAddress].isAdmin && isConnected"
+        v-if="poolsMap[poolAddress] && poolsMap[poolAddress].isAdmin && isConnected"
         mode="icon"
         @click="openEditModal(poolAddress)"
       >
