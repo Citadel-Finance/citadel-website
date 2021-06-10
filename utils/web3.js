@@ -2,6 +2,9 @@ import Web3 from 'web3';
 import Web4 from '@cryptonteam/web4';
 import BigNumber from 'bignumber.js';
 import { Factory, Pool } from '~/abis';
+import { methodAddRpcbsc, methodAddRpcbscTestnet } from '~/configs/configChainRpc';
+
+const { IS_MAINNET } = process.env;
 
 let web3;
 let web3Anon;
@@ -40,21 +43,27 @@ export const initWeb3ProviderAnon = async () => {
   }
 };
 
+// const addRpcToMetamask = () => {
+//
+// };
+
 export const initWeb3Provider = async () => {
   try {
-    web3 = new Web3(window.ethereum);
+    const { ethereum } = window;
+    web3 = new Web3(ethereum);
     userAddress = await web3.eth.getCoinbase();
     if (userAddress === null) {
-      await window.ethereum.enable();
+      await ethereum.enable();
       userAddress = await web3.eth.getCoinbase();
     }
     chainId = await web3.eth.net.getId();
-    if (+chainId !== 97) {
-      return error(1, 'invalid chain', chainId);
+    if (IS_MAINNET !== 'true' && +chainId !== 97) {
+      await ethereum.request(methodAddRpcbscTestnet);
+    } else if (IS_MAINNET === 'true' && +chainId !== 56) {
+      await ethereum.request(methodAddRpcbsc);
     }
-    // const testTime = new Dat
     web4 = new Web4();
-    await web4.setProvider(window.ethereum, userAddress);
+    await web4.setProvider(ethereum, userAddress);
     return output({ userAddress });
   } catch (err) {
     return error(4001, 'connection error', err);

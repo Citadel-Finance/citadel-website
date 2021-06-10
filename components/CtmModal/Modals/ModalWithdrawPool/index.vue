@@ -16,7 +16,7 @@
           Max:
         </div>
         <div class="max__value">
-          {{ Floor(balance, 4) }}  {{ symbol }}
+          {{ Floor(userStaked, 4) }}  {{ symbol }}
         </div>
       </div>
       <div class="main__buttons">
@@ -54,6 +54,9 @@ export default {
     },
     pool() {
       return this.poolsMap[this.poolAddress];
+    },
+    userStaked() {
+      return this.pool.userStaked;
     },
     token() {
       return this.tokensMap[this.pool.childAddress];

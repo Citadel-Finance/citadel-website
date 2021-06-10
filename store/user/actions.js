@@ -6,6 +6,8 @@ import Pool from '~/classes/Pool';
 import modals from '~/store/modals/modals';
 import { shiftedBy } from '~/utils/helpers';
 
+const { ADDRESS_FACTORY } = process.env;
+
 export default {
   async connectAnonNode({ dispatch }) {
     const r = await initWeb3ProviderAnon();
@@ -181,7 +183,7 @@ export default {
   },
   async initFactory({ commit }) {
     const factory = new Factory({
-      address: process.env.ADDRESS_FACTORY,
+      address: ADDRESS_FACTORY,
     });
     const r = await Promise.all([
       factory.fetchPoolsData(),

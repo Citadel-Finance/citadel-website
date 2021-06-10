@@ -77,6 +77,7 @@ export default {
     },
   },
   env: {
-
+    ADDRESS_FACTORY: process.env.ADDRESS_FACTORY,
+    IS_MAINNET: process.env.IS_MAINNET,
   },
 };
