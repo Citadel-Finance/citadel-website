@@ -5,6 +5,9 @@ export default {
   setUserAddress(state, payload) {
     state.userAddress = payload;
   },
+  setIsUserAdmin(state, payload) {
+    state.isUserAdmin = payload;
+  },
   setFactory(state, payload) {
     state.factory = payload;
   },
@@ -58,8 +61,5 @@ export default {
   },
   setAvailablePoolsReward(state, payload) {
     state.availablePoolsReward = payload;
-  },
-  setIsUserAdmin(state, payload) {
-    state.isUserAdmin = payload;
   },
 };

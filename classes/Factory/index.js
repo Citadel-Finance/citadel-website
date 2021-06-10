@@ -104,4 +104,16 @@ export default class Factory extends BasicSmartContract {
       return error(500, 'claimAll error', e);
     }
   }
+
+  async fetchIsUserAdmin() {
+    try {
+      const isUserAdmin = await this.fetchContractData('isAdmin', [getUserAddress()]);
+      return output({
+        isUserAdmin,
+      });
+    } catch (e) {
+      console.log('fetchIsUserAdmin error', e, this);
+      return error(500, 'fetchIsUserAdmin error', e);
+    }
+  }
 }
