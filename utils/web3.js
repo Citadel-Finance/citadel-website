@@ -40,21 +40,38 @@ export const initWeb3ProviderAnon = async () => {
   }
 };
 
+// const addRpcToMetamask = () => {
+//
+// };
+
 export const initWeb3Provider = async () => {
   try {
-    web3 = new Web3(window.ethereum);
+    const { ethereum } = window;
+    web3 = new Web3(ethereum);
     userAddress = await web3.eth.getCoinbase();
     if (userAddress === null) {
-      await window.ethereum.enable();
+      await ethereum.enable();
       userAddress = await web3.eth.getCoinbase();
     }
     chainId = await web3.eth.net.getId();
     if (+chainId !== 97) {
-      return error(1, 'invalid chain', chainId);
+      await ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [{
+          chainId: '0x61',
+          chainName: 'BSC Testnet',
+          nativeCurrency: {
+            name: 'BNB',
+            symbol: 'BNB',
+            decimals: 18,
+          },
+          rpcUrls: ['https://data-seed-prebsc-2-s3.binance.org:8545'],
+          blockExplorerUrls: ['https://explorer.binance.org/smart-testnet'],
+        }],
+      });
     }
-    // const testTime = new Dat
     web4 = new Web4();
-    await web4.setProvider(window.ethereum, userAddress);
+    await web4.setProvider(ethereum, userAddress);
     return output({ userAddress });
   } catch (err) {
     return error(4001, 'connection error', err);
