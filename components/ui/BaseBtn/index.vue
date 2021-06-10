@@ -35,6 +35,8 @@ export default {
           'base-btn_txt-icon': mode === 'txt-icon',
           'base-btn_icon': mode === 'icon',
           'base-btn_connect': mode === 'connect',
+          'base-btn_mini': mode === 'mini',
+          'base-btn_mini-active': mode === 'mini-active',
         },
       ];
     },
@@ -106,6 +108,23 @@ export default {
     &:hover {
       background: #F3EFF3;
     }
+  }
+  &_mini {
+    background: #F6F5F7;
+    border-radius: 10px;
+    color: #7B6C86;
+    font-weight: normal;
+    transition: 0.15s ease-out;
+    border: 1px solid #F6F5F7;
+    &:hover {
+      border: 1px solid #F3D0D7;
+      box-sizing: border-box;
+    }
+  }
+  &_mini-active {
+    border: 1px solid #C31433;
+    box-sizing: border-box;
+    color: #C31433;
   }
 }
 </style>

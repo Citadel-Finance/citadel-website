@@ -7,6 +7,17 @@
       <div class="charts__value">
         37 411.69 ETH
       </div>
+      <div class="charts__btns">
+        <base-btn mode="mini-active">
+          24h
+        </base-btn>
+        <base-btn mode="mini">
+          7d
+        </base-btn>
+        <base-btn mode="mini">
+          All
+        </base-btn>
+      </div>
       <line-chart
         class="charts__chart"
         :data="chartData"
@@ -20,6 +31,17 @@
       <div class="charts__value">
         37 411.69 ETH
       </div>
+      <div class="charts__btns">
+        <base-btn mode="mini">
+          24h
+        </base-btn>
+        <base-btn mode="mini-active">
+          7d
+        </base-btn>
+        <base-btn mode="mini">
+          All
+        </base-btn>
+      </div>
       <line-chart
         class="charts__chart"
         :data="chartData"
@@ -32,6 +54,17 @@
       </div>
       <div class="charts__value">
         37 411.69 ETH
+      </div>
+      <div class="charts__btns">
+        <base-btn mode="mini">
+          24h
+        </base-btn>
+        <base-btn mode="mini">
+          7d
+        </base-btn>
+        <base-btn mode="mini-active">
+          All
+        </base-btn>
       </div>
       <line-chart
         class="charts__chart"
@@ -165,6 +198,12 @@ export default {
   }
   &__chart {
     max-height: 330px;
+  }
+  &__btns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+    margin-bottom: 20px;
   }
 }
 </style>
