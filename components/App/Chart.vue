@@ -22,8 +22,8 @@
       </div>
       <line-chart
         class="charts__chart"
-        :data="chartDataEarnings"
-        :options="optionsEarnings"
+        :data="chartData"
+        :options="options"
       />
     </div>
     <div class="charts__container">
@@ -35,8 +35,8 @@
       </div>
       <line-chart
         class="charts__chart"
-        :data="chartDataBorrowed"
-        :options="optionsBorrowed"
+        :data="chartData"
+        :options="options"
       />
     </div>
   </div>
@@ -81,16 +81,16 @@ export default {
         intersect: false,
         callbacks: {
           title: () => '',
-          label: (item) => `${item.value} USD`,
+          label: (item) => `${item.value} OUT`,
         },
         displayColors: false,
-        titleFontSize: 16,
+        titleFontSize: 14,
         bodyFontFamily: "'Roboto', sans-serif",
-        bodyFontSize: 16,
+        bodyFontSize: 14,
         backgroundColor: 'rgba(12, 12, 20, 0.8)',
         cornerRadius: 6,
-        xPadding: 14,
-        yPadding: 13,
+        xPadding: 10,
+        yPadding: 10,
         caretSize: 6,
       },
       hover: {
@@ -124,64 +124,6 @@ export default {
             },
           },
         ],
-      },
-    },
-    chartDataEarnings: {
-      labels: ['3 Aug', '28 Sep', '23 Nov', '18 Jan', '15 Mar'],
-      datasets: [
-        {
-          label: 'Total earnings',
-          borderColor: '#C31433',
-          borderWidth: 2,
-          data: [10, 20, 25, 25, 30],
-          fill: false,
-          pointBackgroundColor: '#FFFFFF',
-          pointHoverBackgroundColor: '#C31433',
-          pointRadius: 5,
-          pointHoverRadius: 5,
-          pointHitRadius: 30,
-        },
-      ],
-    },
-    optionsEarnings: {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false,
-      },
-      tooltips: {
-        displayColors: false,
-        bodyFontFamily: "sans-serif, 'Arial'",
-        bodyFontSize: 14,
-      },
-    },
-    chartDataBorrowed: {
-      labels: ['3 Aug', '28 Sep', '23 Nov', '18 Jan', '15 Mar'],
-      datasets: [
-        {
-          label: 'Total borrowed',
-          borderColor: '#C31433',
-          borderWidth: 2,
-          data: [20, 30, 25, 45, 30],
-          fill: false,
-          pointBackgroundColor: '#FFFFFF',
-          pointHoverBackgroundColor: '#C31433',
-          pointRadius: 5,
-          pointHoverRadius: 5,
-          pointHitRadius: 30,
-        },
-      ],
-    },
-    optionsBorrowed: {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false,
-      },
-      tooltips: {
-        displayColors: false,
-        bodyFontFamily: "sans-serif, 'Arial'",
-        bodyFontSize: 14,
       },
     },
   }),

@@ -102,7 +102,7 @@
               </div>
             </nuxt-link>
             <div
-              v-if="poolsMap[poolAddress].isAdmin && poolsMap[poolAddress].isAdmin && isConnected"
+              v-if="poolsMap[poolAddress] && poolsMap[poolAddress].isAdmin && isConnected"
               class="table-main__col settings"
               @click="openEditModal(poolAddress)"
             >
