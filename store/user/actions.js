@@ -220,11 +220,12 @@ export default {
     const tokenAddress = pool.childAddress;
     const token = tokensMap[tokenAddress];
     const bnAmount = new BigNumber(amount).shiftedBy(token.decimals).toString();
+    const bnMaxApprove = new BigNumber('1000000000').shiftedBy(token.decimals).toString();
     const { result } = await token.allowance(poolAddress);
     const { allowance } = result;
     console.log('allowance', allowance, amount);
     if (+allowance < +amount) {
-      const approveRes = await token.approve(poolAddress, bnAmount);
+      const approveRes = await token.approve(poolAddress, bnMaxApprove);
       if (!approveRes.ok) {
         if (approveRes.code === 500) {
           console.log('approve error');
@@ -234,8 +235,8 @@ export default {
             status: 'error',
             text: 'User denied transaction signature.',
           }, { root: true });
-          return;
         }
+        return;
       }
       console.log(approveRes);
     }

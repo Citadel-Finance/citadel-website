@@ -16,7 +16,7 @@
           Max:
         </div>
         <div class="max__value">
-          {{ balance + ' ' + symbol }}
+          {{ Floor(balance, 4) }}  {{ symbol }}
         </div>
       </div>
       <div class="main__buttons">
