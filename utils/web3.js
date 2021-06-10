@@ -57,7 +57,6 @@ export const initWeb3Provider = async () => {
       userAddress = await web3.eth.getCoinbase();
     }
     chainId = await web3.eth.net.getId();
-    console.log('IS_MAINNET', IS_MAINNET, IS_MAINNET === 'true');
     if (IS_MAINNET !== 'true' && +chainId !== 97) {
       await ethereum.request(methodAddRpcbscTestnet);
     } else if (IS_MAINNET === 'true' && +chainId !== 56) {
