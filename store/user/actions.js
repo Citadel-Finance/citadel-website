@@ -52,7 +52,6 @@ export default {
     dispatch('subscribeAllPools');
 
     startPingingMetamask(() => {
-      console.log('callback');
       dispatch('disconnectWallet');
     });
 
