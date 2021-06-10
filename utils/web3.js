@@ -36,13 +36,11 @@ export const startPingingMetamask = async (callback) => {
     const referenceChainId = chainId;
     clearInterval(pingTimer);
     pingTimer = setInterval(async () => {
-      console.log('ping');
       const address = await web3.eth.getCoinbase();
       const localChainId = await web3.eth.net.getId();
       if (address !== referenceAddress || localChainId !== referenceChainId) {
         chainId = null;
         userAddress = '';
-
         callback();
         clearInterval(pingTimer);
       }
