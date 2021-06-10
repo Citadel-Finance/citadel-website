@@ -8,6 +8,12 @@
         >
       </div>
       <div>
+        <!--        <base-btn-->
+        <!--          mode="primary"-->
+        <!--          @click="$store.dispatch('user/disconnectWallet')"-->
+        <!--        >-->
+        <!--          disconnect-->
+        <!--        </base-btn>-->
         <div
           v-if="isConnected"
           class="header__connected"

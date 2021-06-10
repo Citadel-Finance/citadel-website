@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { initWeb3Provider, initWeb3ProviderAnon } from '~/utils/web3';
+import { initWeb3Provider, initWeb3ProviderAnon, startPingingMetamask } from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
@@ -9,6 +9,11 @@ import { shiftedBy } from '~/utils/helpers';
 const { ADDRESS_FACTORY } = process.env;
 
 export default {
+  async disconnectWallet({ commit }) {
+    commit('setIsConnected', false);
+    commit('setUserAddress', '');
+    commit('setIsUserAdmin', false);
+  },
   async connectAnonNode({ dispatch }) {
     const r = await initWeb3ProviderAnon();
     // console.log(r);
@@ -45,6 +50,11 @@ export default {
     commit('setUserAddress', userAddress);
     commit('setIsConnected', true);
     dispatch('subscribeAllPools');
+
+    startPingingMetamask(() => {
+      console.log('callback');
+      dispatch('disconnectWallet');
+    });
 
     await Promise.all([
       dispatch('initInstsAll'),
@@ -232,7 +242,7 @@ export default {
     const bnMaxApprove = new BigNumber('1000000000').shiftedBy(token.decimals).toString();
     const { result } = await token.allowance(poolAddress);
     const { allowance } = result;
-    console.log('allowance', allowance, amount);
+    // console.log('allowance', allowance, amount);
     if (+allowance < +amount) {
       const approveRes = await token.approve(poolAddress, bnMaxApprove);
       if (!approveRes.ok) {
