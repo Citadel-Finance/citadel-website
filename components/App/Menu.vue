@@ -20,7 +20,7 @@
         </div>
       </div>
       <base-btn
-        v-if="isUserAdmin && isConnected"
+        v-if="poolsMap[poolAddress].isAdmin && isConnected"
         mode="icon"
         @click="openEditModal(poolAddress)"
       >
@@ -46,7 +46,6 @@ export default {
   computed: {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
-      isUserAdmin: 'user/getIsUserAdmin',
       isConnected: 'user/getIsConnected',
     }),
     poolAddress() {

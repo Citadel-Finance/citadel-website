@@ -1,12 +1,13 @@
 <template>
   <div
     class="content__pools pools"
-    :class="{ 'pools_admin' : isUserAdmin && isConnected, 'pools_auth' : isConnected && !isUserAdmin }"
+    :class="{ 'pools_admin' : isConnected && (isUserAdmin || isUserAdminOfAnyPool),
+              'pools_auth' : isConnected && !isUserAdmin && !isUserAdminOfAnyPool }"
   >
     <div class="pools__wrapper">
       <div class="pools__header">
         <div class="pools__title">
-          Pools {{ isUserAdminOfAnyPool }}
+          Pools
         </div>
         <div
           v-if="isUserAdmin && isConnected"
@@ -37,13 +38,13 @@
             Balance
           </div>
           <div
-            v-if="isUserAdmin && isConnected"
+            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"
             class="table-main__th"
           >
             Status
           </div>
           <div
-            v-if="isUserAdmin && isConnected"
+            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"
             class="table-main__th"
           />
         </div>
@@ -85,7 +86,7 @@
                 {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
               </div>
               <div
-                v-if="isUserAdmin && isConnected"
+                v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"
                 class="table-main__col status"
               >
                 <span
@@ -101,7 +102,7 @@
               </div>
             </nuxt-link>
             <div
-              v-if="poolsMap[poolAddress].isAdmin && isUserAdmin"
+              v-if="poolsMap[poolAddress].isAdmin && isConnected"
               class="table-main__col settings"
               @click="openEditModal(poolAddress)"
             >
