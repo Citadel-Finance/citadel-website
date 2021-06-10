@@ -1,8 +1,10 @@
 <template>
   <div
     class="content__pools pools"
-    :class="{ 'pools_admin' : isConnected && (isUserAdmin || isUserAdminOfAnyPool),
-              'pools_auth' : isConnected && !isUserAdmin && !isUserAdminOfAnyPool }"
+    :class="{
+      'pools_auth' : isConnected,
+      'pools_admin' : isConnected && (isUserAdmin || isUserAdminOfAnyPool),
+    }"
   >
     <div class="pools__wrapper">
       <div class="pools__header">
@@ -40,10 +42,10 @@
           <div class="table-main__th">
             Status
           </div>
-          <div
-            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"
-            class="table-main__th"
-          />
+          <!--          <div-->
+          <!--            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"-->
+          <!--            class="table-main__th"-->
+          <!--          />-->
         </div>
         <div class="table-main__body">
           <div
@@ -163,6 +165,16 @@ export default {
 
 <style lang="scss" scoped>
 .pools {
+  &_auth {
+    .table-main {
+      &__head {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      &__link {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
   &_admin {
     .table-main {
       &__head {
@@ -173,16 +185,6 @@ export default {
       }
       &__link {
         grid-template-columns: repeat(5, 1fr);
-      }
-    }
-  }
-  &_auth {
-    .table-main {
-      &__head {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      &__link {
-        grid-template-columns: repeat(4, 1fr);
       }
     }
   }
