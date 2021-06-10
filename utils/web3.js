@@ -2,6 +2,7 @@ import Web3 from 'web3';
 import Web4 from '@cryptonteam/web4';
 import BigNumber from 'bignumber.js';
 import { Factory, Pool } from '~/abis';
+import { methodAddRpcbscTestnet } from '~/configs/configChainRpc';
 
 let web3;
 let web3Anon;
@@ -55,20 +56,7 @@ export const initWeb3Provider = async () => {
     }
     chainId = await web3.eth.net.getId();
     if (+chainId !== 97) {
-      await ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [{
-          chainId: '0x61',
-          chainName: 'BSC Testnet',
-          nativeCurrency: {
-            name: 'BNB',
-            symbol: 'BNB',
-            decimals: 18,
-          },
-          rpcUrls: ['https://data-seed-prebsc-2-s3.binance.org:8545'],
-          blockExplorerUrls: ['https://explorer.binance.org/smart-testnet'],
-        }],
-      });
+      await ethereum.request(methodAddRpcbscTestnet);
     }
     web4 = new Web4();
     await web4.setProvider(ethereum, userAddress);
