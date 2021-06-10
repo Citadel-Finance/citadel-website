@@ -2,12 +2,13 @@
   <div class="content__charts charts">
     <div class="charts__container">
       <div class="charts__title">
-        Available
+        Total deposited
       </div>
       <div class="charts__value">
         37 411.69 ETH
       </div>
       <line-chart
+        class="charts__chart"
         :data="chartData"
         :options="options"
       />
@@ -20,6 +21,7 @@
         37 411.69 ETH
       </div>
       <line-chart
+        class="charts__chart"
         :data="chartDataEarnings"
         :options="optionsEarnings"
       />
@@ -32,6 +34,7 @@
         37 411.69 ETH
       </div>
       <line-chart
+        class="charts__chart"
         :data="chartDataBorrowed"
         :options="optionsBorrowed"
       />
@@ -77,7 +80,7 @@ export default {
         mode: 'index',
         intersect: false,
         callbacks: {
-          title: () => 'Title',
+          title: () => '',
           label: (item) => `${item.value} USD`,
         },
         displayColors: false,
@@ -217,6 +220,9 @@ export default {
     line-height: 23px;
     color: #240B36;
     margin-bottom: 20px;
+  }
+  &__chart {
+    max-height: 330px;
   }
 }
 </style>
