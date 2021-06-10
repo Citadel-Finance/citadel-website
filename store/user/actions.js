@@ -48,7 +48,6 @@ export default {
     }
     const { userAddress } = r.result;
     commit('setUserAddress', userAddress);
-    commit('setIsConnected', true);
     dispatch('subscribeAllPools');
 
     startPingingMetamask(() => {
@@ -62,6 +61,7 @@ export default {
       dispatch('updateRewardData'),
       dispatch('fetchIsUserAdmin'),
     ]);
+    commit('setIsConnected', true);
 
     return r;
   },

@@ -1,8 +1,10 @@
 <template>
   <div
     class="content__pools pools"
-    :class="{ 'pools_admin' : isConnected && (isUserAdmin || isUserAdminOfAnyPool),
-              'pools_auth' : isConnected && !isUserAdmin && !isUserAdminOfAnyPool }"
+    :class="{
+      'pools_auth' : isConnected,
+      'pools_admin' : isConnected && (isUserAdmin || isUserAdminOfAnyPool),
+    }"
   >
     <div class="pools__wrapper">
       <div class="pools__header">
@@ -37,16 +39,13 @@
           >
             Balance
           </div>
-          <div
-            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"
-            class="table-main__th"
-          >
+          <div class="table-main__th">
             Status
           </div>
-          <div
-            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"
-            class="table-main__th"
-          />
+          <!--          <div-->
+          <!--            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"-->
+          <!--            class="table-main__th"-->
+          <!--          />-->
         </div>
         <div class="table-main__body">
           <div
@@ -85,10 +84,7 @@
               >
                 {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
               </div>
-              <div
-                v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"
-                class="table-main__col status"
-              >
+              <div class="table-main__col status">
                 <span
                   class="status__dot"
                   :class="{'status__dot_active': getIsEnabledByAddress(poolAddress)}"
@@ -169,6 +165,16 @@ export default {
 
 <style lang="scss" scoped>
 .pools {
+  &_auth {
+    .table-main {
+      &__head {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      &__link {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
   &_admin {
     .table-main {
       &__head {
@@ -179,16 +185,6 @@ export default {
       }
       &__link {
         grid-template-columns: repeat(5, 1fr);
-      }
-    }
-  }
-  &_auth {
-    .table-main {
-      &__head {
-        grid-template-columns: repeat(4, 1fr);
-      }
-      &__link {
-        grid-template-columns: repeat(4, 1fr);
       }
     }
   }
@@ -239,7 +235,7 @@ export default {
     display: grid;
     min-width: 1130px;
     margin-bottom: 10px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
   &__th {
     padding: 14px 20px;
@@ -268,7 +264,7 @@ export default {
   }
   &__link {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     text-decoration: none;
   }
 }
