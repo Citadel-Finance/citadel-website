@@ -1,7 +1,12 @@
 <template>
   <div class="content__container">
     <Menu />
-    <Chart />
+    <!--    <line-chart />-->
+    <line-chart
+      :data="chartData"
+      :options="options"
+    />
+    <!--    <Chart />-->
     <div class="content__main">
       <Stats
         :balance="`${Floor(balance, 4)} ${symbol}`"
@@ -16,16 +21,18 @@
 <script>
 import { mapGetters } from 'vuex';
 import Menu from '~/components/App/Menu';
-import Chart from '~/components/App/Chart';
+// import Chart from '~/components/App/Chart';
 import Stats from '~/components/App/Stats';
 import Providers from '~/components/App/Providers';
 import Transaction from '~/components/App/Transaction';
+import LineChart from '~/components/App/LineChart';
 
 export default {
   name: 'Pool',
   components: {
     Menu,
-    Chart,
+    // Chart,
+    LineChart,
     Stats,
     Providers,
     Transaction,
@@ -33,6 +40,20 @@ export default {
   data: () => ({
     balance: '',
     symbol: '',
+    chartData: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [
+        {
+          label: 'Data One',
+          backgroundColor: '#f87979',
+          data: [40, 39, 10, 40, 39, 80, 40],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+    },
   }),
   computed: {
     ...mapGetters({

@@ -37,12 +37,10 @@ import modals from '~/store/modals/modals';
 export default {
   name: 'Menu',
   props: {},
-  data() {
-    return {
-      titleRate: 'Annual percentage rate',
-      percents: '20.06%',
-    };
-  },
+  data: () => ({
+    titleRate: 'Annual percentage rate',
+    percents: '20.06%',
+  }),
   computed: {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
