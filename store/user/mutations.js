@@ -59,4 +59,7 @@ export default {
   setAvailablePoolsReward(state, payload) {
     state.availablePoolsReward = payload;
   },
+  setIsUserAdmin(state, payload) {
+    state.isUserAdmin = payload;
+  },
 };

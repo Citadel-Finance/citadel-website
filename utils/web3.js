@@ -1,7 +1,6 @@
 import Web3 from 'web3';
 import Web4 from '@cryptonteam/web4';
 import BigNumber from 'bignumber.js';
-import { Factory, Pool } from '~/abis';
 import { methodAddRpcbsc, methodAddRpcbscTestnet } from '~/configs/configChainRpc';
 
 const { IS_MAINNET } = process.env;
@@ -26,6 +25,34 @@ export const error = (code, msg, data) => ({
 
 BigNumber.config({ EXPONENTIAL_AT: 60 });
 
+let pingTimer = null;
+
+export const startPingingMetamask = async (callback) => {
+  try {
+    if (web3 === undefined) {
+      return error(500, 'pingingMetamask err');
+    }
+    const referenceAddress = userAddress;
+    const referenceChainId = chainId;
+    clearInterval(pingTimer);
+    pingTimer = setInterval(async () => {
+      console.log('ping');
+      const address = await web3.eth.getCoinbase();
+      const localChainId = await web3.eth.net.getId();
+      if (address !== referenceAddress || localChainId !== referenceChainId) {
+        chainId = null;
+        userAddress = '';
+
+        callback();
+        clearInterval(pingTimer);
+      }
+    }, 2000);
+    return output();
+  } catch (err) {
+    return error(500, 'pingingMetamask err', err);
+  }
+};
+
 export const initWeb3ProviderAnon = async () => {
   try {
     // const infuraKeyBsc = process.env.NODE_KEY_BSC;
@@ -43,10 +70,6 @@ export const initWeb3ProviderAnon = async () => {
   }
 };
 
-// const addRpcToMetamask = () => {
-//
-// };
-
 export const initWeb3Provider = async () => {
   try {
     const { ethereum } = window;
@@ -59,8 +82,10 @@ export const initWeb3Provider = async () => {
     chainId = await web3.eth.net.getId();
     if (IS_MAINNET !== 'true' && +chainId !== 97) {
       await ethereum.request(methodAddRpcbscTestnet);
+      chainId = await web3.eth.net.getId();
     } else if (IS_MAINNET === 'true' && +chainId !== 56) {
       await ethereum.request(methodAddRpcbsc);
+      chainId = await web3.eth.net.getId();
     }
     web4 = new Web4();
     await web4.setProvider(ethereum, userAddress);

@@ -1,7 +1,10 @@
 <template>
   <div
     class="content__pools pools"
-    :class="{ 'pools_admin' : isUserAdmin && isConnected, 'pools_auth' : isConnected && !isUserAdmin }"
+    :class="{
+      'pools_admin' : isUserAdmin && isConnected,
+      'pools_auth' : isConnected && !isUserAdmin
+    }"
   >
     <div class="pools__wrapper">
       <div class="pools__header">
@@ -37,7 +40,7 @@
             Balance
           </div>
           <div
-            v-if="isUserAdmin && isConnected"
+            v-if="isUserAdmin && isConnected && isUserAdminOfAnyPool"
             class="table-main__th"
           >
             Status
