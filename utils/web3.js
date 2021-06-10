@@ -2,7 +2,9 @@ import Web3 from 'web3';
 import Web4 from '@cryptonteam/web4';
 import BigNumber from 'bignumber.js';
 import { Factory, Pool } from '~/abis';
-import { methodAddRpcbscTestnet } from '~/configs/configChainRpc';
+import { methodAddRpcbsc, methodAddRpcbscTestnet } from '~/configs/configChainRpc';
+
+const { IS_MAINNET } = process.env;
 
 let web3;
 let web3Anon;
@@ -55,8 +57,11 @@ export const initWeb3Provider = async () => {
       userAddress = await web3.eth.getCoinbase();
     }
     chainId = await web3.eth.net.getId();
-    if (+chainId !== 97) {
+    console.log('IS_MAINNET', IS_MAINNET, IS_MAINNET === 'true');
+    if (IS_MAINNET !== 'true' && +chainId !== 97) {
       await ethereum.request(methodAddRpcbscTestnet);
+    } else if (IS_MAINNET === 'true' && +chainId !== 56) {
+      await ethereum.request(methodAddRpcbsc);
     }
     web4 = new Web4();
     await web4.setProvider(ethereum, userAddress);
