@@ -61,7 +61,7 @@ export default {
   border-radius: 10px;
   color: #FFFFFF;
   &_disabled {
-    background: #F3EFF3;
+    background: #F3EFF3 !important;
     color: #D4CED7;
     pointer-events: none;
   }

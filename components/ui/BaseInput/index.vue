@@ -6,7 +6,7 @@
     >
       <input
         :value="value"
-        type="text"
+        :type="type"
         class="base-input__input"
         :placeholder="placeholder"
         :class="{'base-input__input_desc' : mode === 'desc'}"
@@ -38,6 +38,10 @@ export default {
       default: '',
     },
     value: {
+      type: String,
+      default: '',
+    },
+    type: {
       type: String,
       default: '',
     },
@@ -88,18 +92,16 @@ export default {
     height: 59px;
     background: #F6F5F7;
     border-radius: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 18px;
     align-items: center;
-    letter-spacing: 0.05em;
     color: #A89DAF;
     position: relative;
   }
   &__input {
+    font-family: sans-serif, 'Arial';
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
     width: 100%;
     padding: 20px;
     border-radius: 10px;

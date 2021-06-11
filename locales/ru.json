@@ -1,3 +1,6 @@
 {
-
+  "messages": {
+    "required": "Fill the field!",
+    "min": "The field must be at least {length} characters"
+  }
 }

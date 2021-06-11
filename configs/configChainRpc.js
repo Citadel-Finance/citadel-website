@@ -8,7 +8,7 @@ export const methodAddRpcbscTestnet = {
       symbol: 'BNB',
       decimals: 18,
     },
-    rpcUrls: ['https://data-seed-prebsc-2-s3.binance.org:8545'],
+    rpcUrls: ['https://data-seed-prebsc-1-s3.binance.org:8545'],
     blockExplorerUrls: ['https://testnet.bscscan.com'],
   }],
 };

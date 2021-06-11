@@ -1,39 +1,51 @@
 <template>
   <ctm-modal-box title="Deposit">
-    <div class="ctm-modal__main main">
-      <div class="main__title">
-        Amount
-      </div>
-      <base-input
-        v-model="amount"
-        :placeholder="`Amount in ${symbol}`"
-        :description="'MAX'"
-        mode="desc"
-        @handleClickBtn="setMax"
-      />
-      <div class="main__balance balance">
-        <div class="balance__title">
-          Your balance:
+    <validation-observer v-slot="{ handleSubmit }">
+      <form @submit.prevent="handleSubmit(deposit)">
+        <div class="ctm-modal__main main">
+          <div class="main__title">
+            Amount
+          </div>
+          <validation-provider
+            v-slot="{ errors }"
+            rules="required|min:2|"
+          >
+            <base-input
+              v-model="amount"
+              :type="'number'"
+              :placeholder="`Amount in ${symbol}`"
+              :description="'MAX'"
+              :error-text="errors[0]"
+              mode="desc"
+              @handleClickBtn="setMax"
+            />
+          </validation-provider>
+          <div class="main__balance balance">
+            <div class="balance__title">
+              Your balance:
+            </div>
+            <div class="balance__value">
+              {{ Floor(balance, 8) }} {{ symbol }}
+            </div>
+          </div>
+          <div class="main__buttons">
+            <base-btn
+              mode="secondary"
+              @click="close"
+            >
+              Close
+            </base-btn>
+
+            <base-btn
+              mode="primary"
+              @click="handleSubmit(deposit)"
+            >
+              Deposit
+            </base-btn>
+          </div>
         </div>
-        <div class="balance__value">
-          {{ Floor(balance, 8) }} {{ symbol }}
-        </div>
-      </div>
-      <div class="main__buttons">
-        <base-btn
-          mode="secondary"
-          @click="close"
-        >
-          Close
-        </base-btn>
-        <base-btn
-          mode="primary"
-          @click="deposit"
-        >
-          Deposit
-        </base-btn>
-      </div>
-    </div>
+      </form>
+    </validation-observer>
   </ctm-modal-box>
 </template>
 <script>
