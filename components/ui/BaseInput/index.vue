@@ -1,38 +1,47 @@
 <template>
-  <div class="base-input">
-    <div
-      class="base-input__control"
-      :class="inputClass"
-    >
-      <input
-        :value="value"
-        :type="type"
-        class="base-input__input"
-        :placeholder="placeholder"
-        :class="{'base-input__input_desc' : mode === 'desc'}"
-        required
-        @input="input"
+  <validation-provider
+    v-slot="{ errors }"
+    :rules="rules"
+  >
+    <div class="base-input">
+      <div
+        class="base-input__control"
+        :class="inputClass"
       >
-      <span
-        v-if="mode === 'desc'"
-        class="base-input__description"
-        @click="$emit('handleClickBtn')"
+        <input
+          :value="value"
+          :type="type"
+          class="base-input__input"
+          :placeholder="placeholder"
+          :class="{'base-input__input_desc' : mode === 'desc'}"
+          required
+          @input="input"
+        >
+        <span
+          v-if="mode === 'desc'"
+          class="base-input__description"
+          @click="$emit('handleClickBtn')"
+        >
+          {{ description }}
+        </span>
+      </div>
+      <div
+        v-if="!isHideError"
+        class="base-input__error"
       >
-        {{ description }}
-      </span>
+        {{ errors[0] }}
+      </div>
     </div>
-    <div
-      v-if="!isHideError"
-      class="base-input__error"
-    >
-      {{ errorText }}
-    </div>
-  </div>
+  </validation-provider>
 </template>
 
 <script>
 export default {
   props: {
+    rules: {
+      type: [String, Array, Object],
+      default: '',
+    },
     mode: {
       type: String,
       default: '',

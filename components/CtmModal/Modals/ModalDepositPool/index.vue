@@ -1,25 +1,21 @@
 <template>
   <ctm-modal-box title="Deposit">
     <validation-observer v-slot="{ handleSubmit }">
-      <form @submit.prevent="handleSubmit(deposit)">
+      <form @submit.prevent>
         <div class="ctm-modal__main main">
           <div class="main__title">
             Amount
           </div>
-          <validation-provider
-            v-slot="{ errors }"
-            rules="required|min:2|"
-          >
-            <base-input
-              v-model="amount"
-              :type="'number'"
-              :placeholder="`Amount in ${symbol}`"
-              :description="'MAX'"
-              :error-text="errors[0]"
-              mode="desc"
-              @handleClickBtn="setMax"
-            />
-          </validation-provider>
+          <base-input
+            v-model="amount"
+            :type="'number'"
+            :placeholder="`Amount in ${symbol}`"
+            :description="'MAX'"
+            rules="required|min:2"
+            mode="desc"
+            @handleClickBtn="setMax"
+            @keydown.enter="onEnter($event, handleSubmit, click)"
+          />
           <div class="main__balance balance">
             <div class="balance__title">
               Your balance:
@@ -104,6 +100,12 @@ export default {
       ]);
 
       this.SetLoader(false);
+    },
+    onEnter(e, handler, callback) {
+      if (!e.ctrlKey) {
+        e.preventDefault();
+        handler(callback);
+      }
     },
   },
 };
