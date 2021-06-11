@@ -122,6 +122,7 @@ export default {
     }
   }
   &_mini-active {
+    font-weight: normal;
     border: 1px solid #C31433;
     box-sizing: border-box;
     color: #C31433;

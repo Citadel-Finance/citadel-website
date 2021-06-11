@@ -5,7 +5,7 @@
         Total deposited
       </div>
       <div class="charts__value">
-        37 411.69 ETH
+        37 411.69 {{ symbol }}
       </div>
       <div class="charts__btns">
         <base-btn mode="mini-active">
@@ -29,7 +29,7 @@
         Total earnings
       </div>
       <div class="charts__value">
-        37 411.69 ETH
+        37 411.69 {{ symbol }}
       </div>
       <div class="charts__btns">
         <base-btn mode="mini">
@@ -53,7 +53,7 @@
         Total borrowed
       </div>
       <div class="charts__value">
-        37 411.69 ETH
+        --
       </div>
       <div class="charts__btns">
         <base-btn mode="mini">
@@ -68,8 +68,6 @@
       </div>
       <line-chart
         class="charts__chart"
-        :data="chartData"
-        :options="options"
       />
     </div>
   </div>
@@ -77,6 +75,7 @@
 
 <script>
 
+import { mapGetters } from 'vuex';
 import LineChart from '~/components/App/LineChart';
 
 export default {
@@ -114,7 +113,7 @@ export default {
         intersect: false,
         callbacks: {
           title: () => '',
-          label: (item) => `${item.value} OUT`,
+          label: (item) => `${item.value}`,
         },
         displayColors: false,
         titleFontSize: 14,
@@ -160,6 +159,21 @@ export default {
       },
     },
   }),
+  computed: {
+    ...mapGetters({
+      poolsMap: 'user/getPoolsMap',
+      tokensMap: 'user/getTokensMap',
+    }),
+    poolAddress() {
+      return this.$route.params.address;
+    },
+    pool() {
+      return this.poolsMap[this.poolAddress] || {};
+    },
+    symbol() {
+      return this.pool.symbol;
+    },
+  },
 };
 </script>
 
