@@ -77,6 +77,7 @@
 
 import { mapActions, mapGetters } from 'vuex';
 import LineChart from '~/components/App/LineChart';
+import { shiftedBy } from '~/utils/helpers';
 
 export default {
   components: {
@@ -140,8 +141,8 @@ export default {
       fetchTotalDeposited: 'charts/fetchTotalDeposited',
     }),
     formChartData(data) {
-      const labels = data.map((el) => new Date(el.date).getTime());
-      const dataParsed = data.map((el) => el.value);
+      const labels = data.map((el) => new Date(el.createdAt).getTime());
+      const dataParsed = data.map((el) => shiftedBy(el.totalDeposited, -18));
       return {
         labels,
         datasets: [
