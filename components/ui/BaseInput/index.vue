@@ -11,9 +11,12 @@
         <input
           :value="value"
           :type="type"
+          :name="name"
           class="base-input__input"
           :placeholder="placeholder"
-          :class="{'base-input__input_desc' : mode === 'desc'}"
+          :class="[
+            {'base-input__input_desc' : mode === 'desc'},
+          ]"
           required
           @input="input"
         >
@@ -51,6 +54,10 @@ export default {
       default: '',
     },
     type: {
+      type: String,
+      default: '',
+    },
+    name: {
       type: String,
       default: '',
     },

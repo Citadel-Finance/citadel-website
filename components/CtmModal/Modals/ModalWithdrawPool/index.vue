@@ -9,9 +9,10 @@
           <base-input
             v-model="amount"
             :type="'number'"
+            :name="'Amount'"
             :placeholder="`Amount in ${symbol}`"
             :description="'MAX'"
-            rules="required"
+            rules="required|number"
             mode="desc"
             @handleClickBtn="setMax"
             @keydown.enter="onEnter($event, handleSubmit, withdraw)"

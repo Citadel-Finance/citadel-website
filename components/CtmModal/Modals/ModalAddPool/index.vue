@@ -8,9 +8,9 @@
           </div>
           <base-input
             v-model="tokenAddress"
-            :type="'number'"
+            :name="'Token address'"
             :placeholder="'0x0000000000000000000000000000000000000000'"
-            rules="required"
+            rules="required|address"
             class="main__input"
           />
           <div class="main__title">
@@ -19,8 +19,9 @@
           <base-input
             v-model="tokensPerBlock"
             :type="'number'"
+            :name="'Tokens per block'"
             :placeholder="'1000'"
-            rules="required"
+            rules="required|number"
             class="main__input"
           />
           <div class="main__title">
@@ -29,8 +30,9 @@
           <base-input
             v-model="apyTax"
             :type="'number'"
+            :name="'APY tax'"
             :placeholder="'0.07'"
-            rules="required"
+            rules="required|number"
             class="main__input"
           />
           <div class="main__title">
@@ -39,8 +41,9 @@
           <base-input
             v-model="premiumCoeff"
             :type="'number'"
+            :name="'Pool rewards'"
             :placeholder="'20.06'"
-            rules="required"
+            rules="required|number"
             class="main__input"
           />
           <div class="main__title">

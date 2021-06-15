@@ -9,8 +9,9 @@
           <base-input
             v-model="tokensPerBlockClone"
             :type="'number'"
+            :name="'Tokens per block'"
             :placeholder="'1000'"
-            rules="required"
+            rules="required|number"
             class="main__input"
           />
           <div class="main__title">
@@ -19,8 +20,9 @@
           <base-input
             v-model="apyTaxClone"
             :type="'number'"
+            :name="'APY tax'"
             :placeholder="'0.7'"
-            rules="required"
+            rules="required|number"
             class="main__input"
           />
           <div class="main__title">
@@ -29,8 +31,9 @@
           <base-input
             v-model="premiumCoeffClone"
             :type="'number'"
+            :name="'Pool rewards'"
             :placeholder="'20.06'"
-            rules="required"
+            rules="required|number"
             class="main__input"
           />
           <div class="main__title">
