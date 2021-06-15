@@ -85,7 +85,6 @@ export default class Token extends BasicSmartContract {
       const r = await this.fetchContractData('allowance', [
         owner, recipient,
       ]);
-      console.log(r);
       const bnAmount = new BigNumber(r).shiftedBy(-this.decimals).toString();
       return output({
         allowance: bnAmount,

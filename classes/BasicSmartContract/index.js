@@ -28,7 +28,7 @@ export default class BasicSmartContract {
     return insts[this.address];
   }
 
-  subscribeEvents(eventName, callback = () => {}) {
+  subscribeEvents(eventName, callback = () => {}, filter = {}) {
     const rand = Math.random();
     this.session = { ...this.session, [eventName]: rand };
     const session = this.session[eventName];
@@ -37,7 +37,7 @@ export default class BasicSmartContract {
     // console.log('subscribeEvents', eventName, this.address);
     inst.events[eventName]({
       fromBlock: 0,
-      filter: {},
+      filter,
     }, (e, r) => {
       if (e) {
         console.log(e);

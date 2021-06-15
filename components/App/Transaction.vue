@@ -69,7 +69,7 @@ export default {
     },
     txs() {
       const { poolAddress, poolsEventsMap } = this;
-      return [...poolsEventsMap[poolAddress] || []].reverse();
+      return [...poolsEventsMap[poolAddress] || []].sort((a, b) => a.blockNumber - b.blockNumber).reverse();
     },
   },
   methods: {
