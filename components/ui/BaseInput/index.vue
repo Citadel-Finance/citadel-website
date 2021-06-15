@@ -181,5 +181,12 @@ export default {
     color: #EA3147;
     line-height: 100%;
   }
+  &_error {
+    .base-input {
+      &__input {
+        background: red;
+      }
+    }
+  }
 }
 </style>
