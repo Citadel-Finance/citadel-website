@@ -32,28 +32,36 @@
           </div>
         </div>
         <div
-          v-if="isConnected && txs.length"
-          class="transactions__pagination pagination"
+          v-if="isConnected && amountOfPages > 1"
+          class="transactions__pagination"
         >
-          <div class="pagination__wrapper">
-            <span
-              class="icon-chevron_left pagination__arrow"
-              :class="{'pagination__arrow_disabled': currentPage === 1}"
-              @click="setPageSettings(currentPage - 1)"
-            />
-            <span
-              v-for="i of amountOfPages"
-              :key="`pools__page_${i}`"
-              class="pagination__page"
-              :class="{'pagination__page_active': currentPage === i}"
-              @click="setPageSettings(i)"
-            >{{ i }}</span>
-            <span
-              class="icon-chevron_right pagination__arrow"
-              :class="{'pagination__arrow_disabled': currentPage === amountOfPages}"
-              @click="setPageSettings(currentPage + 1)"
-            />
-          </div>
+          <!--          <div class="pagination__wrapper">-->
+          <!--            <span-->
+          <!--              class="icon-chevron_left pagination__arrow"-->
+          <!--              :class="{'pagination__arrow_disabled': currentPage === 1}"-->
+          <!--              @click="setPageSettings(currentPage - 1)"-->
+          <!--            />-->
+          <!--            <span-->
+          <!--              v-for="i of amountOfPages"-->
+          <!--              :key="`pools__page_${i}`"-->
+          <!--              class="pagination__page"-->
+          <!--              :class="{'pagination__page_active': currentPage === i}"-->
+          <!--              @click="setPageSettings(i)"-->
+          <!--            >{{ i }}</span>-->
+          <!--            <span-->
+          <!--              class="icon-chevron_right pagination__arrow"-->
+          <!--              :class="{'pagination__arrow_disabled': currentPage === amountOfPages}"-->
+          <!--              @click="setPageSettings(currentPage + 1)"-->
+          <!--            />-->
+          <!--          </div>-->
+          <b-pagination
+            v-model="currentPage"
+            :total-rows="amountOfTxs"
+            :per-page="itemsPerPage"
+            first-number
+            last-number
+            class="pagination"
+          />
         </div>
       </div>
     </div>
@@ -134,6 +142,10 @@ export default {
     color: #240A36;
     font-family: sans-serif, 'Conto-Medium';
   }
+  &__pagination {
+    display: flex;
+    justify-content: flex-end;
+  }
 }
 .table-main {
   display: grid;
@@ -198,62 +210,111 @@ export default {
   letter-spacing: 0.05em;
   color: #7B6C86;
 }
-.pagination {
-  display: flex;
-  justify-content: flex-end;
-  &__wrapper {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    grid-gap: 10px;
-    letter-spacing: 0.05em;
-    color: #240A36;
-    width: auto;
-    background: rgba(36, 11, 54, 0.04);
-    border-radius: 10px;
-    padding: 5px;
-    height: 40px;
-  }
-  &__page {
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 0.3s ease-out;
-    &:hover {
-      cursor: pointer;
+.pagination::v-deep {
+  //&__wrapper {
+  //  font-family: sans-serif, 'Arial';
+  //  font-style: normal;
+  //  font-weight: normal;
+  //  font-size: 16px;
+  //  line-height: 120%;
+  //  display: flex;
+  //  align-items: center;
+  //  grid-gap: 10px;
+  //  letter-spacing: 0.05em;
+  //  color: #240A36;
+  //  width: auto;
+  //  background: rgba(36, 11, 54, 0.04);
+  //  border-radius: 10px;
+  //  padding: 5px;
+  //  height: 40px;
+  //}
+  //&__page {
+  //  width: 30px;
+  //  height: 30px;
+  //  border-radius: 6px;
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //  transition: 0.3s ease-out;
+  //  &:hover {
+  //    cursor: pointer;
+  //  }
+  //  &_active {
+  //    background: #C31433;
+  //    color: #FFFFFF;
+  //  }
+  //}
+  //&__arrow {
+  //  width: 30px;
+  //  height: 30px;
+  //  border-radius: 6px;
+  //  display: flex;
+  //  justify-content: center;
+  //  align-items: center;
+  //  &:hover {
+  //    background: #FFFFFF;
+  //    color: #C31433;
+  //    cursor: pointer;
+  //  }
+  //  &_disabled {
+  //    opacity: 0.2;
+  //    pointer-events: none;
+  //  }
+  //}
+  //span::before {
+  //  font-size: 24px;
+  //  color: #C31433;
+  //}
+  //margin-left:  auto;
+  li {
+    &:not(:last-child) {
+      margin-right: 10px;
     }
-    &_active {
-      background: #C31433;
-      color: #FFFFFF;
-    }
   }
-  &__arrow {
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
+  .page-item {
+    //&:first-child  {
+    //  font-size: 23px;
+    //}
+    //&:last-child {
+    //  font-size: 23px;
+    //}
+    &.active {
+      button {
+        width: 40px;
+        height: 40px;
+        background: #C31433;
+        color: #FFFFFF;
+        border-radius: 5px;
+      }
+    }
+    button {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #DDF2F6;
+      border-radius: 5px;
       background: #FFFFFF;
-      color: #C31433;
-      cursor: pointer;
-    }
-    &_disabled {
-      opacity: 0.2;
-      pointer-events: none;
+      color: #A9DFE9;
     }
   }
-  span::before {
-    font-size: 24px;
-    color: #C31433;
+  .page-link {
+    &.active {
+      button {
+        width: 40px;
+        height: 40px;
+        border: 1px solid #54C0D3;
+        background: #54C0D3;
+        border-radius: 5px;
+        color: #FFFFFF;
+      }
+    }
+    button {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #DDF2F6;
+      border-radius: 5px;
+      background: #FFFFFF;
+      color: #A9DFE9;
+    }
   }
 }
 </style>
