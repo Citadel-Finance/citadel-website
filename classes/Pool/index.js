@@ -141,10 +141,10 @@ export default class Pool extends BasicSmartContract {
     };
   }
 
-  subscribeEvents(eventName, callback = () => {}) {
+  subscribeEvents(eventName, callback = () => {}, filter = {}) {
     super.subscribeEvents(eventName, (r) => {
       callback(this.eventCallback(r));
-    });
+    }, filter);
   }
 
   async editPool({

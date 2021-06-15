@@ -1,5 +1,7 @@
 import BigNumber from 'bignumber.js';
-import { initWeb3Provider, initWeb3ProviderAnon, startPingingMetamask } from '~/utils/web3';
+import {
+  getUserAddress, initWeb3Provider, initWeb3ProviderAnon, startPingingMetamask,
+} from '~/utils/web3';
 import Factory from '~/classes/Factory';
 import Token from '~/classes/Token';
 import Pool from '~/classes/Pool';
@@ -316,13 +318,13 @@ export default {
           key: address,
           value: r,
         });
-      });
+      }, { depositor: [getUserAddress()] });
       pool.subscribeEvents('Withdrew', (r) => {
         commit('pushPoolsEventsMap', {
           key: address,
           value: r,
         });
-      });
+      }, { receiver: [getUserAddress()] });
       // pool.subscribeEvents('totalHistory', (r) => {
       //   console.log(r);
       // });
