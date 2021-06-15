@@ -55,7 +55,7 @@ export const initWeb3ProviderAnon = async () => {
   try {
     // const infuraKeyBsc = process.env.NODE_KEY_BSC;
     let bscUrl;
-    if (+process.env.CHAIN_TYPE === 1) {
+    if (process.env.IS_MAINNET === 'true') {
       bscUrl = 'https://bsc-dataseed.binance.org/';
     } else {
       bscUrl = 'https://data-seed-prebsc-1-s3.binance.org:8545/';
