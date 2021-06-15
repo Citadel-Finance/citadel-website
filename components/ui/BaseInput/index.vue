@@ -6,7 +6,10 @@
     <div class="base-input">
       <div
         class="base-input__control"
-        :class="inputClass"
+        :class="{
+          ...inputClass,
+          'base-input_error': errors.length !== 0,
+        }"
       >
         <input
           :value="value"
