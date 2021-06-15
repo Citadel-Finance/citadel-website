@@ -8,7 +8,6 @@
         class="base-input__control"
         :class="{
           ...inputClass,
-          'base-input_error': errors.length !== 0,
         }"
       >
         <span
