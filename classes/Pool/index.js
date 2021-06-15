@@ -8,6 +8,7 @@ import { shiftedBy } from '~/utils/helpers';
 
 const topByAddress = {};
 const totalStakedByAddress = {};
+const totalProfitByAddress = {};
 const apyTaxByAddress = {};
 
 const tokensPerBlockByAddress = {};
@@ -58,6 +59,10 @@ export default class Pool extends BasicSmartContract {
     return totalStakedByAddress[this.address];
   }
 
+  getTotalProfit() {
+    return totalProfitByAddress[this.address];
+  }
+
   getApyTax() {
     return apyTaxByAddress[this.address];
   }
@@ -78,7 +83,7 @@ export default class Pool extends BasicSmartContract {
     try {
       const commonData = await this.fetchContractData('getCommonData');
       const {
-        decimals, token, totalStaked, symbol, apyTax, enabled, tokensPerBlock, premiumCoeff,
+        decimals, token, totalStaked, symbol, apyTax, enabled, tokensPerBlock, premiumCoeff, totalProfit,
       } = commonData;
       this.decimals = +decimals;
       this.symbol = symbol;
@@ -87,10 +92,10 @@ export default class Pool extends BasicSmartContract {
       tokensPerBlockByAddress[this.address] = shiftedBy(tokensPerBlock, -decimals);
       premiumCoeffByAddress[this.address] = shiftedBy(premiumCoeff, -decimals);
 
-      // this.isEnabled = enabled;
       isEnabledByAddress[this.address] = enabled;
       apyTaxByAddress[this.address] = shiftedBy(apyTax, -decimals);
       totalStakedByAddress[this.address] = shiftedBy(totalStaked, -decimals);
+      totalProfitByAddress[this.address] = shiftedBy(totalProfit, -decimals);
 
       return output({ commonData });
     } catch (e) {
