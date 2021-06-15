@@ -9,7 +9,7 @@
     <div class="pools__wrapper">
       <div class="pools__header">
         <div class="pools__title">
-          Pools {{ amountOfPools }}
+          Pools ({{ amountOfPools }})
         </div>
         <div
           v-if="isUserAdmin && isConnected"
@@ -49,7 +49,7 @@
         </div>
         <div class="table-main__body">
           <div
-            v-for="(poolAddress, i) in Object.keys(poolsMap)"
+            v-for="(poolAddress, i) in pageItems"
             :key="`pool__item-${i}`"
             class="table-main__tr"
           >
@@ -109,18 +109,23 @@
       </div>
       <div class="pools__pagination pagination">
         <div class="pagination__wrapper">
-          <span class="icon-chevron_left" />
-          <span class="pagination__page">1</span>
-          <span class="pagination__page">2</span>
-          <span class="pagination__page">3</span>
-          <!--          <span-->
-          <!--            v-for="i of amountOfPages"-->
-          <!--            :key="`pools__page_${i}`"-->
-          <!--            class="pagination__page"-->
-          <!--            :class="{'pagination__page_active': currentPage === i}"-->
-          <!--            @click="getPageItems(i)"-->
-          <!--          >i</span>-->
-          <span class="icon-chevron_right" />
+          <span
+            class="icon-chevron_left pagination__arrow"
+            :class="{'pagination__arrow_disabled': currentPage === 1}"
+            @click="setPageSettings(currentPage - 1)"
+          />
+          <span
+            v-for="i of amountOfPages"
+            :key="`pools__page_${i}`"
+            class="pagination__page"
+            :class="{'pagination__page_active': currentPage === i}"
+            @click="setPageSettings(i)"
+          >{{ i }}</span>
+          <span
+            class="icon-chevron_right pagination__arrow"
+            :class="{'pagination__arrow_disabled': currentPage === amountOfPages}"
+            @click="setPageSettings(currentPage + 1)"
+          />
         </div>
       </div>
     </div>
@@ -140,10 +145,9 @@ export default {
       { key: 'apy', label: 'APY' },
       { key: 'liquidity', label: 'Liquidity (USD)' },
     ],
-    itemsPerPage: 1,
+    itemsPerPage: 10,
     currentPage: 1,
     startIndex: 0,
-    pageItems: [],
   }),
   computed: {
     ...mapGetters({
@@ -159,16 +163,19 @@ export default {
 
       return isAdminArray.includes(true);
     },
+    arrayOfPools() {
+      const { poolsMap } = this;
+      return Object.keys(poolsMap);
+    },
     amountOfPools() {
-      return this.poolsMap.length;
+      return this.arrayOfPools.length;
     },
     amountOfPages() {
       return Math.ceil(this.amountOfPools / this.itemsPerPage);
     },
-  },
-  async mounted() {
-    await console.log(this.poolsMap);
-    // this.pageItems = this.poolsMap.slice(this.startIndex, this.itemsPerPage);
+    pageItems() {
+      return this.arrayOfPools.slice(this.startIndex, (this.itemsPerPage + this.startIndex));
+    },
   },
   methods: {
     getIsEnabledByAddress(poolAddress) {
@@ -187,15 +194,9 @@ export default {
         poolAddress,
       });
     },
-    getPageItems(i) {
+    setPageSettings(i) {
       this.currentPage = i;
-      if (i === 0) {
-        this.currentPage = this.amountOfPools;
-      } else if (i === (this.amountOfPools + 1)) {
-        this.currentPage = 1;
-      }
       this.startIndex = this.itemsPerPage * (this.currentPage - 1);
-      // this.pageItems = this.poolsMap.slice(this.startIndex, (this.startIndex + this.itemsPerPage));
     },
   },
 };
@@ -397,9 +398,28 @@ export default {
     align-items: center;
     transition: 0.3s ease-out;
     &:hover {
+      cursor: pointer;
+    }
+    &_active {
       background: #C31433;
       color: #FFFFFF;
+    }
+  }
+  &__arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+      background: #FFFFFF;
+      color: #C31433;
       cursor: pointer;
+    }
+    &_disabled {
+      opacity: 0.2;
+      pointer-events: none;
     }
   }
   span::before {
