@@ -24,12 +24,12 @@ Object.keys(rules).forEach((rule) => {
 
 extend('address', {
   validate: (value) => addressPattern.test(value),
-  message: 'The {_field_} field must have of this type: 0x0000000000000000000000000000000000000000',
+  message: 'You entered an invalid {_field_}!',
 });
 
 extend('number', {
   validate: (value) => /^[0-9]+([,.][0-9]+)?$/g.test(value),
-  message: 'The {_field_} field must have numbers',
+  message: 'The {_field_} field must have numbers.',
 });
 
 export default ({ app }) => {

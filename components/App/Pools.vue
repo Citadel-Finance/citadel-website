@@ -366,8 +366,6 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    align-content: center;
-    justify-items: center;
     transition: 0.3s ease-out;
     &:hover {
       background: #C31433;

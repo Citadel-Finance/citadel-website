@@ -8,6 +8,10 @@
         class="base-input__control"
         :class="inputClass"
       >
+        <span
+          v-if="errors[0]"
+          class="icon-error"
+        />
         <input
           :value="value"
           :type="type"
@@ -16,8 +20,8 @@
           :placeholder="placeholder"
           :class="[
             {'base-input__input_desc' : mode === 'desc'},
+            {'base-input__input_error' : errors.length},
           ]"
-          required
           @input="input"
         >
         <span
@@ -111,6 +115,17 @@ export default {
     align-items: center;
     color: #A89DAF;
     position: relative;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    span::before {
+      font-size: 24px;
+      color: #C31433;
+      left: 20px;
+      position: absolute;
+    }
   }
   &__input {
     font-family: sans-serif, 'Arial';
@@ -127,6 +142,10 @@ export default {
     &_desc {
       padding-right: 73px;
     }
+    &_error {
+      padding-left: 50px;
+      border: 1px solid #C31433 !important;
+    }
     &:hover {
       background: #F6F5F7;
       border: 1px solid #DA7284;
@@ -142,7 +161,6 @@ export default {
   }
   &__description {
     font-size: 16px;
-    text-align: right;
     min-width: 53px;
     color: #C31433;
     font-weight: bold;
