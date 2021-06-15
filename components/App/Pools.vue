@@ -9,7 +9,7 @@
     <div class="pools__wrapper">
       <div class="pools__header">
         <div class="pools__title">
-          Pools
+          Pools {{ amountOfPools }}
         </div>
         <div
           v-if="isUserAdmin && isConnected"
@@ -107,6 +107,22 @@
           </div>
         </div>
       </div>
+      <div class="pools__pagination pagination">
+        <div class="pagination__wrapper">
+          <span class="icon-chevron_left" />
+          <span class="pagination__page">1</span>
+          <span class="pagination__page">2</span>
+          <span class="pagination__page">3</span>
+          <!--          <span-->
+          <!--            v-for="i of amountOfPages"-->
+          <!--            :key="`pools__page_${i}`"-->
+          <!--            class="pagination__page"-->
+          <!--            :class="{'pagination__page_active': currentPage === i}"-->
+          <!--            @click="getPageItems(i)"-->
+          <!--          >i</span>-->
+          <span class="icon-chevron_right" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -118,15 +134,17 @@ import modals from '~/store/modals/modals';
 
 export default {
   name: 'Pools',
-  data() {
-    return {
-      fields: [
-        { key: 'currency', label: 'Currency' },
-        { key: 'apy', label: 'APY' },
-        { key: 'liquidity', label: 'Liquidity (USD)' },
-      ],
-    };
-  },
+  data: () => ({
+    fields: [
+      { key: 'currency', label: 'Currency' },
+      { key: 'apy', label: 'APY' },
+      { key: 'liquidity', label: 'Liquidity (USD)' },
+    ],
+    itemsPerPage: 1,
+    currentPage: 1,
+    startIndex: 0,
+    pageItems: [],
+  }),
   computed: {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
@@ -141,6 +159,16 @@ export default {
 
       return isAdminArray.includes(true);
     },
+    amountOfPools() {
+      return this.poolsMap.length;
+    },
+    amountOfPages() {
+      return Math.ceil(this.amountOfPools / this.itemsPerPage);
+    },
+  },
+  async mounted() {
+    await console.log(this.poolsMap);
+    // this.pageItems = this.poolsMap.slice(this.startIndex, this.itemsPerPage);
   },
   methods: {
     getIsEnabledByAddress(poolAddress) {
@@ -158,6 +186,16 @@ export default {
         key: modals.editPool,
         poolAddress,
       });
+    },
+    getPageItems(i) {
+      this.currentPage = i;
+      if (i === 0) {
+        this.currentPage = this.amountOfPools;
+      } else if (i === (this.amountOfPools + 1)) {
+        this.currentPage = 1;
+      }
+      this.startIndex = this.itemsPerPage * (this.currentPage - 1);
+      // this.pageItems = this.poolsMap.slice(this.startIndex, (this.startIndex + this.itemsPerPage));
     },
   },
 };
@@ -328,6 +366,45 @@ export default {
     &:hover {
       color: #7B6C86;
     }
+  }
+}
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  &__wrapper {
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    letter-spacing: 0.05em;
+    color: #240A36;
+    width: auto;
+    background: rgba(36, 11, 54, 0.04);
+    border-radius: 10px;
+    padding: 5px;
+    height: 40px;
+  }
+  &__page {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease-out;
+    &:hover {
+      background: #C31433;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+  }
+  span::before {
+    font-size: 24px;
+    color: #C31433;
   }
 }
 </style>

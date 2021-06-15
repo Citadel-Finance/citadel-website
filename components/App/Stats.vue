@@ -58,11 +58,6 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'Deposit',
-  components: {
-    ...mapGetters({
-      poolsMap: 'user/getPoolsMap',
-    }),
-  },
   props: {
     balance: {
       default: '',

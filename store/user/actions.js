@@ -261,14 +261,25 @@ export default {
       console.log(approveRes);
     }
     const depositRes = await pool.deposit(bnAmount);
-    console.log(depositRes);
-    console.log('DONE');
+    if (!depositRes.ok) {
+      if (depositRes.code === 500) {
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'User denied transaction signature.',
+        }, { root: true });
+      }
+      return;
+    }
     await dispatch('modals/show', {
       key: modals.status,
       title: 'Success',
       status: 'success',
       text: 'Your funds are deposited.',
     }, { root: true });
+    console.log(depositRes);
+    console.log('DONE');
   },
 
   async poolWithdraw({ getters, dispatch }, { amount, poolAddress }) {

@@ -1,61 +1,76 @@
 <template>
   <ctm-modal-box title="Add pool">
-    <div class="ctm-modal__main main">
-      <div class="main__title">
-        Token address
-      </div>
-      <base-input
-        v-model="tokenAddress"
-        :placeholder="'0x0000000000000000000000000000000000000000'"
-        class="main__input"
-      />
-      <div class="main__title">
-        Tokens per block
-      </div>
-      <base-input
-        v-model="tokensPerBlock"
-        :placeholder="'1000'"
-        class="main__input"
-      />
-      <div class="main__title">
-        APY tax
-      </div>
-      <base-input
-        v-model="apyTax"
-        :placeholder="'0.07%'"
-        class="main__input"
-      />
-      <div class="main__title">
-        Pool rewards
-      </div>
-      <base-input
-        v-model="premiumCoeff"
-        :placeholder="'20.06%'"
-        class="main__input"
-      />
-      <div class="main__title">
-        Status
-      </div>
-      <base-radio
-        v-model="isEnabled"
-        :options="optionsRadio"
-        class="main__radio"
-      />
-      <div class="main__buttons">
-        <base-btn
-          :mode="'secondary'"
-          @click="close()"
-        >
-          Close
-        </base-btn>
-        <base-btn
-          mode="primary"
-          @click="handleCreatePool"
-        >
-          Add
-        </base-btn>
-      </div>
-    </div>
+    <validation-observer v-slot="{ handleSubmit }">
+      <form @submit.prevent>
+        <div class="ctm-modal__main main">
+          <div class="main__title">
+            Token address
+          </div>
+          <base-input
+            v-model="tokenAddress"
+            :name="'Token address'"
+            :placeholder="'0x0000000000000000000000000000000000000000'"
+            rules="required|address"
+            class="main__input"
+          />
+          <div class="main__title">
+            Tokens per block
+          </div>
+          <base-input
+            v-model="tokensPerBlock"
+            :type="'number'"
+            :name="'Tokens per block'"
+            :placeholder="'1000'"
+            rules="required|number"
+            class="main__input"
+          />
+          <div class="main__title">
+            APY tax
+          </div>
+          <base-input
+            v-model="apyTax"
+            :type="'number'"
+            :name="'APY tax'"
+            :placeholder="'0.07'"
+            rules="required|number"
+            class="main__input"
+          />
+          <div class="main__title">
+            Pool rewards
+          </div>
+          <base-input
+            v-model="premiumCoeff"
+            :type="'number'"
+            :name="'Pool rewards'"
+            :placeholder="'20.06'"
+            rules="required|number"
+            class="main__input"
+          />
+          <div class="main__title">
+            Status
+          </div>
+          <base-radio
+            v-model="isEnabled"
+            :options="optionsRadio"
+            class="main__radio"
+          />
+          <div class="main__buttons">
+            <base-btn
+              :mode="'secondary'"
+              @click="close()"
+            >
+              Close
+            </base-btn>
+            <base-btn
+              mode="primary"
+              @click="handleSubmit(handleCreatePool)"
+            >
+              Add
+            </base-btn>
+          </div>
+        </div>
+      </form>
+    </validation-observer>
   </ctm-modal-box>
 </template>
 <script>

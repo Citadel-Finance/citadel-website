@@ -178,7 +178,7 @@ export default {
     border-radius: 10px;
     max-width: 370px;
     padding: 20px;
-   }
+  }
   &__title {
     font-family: sans-serif, 'Arial';
     font-style: normal;

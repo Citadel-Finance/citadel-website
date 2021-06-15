@@ -58,7 +58,7 @@ export const initWeb3ProviderAnon = async () => {
     if (process.env.IS_MAINNET === 'true') {
       bscUrl = 'https://bsc-dataseed.binance.org/';
     } else {
-      bscUrl = 'https://data-seed-prebsc-2-s3.binance.org:8545/';
+      bscUrl = 'https://data-seed-prebsc-1-s3.binance.org:8545/';
     }
     const providerBsc = new Web3.providers.HttpProvider(bscUrl);
     web3Anon = new Web3(providerBsc);

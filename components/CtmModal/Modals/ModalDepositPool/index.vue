@@ -1,39 +1,48 @@
 <template>
   <ctm-modal-box title="Deposit">
-    <div class="ctm-modal__main main">
-      <div class="main__title">
-        Amount
-      </div>
-      <base-input
-        v-model="amount"
-        :placeholder="`Amount in ${symbol}`"
-        :description="'MAX'"
-        mode="desc"
-        @handleClickBtn="setMax"
-      />
-      <div class="main__balance balance">
-        <div class="balance__title">
-          Your balance:
+    <validation-observer v-slot="{ handleSubmit }">
+      <form @submit.prevent>
+        <div class="ctm-modal__main main">
+          <div class="main__title">
+            Amount
+          </div>
+          <base-input
+            v-model="amount"
+            :type="'number'"
+            :name="'Amount'"
+            :placeholder="`Amount in ${symbol}`"
+            :description="'MAX'"
+            rules="required|number"
+            mode="desc"
+            @handleClickBtn="setMax"
+            @keydown.enter="onEnter($event, handleSubmit, deposit)"
+          />
+          <div class="main__balance balance">
+            <div class="balance__title">
+              Your balance:
+            </div>
+            <div class="balance__value">
+              {{ Floor(balance, 8) }} {{ symbol }}
+            </div>
+          </div>
+          <div class="main__buttons">
+            <base-btn
+              mode="secondary"
+              @click="close"
+            >
+              Close
+            </base-btn>
+
+            <base-btn
+              mode="primary"
+              @click="handleSubmit(deposit)"
+            >
+              Deposit
+            </base-btn>
+          </div>
         </div>
-        <div class="balance__value">
-          {{ Floor(balance, 8) }} {{ symbol }}
-        </div>
-      </div>
-      <div class="main__buttons">
-        <base-btn
-          mode="secondary"
-          @click="close"
-        >
-          Close
-        </base-btn>
-        <base-btn
-          mode="primary"
-          @click="deposit"
-        >
-          Deposit
-        </base-btn>
-      </div>
-    </div>
+      </form>
+    </validation-observer>
   </ctm-modal-box>
 </template>
 <script>
@@ -92,6 +101,12 @@ export default {
       ]);
 
       this.SetLoader(false);
+    },
+    onEnter(e, handler, callback) {
+      if (!e.ctrlKey) {
+        e.preventDefault();
+        handler(callback);
+      }
     },
   },
 };

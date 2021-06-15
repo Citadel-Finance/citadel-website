@@ -1,43 +1,69 @@
 <template>
-  <div class="base-input">
-    <div
-      class="base-input__control"
-      :class="inputClass"
-    >
-      <input
-        :value="value"
-        type="text"
-        class="base-input__input"
-        :placeholder="placeholder"
-        :class="{'base-input__input_desc' : mode === 'desc'}"
-        required
-        @input="input"
+  <validation-provider
+    v-slot="{ errors }"
+    :rules="rules"
+  >
+    <div class="base-input">
+      <div
+        class="base-input__control"
+        :class="{
+          ...inputClass,
+        }"
       >
-      <span
-        v-if="mode === 'desc'"
-        class="base-input__description"
-        @click="$emit('handleClickBtn')"
+        <span
+          v-if="errors[0]"
+          class="icon-error"
+        />
+        <input
+          :value="value"
+          :type="type"
+          :name="name"
+          class="base-input__input"
+          :placeholder="placeholder"
+          :class="[
+            {'base-input__input_desc' : mode === 'desc'},
+            {'base-input__input_error' : errors.length},
+          ]"
+          @input="input"
+        >
+        <span
+          v-if="mode === 'desc'"
+          class="base-input__description"
+          @click="$emit('handleClickBtn')"
+        >
+          {{ description }}
+        </span>
+      </div>
+      <div
+        v-if="!isHideError"
+        class="base-input__error"
       >
-        {{ description }}
-      </span>
+        {{ errors[0] }}
+      </div>
     </div>
-    <div
-      v-if="!isHideError"
-      class="base-input__error"
-    >
-      {{ errorText }}
-    </div>
-  </div>
+  </validation-provider>
 </template>
 
 <script>
 export default {
   props: {
+    rules: {
+      type: [String, Array, Object],
+      default: '',
+    },
     mode: {
       type: String,
       default: '',
     },
     value: {
+      type: String,
+      default: '',
+    },
+    type: {
+      type: String,
+      default: '',
+    },
+    name: {
       type: String,
       default: '',
     },
@@ -88,18 +114,27 @@ export default {
     height: 59px;
     background: #F6F5F7;
     border-radius: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 18px;
     align-items: center;
-    letter-spacing: 0.05em;
     color: #A89DAF;
     position: relative;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    span::before {
+      font-size: 24px;
+      color: #C31433;
+      left: 20px;
+      position: absolute;
+    }
   }
   &__input {
+    font-family: sans-serif, 'Arial';
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
     width: 100%;
     padding: 20px;
     border-radius: 10px;
@@ -108,6 +143,10 @@ export default {
     transition: 0.2s ease-in-out;
     &_desc {
       padding-right: 73px;
+    }
+    &_error {
+      padding-left: 50px;
+      border: 1px solid #C31433 !important;
     }
     &:hover {
       background: #F6F5F7;
@@ -124,7 +163,6 @@ export default {
   }
   &__description {
     font-size: 16px;
-    text-align: right;
     min-width: 53px;
     color: #C31433;
     font-weight: bold;
@@ -142,6 +180,13 @@ export default {
     font-size: 12px;
     color: #EA3147;
     line-height: 100%;
+  }
+  &_error {
+    .base-input {
+      &__input {
+        background: red;
+      }
+    }
   }
 }
 </style>

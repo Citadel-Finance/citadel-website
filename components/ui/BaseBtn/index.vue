@@ -61,7 +61,7 @@ export default {
   border-radius: 10px;
   color: #FFFFFF;
   &_disabled {
-    background: #F3EFF3;
+    background: #F3EFF3 !important;
     color: #D4CED7;
     pointer-events: none;
   }
@@ -122,6 +122,7 @@ export default {
     }
   }
   &_mini-active {
+    font-weight: normal;
     border: 1px solid #C31433;
     box-sizing: border-box;
     color: #C31433;

@@ -1,39 +1,47 @@
 <template>
   <ctm-modal-box title="Withdraw pool">
-    <div class="ctm-modal__main main">
-      <div class="main__title">
-        Amount
-      </div>
-      <base-input
-        v-model="amount"
-        :placeholder="`Amount in ${symbol}`"
-        :description="'MAX'"
-        mode="desc"
-        @handleClickBtn="setMax"
-      />
-      <div class="main__balance max">
-        <div class="max__title">
-          Max:
+    <validation-observer v-slot="{ handleSubmit }">
+      <form @submit.prevent>
+        <div class="ctm-modal__main main">
+          <div class="main__title">
+            Amount
+          </div>
+          <base-input
+            v-model="amount"
+            :type="'number'"
+            :name="'Amount'"
+            :placeholder="`Amount in ${symbol}`"
+            :description="'MAX'"
+            rules="required|number"
+            mode="desc"
+            @handleClickBtn="setMax"
+            @keydown.enter="onEnter($event, handleSubmit, withdraw)"
+          />
+          <div class="main__balance max">
+            <div class="max__title">
+              Max:
+            </div>
+            <div class="max__value">
+              {{ Floor(userStaked, 4) }}  {{ symbol }}
+            </div>
+          </div>
+          <div class="main__buttons">
+            <base-btn
+              mode="secondary"
+              @click="close"
+            >
+              Close
+            </base-btn>
+            <base-btn
+              mode="primary"
+              @click="handleSubmit(withdraw)"
+            >
+              Withdraw
+            </base-btn>
+          </div>
         </div>
-        <div class="max__value">
-          {{ Floor(userStaked, 4) }}  {{ symbol }}
-        </div>
-      </div>
-      <div class="main__buttons">
-        <base-btn
-          mode="secondary"
-          @click="close"
-        >
-          Close
-        </base-btn>
-        <base-btn
-          mode="primary"
-          @click="withdraw"
-        >
-          Withdraw
-        </base-btn>
-      </div>
-    </div>
+      </form>
+    </validation-observer>
   </ctm-modal-box>
 </template>
 <script>
@@ -93,6 +101,12 @@ export default {
         this.updateRewardData(),
       ]);
       this.SetLoader(false);
+    },
+    onEnter(e, handler, callback) {
+      if (!e.ctrlKey) {
+        e.preventDefault();
+        handler(callback);
+      }
     },
   },
 };
