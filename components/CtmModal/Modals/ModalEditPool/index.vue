@@ -1,53 +1,63 @@
 <template>
   <ctm-modal-box title="Edit pool">
-    <div class="ctm-modal__main main">
-      <div class="main__title">
-        Tokens per block
-      </div>
-      <base-input
-        v-model="tokensPerBlockClone"
-        :placeholder="'1000'"
-        class="main__input"
-      />
-      <div class="main__title">
-        APY tax
-      </div>
-      <base-input
-        v-model="apyTaxClone"
-        :placeholder="'0.7%'"
-        class="main__input"
-      />
-      <div class="main__title">
-        Pool rewards
-      </div>
-      <base-input
-        v-model="premiumCoeffClone"
-        :placeholder="'20.06%'"
-        class="main__input"
-      />
-      <div class="main__title">
-        Status
-      </div>
-      <base-radio
-        v-model="isEnabledClone"
-        :options="optionsRadio"
-        class="main__radio"
-      />
-      <div class="main__buttons">
-        <base-btn
-          :mode="'secondary'"
-          @click="close()"
-        >
-          Close
-        </base-btn>
-        <base-btn
-          mode="primary"
-          @click="handleEditPool"
-        >
-          Save
-        </base-btn>
-      </div>
-    </div>
+    <validation-observer v-slot="{ handleSubmit }">
+      <form @submit.prevent>
+        <div class="ctm-modal__main main">
+          <div class="main__title">
+            Tokens per block
+          </div>
+          <base-input
+            v-model="tokensPerBlockClone"
+            :type="'number'"
+            :placeholder="'1000'"
+            rules="required"
+            class="main__input"
+          />
+          <div class="main__title">
+            APY tax
+          </div>
+          <base-input
+            v-model="apyTaxClone"
+            :type="'number'"
+            :placeholder="'0.7'"
+            rules="required"
+            class="main__input"
+          />
+          <div class="main__title">
+            Pool rewards
+          </div>
+          <base-input
+            v-model="premiumCoeffClone"
+            :type="'number'"
+            :placeholder="'20.06'"
+            rules="required"
+            class="main__input"
+          />
+          <div class="main__title">
+            Status
+          </div>
+          <base-radio
+            v-model="isEnabledClone"
+            :options="optionsRadio"
+            class="main__radio"
+          />
+          <div class="main__buttons">
+            <base-btn
+              :mode="'secondary'"
+              @click="close()"
+            >
+              Close
+            </base-btn>
+            <base-btn
+              mode="primary"
+              @click="handleSubmit(handleEditPool)"
+            >
+              Save
+            </base-btn>
+          </div>
+        </div>
+      </form>
+    </validation-observer>
   </ctm-modal-box>
 </template>
 <script>
@@ -123,8 +133,6 @@ export default {
       this.$store.dispatch('modals/hide');
     },
     async handleEditPool() {
-      // console.log(this.poolAddress, this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.isEnabled);
-      // console.log(this.poolAddress, this.tokensPerBlockClone, this.apyTaxClone, this.premiumCoeff, this.isEnabledClone);
       this.SetLoader(true);
       const {
         poolAddress, tokensPerBlockClone, apyTaxClone, premiumCoeffClone, isEnabledClone,

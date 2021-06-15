@@ -11,10 +11,10 @@
             :type="'number'"
             :placeholder="`Amount in ${symbol}`"
             :description="'MAX'"
-            rules="required|min:2"
+            rules="required"
             mode="desc"
             @handleClickBtn="setMax"
-            @keydown.enter="onEnter($event, handleSubmit, click)"
+            @keydown.enter="onEnter($event, handleSubmit, deposit)"
           />
           <div class="main__balance balance">
             <div class="balance__title">
