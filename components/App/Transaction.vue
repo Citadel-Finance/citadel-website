@@ -32,7 +32,7 @@
           </div>
         </div>
         <div
-          v-if="isConnected"
+          v-if="isConnected && txs.length"
           class="transactions__pagination pagination"
         >
           <div class="pagination__wrapper">
