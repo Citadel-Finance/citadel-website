@@ -107,6 +107,15 @@
           </div>
         </div>
       </div>
+      <div class="pools__pagination pagination">
+        <div class="pagination__wrapper">
+          <span class="icon-chevron_left" />
+          <span class="pagination__page">1</span>
+          <span class="pagination__page">2</span>
+          <span class="pagination__page">3</span>
+          <span class="icon-chevron_right" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -328,6 +337,47 @@ export default {
     &:hover {
       color: #7B6C86;
     }
+  }
+}
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  &__wrapper {
+    font-family: sans-serif, 'Arial';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    grid-gap: 10px;
+    letter-spacing: 0.05em;
+    color: #240A36;
+    width: auto;
+    background: rgba(36, 11, 54, 0.04);
+    border-radius: 10px;
+    padding: 5px;
+    height: 40px;
+  }
+  &__page {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    transition: 0.3s ease-out;
+    &:hover {
+      background: #C31433;
+      color: #FFFFFF;
+      cursor: pointer;
+    }
+  }
+  span::before {
+    font-size: 24px;
+    color: #C31433;
   }
 }
 </style>
