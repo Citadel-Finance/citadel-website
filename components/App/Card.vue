@@ -5,8 +5,14 @@
     </div>
     <hr class="cards__line">
     <div
+      v-if="isDisconnected"
+      class="cards__value cards__value_disc"
+    >
+      Connect wallet
+    </div>
+    <div
+      v-else
       class="cards__value"
-      :class="cardClass"
     >
       {{ value }}
     </div>
@@ -28,6 +34,10 @@ export default {
     mode: {
       type: String,
       default: '',
+    },
+    isDisconnected: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

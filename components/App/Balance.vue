@@ -11,8 +11,8 @@
         />
         <Card
           title="Balance CitaDEL"
-          :value="`${Floor(ctlToken.balance) || 'Wallet disconnected'}`"
-          mode="disconnected"
+          :value="`${Floor(ctlToken.balance)}`"
+          :is-disconnected="!isConnected"
         />
         <Card
           title="Rewards CitaDEL"
@@ -111,7 +111,8 @@ export default {
 }
 
 .claim {
-  height: 100%;
+  transition: 0s;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
