@@ -322,13 +322,13 @@ export default {
           key: address,
           value: r,
         });
-      }, { depositor: [getUserAddress()] });
+      }, { user: [getUserAddress()] });
       pool.subscribeEvents('Withdrew', (r) => {
         commit('pushPoolsEventsMap', {
           key: address,
           value: r,
         });
-      }, { receiver: [getUserAddress()] });
+      }, { user: [getUserAddress()] });
       // pool.subscribeEvents('totalHistory', (r) => {
       //   console.log(r);
       // });

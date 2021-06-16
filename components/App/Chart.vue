@@ -134,7 +134,9 @@ export default {
     },
   },
   async mounted() {
-    await this.fetchTotalDeposited();
+    await this.fetchTotalDeposited({
+      periodType: 'all',
+    });
   },
   methods: {
     ...mapActions({

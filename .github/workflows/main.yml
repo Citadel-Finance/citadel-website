@@ -5,33 +5,34 @@ on:
     branches:
       - master
       - develop
+      
 
 jobs:
- # deploy-master:
-#
- #   runs-on: ubuntu-latest
- #   if: github.ref == 'refs/heads/master'
-#
- #   steps:
- #   - name: Copy code files to container
- #     uses: actions/checkout@v2
-#
- #   - name: Install Node.js
- #     uses: actions/setup-node@v1
- #     with:
- #       node-version: '12.x'
-#
- #   - name: Install npm dependencies
- #     run: npm install
-#
-   # - name: Run generate task
-   #   run: npm run generate
-   #   env:
-   #       INFURA: ${{ secrets.INFURA_MAINNET }}
-   #       NETWORK_ID: ${{ secrets.NETWORK_ID_MAINNET }}
-   #       FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_MAINNET }}
-   #       FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_MAINNET }}
-   #       PORTIS_ID: ${{ secrets.PORTIS_ID }}
+  deploy-master:
+
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+
+    steps:
+    - name: Copy code files to container
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '12.x'
+
+    - name: Install npm dependencies
+      run: npm install
+
+    - name: Run generate task
+      run: npm run generate
+      env:
+          INFURA: ${{ secrets.INFURA_MAINNET }}
+          NETWORK_ID: ${{ secrets.NETWORK_ID_MAINNET }}
+          FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_MAINNET }}
+          FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_MAINNET }}
+          PORTIS_ID: ${{ secrets.PORTIS_ID }}
 
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.1
@@ -43,7 +44,7 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
 
-   deploy-develop:
+  deploy-develop:
 
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
@@ -68,7 +69,7 @@ jobs:
           FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_TESTNET }}
           FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_TESTNET }}
           PORTIS_ID: ${{ secrets.PORTIS_ID }}
-
+          API_URL: ${{ secrets.API_URL }}
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.1
         env:
@@ -77,7 +78,7 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET_TESTNET }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
 
   deploy-develop-bsc:
 
@@ -113,40 +114,6 @@ jobs:
           SOURCE: "dist/"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET_TESTNET_BSC }}
+          TARGET: ${{ secrets.REMOTE_TARGET }}
 
-  deploy-stage:
-
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/stage'
-
-    steps:
-    - name: Copy code files to container
-      uses: actions/checkout@v2
-
-    - name: Install Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-
-    - name: Install npm dependencies
-      run: npm install
-
-    - name: Run generate task
-      run: npm run generate
-      env:
-          INFURA: ${{ secrets.INFURA_MAINNET }}
-          NETWORK_ID: ${{ secrets.NETWORK_ID_MAINNET }}
-          FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_MAINNET }}
-          FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_MAINNET }}
-          PORTIS_ID: ${{ secrets.PORTIS_ID }}
-
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v2.1.1
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET_MAINNET_STAGE }}
+  

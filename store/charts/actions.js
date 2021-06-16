@@ -1,10 +1,8 @@
-import BigNumber from 'bignumber.js';
-import axios from 'axios';
-
 export default {
-  async fetchTotalDeposited({ commit }) {
+  async fetchTotalDeposited({ commit }, payload) {
     try {
-      const r = await axios.get('http://192.168.88.117:3000/api/v1/graph/totalDeposited/all');
+      const { chartName, periodType } = payload;
+      const r = await this.$axios.get(`/v1/graph/totalDeposited/${periodType}`);
       console.log(r);
       commit('setTotalStakedData', r.data.result.data);
     } catch (e) {
