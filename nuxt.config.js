@@ -50,6 +50,7 @@ export default {
     'bootstrap-vue/nuxt',
     'nuxt-i18n',
     'cookie-universal-nuxt',
+    '@nuxtjs/axios',
   ],
   build: {
     transpile: [
@@ -76,8 +77,12 @@ export default {
       alwaysRedirect: true,
     },
   },
+  axios: {
+    baseURL: process.env.API_URL,
+  },
   env: {
     ADDRESS_FACTORY: process.env.ADDRESS_FACTORY,
     IS_MAINNET: process.env.IS_MAINNET,
+    API_URL: process.env.API_URL,
   },
 };
