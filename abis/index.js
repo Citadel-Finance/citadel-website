@@ -607,19 +607,14 @@ export const Pool = [
   {
     inputs: [
       {
-        internalType: 'contract IBEP20',
+        internalType: 'address',
         name: 'token_',
         type: 'address',
       },
       {
-        internalType: 'contract CTLToken',
+        internalType: 'address',
         name: 'ctlToken_',
         type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'startTime_',
-        type: 'uint256',
       },
       {
         internalType: 'uint256',
@@ -687,13 +682,7 @@ export const Pool = [
       {
         indexed: true,
         internalType: 'address',
-        name: 'depositor',
-        type: 'address',
-      },
-      {
-        indexed: true,
-        internalType: 'contract IBEP20',
-        name: 'token',
+        name: 'user',
         type: 'address',
       },
       {
@@ -755,13 +744,7 @@ export const Pool = [
       {
         indexed: true,
         internalType: 'address',
-        name: 'borrower',
-        type: 'address',
-      },
-      {
-        indexed: true,
-        internalType: 'contract IBEP20',
-        name: 'token',
+        name: 'user',
         type: 'address',
       },
       {
@@ -886,13 +869,7 @@ export const Pool = [
       {
         indexed: true,
         internalType: 'address',
-        name: 'receiver',
-        type: 'address',
-      },
-      {
-        indexed: true,
-        internalType: 'contract IBEP20',
-        name: 'token',
+        name: 'user',
         type: 'address',
       },
       {
@@ -1030,19 +1007,6 @@ export const Pool = [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'apyTax',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
     inputs: [
       {
         internalType: 'address',
@@ -1100,19 +1064,6 @@ export const Pool = [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'borrowed',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
     inputs: [
       {
         internalType: 'address',
@@ -1136,32 +1087,6 @@ export const Pool = [
     name: 'claimRewards',
     outputs: [],
     stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'ctlToken',
-    outputs: [
-      {
-        internalType: 'contract CTLToken',
-        name: '',
-        type: 'address',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'ctlTps',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -1311,12 +1236,22 @@ export const Pool = [
             type: 'uint256',
           },
           {
-            internalType: 'contract IBEP20',
+            internalType: 'uint256',
+            name: 'tokensPerStaked',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'ctlPerStaked',
+            type: 'uint256',
+          },
+          {
+            internalType: 'contract IERC20',
             name: 'token',
             type: 'address',
           },
           {
-            internalType: 'contract CTLToken',
+            internalType: 'contract ICTLToken',
             name: 'ctlToken',
             type: 'address',
           },
@@ -1327,12 +1262,12 @@ export const Pool = [
           },
           {
             internalType: 'string',
-            name: 'symbol',
+            name: 'name',
             type: 'string',
           },
           {
             internalType: 'string',
-            name: 'name',
+            name: 'symbol',
             type: 'string',
           },
         ],
@@ -1517,6 +1452,11 @@ export const Pool = [
             type: 'uint256',
           },
           {
+            internalType: 'uint256',
+            name: 'totalProfit',
+            type: 'uint256',
+          },
+          {
             internalType: 'bool',
             name: 'is_admin',
             type: 'bool',
@@ -1611,19 +1551,6 @@ export const Pool = [
   },
   {
     inputs: [],
-    name: 'premiumCoeff',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'prevMintingBlock',
     outputs: [
       {
@@ -1654,19 +1581,6 @@ export const Pool = [
     type: 'function',
   },
   {
-    inputs: [],
-    name: 'returned',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
     inputs: [
       {
         internalType: 'bytes32',
@@ -1686,38 +1600,12 @@ export const Pool = [
   },
   {
     inputs: [],
-    name: 'startTime',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'symbol',
     outputs: [
       {
         internalType: 'string',
         name: '',
         type: 'string',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'token',
-    outputs: [
-      {
-        internalType: 'contract IBEP20',
-        name: '',
-        type: 'address',
       },
     ],
     stateMutability: 'view',
@@ -1738,46 +1626,7 @@ export const Pool = [
   },
   {
     inputs: [],
-    name: 'totalProfit',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'totalStaked',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'totalSupply',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'tps',
     outputs: [
       {
         internalType: 'uint256',
@@ -1886,18 +1735,8 @@ export const Pool = [
       },
       {
         internalType: 'uint256',
-        name: 'returned',
-        type: 'uint256',
-      },
-      {
-        internalType: 'uint256',
         name: 'profit',
         type: 'uint256',
-      },
-      {
-        internalType: 'bool',
-        name: 'lock',
-        type: 'bool',
       },
     ],
     stateMutability: 'view',
@@ -1970,7 +1809,7 @@ export const Factory = [
   {
     inputs: [
       {
-        internalType: 'contract CTLToken',
+        internalType: 'address',
         name: 'ctlToken_',
         type: 'address',
       },
@@ -1983,7 +1822,7 @@ export const Factory = [
     inputs: [
       {
         indexed: false,
-        internalType: 'contract IBEP20',
+        internalType: 'address',
         name: 'token',
         type: 'address',
       },
@@ -2087,7 +1926,33 @@ export const Factory = [
   },
   {
     inputs: [],
+    name: 'BORROWER_ROLE',
+    outputs: [
+      {
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'DEFAULT_ADMIN_ROLE',
+    outputs: [
+      {
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'MINTER_ROLE',
     outputs: [
       {
         internalType: 'bytes32',
@@ -2101,14 +1966,9 @@ export const Factory = [
   {
     inputs: [
       {
-        internalType: 'contract IBEP20',
+        internalType: 'address',
         name: 'token',
         type: 'address',
-      },
-      {
-        internalType: 'uint256',
-        name: 'startTime',
-        type: 'uint256',
       },
       {
         internalType: 'uint256',
@@ -2148,7 +2008,7 @@ export const Factory = [
             type: 'address',
           },
           {
-            internalType: 'contract IBEP20',
+            internalType: 'address',
             name: 'token',
             type: 'address',
           },
@@ -2178,7 +2038,7 @@ export const Factory = [
     name: 'ctlToken',
     outputs: [
       {
-        internalType: 'contract CTLToken',
+        internalType: 'address',
         name: '',
         type: 'address',
       },
@@ -2189,7 +2049,7 @@ export const Factory = [
   {
     inputs: [
       {
-        internalType: 'contract IBEP20',
+        internalType: 'address',
         name: 'token',
         type: 'address',
       },
@@ -2202,7 +2062,7 @@ export const Factory = [
   {
     inputs: [
       {
-        internalType: 'contract IBEP20',
+        internalType: 'address',
         name: 'token',
         type: 'address',
       },
@@ -2338,26 +2198,7 @@ export const Factory = [
   {
     inputs: [
       {
-        internalType: 'contract IBEP20',
-        name: 'token',
-        type: 'address',
-      },
-    ],
-    name: 'isPoolEnabled',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [
-      {
-        internalType: 'contract IBEP20',
+        internalType: 'address',
         name: '',
         type: 'address',
       },
@@ -2415,8 +2256,13 @@ export const Factory = [
             name: 'isAdmin',
             type: 'bool',
           },
+          {
+            internalType: 'bool',
+            name: 'isBorrower',
+            type: 'bool',
+          },
         ],
-        internalType: 'struct CitadelFactory.PoolsRewardInfo[]',
+        internalType: 'struct CitadelFactory.PoolRewards[]',
         name: '',
         type: 'tuple[]',
       },

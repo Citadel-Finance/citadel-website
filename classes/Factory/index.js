@@ -44,7 +44,6 @@ export default class Factory extends BasicSmartContract {
 
   async createPool({
     tokenAddress,
-    startTime,
     tokensPerBlock,
     apyTax,
     premiumCoeff,
@@ -57,7 +56,6 @@ export default class Factory extends BasicSmartContract {
       premiumCoeff = shiftedBy(premiumCoeff, +decimals);
       const r = await this.inst().addPool(
         tokenAddress,
-        startTime,
         tokensPerBlock,
         apyTax,
         premiumCoeff,
