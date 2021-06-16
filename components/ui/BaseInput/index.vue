@@ -138,7 +138,7 @@ export default {
     width: 100%;
     padding: 20px;
     border-radius: 10px;
-    background: transparent;
+    background: #F6F5F7;
     border: 1px solid #F6F5F7;
     transition: 0.2s ease-in-out;
     &_desc {
@@ -148,10 +148,6 @@ export default {
       padding-left: 50px;
       border: 1px solid #C31433 !important;
     }
-    &:hover {
-      background: #F6F5F7;
-      border: 1px solid #DA7284;
-    }
     &:focus-within {
       background: #FFFFFF;
       border: 1px solid #DA7284;
@@ -159,6 +155,9 @@ export default {
     &:valid {
       background: #FFFFFF;
       border: 1px solid #D4CED7;
+    }
+    &:hover {
+      border: 1px solid #DA7284;
     }
   }
   &__description {
