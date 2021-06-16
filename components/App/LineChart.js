@@ -15,7 +15,8 @@ export default {
         mode: 'index',
         intersect: false,
         callbacks: {
-          title: () => '',
+          // title: () => '',
+          title: (item) => item[0].label,
           label: (item) => `${item.value} OUT`,
         },
         displayColors: false,
