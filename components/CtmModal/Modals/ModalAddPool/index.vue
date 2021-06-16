@@ -116,7 +116,6 @@ export default {
       });
       await this.$store.dispatch('user/updatePoolsAndBalances');
       this.SetLoader(false);
-      this.close(); // TODO success modal
     },
   },
 };

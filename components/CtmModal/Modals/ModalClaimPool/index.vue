@@ -2,36 +2,24 @@
   <ctm-modal-box title="Claim">
     <!--    <div class="ctm-modal__box">-->
     <div class="ctm-modal__main main">
-      <div class="main__text">
-        {{ claimText }}
-      </div>
-      <div class="main__rewards rewards">
-        <div>
-          <div
-            v-for="(item, i) in availablePoolsRewardNoZero"
-            :key="i"
-          >
-            {{ getSymbolByPool(item.pool) }} {{ Floor(item.reward) }}
-          </div>
+      <!--      <div class="main__text">-->
+      <!--        {{ claimText }}-->
+      <!--      </div>-->
+      <div
+        v-for="(item, i) in availablePoolsRewardNoZero"
+        :key="i"
+        class="main__rewards rewards"
+      >
+        <div class="rewards__titles">
+          <span class="rewards__title">
+            {{ getSymbolByPool(item.pool) }}
+          </span>
         </div>
-        <!--        <div class="rewards__titles">-->
-        <!--          <span-->
-        <!--            v-for="(item, i) in rewardsTitle"-->
-        <!--            :key="i"-->
-        <!--            class="rewards__title"-->
-        <!--          >-->
-        <!--            {{ item }}-->
-        <!--          </span>-->
-        <!--        </div>-->
-        <!--        <div class="rewards__values">-->
-        <!--          <span-->
-        <!--            v-for="(item, i) in rewardsValues"-->
-        <!--            :key="i"-->
-        <!--            class="rewards__value"-->
-        <!--          >-->
-        <!--            {{ item }}-->
-        <!--          </span>-->
-        <!--        </div>-->
+        <div class="rewards__values">
+          <span class="rewards__value">
+            {{ Floor(item.reward) }}
+          </span>
+        </div>
       </div>
       <div class="main__amount amount">
         <div class="amount__title">
@@ -65,7 +53,7 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   data() {
     return {
-      claimText: 'To deposit ETH, you will be prompted to confirm the deposit. ',
+      // claimText: 'To deposit ETH, you will be prompted to confirm the deposit. ',
       // amount: '100.26000000 ETH',
       // rewardsTitle: {
       //   earlyRewards: 'Early rewards:',
@@ -143,7 +131,7 @@ export default {
   background: #F6F5F7;
   border-radius: 10px;
   padding: 20px 15px;
-  margin: 20px 0 10px;
+  margin: 0 0 10px;
   display: flex;
   justify-content: space-between;
   &__titles {
@@ -166,8 +154,9 @@ export default {
 }
 .amount {
   display: flex;
-  padding: 20px 15px;
+  padding: 20px 0;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 10px;
   &__title {
     font-size: 16px;

@@ -18,7 +18,7 @@ export const BEP20 = [
       },
       {
         internalType: 'uint256',
-        name: 'maxTotalSupply_',
+        name: 'startBlock_',
         type: 'uint256',
       },
     ],
@@ -149,6 +149,19 @@ export const BEP20 = [
     ],
     name: 'Transfer',
     type: 'event',
+  },
+  {
+    inputs: [],
+    name: 'ADMIN_ROLE',
+    outputs: [
+      {
+        internalType: 'bytes32',
+        name: '',
+        type: 'bytes32',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
   },
   {
     inputs: [],
@@ -423,19 +436,6 @@ export const BEP20 = [
   },
   {
     inputs: [],
-    name: 'maxTotalSupply',
-    outputs: [
-      {
-        internalType: 'uint256',
-        name: '',
-        type: 'uint256',
-      },
-    ],
-    stateMutability: 'view',
-    type: 'function',
-  },
-  {
-    inputs: [],
     name: 'mint',
     outputs: [
       {
@@ -445,19 +445,6 @@ export const BEP20 = [
       },
     ],
     stateMutability: 'nonpayable',
-    type: 'function',
-  },
-  {
-    inputs: [],
-    name: 'mintDisabled',
-    outputs: [
-      {
-        internalType: 'bool',
-        name: '',
-        type: 'bool',
-      },
-    ],
-    stateMutability: 'view',
     type: 'function',
   },
   {
@@ -511,15 +498,40 @@ export const BEP20 = [
   },
   {
     inputs: [],
+    name: 'startBlock',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: '',
+        type: 'uint256',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
     name: 'startMint',
-    outputs: [],
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
     inputs: [],
     name: 'stopMint',
-    outputs: [],
+    outputs: [
+      {
+        internalType: 'bool',
+        name: '',
+        type: 'bool',
+      },
+    ],
     stateMutability: 'nonpayable',
     type: 'function',
   },

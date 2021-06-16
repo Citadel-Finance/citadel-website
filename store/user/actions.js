@@ -28,9 +28,7 @@ export default {
   },
   async connectWallet({ dispatch, commit }) {
     const r = await initWeb3Provider();
-    // console.log(r);
     if (!r.ok) {
-      // TODO show modal
       if (r.code === 4001) {
         await dispatch('modals/show', {
           key: modals.status,
@@ -44,6 +42,13 @@ export default {
           title: 'Error',
           status: 'error',
           text: 'Invalid chain.',
+        }, { root: true });
+      } else if (r.code === 449) {
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'Install Metamask.',
         }, { root: true });
       }
       return r;
@@ -243,7 +248,6 @@ export default {
     const bnMaxApprove = new BigNumber('1000000000').shiftedBy(token.decimals).toString();
     const { result } = await token.allowance(poolAddress);
     const { allowance } = result;
-    // console.log('allowance', allowance, amount);
     if (+allowance < +amount) {
       const approveRes = await token.approve(poolAddress, bnMaxApprove);
       if (!approveRes.ok) {
@@ -318,33 +322,64 @@ export default {
           key: address,
           value: r,
         });
-      }, { depositor: [getUserAddress()] });
+      }, { user: [getUserAddress()] });
       pool.subscribeEvents('Withdrew', (r) => {
         commit('pushPoolsEventsMap', {
           key: address,
           value: r,
         });
-      }, { receiver: [getUserAddress()] });
+      }, { user: [getUserAddress()] });
       // pool.subscribeEvents('totalHistory', (r) => {
       //   console.log(r);
       // });
     });
   },
-  async createPool({ getters }, payload) {
+  async createPool({ getters, dispatch }, payload) {
     const { getFactory: factory } = getters;
-    await factory.createPool(payload);
+    // await factory.createPool(payload);
+    const createRes = await factory.createPool(payload);
+    if (!createRes.ok) {
+      if (createRes.code === 500) {
+        console.log('edit error');
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'User denied creating pool.',
+        }, { root: true });
+        return;
+      }
+    }
+    await dispatch('modals/show', {
+      key: modals.status,
+      title: 'Success',
+      status: 'success',
+      text: 'Pool has been created.',
+    }, { root: true });
   },
   async editPool({ getters, dispatch }, payload) {
     const { poolAddress } = payload;
     const { getPoolsMap: poolsMap } = getters;
     const pool = poolsMap[poolAddress];
-    await pool.editPool(payload);
-    // await dispatch('modals/show', {
-    //   key: modals.status,
-    //   title: 'Success',
-    //   status: 'success',
-    //   text: 'Pool has been edited.',
-    // }, { root: true });
+    const editRes = await pool.editPool(payload);
+    if (!editRes.ok) {
+      if (editRes.code === 500) {
+        console.log('edit error');
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'User denied editing pool.',
+        }, { root: true });
+        return;
+      }
+    }
+    await dispatch('modals/show', {
+      key: modals.status,
+      title: 'Success',
+      status: 'success',
+      text: 'Pool has been edited.',
+    }, { root: true });
   },
 
   claimAll({ getters }) {
