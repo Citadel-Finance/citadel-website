@@ -43,7 +43,7 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET }}
 
-  deploy-develop:
+   deploy-develop:
 
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/develop'
