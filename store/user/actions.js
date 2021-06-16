@@ -59,11 +59,11 @@ export default {
     await Promise.all([
       dispatch('initInstsAll'),
       dispatch('fetchPoolsUserData'),
-      dispatch('fetchAllBalances'),
       dispatch('updateRewardData'),
       dispatch('fetchIsUserAdmin'),
     ]);
     commit('setIsConnected', true);
+    dispatch('fetchAllBalances');
 
     return r;
   },
