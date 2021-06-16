@@ -107,26 +107,18 @@
           </div>
         </div>
       </div>
-      <div class="pools__pagination pagination">
-        <div class="pagination__wrapper">
-          <span
-            class="icon-chevron_left pagination__arrow"
-            :class="{'pagination__arrow_disabled': currentPage === 1}"
-            @click="setPageSettings(currentPage - 1)"
-          />
-          <span
-            v-for="i of amountOfPages"
-            :key="`pools__page_${i}`"
-            class="pagination__page"
-            :class="{'pagination__page_active': currentPage === i}"
-            @click="setPageSettings(i)"
-          >{{ i }}</span>
-          <span
-            class="icon-chevron_right pagination__arrow"
-            :class="{'pagination__arrow_disabled': currentPage === amountOfPages}"
-            @click="setPageSettings(currentPage + 1)"
-          />
-        </div>
+      <div
+        v-if="amountOfPages > 1"
+        class="pools__pagination"
+      >
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="amountOfPools"
+          :per-page="itemsPerPage"
+          first-number
+          last-number
+          class="pagination"
+        />
       </div>
     </div>
   </div>
@@ -147,7 +139,6 @@ export default {
     ],
     itemsPerPage: 10,
     currentPage: 1,
-    startIndex: 0,
   }),
   computed: {
     ...mapGetters({
@@ -174,7 +165,12 @@ export default {
       return Math.ceil(this.amountOfPools / this.itemsPerPage);
     },
     pageItems() {
-      return this.arrayOfPools.slice(this.startIndex, (this.itemsPerPage + this.startIndex));
+      const items = [];
+      for (let i = 0; i < this.itemsPerPage; i += 1) {
+        const index = (this.currentPage - 1) * this.itemsPerPage + i;
+        if (this.arrayOfPools[index]) items.push(this.arrayOfPools[index]);
+      }
+      return items;
     },
   },
   methods: {
@@ -193,10 +189,6 @@ export default {
         key: modals.editPool,
         poolAddress,
       });
-    },
-    setPageSettings(i) {
-      this.currentPage = i;
-      this.startIndex = this.itemsPerPage * (this.currentPage - 1);
     },
   },
 };
@@ -259,6 +251,10 @@ export default {
         color: #C31433;
       }
     }
+  }
+  &__pagination {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 .table-main {
@@ -353,7 +349,6 @@ export default {
   align-items: center;
   span {
     padding: 5px;
-
     transition: 0.3s ease-in-out;
     cursor: pointer;
     border-radius: 7px;
@@ -369,62 +364,68 @@ export default {
     }
   }
 }
-.pagination {
+.pagination::v-deep {
+  font-family: sans-serif, 'Arial';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 120%;
   display: flex;
-  justify-content: flex-end;
-  &__wrapper {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 120%;
+  align-items: center;
+  grid-gap: 10px;
+  letter-spacing: 0.05em;
+  background: rgba(36, 11, 54, 0.04);
+  border-radius: 10px;
+  padding: 5px;
+  height: 40px;
+  .page-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    grid-gap: 10px;
-    letter-spacing: 0.05em;
     color: #240A36;
-    width: auto;
-    background: rgba(36, 11, 54, 0.04);
-    border-radius: 10px;
-    padding: 5px;
-    height: 40px;
+    &:first-child,
+    &:last-child {
+      font-size: 24px;
+    }
+    &.active {
+      button {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        background: #C31433;
+        color: #FFFFFF;
+        border-radius: 5px;
+      }
+    }
+    .page-link {
+      width: 30px;
+      height: 30px;
+      color: #240A36;
+      border: none;
+      background: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:focus {
+        box-shadow: none;
+      }
+    }
   }
-  &__page {
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
+  .page-link {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.3s ease-out;
-    &:hover {
-      cursor: pointer;
-    }
-    &_active {
-      background: #C31433;
-      color: #FFFFFF;
-    }
   }
-  &__arrow {
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    &:hover {
-      background: #FFFFFF;
-      color: #C31433;
-      cursor: pointer;
+  .disabled {
+    .page-link {
+      &:first-child,
+      &:last-child {
+        opacity: 0.2;
+      }
     }
-    &_disabled {
-      opacity: 0.2;
-      pointer-events: none;
-    }
-  }
-  span::before {
-    font-size: 24px;
-    color: #C31433;
   }
 }
 </style>
