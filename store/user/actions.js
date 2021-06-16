@@ -28,9 +28,7 @@ export default {
   },
   async connectWallet({ dispatch, commit }) {
     const r = await initWeb3Provider();
-    // console.log(r);
     if (!r.ok) {
-      // TODO show modal
       if (r.code === 4001) {
         await dispatch('modals/show', {
           key: modals.status,
@@ -44,6 +42,13 @@ export default {
           title: 'Error',
           status: 'error',
           text: 'Invalid chain.',
+        }, { root: true });
+      } else if (r.code === 449) {
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'Install Metamask.',
         }, { root: true });
       }
       return r;
