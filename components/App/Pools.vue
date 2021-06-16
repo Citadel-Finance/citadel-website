@@ -9,7 +9,7 @@
     <div class="pools__wrapper">
       <div class="pools__header">
         <div class="pools__title">
-          Pools {{ amountOfPools }}
+          Pools ({{ amountOfPools }})
         </div>
         <div
           v-if="isUserAdmin && isConnected"
@@ -49,7 +49,7 @@
         </div>
         <div class="table-main__body">
           <div
-            v-for="(poolAddress, i) in Object.keys(poolsMap)"
+            v-for="(poolAddress, i) in pageItems"
             :key="`pool__item-${i}`"
             class="table-main__tr"
           >
@@ -107,21 +107,18 @@
           </div>
         </div>
       </div>
-      <div class="pools__pagination pagination">
-        <div class="pagination__wrapper">
-          <span class="icon-chevron_left" />
-          <span class="pagination__page">1</span>
-          <span class="pagination__page">2</span>
-          <span class="pagination__page">3</span>
-          <!--          <span-->
-          <!--            v-for="i of amountOfPages"-->
-          <!--            :key="`pools__page_${i}`"-->
-          <!--            class="pagination__page"-->
-          <!--            :class="{'pagination__page_active': currentPage === i}"-->
-          <!--            @click="getPageItems(i)"-->
-          <!--          >i</span>-->
-          <span class="icon-chevron_right" />
-        </div>
+      <div
+        v-if="amountOfPages > 1"
+        class="pools__pagination"
+      >
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="amountOfPools"
+          :per-page="itemsPerPage"
+          first-number
+          last-number
+          class="pagination"
+        />
       </div>
     </div>
   </div>
@@ -140,10 +137,8 @@ export default {
       { key: 'apy', label: 'APY' },
       { key: 'liquidity', label: 'Liquidity (USD)' },
     ],
-    itemsPerPage: 1,
+    itemsPerPage: 10,
     currentPage: 1,
-    startIndex: 0,
-    pageItems: [],
   }),
   computed: {
     ...mapGetters({
@@ -159,16 +154,24 @@ export default {
 
       return isAdminArray.includes(true);
     },
+    arrayOfPools() {
+      const { poolsMap } = this;
+      return Object.keys(poolsMap);
+    },
     amountOfPools() {
-      return this.poolsMap.length;
+      return this.arrayOfPools.length;
     },
     amountOfPages() {
       return Math.ceil(this.amountOfPools / this.itemsPerPage);
     },
-  },
-  async mounted() {
-    await console.log(this.poolsMap);
-    // this.pageItems = this.poolsMap.slice(this.startIndex, this.itemsPerPage);
+    pageItems() {
+      const items = [];
+      for (let i = 0; i < this.itemsPerPage; i += 1) {
+        const index = (this.currentPage - 1) * this.itemsPerPage + i;
+        if (this.arrayOfPools[index]) items.push(this.arrayOfPools[index]);
+      }
+      return items;
+    },
   },
   methods: {
     getIsEnabledByAddress(poolAddress) {
@@ -186,16 +189,6 @@ export default {
         key: modals.editPool,
         poolAddress,
       });
-    },
-    getPageItems(i) {
-      this.currentPage = i;
-      if (i === 0) {
-        this.currentPage = this.amountOfPools;
-      } else if (i === (this.amountOfPools + 1)) {
-        this.currentPage = 1;
-      }
-      this.startIndex = this.itemsPerPage * (this.currentPage - 1);
-      // this.pageItems = this.poolsMap.slice(this.startIndex, (this.startIndex + this.itemsPerPage));
     },
   },
 };
@@ -258,6 +251,10 @@ export default {
         color: #C31433;
       }
     }
+  }
+  &__pagination {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 .table-main {
@@ -352,7 +349,6 @@ export default {
   align-items: center;
   span {
     padding: 5px;
-
     transition: 0.3s ease-in-out;
     cursor: pointer;
     border-radius: 7px;
@@ -368,43 +364,68 @@ export default {
     }
   }
 }
-.pagination {
+.pagination::v-deep {
+  font-family: sans-serif, 'Arial';
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 120%;
   display: flex;
-  justify-content: flex-end;
-  &__wrapper {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 120%;
-    display: flex;
-    align-items: center;
-    grid-gap: 10px;
-    letter-spacing: 0.05em;
-    color: #240A36;
-    width: auto;
-    background: rgba(36, 11, 54, 0.04);
-    border-radius: 10px;
-    padding: 5px;
-    height: 40px;
-  }
-  &__page {
+  align-items: center;
+  grid-gap: 10px;
+  letter-spacing: 0.05em;
+  background: rgba(36, 11, 54, 0.04);
+  border-radius: 10px;
+  padding: 5px;
+  height: 40px;
+  .page-item {
     width: 30px;
     height: 30px;
     border-radius: 6px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: 0.3s ease-out;
-    &:hover {
-      background: #C31433;
-      color: #FFFFFF;
-      cursor: pointer;
+    color: #240A36;
+    &:first-child,
+    &:last-child {
+      font-size: 24px;
+    }
+    &.active {
+      button {
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        background: #C31433;
+        color: #FFFFFF;
+        border-radius: 5px;
+      }
+    }
+    .page-link {
+      width: 30px;
+      height: 30px;
+      color: #240A36;
+      border: none;
+      background: inherit;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:focus {
+        box-shadow: none;
+      }
     }
   }
-  span::before {
-    font-size: 24px;
-    color: #C31433;
+  .page-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .disabled {
+    .page-link {
+      &:first-child,
+      &:last-child {
+        opacity: 0.2;
+      }
+    }
   }
 }
 </style>
