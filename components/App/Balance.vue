@@ -7,11 +7,12 @@
       <div class="balance__cards cards">
         <Card
           title="Supply CitaDEL"
-          :value="`${ctlToken.totalSupply}`"
+          :value="`${ctlToken.totalSupply || '-'}`"
         />
         <Card
           title="Balance CitaDEL"
-          :value="`${Floor(ctlToken.balance)}`"
+          :value="`${Floor(ctlToken.balance) || 'Wallet disconnected'}`"
+          mode="disconnected"
         />
         <Card
           title="Rewards CitaDEL"

@@ -4,7 +4,10 @@
       {{ title }}
     </div>
     <hr class="cards__line">
-    <div class="cards__value">
+    <div
+      class="cards__value"
+      :class="cardClass"
+    >
       {{ value }}
     </div>
   </div>
@@ -21,6 +24,22 @@ export default {
     value: {
       type: String,
       default: '',
+    },
+    mode: {
+      type: String,
+      default: '',
+    },
+  },
+  computed: {
+    cardClass() {
+      const {
+        mode,
+      } = this;
+      return [
+        {
+          cards__value_disc: mode === 'disconnected',
+        },
+      ];
     },
   },
 };
@@ -57,6 +76,12 @@ export default {
     font-size: 20px;
     line-height: 24px;
     color: #240B36;
+    &_disc {
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 18px;
+      color: #D4CED7;
+    }
   }
 }
 </style>
