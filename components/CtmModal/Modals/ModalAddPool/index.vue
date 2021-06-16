@@ -79,7 +79,6 @@ import { mapGetters } from 'vuex';
 export default {
   data: () => ({
     tokenAddress: '',
-    startTime: '0',
     tokensPerBlock: '',
     apyTax: '',
     premiumCoeff: '',
@@ -106,11 +105,10 @@ export default {
       this.SetLoader(true);
       console.log(this.tokensPerBlock, this.apyTax, this.premiumCoeff, this.isEnabled);
       const {
-        tokenAddress, startTime, tokensPerBlock, apyTax, premiumCoeff, isEnabled,
+        tokenAddress, tokensPerBlock, apyTax, premiumCoeff, isEnabled,
       } = this;
       await this.$store.dispatch('user/createPool', {
         tokenAddress,
-        startTime,
         tokensPerBlock,
         apyTax,
         premiumCoeff,
@@ -118,6 +116,7 @@ export default {
       });
       await this.$store.dispatch('user/updatePoolsAndBalances');
       this.SetLoader(false);
+      this.close(); // TODO success modal
     },
   },
 };
