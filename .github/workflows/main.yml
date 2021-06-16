@@ -69,7 +69,7 @@ jobs:
           FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_TESTNET }}
           FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_TESTNET }}
           PORTIS_ID: ${{ secrets.PORTIS_ID }}
-
+          API_URL: ${{ secrets.API_URL }}
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.1
         env:
