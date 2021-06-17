@@ -8,7 +8,7 @@
       v-if="isDisconnected"
       class="cards__value cards__value_disc"
     >
-      Connect wallet
+      Wallet disconnected
     </div>
     <div
       v-else
@@ -28,10 +28,6 @@ export default {
       type: String,
     },
     value: {
-      type: String,
-      default: '',
-    },
-    mode: {
       type: String,
       default: '',
     },

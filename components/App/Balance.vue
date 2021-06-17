@@ -17,6 +17,7 @@
         <Card
           title="Rewards CitaDEL"
           :value="`${Floor(availableCtlReward)}`"
+          :is-disconnected="!isConnected"
         />
         <Card
           title="Price CitaDEL"
