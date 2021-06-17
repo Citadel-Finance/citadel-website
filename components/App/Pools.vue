@@ -199,10 +199,10 @@ export default {
   &_auth {
     .table-main {
       &__head {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
       }
       &__link {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
       }
     }
   }
