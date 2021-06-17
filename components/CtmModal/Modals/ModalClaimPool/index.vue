@@ -1,10 +1,12 @@
 <template>
   <ctm-modal-box title="Claim">
-    <!--    <div class="ctm-modal__box">-->
     <div class="ctm-modal__main main">
-      <!--      <div class="main__text">-->
-      <!--        {{ claimText }}-->
-      <!--      </div>-->
+      <div
+        v-if="availablePoolsRewardNoZero.length === 0"
+        class="main__message"
+      >
+        You don't have tokens for claim
+      </div>
       <div
         v-for="(item, i) in availablePoolsRewardNoZero"
         :key="i"
@@ -38,37 +40,19 @@
         </base-btn>
         <base-btn
           mode="primary"
+          :disabled="availablePoolsRewardNoZero.length === 0"
           @click="handleClaimAll"
         >
           Claim all
         </base-btn>
       </div>
     </div>
-    <!--    </div>-->
   </ctm-modal-box>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  data() {
-    return {
-      // claimText: 'To deposit ETH, you will be prompted to confirm the deposit. ',
-      // amount: '100.26000000 ETH',
-      // rewardsTitle: {
-      //   earlyRewards: 'Early rewards:',
-      //   lp1Rewards: 'LP1 rewards:',
-      //   lp2Rewards: 'LP2 rewards:',
-      //   hidingGameRewards: 'Hiding game rewards:',
-      // },
-      // rewardsValues: {
-      //   earlyRewards: '23.25640000 ETH',
-      //   lp1Rewards: '23.25640000 ETH',
-      //   lp2Rewards: '23.25640000 ETH',
-      //   hidingGameRewards: '23.25640000 ETH',
-      // },
-    };
-  },
   computed: {
     ...mapGetters({
       options: 'modals/getOptions',
@@ -107,6 +91,11 @@ export default {
 }
 .main {
   padding: 20px;
+  &__message {
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+  }
   &__text {
     font-weight: 300;
     letter-spacing: 0.05em;

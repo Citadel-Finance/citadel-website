@@ -36,18 +36,6 @@ export default {
       default: false,
     },
   },
-  computed: {
-    cardClass() {
-      const {
-        mode,
-      } = this;
-      return [
-        {
-          cards__value_disc: mode === 'disconnected',
-        },
-      ];
-    },
-  },
 };
 </script>
 
