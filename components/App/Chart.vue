@@ -30,6 +30,7 @@
       <line-chart
         class="chart__line-chart"
         :chart-data="chartData"
+        :symbol="symbol"
       />
     </div>
   </div>
@@ -55,6 +56,10 @@ export default {
     chartData: {
       type: Object,
       default() { return {}; },
+    },
+    symbol: {
+      type: String,
+      default: '',
     },
     isActive: {
       type: String,

@@ -6,17 +6,20 @@
         title="Total deposited"
         :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
         :chart-data="totalStakedDataChart"
+        :symbol="pool.symbol"
         is-active="day"
       />
       <Chart
         title="Total earnings"
         :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
         :chart-data="chartData"
+        :symbol="pool.symbol"
       />
       <Chart
         title="Total borrowed"
         :value="`- ${ pool.symbol }`"
-        :chart-data="formChartData([])"
+        :chart-data="totalStakedDataChart"
+        :symbol="pool.symbol"
       />
     </div>
     <div class="content__main">

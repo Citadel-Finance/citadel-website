@@ -4,6 +4,12 @@ const { reactiveProp } = mixins;
 export default {
   extends: Line,
   mixins: [reactiveProp],
+  props: {
+    symbol: {
+      type: String,
+      default: '',
+    },
+  },
   data: () => ({
     options: {
       responsive: true,
@@ -17,7 +23,7 @@ export default {
         callbacks: {
           // title: () => '',
           title: (item) => item[0].label,
-          label: (item) => `${item.value} OUT`,
+          label: (item) => `${item.value} ${this.symbol}`,
         },
         displayColors: false,
         titleFontSize: 14,
