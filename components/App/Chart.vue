@@ -30,7 +30,6 @@
       <line-chart
         class="chart__line-chart"
         :chart-data="chartData"
-        :symbol="symbol"
       />
     </div>
   </div>
@@ -49,6 +48,10 @@ export default {
       default: '',
       type: String,
     },
+    nameChart: {
+      default: '',
+      type: String,
+    },
     value: {
       type: String,
       default: '',
@@ -56,10 +59,6 @@ export default {
     chartData: {
       type: Object,
       default() { return {}; },
-    },
-    symbol: {
-      type: String,
-      default: '',
     },
     isActive: {
       type: String,
@@ -71,6 +70,15 @@ export default {
       activeBtn: this.isActive,
     };
   },
+  // methods: {
+  //   async changePeriod(value) {
+  //     const r = await this.$store.dispatch('charts/updatePeriod', {
+  //       period: value,
+  //       name: this.nameChart,
+  //     });
+  //     if (r.ok === true) this.activeBtn = value;
+  //   },
+  // },
 };
 </script>
 

@@ -6,20 +6,20 @@
         title="Total deposited"
         :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
         :chart-data="totalStakedDataChart"
-        :symbol="pool.symbol"
+        :name-chart="'total-deposited'"
         is-active="day"
       />
       <Chart
         title="Total earnings"
         :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
-        :chart-data="chartData"
-        :symbol="pool.symbol"
+        :chart-data="totalEarningsDataChart"
+        :name-chart="'total-profit'"
       />
       <Chart
         title="Total borrowed"
         :value="`- ${ pool.symbol }`"
-        :chart-data="totalStakedDataChart"
-        :symbol="pool.symbol"
+        :chart-data="totalBorrowedDataChart"
+        :name-chart="'total-borrowed'"
       />
     </div>
     <div class="content__main">
@@ -80,7 +80,10 @@ export default {
     ...mapGetters({
       poolsMap: 'user/getPoolsMap',
       totalStakedData: 'charts/getTotalStakedData',
+      totalEarningsData: 'charts/getTotalEarningsData',
+      totalBorrowedData: 'charts/getTotalBorrowedData',
       tokensMap: 'user/getTokensMap',
+      // charts: 'charts/getCharts',
     }),
     poolAddress() {
       return this.$route.params?.address ?? '';
@@ -103,16 +106,40 @@ export default {
       }
       return this.formChartData(totalStakedData);
     },
+    totalEarningsDataChart() {
+      const { totalEarningsData } = this;
+      if (totalEarningsData.length === 0) {
+        return {};
+      }
+      return this.formChartData(totalEarningsData);
+    },
+    totalBorrowedDataChart() {
+      const { totalBorrowedData } = this;
+      if (totalBorrowedData.length === 0) {
+        return {};
+      }
+      return this.formChartData(totalBorrowedData);
+    },
   },
   async mounted() {
-    await this.fetchTotalCharts({
-      periodType: 'all',
+    await this.fetchTotalStaked({
+      periodType: 'day',
       chartName: 'total-deposited',
+    });
+    await this.fetchTotalEarnings({
+      periodType: 'day',
+      chartName: 'total-profit',
+    });
+    await this.fetchTotalBorrowed({
+      periodType: 'day',
+      chartName: 'total-borrowed',
     });
   },
   methods: {
     ...mapActions({
-      fetchTotalCharts: 'charts/fetchTotalCharts',
+      fetchTotalStaked: 'charts/fetchTotalStaked',
+      fetchTotalEarnings: 'charts/fetchTotalEarnings',
+      fetchTotalBorrowed: 'charts/fetchTotalBorrowed',
     }),
     formChartData(data) {
       const labels = data.map((el) => new Date(el.createdAt).getTime());

@@ -134,7 +134,7 @@ export default {
   data: () => ({
     fields: [
       { key: 'currency', label: 'Currency' },
-      { key: 'apy', label: 'APY' },
+      { key: 'apy', label: 'APY, %' },
       { key: 'liquidity', label: 'Liquidity (USD)' },
     ],
     itemsPerPage: 10,
