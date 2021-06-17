@@ -1,29 +1,5 @@
 <template>
   <div class="content__chart chart">
-    <!--    <div class="charts__container">-->
-    <!--      <div class="charts__title">-->
-    <!--        Total deposited {{ title }}-->
-    <!--      </div>-->
-    <!--      <div class="charts__value">-->
-    <!--        {{ Floor(totalStaked) }} {{ pool.symbol }}-->
-    <!--      </div>-->
-    <!--      <div class="charts__btns">-->
-    <!--        <base-btn mode="mini-active">-->
-    <!--          24h-->
-    <!--        </base-btn>-->
-    <!--        <base-btn mode="mini">-->
-    <!--          7d-->
-    <!--        </base-btn>-->
-    <!--        <base-btn mode="mini">-->
-    <!--          All-->
-    <!--        </base-btn>-->
-    <!--      </div>-->
-    <!--      <line-chart-->
-    <!--        v-if="totalStakedDataChart"-->
-    <!--        class="charts__chart"-->
-    <!--        :chart-data="totalStakedDataChart"-->
-    <!--      />-->
-    <!--    </div>-->
     <div class="chart__container">
       <div class="chart__title">
         {{ title }}
@@ -32,13 +8,22 @@
         {{ value }}
       </div>
       <div class="chart__btns">
-        <base-btn mode="mini">
+        <base-btn
+          :mode="activeBtn === 'day' ? 'mini-active' : 'mini'"
+          @click="activeBtn='day'"
+        >
           24h
         </base-btn>
-        <base-btn mode="mini-active">
+        <base-btn
+          :mode="activeBtn === 'week' ? 'mini-active' : 'mini'"
+          @click="activeBtn='week'"
+        >
           7d
         </base-btn>
-        <base-btn mode="mini">
+        <base-btn
+          :mode="activeBtn === 'all' ? 'mini-active' : 'mini'"
+          @click="activeBtn='all'"
+        >
           All
         </base-btn>
       </div>
@@ -47,29 +32,6 @@
         :chart-data="chartData"
       />
     </div>
-    <!--    <div class="charts__container">-->
-    <!--      <div class="charts__title">-->
-    <!--        Total borrowed-->
-    <!--      </div>-->
-    <!--      <div class="charts__value">-->
-    <!--        - {{ pool.symbol }}-->
-    <!--      </div>-->
-    <!--      <div class="charts__btns">-->
-    <!--        <base-btn mode="mini">-->
-    <!--          24h-->
-    <!--        </base-btn>-->
-    <!--        <base-btn mode="mini">-->
-    <!--          7d-->
-    <!--        </base-btn>-->
-    <!--        <base-btn mode="mini-active">-->
-    <!--          All-->
-    <!--        </base-btn>-->
-    <!--      </div>-->
-    <!--      <line-chart-->
-    <!--        class="charts__chart"-->
-    <!--        :chart-data="formChartData([])"-->
-    <!--      />-->
-    <!--    </div>-->
   </div>
 </template>
 
@@ -96,8 +58,13 @@ export default {
     },
     isActive: {
       type: String,
-      default: '',
+      default: 'day',
     },
+  },
+  data() {
+    return {
+      activeBtn: this.isActive,
+    };
   },
 };
 </script>

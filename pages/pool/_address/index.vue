@@ -6,7 +6,7 @@
         title="Total deposited"
         :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
         :chart-data="totalStakedDataChart"
-        active="day"
+        is-active="day"
       />
       <Chart
         title="Total earnings"
@@ -16,7 +16,7 @@
       <Chart
         title="Total borrowed"
         :value="`- ${ pool.symbol }`"
-        :chart-data="formChartData([])"
+        :chart-data="totalStakedDataChart"
       />
     </div>
     <div class="content__main">
@@ -96,7 +96,7 @@ export default {
     totalStakedDataChart() {
       const { totalStakedData } = this;
       if (totalStakedData.length === 0) {
-        return false;
+        return {};
       }
       return this.formChartData(totalStakedData);
     },
