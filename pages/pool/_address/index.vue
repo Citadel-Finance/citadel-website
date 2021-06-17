@@ -16,7 +16,7 @@
       <Chart
         title="Total borrowed"
         :value="`- ${ pool.symbol }`"
-        :chart-data="totalStakedDataChart"
+        :chart-data="formChartData([])"
       />
     </div>
     <div class="content__main">
@@ -102,17 +102,18 @@ export default {
     },
   },
   async mounted() {
-    await this.fetchTotalDeposited({
+    await this.fetchTotalCharts({
       periodType: 'all',
+      chartName: 'total-deposited',
     });
   },
   methods: {
     ...mapActions({
-      fetchTotalDeposited: 'charts/fetchTotalDeposited',
+      fetchTotalCharts: 'charts/fetchTotalCharts',
     }),
     formChartData(data) {
       const labels = data.map((el) => new Date(el.createdAt).getTime());
-      const dataParsed = data.map((el) => shiftedBy(el.totalDeposited, -18));
+      const dataParsed = data.map((el) => shiftedBy(el.value, -18));
       return {
         labels,
         datasets: [
