@@ -320,12 +320,13 @@ export default {
     height: 44px;
   }
   &__title {
-    font-size: 21px;
-    line-height: 25px;
-    font-weight: 500;
     color: #240A36;
     display: flex;
     align-items: center;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.03em;
   }
   &__button {
     .base-btn {

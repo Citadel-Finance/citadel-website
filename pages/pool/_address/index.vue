@@ -83,7 +83,6 @@ export default {
       totalEarningsData: 'charts/getTotalEarningsData',
       totalBorrowedData: 'charts/getTotalBorrowedData',
       tokensMap: 'user/getTokensMap',
-      // charts: 'charts/getCharts',
     }),
     poolAddress() {
       return this.$route.params?.address ?? '';
@@ -176,6 +175,9 @@ export default {
     display: grid;
     grid-gap: 30px;
     margin: auto;
+    @include _767 {
+      grid-gap: 16px;
+    }
   }
   &__charts {
     width: 100%;

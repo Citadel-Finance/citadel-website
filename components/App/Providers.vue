@@ -93,11 +93,13 @@ export default {
     grid-gap: 20px;
   }
   &__title {
+    color: #240A36;
+    display: flex;
+    align-items: center;
     font-weight: normal;
     font-size: 20px;
     line-height: 23px;
     letter-spacing: 0.03em;
-    color: #240A36;
   }
 }
 .table-main {
