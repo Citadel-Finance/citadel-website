@@ -169,18 +169,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .content {
+  width: 100%;
   &__container {
+    @include container;
     display: grid;
     grid-gap: 30px;
-    width: 100%;
     margin: auto;
-    max-width: 1170px;
   }
   &__charts {
     width: 100%;
-    max-width: 1170px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 30px;
@@ -189,7 +187,6 @@ export default {
     display: flex;
     grid-gap: 30px;
     justify-content: space-between;
-    max-width: 1170px;
   }
 }
 </style>

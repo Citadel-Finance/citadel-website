@@ -74,7 +74,6 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 1170px;
   a:hover {
     text-decoration: none;
   }

@@ -28,12 +28,12 @@ export default {
 
 <style lang="scss" scoped>
 .content {
+  width: 100%;
   &__container {
+    @include container;
     display: grid;
     grid-gap: 30px;
-    width: 100%;
     margin: auto;
-    max-width: 1170px;
   }
 }
 </style>

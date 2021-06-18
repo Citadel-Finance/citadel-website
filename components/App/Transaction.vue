@@ -109,7 +109,6 @@ export default {
   &__wrapper {
     margin: auto;
     background: #FFFFFF;
-    max-width: 1170px;
     padding: 20px;
     border-radius: 10px;
     display: grid;

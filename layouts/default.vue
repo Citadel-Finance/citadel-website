@@ -105,7 +105,7 @@ export default {
   width: 100%;
   background: #FFFFFF;
   &__wrapper {
-    max-width: 1170px;
+    @include container;
     background: #FFFFFF;
     display: flex;
     margin: auto;
