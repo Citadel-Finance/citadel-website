@@ -1,7 +1,43 @@
 <template>
   <div class="primary">
     <div class="primary__template template">
-      <Header />
+      <div class="template__header header">
+        <div class="header__wrapper">
+          <div class="header__logo">
+            <img
+              :src="Require('logo.svg')"
+              alt="logo"
+            >
+          </div>
+          <div class="header__btn">
+            <!--        <base-btn-->
+            <!--          mode="primary"-->
+            <!--          @click="$store.dispatch('user/disconnectWallet')"-->
+            <!--        >-->
+            <!--          disconnect-->
+            <!--        </base-btn>-->
+            <div
+              v-if="isConnected"
+              class="header__connected"
+            >
+              <span class="header__dot" />
+              <span
+                class="header__address"
+                :title="userAddress"
+              >
+                {{ SubstrString(userAddress, 0, 6) + '...' + SubstrString(userAddress, userAddress.length - 4, 4) }}
+              </span>
+            </div>
+            <base-btn
+              v-if="!isConnected"
+              mode="primary"
+              @click="openModalConnect"
+            >
+              Connect Wallet
+            </base-btn>
+          </div>
+        </div>
+      </div>
       <div class="template__content content">
         <nuxt />
       </div>
@@ -11,11 +47,16 @@
   </div>
 </template>
 <script>
-import Header from '../components/App/Header';
+
+import { mapGetters } from 'vuex';
+import modals from '~/store/modals/modals';
 
 export default {
-  components: {
-    Header,
+  computed: {
+    ...mapGetters({
+      userAddress: 'user/getUserAddress',
+      isConnected: 'user/getIsConnected',
+    }),
   },
   async mounted() {
     await this.connectAnonNode();
@@ -34,6 +75,12 @@ export default {
     //   // }
     //   return r;
     // },
+    openModalConnect() {
+      this.ShowModal({
+        text: 'WalletConnect',
+        key: modals.connectWallet,
+      });
+    },
     async connectAnonNode() {
       const r = await this.$store.dispatch('user/connectAnonNode');
       return r;
@@ -42,9 +89,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 .primary {
-  font-family: Montserrat, sans-serif;
+  font-family: sans-serif, 'Arial';
+  font-style: normal;
   background-color: #F6F5F7;
   overflow-y: auto;
   height: 100vh;
@@ -53,5 +100,47 @@ export default {
   display: grid;
   grid-gap: 30px;
   margin-bottom: 30px;
+}
+.header {
+  width: 100%;
+  background: #FFFFFF;
+  &__wrapper {
+    max-width: 1170px;
+    background: #FFFFFF;
+    display: flex;
+    margin: auto;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__btn {
+    width: 200px;
+    height: 48px;
+  }
+  &__connected {
+    background: #F6F5F7;
+    border-radius: 10px;
+    padding: 15px 23px;
+    display: flex;
+    grid-gap: 20px;
+  }
+  &__dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    &:before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #C31432;
+    }
+  }
+  &__address {
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.05em;
+    color: #240B36;
+  }
 }
 </style>

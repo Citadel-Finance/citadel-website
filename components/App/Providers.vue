@@ -93,8 +93,6 @@ export default {
     grid-gap: 20px;
   }
   &__title {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 23px;

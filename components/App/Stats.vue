@@ -113,8 +113,6 @@ export default {
     justify-content: space-between;
   }
   &__title {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 23px;
@@ -142,8 +140,6 @@ export default {
     border-radius: 10px;
   }
   &__title {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: bold;
     font-size: 10px;
     line-height: 11px;
@@ -160,8 +156,6 @@ export default {
     height: 3px;
   }
   &__value {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: 600;
     font-size: 20px;
     line-height: 24px;

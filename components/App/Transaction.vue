@@ -119,7 +119,6 @@ export default {
     font-size: 21px;
     line-height: 25px;
     color: #240A36;
-    font-family: sans-serif, 'Conto-Medium';
   }
   &__pagination {
     display: flex;
@@ -165,24 +164,18 @@ export default {
   }
 }
 .date {
-  font-family: sans-serif, 'Arial';
-  font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 18px;
   color: #240A36;
 }
 .change {
-  font-family: sans-serif, 'Arial';
-  font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 18px;
   color: #240A36;
 }
 .hash {
-  font-family: sans-serif, 'Arial';
-  font-style: normal;
   font-weight: normal;
   font-size: 16px;
   line-height: 18px;

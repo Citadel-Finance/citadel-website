@@ -53,7 +53,6 @@ export default {
   align-items: center;
   width: 100%;
   padding: 15px;
-  font-style: normal;
   font-weight: bold;
   font-size: 16px;
   line-height: 18px;

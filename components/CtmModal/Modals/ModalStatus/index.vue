@@ -62,8 +62,6 @@ export default {
   flex-direction: column;
   grid-gap: 20px;
   &__title {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: normal;
     font-size: 20px;
     line-height: 23px;
@@ -80,8 +78,6 @@ export default {
     }
   }
   &__text {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: normal;
     font-size: 16px;
     line-height: 120%;

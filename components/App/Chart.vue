@@ -91,8 +91,6 @@ export default {
     padding: 20px;
   }
   &__title {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: bold;
     font-size: 10px;
     line-height: 11px;
@@ -102,8 +100,6 @@ export default {
     margin-bottom: 10px;
   }
   &__value {
-    font-family: sans-serif, 'Arial';
-    font-style: normal;
     font-weight: bold;
     font-size: 20px;
     line-height: 23px;

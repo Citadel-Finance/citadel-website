@@ -134,7 +134,7 @@ export default {
   data: () => ({
     fields: [
       { key: 'currency', label: 'Currency' },
-      { key: 'apy', label: 'APY, %' },
+      { key: 'apy', label: 'APY (%)' },
       { key: 'liquidity', label: 'Liquidity (USD)' },
     ],
     itemsPerPage: 10,
@@ -234,7 +234,6 @@ export default {
   }
   &__title {
     font-size: 21px;
-    font-family: sans-serif, 'Conto-Medium';
     line-height: 25px;
     font-weight: 500;
     color: #240A36;

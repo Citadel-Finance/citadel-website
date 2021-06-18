@@ -130,7 +130,6 @@ export default {
     }
   }
   &__input {
-    font-family: sans-serif, 'Arial';
     font-weight: normal;
     font-size: 16px;
     line-height: 18px;
