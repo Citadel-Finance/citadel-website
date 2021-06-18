@@ -108,10 +108,16 @@ export default {
       font-size: 24px;
     }
   }
+  @include _1199 {
+    &__cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @include _380;
 }
 .claim {
   transition: 0s;
-  min-height: 100%;
+  height: 127px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

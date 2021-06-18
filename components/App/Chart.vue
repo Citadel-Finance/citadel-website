@@ -22,7 +22,7 @@
         </base-btn>
         <base-btn
           :mode="activeBtn === 'all' ? 'mini-active' : 'mini'"
-          @click="activeBtn='all'"
+          @click="changePeriod('all')"
         >
           All
         </base-btn>
@@ -37,6 +37,7 @@
 
 <script>
 
+import { mapActions } from 'vuex';
 import LineChart from '~/components/App/LineChart';
 
 export default {
@@ -70,15 +71,17 @@ export default {
       activeBtn: this.isActive,
     };
   },
-  // methods: {
-  //   async changePeriod(value) {
-  //     const r = await this.$store.dispatch('charts/updatePeriod', {
-  //       period: value,
-  //       name: this.nameChart,
-  //     });
-  //     if (r.ok === true) this.activeBtn = value;
-  //   },
-  // },
+  methods: {
+    ...mapActions({
+      fetchTotalStaked: 'charts/fetchTotalStaked',
+    }),
+    async changePeriod(value) {
+      await this.fetchTotalStaked({
+        periodType: value,
+        chartName: this.nameChart,
+      });
+    },
+  },
 };
 </script>
 

@@ -78,7 +78,11 @@ export default {
     }
   }
   &_back-image {
-    background-image: url(~assets/img/button_bg.svg);
+    background-color: #C31433;
+    background-image: url(~assets/img/frame_bg.svg);
+    background-position: bottom 0 left 0;
+    background-repeat: no-repeat;
+    width: 100%;
     justify-content: start;
     align-items: start;
   }

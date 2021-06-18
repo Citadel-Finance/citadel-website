@@ -1,7 +1,7 @@
 <template>
   <div class="content__container">
     <Balance />
-    <Pools />
+    <!--    <Pools />-->
   </div>
 </template>
 
@@ -13,7 +13,7 @@ import Pools from '../components/App/Pools';
 export default {
   components: {
     Balance,
-    Pools,
+    // Pools,
   },
   computed: {
     ...mapGetters({

@@ -46,6 +46,7 @@ export default {
     width: 100%;
     background: #F6F5F7;
     border-radius: 10px;
+    height: 127px;
   }
   &__title {
     font-weight: bold;
