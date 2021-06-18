@@ -16,7 +16,7 @@
           {{ titleRate }}
         </div>
         <div class="info__percents">
-          {{ apyTax }} %
+          {{ apyTax || '-' }} %
         </div>
       </div>
       <base-btn
@@ -84,12 +84,15 @@ export default {
   font-size: 16px;
   line-height: 18px;
   color: #240A36;
-  padding: 13px 15px;
+  padding: 13px 15px 13px 10px;
   transition: 0.3s ease-out;
   text-decoration: none;
+  display: flex;
+  height: 44px;
   &__button {
     display: flex;
     align-items: center;
+    justify-content: center;
     grid-gap: 5px;
   }
   &:hover {

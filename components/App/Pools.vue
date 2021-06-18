@@ -231,6 +231,7 @@ export default {
   &__header {
     display: flex;
     justify-content: space-between;
+    height: 44px;
   }
   &__title {
     font-size: 21px;

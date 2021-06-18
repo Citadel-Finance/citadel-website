@@ -46,7 +46,6 @@ export default {
 
 <style lang="scss" scoped>
 .base-btn {
-  height: 48px;
   position: relative;
   display: flex;
   justify-content: center;
@@ -66,6 +65,7 @@ export default {
   }
   &_primary {
     background: #C31433;
+    height: 48px;
     &:hover {
       background: #9F0923;
     }
@@ -86,12 +86,14 @@ export default {
     background: #FFFFFF;
     color: #240A36;
     border: 1px solid #F3EFF3;
+    height: 44px;
     &:hover {
       background: #FDEFF2;
       border: 1px solid #C31433;
     }
   }
   &_icon {
+    height: 44px;
     background: #FFFFFF;
     color: #C31433;
     &:hover {
@@ -115,6 +117,7 @@ export default {
     font-weight: normal;
     transition: 0.15s ease-out;
     border: 1px solid #F6F5F7;
+    height: 39px;
     &:hover {
       border: 1px solid #F3D0D7;
       box-sizing: border-box;
@@ -122,6 +125,7 @@ export default {
   }
   &_mini-active {
     font-weight: normal;
+    height: 39px;
     border: 1px solid #C31433;
     box-sizing: border-box;
     color: #C31433;

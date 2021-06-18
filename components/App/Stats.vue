@@ -110,7 +110,7 @@ export default {
     padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    grid-gap: 20px;
   }
   &__title {
     font-weight: normal;
