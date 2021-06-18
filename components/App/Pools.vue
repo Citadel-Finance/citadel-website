@@ -24,7 +24,10 @@
           </base-btn>
         </div>
       </div>
-      <div class="pools__table table-main">
+      <div
+        v-if="isDesktop"
+        class="pools__table table-main"
+      >
         <div class="table-main__head">
           <div
             v-for="(field,i) in fields"
@@ -42,10 +45,6 @@
           <div class="table-main__th">
             Status
           </div>
-          <!--          <div-->
-          <!--            v-if="(isUserAdmin || isUserAdminOfAnyPool) && isConnected"-->
-          <!--            class="table-main__th"-->
-          <!--          />-->
         </div>
         <div class="table-main__body">
           <div
@@ -59,8 +58,12 @@
             >
               <div class="table-main__col currency">
                 <span class="currency__img">
+                  <!--                  <img-->
+                  <!--                    :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"-->
+                  <!--                    alt=""-->
+                  <!--                  >-->
                   <img
-                    :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"
+                    :src="Require('logo_small.svg')"
                     alt=""
                   >
                 </span>
@@ -108,6 +111,77 @@
         </div>
       </div>
       <div
+        v-if="!isDesktop"
+        class="pools__table table-mini"
+      >
+        <div
+          v-for="(poolAddress, i) in pageItems"
+          :key="`pool__item-${i}`"
+          class="table-mini__tr"
+        >
+          <div class="table-mini__top">
+            <div class="table-mini__status status">
+              <span
+                class="status__dot"
+                :class="{'status__dot_active': getIsEnabledByAddress(poolAddress)}"
+              />
+              <span v-if="getIsEnabledByAddress(poolAddress)">
+                Active
+              </span>
+              <span v-else>
+                Inactive
+              </span>
+            </div>
+            <div
+              v-if="poolsMap[poolAddress] && poolsMap[poolAddress].isAdmin && isConnected"
+              class="table-mini__col settings"
+              @click="openEditModal(poolAddress)"
+            >
+              <span class="icon-more_vertical" />
+            </div>
+          </div>
+          <nuxt-link
+            :to="`/pool/${poolAddress}`"
+            class="table-mini__link"
+          >
+            <div class="table-mini__content">
+              <div class="currency">
+                <span class="currency__img">
+                  <!--                  <img-->
+                  <!--                    :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"-->
+                  <!--                    alt=""-->
+                  <!--                  >-->
+                  <img
+                    :src="Require('logo_small.svg')"
+                    alt=""
+                  >
+                </span>
+                <span class="currency__value">
+                  {{ tokensMap[poolsMap[poolAddress].childAddress].symbol }}
+                </span>
+              </div>
+              <div
+                v-if="isConnected"
+                class="table-mini__balance"
+                :title="poolsMap[poolAddress].userStaked"
+              >
+                {{ Floor(poolsMap[poolAddress].userStaked, 4) }}
+              </div>
+            </div>
+            <div class="table-mini__bottom">
+              <div class="table-mini__liquidity">
+                <span class="table-mini__title">Liquidity</span>
+                <span class="table-mini__value">${{ Floor(poolsMap[poolAddress].getApyTax(), 7) }}</span>
+              </div>
+              <div class="table-mini__apy">
+                <span class="table-mini__title">Apy</span>
+                <span class="table-mini__value">{{ Floor(poolsMap[poolAddress].getTotalStaked(), 7) }}%</span>
+              </div>
+            </div>
+          </nuxt-link>
+        </div>
+      </div>
+      <div
         v-if="amountOfPages > 1"
         class="pools__pagination"
       >
@@ -134,11 +208,12 @@ export default {
   data: () => ({
     fields: [
       { key: 'currency', label: 'Currency' },
-      { key: 'apy', label: 'APY (%)' },
-      { key: 'liquidity', label: 'Liquidity (USD)' },
+      { key: 'apy', label: 'APY, %' },
+      { key: 'liquidity', label: 'Liquidity, $' },
     ],
     itemsPerPage: 10,
     currentPage: 1,
+    isDesktop: false,
   }),
   computed: {
     ...mapGetters({
@@ -173,7 +248,20 @@ export default {
       return items;
     },
   },
+  mounted() {
+    this.checkDesktop();
+    window.addEventListener('resize', () => {
+      this.checkDesktop();
+      this.isShow = false;
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', () => {});
+  },
   methods: {
+    checkDesktop() {
+      this.isDesktop = document.body.clientWidth > 991;
+    },
     getIsEnabledByAddress(poolAddress) {
       return this.poolsMap[poolAddress].getIsEnabled();
     },
@@ -220,7 +308,6 @@ export default {
     }
   }
   &__wrapper {
-    margin: auto;
     background: #FFFFFF;
     border-radius: 10px;
     padding: 20px;
@@ -267,17 +354,17 @@ export default {
     text-transform: uppercase;
     color: #7B6C86;
     display: grid;
-    min-width: 1130px;
     margin-bottom: 10px;
     grid-template-columns: repeat(4, 1fr);
   }
   &__th {
     padding: 14px 20px;
     border: none;
+    align-items: center;
+    display: flex;
   }
   &__tr {
     display: grid;
-    min-width: 1130px;
     grid-template-columns: 1fr;
     padding: 14px 0;
     transition: 0.3s ease-out;
@@ -302,10 +389,72 @@ export default {
     text-decoration: none;
   }
 }
+.table-mini {
+  &__tr {
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px 0;
+  }
+  &__tr:not(:last-child) {
+    border-bottom: 1px solid #F3EFF3;
+  }
+  &__top {
+    line-height: 13px;
+    align-items: center;
+    color: #A89DAF;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__link {
+    text-decoration: none;
+    display: grid;
+    grid-gap: 15px;
+  }
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  &__balance {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    display: flex;
+    align-items: center;
+    color: #240A36;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 11px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #D4CED7;
+  }
+  &__value {
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 17px;
+    letter-spacing: 0.05em;
+    color: #A89DAF;
+  }
+}
 .currency {
   display: flex;
   align-items: center;
   grid-gap: 15px;
+  &__img {
+    width: 40px;
+    height: 40px;
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
   &__value {
     font-weight: 600;
     font-size: 16px;
@@ -343,14 +492,15 @@ export default {
 .settings {
   display: flex;
   justify-content: center;
-  justify-items: center;
-  align-content: center;
   align-items: center;
   span {
     padding: 5px;
     transition: 0.3s ease-in-out;
     cursor: pointer;
     border-radius: 7px;
+    @include _991 {
+      background: #F3EFF3;
+    }
     &:hover {
       background: #F3EFF3;
     }
@@ -358,6 +508,9 @@ export default {
   span::before {
     font-size: 24px;
     color: #A89DAF;
+    @include _991 {
+      color: #7B6C86;
+    }
     &:hover {
       color: #7B6C86;
     }

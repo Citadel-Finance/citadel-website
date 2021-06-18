@@ -112,7 +112,7 @@ export default {
     align-items: center;
     justify-content: space-between;
     @include _575 {
-      padding: 20px;
+      padding: 16px;
     }
   }
   &__logo {

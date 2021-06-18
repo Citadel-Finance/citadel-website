@@ -176,7 +176,11 @@ export default {
       grid-row-end: 4;
     }
   }
-  @include _380;
+  @include _380 {
+    .cards {
+      grid-gap: 10px;
+    }
+  };
 }
 .claim {
   transition: 0s;
@@ -184,6 +188,9 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  &__top {
+    text-align: left;
+  }
   &__bottom {
     display: flex;
     justify-content: flex-end;
