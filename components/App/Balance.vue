@@ -8,20 +8,24 @@
         <Card
           title="Supply CitaDEL"
           :value="`${ctlToken.totalSupply || '-'}`"
+          class="cards__supply"
         />
         <Card
           title="Balance CitaDEL"
           :value="`${Floor(ctlToken.balance)}`"
           :is-disconnected="!isConnected"
+          class="cards__balance"
         />
         <Card
           title="Rewards CitaDEL"
           :value="`${Floor(availableCtlReward)}`"
           :is-disconnected="!isConnected"
+          class="cards__rewards"
         />
         <Card
           title="Price CitaDEL"
           value="-"
+          class="cards__price"
         />
         <base-btn
           class="balance__btn claim"
@@ -108,9 +112,68 @@ export default {
       font-size: 24px;
     }
   }
-  @include _1199 {
-    &__cards {
+  @include _991 {
+    .cards {
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      &__supply {
+        grid-column-start: 1;
+        grid-column-end: 3;
+      }
+      &__balance {
+        grid-column-start: 3;
+        grid-column-end: 5;
+      }
+      &__rewards {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+      &__price {
+        grid-column-start: 4;
+        grid-column-end: 5;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+    }
+    .claim {
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+  }
+  @include _767 {
+    .cards {
       grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      &__supply {
+        grid-column-start: 1;
+        grid-column-end: 2;
+      }
+      &__balance {
+        grid-column-start: 2;
+        grid-column-end: 3;
+      }
+      &__rewards {
+        grid-column-start: 1;
+        grid-column-end: 2;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+      &__price {
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+    }
+    .claim {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      grid-row-end: 4;
     }
   }
   @include _380;

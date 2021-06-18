@@ -3,12 +3,7 @@
     <div class="primary__template template">
       <div class="template__header header">
         <div class="header__wrapper">
-          <div class="header__logo">
-            <img
-              :src="Require('logo.svg')"
-              alt="logo"
-            >
-          </div>
+          <div class="header__logo" />
           <div class="header__btn">
             <!--        <base-btn-->
             <!--          mode="primary"-->
@@ -100,6 +95,10 @@ export default {
   display: grid;
   grid-gap: 30px;
   margin-bottom: 30px;
+  @include _767 {
+    grid-gap: 16px;
+    margin-bottom: 16px;
+  }
 }
 .header {
   width: 100%;
@@ -112,6 +111,19 @@ export default {
     padding: 20px 0;
     align-items: center;
     justify-content: space-between;
+    @include _575 {
+      padding: 20px;
+    }
+  }
+  &__logo {
+    width: 116px;
+    height: 37px;
+    background-image: url(~assets/img/logo_big.svg);
+    background-repeat: no-repeat;
+    @include _480 {
+      height: 48px;
+      background-image: url(~assets/img/logo_small.svg);
+    }
   }
   &__btn {
     width: 200px;
