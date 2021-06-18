@@ -34,6 +34,9 @@ export default {
     display: grid;
     grid-gap: 30px;
     margin: auto;
+    @include _767 {
+      grid-gap: 16px;
+    }
   }
 }
 </style>
