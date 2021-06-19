@@ -65,7 +65,7 @@ jobs:
             SERVER_HOST=${{ secrets.SERVER_HOST }} \
             ADDRESS_FACTORY=${{ secrets.ADDRESS_FACTORY }} \
             NUXT_PORT=${{ secrets.NUXT_PORT }}
-            WEBSITE_PROCCESS=${{ secret.WEBSITE_PROCCESS_TESTNET }} 
+            WEBSITE_PROCCESS=${{ secrets.WEBSITE_PROCCESS_TESTNET }} 
             IS_MAINNET=${{ secrets.IS_MAINNET }} \
             SRC_DIR=${{ github.workspace }}/" website-update.yml;
             API_URL=${{ secrets.API_URL }} \
