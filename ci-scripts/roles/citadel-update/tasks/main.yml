@@ -10,7 +10,7 @@
     state: directory
     recurse: yes
 
-- name: Upload backend files
+- name: Upload website files
   synchronize:
     src: '{{ SRC_DIR }}'
     dest: '{{ BUILD_DIR }}'
@@ -39,12 +39,12 @@
   shell: 'pm2 stop {{ WEBSITE_PROCCESS }}'
   ignore_errors: yes
 
-- name: Delete backend dir
+- name: Delete website dir
   file:
     path: '{{ WEBSITE_BIN }}'
     state: absent
 
-# - name: Create backend dir
+# - name: Create website dir
 #   file:
 #     path: '{{ WEBSITE_BIN }}'
 #     state: directory
@@ -53,7 +53,7 @@
 - name: Move generated files to webiste bin dir
   shell: mv {{ BUILD_DIR }} {{ WEBSITE_BIN }}
           
-- name: Start backend process
+- name: Start website process
   shell: 'pm2 start {{ WEBSITE_APP }}'
   args:
     chdir: '{{ WEBSITE_BIN }}'
