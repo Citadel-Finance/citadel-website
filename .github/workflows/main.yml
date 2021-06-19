@@ -64,7 +64,7 @@ jobs:
             INFURA=${{ secrets.INFURA_TESTNET }} \
             SERVER_HOST=${{ secrets.SERVER_HOST }} \
             ADDRESS_FACTORY=${{ secrets.ADDRESS_FACTORY }} \
-            NUXT_PORT=${{ secret.NUXT_PORT }}
+            NUXT_PORT=${{ secrets.NUXT_PORT }}
             WEBSITE_PROCCESS=${{ secret.WEBSITE_PROCCESS_TESTNET }} 
             IS_MAINNET=${{ secrets.IS_MAINNET }} \
             SRC_DIR=${{ github.workspace }}/" website-update.yml;
