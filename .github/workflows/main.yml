@@ -69,6 +69,7 @@ jobs:
             IS_MAINNET=${{ secrets.IS_MAINNET }} \
             SRC_DIR=${{ github.workspace }}/" website-update.yml;
             API_URL=${{ secrets.API_URL }} \
+            WEBSITE_BIN=${{ secrets.WEBSITE_BIN }};
        
 #
 #  deploy-develop-bsc:
