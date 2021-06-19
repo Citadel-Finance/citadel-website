@@ -63,7 +63,6 @@ jobs:
           ansible-playbook -i "${{ secrets.REMOTE_HOST }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \ 
             INFURA=${{ secrets.INFURA_TESTNET }} \
             SERVER_HOST=${{ secrets.SERVER_HOST }} \
-       #     SERVER_PORT=${{ secrets.SERVER_PORT }} \
             ADDRESS_FACTORY=${{ secrets.ADDRESS_FACTORY }} \
             NUXT_PORT=${{ secret.NUXT_PORT }}
             WEBSITE_PROCCESS=${{ secret.WEBSITE_PROCCESS_TESTNET }} 
