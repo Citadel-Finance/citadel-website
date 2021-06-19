@@ -1,0 +1,4 @@
+---
+# defaults file for citadel-update
+WEBSITE_ENV: .env
+WEBSITE_APP: app.json

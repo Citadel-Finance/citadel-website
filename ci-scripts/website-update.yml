@@ -1,0 +1,7 @@
+---
+- name: Update Citadel Website
+  hosts: all
+  gather_facts: True
+
+  roles:
+    - role: citadel-update
