@@ -44,11 +44,11 @@
     path: '{{ WEBSITE_BIN }}'
     state: absent
 
-- name: Create website dir
-  file:
-    path: '{{ WEBSITE_BIN }}'
-    state: directory
-    recurse: yes
+#- name: Create website dir
+#  file:
+#    path: '{{ WEBSITE_BIN }}'
+#    state: directory
+#    recurse: yes
 
 - name: Move generated files to webiste bin dir
   shell: mv {{ BUILD_DIR }} {{ WEBSITE_BIN }}
