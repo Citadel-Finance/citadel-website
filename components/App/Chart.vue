@@ -118,5 +118,20 @@ export default {
     grid-gap: 20px;
     margin-bottom: 20px;
   }
+  @include _1199 {
+    &__container {
+      width: 100%;
+      max-width: 100%;
+    }
+    &__line-chart {
+      width: 100%;
+    }
+  }
+  @include _380 {
+    &__line-chart {
+      max-width: 300px;
+      width: 100%;
+    }
+  }
 }
 </style>
