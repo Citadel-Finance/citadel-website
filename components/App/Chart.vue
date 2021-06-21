@@ -28,6 +28,7 @@
         </base-btn>
       </div>
       <line-chart
+        width="300"
         class="chart__line-chart"
         :chart-data="chartData"
       />
@@ -129,7 +130,6 @@ export default {
   }
   @include _380 {
     &__line-chart {
-      max-width: 300px;
       width: 100%;
     }
   }
