@@ -6,20 +6,20 @@
         title="Total deposited"
         :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
         :chart-data="totalStakedDataChart"
-        :name-chart="'total-deposited'"
+        :name-chart="'deposited'"
         is-active="day"
       />
       <Chart
         title="Total earnings"
         :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
         :chart-data="totalEarningsDataChart"
-        :name-chart="'total-profit'"
+        :name-chart="'profit'"
       />
       <Chart
         title="Total borrowed"
         :value="`- ${ pool.symbol }`"
         :chart-data="totalBorrowedDataChart"
-        :name-chart="'total-borrowed'"
+        :name-chart="'borrowed'"
       />
     </div>
     <div class="content__main">
@@ -122,16 +122,19 @@ export default {
   },
   async mounted() {
     await this.fetchTotalStaked({
+      poolAddress: this.poolAddress,
       periodType: 'day',
-      chartName: 'total-deposited',
+      chartName: 'deposited',
     });
     await this.fetchTotalEarnings({
+      poolAddress: this.poolAddress,
       periodType: 'day',
-      chartName: 'total-profit',
+      chartName: 'profit',
     });
     await this.fetchTotalBorrowed({
+      poolAddress: this.poolAddress,
       periodType: 'day',
-      chartName: 'total-borrowed',
+      chartName: 'borrowed',
     });
   },
   methods: {

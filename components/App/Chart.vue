@@ -28,7 +28,7 @@
         </base-btn>
       </div>
       <line-chart
-        width="300"
+        :width="300"
         class="chart__line-chart"
         :chart-data="chartData"
       />

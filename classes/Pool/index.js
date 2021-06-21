@@ -38,7 +38,7 @@ export default class Pool extends BasicSmartContract {
     }
     return (JSON.parse(topByAddress[this.address])).map((item) => ({
       ...item,
-      staked: shiftedBy(item.staked, -this.decimals || 0),
+      staked: +shiftedBy(item.staked, -this.decimals || 0),
     }));
   }
 
