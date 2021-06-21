@@ -4,7 +4,10 @@
       <div class="transactions__title">
         Transactions ({{ txs.length }})
       </div>
-      <div class="transactions__table table-main">
+      <div
+        v-if="isDesktop"
+        class="transactions__table table-main"
+      >
         <div class="table-main__head">
           <div
             v-for="(field,i) in fields"
@@ -31,19 +34,48 @@
             </div>
           </div>
         </div>
-        <div
-          v-if="isConnected && amountOfPages > 1"
-          class="transactions__pagination"
-        >
-          <b-pagination
-            v-model="currentPage"
-            :total-rows="amountOfTxs"
-            :per-page="itemsPerPage"
-            first-number
-            last-number
-            class="pagination"
-          />
+      </div>
+      <div
+        v-if="!isDesktop"
+        class="transactions__table table-mini"
+      >
+        <div class="table-mini__body">
+          <div
+            v-for="(event, i) in pageItems"
+            :key="`position__item-${i}`"
+            class="table-mini__tr"
+          >
+            <div class="table-mini__top">
+              <div class="table-mini__date">
+                {{ GetFormTimestamp(event.returnValues.date, format = 'L') }}
+              </div>
+              <div class="table-mini__change">
+                {{ event.amount }} {{ event.event }}
+              </div>
+            </div>
+            <div class="table-mini__bottom">
+              <div class="table-mini__title">
+                TX Hash
+              </div>
+              <div class="table-mini__hash">
+                {{ SubstrString(event.transactionHash, 0, 10) + '...' + SubstrString(event.transactionHash, event.transactionHash.length - 10, 10) }}
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div
+        v-if="isConnected && amountOfPages > 1"
+        class="transactions__pagination"
+      >
+        <b-pagination
+          v-model="currentPage"
+          :total-rows="amountOfTxs"
+          :per-page="itemsPerPage"
+          first-number
+          last-number
+          class="pagination"
+        />
       </div>
     </div>
   </div>
@@ -73,6 +105,7 @@ export default {
     ],
     itemsPerPage: 10,
     currentPage: 1,
+    isDesktop: false,
   }),
   computed: {
     ...mapGetters({
@@ -99,6 +132,21 @@ export default {
         if (this.txs[index]) items.push(this.txs[index]);
       }
       return items;
+    },
+  },
+  mounted() {
+    this.checkDesktop();
+    window.addEventListener('resize', () => {
+      this.checkDesktop();
+      this.isShow = false;
+    });
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', () => {});
+  },
+  methods: {
+    checkDesktop() {
+      this.isDesktop = document.body.clientWidth > 991;
     },
   },
 };
@@ -164,6 +212,51 @@ export default {
     color: #7B6C86;
     display: flex;
     align-items: center;
+  }
+}
+.table-mini {
+  &__tr {
+    display: grid;
+    grid-gap: 20px;
+    padding-bottom: 30px;
+  }
+  &__tr:not(:first-child) {
+    padding-top: 20px;
+  }
+  &__tr:not(:last-child) {
+    border-bottom: 1px solid #F3EFF3;
+  }
+  &__top,
+  &__bottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__date {
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+    color: #240A36;
+  }
+  &__change {
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #240A36;
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 11px;
+    letter-spacing: 0.105em;
+    text-transform: uppercase;
+    color: #D4CED7;
+  }
+  &__hash {
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+    color: #A89DAF;
   }
 }
 .date {

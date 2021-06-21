@@ -29,7 +29,7 @@
       />
       <Providers />
     </div>
-    <!--    <Transaction />-->
+    <Transaction />
   </div>
 </template>
 
@@ -40,7 +40,7 @@ import Menu from '~/components/App/Menu';
 // import Chart from '~/components/App/Chart';
 import Stats from '~/components/App/Stats';
 import Providers from '~/components/App/Providers';
-// import Transaction from '~/components/App/Transaction';
+import Transaction from '~/components/App/Transaction';
 
 export default {
   name: 'Pool',
@@ -49,7 +49,7 @@ export default {
     // Chart,
     Stats,
     Providers,
-    // Transaction,
+    Transaction,
   },
   data: () => ({
     balance: '',
