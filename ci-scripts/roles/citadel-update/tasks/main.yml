@@ -31,7 +31,7 @@
     dest: '{{ BUILD_DIR }}/{{ WEBSITE_APP }}'
 
 - name: Build code
-  shell: npm run build
+  shell: npm run generate
   args:
     chdir: '{{ BUILD_DIR }}'
 
@@ -44,11 +44,11 @@
     path: '{{ WEBSITE_BIN }}'
     state: absent
 
-# - name: Create website dir
-#   file:
-#     path: '{{ WEBSITE_BIN }}'
-#     state: directory
-#     recurse: yes
+- name: Create website dir
+  file:
+    path: '{{ WEBSITE_BIN }}'
+    state: directory
+    recurse: yes
 
 - name: Move generated files to webiste bin dir
   shell: mv {{ BUILD_DIR }} {{ WEBSITE_BIN }}
@@ -63,7 +63,7 @@
   args:
     chdir: '{{ WEBSITE_BIN }}'
 
-# - name: Delete build dir
-#   file:
-#     path: '{{ BUILD_DIR }}'
-#     state: absent
+- name: Delete build dir
+  file:
+    path: '{{ BUILD_DIR }}'
+    state: absent
