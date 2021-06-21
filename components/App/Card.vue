@@ -68,7 +68,7 @@ export default {
   }
   &__value {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 24px;
     color: #240B36;
     &_disc {

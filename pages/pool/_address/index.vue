@@ -1,27 +1,27 @@
 <template>
   <div class="content__container">
     <Menu />
-    <div class="content__charts">
-      <Chart
-        title="Total deposited"
-        :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
-        :chart-data="totalStakedDataChart"
-        :name-chart="'total-deposited'"
-        is-active="day"
-      />
-      <Chart
-        title="Total earnings"
-        :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
-        :chart-data="totalEarningsDataChart"
-        :name-chart="'total-profit'"
-      />
-      <Chart
-        title="Total borrowed"
-        :value="`- ${ pool.symbol }`"
-        :chart-data="totalBorrowedDataChart"
-        :name-chart="'total-borrowed'"
-      />
-    </div>
+    <!--    <div class="content__charts">-->
+    <!--      <Chart-->
+    <!--        title="Total deposited"-->
+    <!--        :value="`${ Floor(totalProfit) } ${ pool.symbol }`"-->
+    <!--        :chart-data="totalStakedDataChart"-->
+    <!--        :name-chart="'total-deposited'"-->
+    <!--        is-active="day"-->
+    <!--      />-->
+    <!--      <Chart-->
+    <!--        title="Total earnings"-->
+    <!--        :value="`${ Floor(totalStaked) } ${ pool.symbol }`"-->
+    <!--        :chart-data="totalEarningsDataChart"-->
+    <!--        :name-chart="'total-profit'"-->
+    <!--      />-->
+    <!--      <Chart-->
+    <!--        title="Total borrowed"-->
+    <!--        :value="`- ${ pool.symbol }`"-->
+    <!--        :chart-data="totalBorrowedDataChart"-->
+    <!--        :name-chart="'total-borrowed'"-->
+    <!--      />-->
+    <!--    </div>-->
     <div class="content__main">
       <Stats
         :balance="`${Floor(balance, 4)} ${symbol}`"
@@ -29,7 +29,7 @@
       />
       <Providers />
     </div>
-    <Transaction />
+    <!--    <Transaction />-->
   </div>
 </template>
 
@@ -37,19 +37,19 @@
 import { mapActions, mapGetters } from 'vuex';
 import { shiftedBy } from '~/utils/helpers';
 import Menu from '~/components/App/Menu';
-import Chart from '~/components/App/Chart';
+// import Chart from '~/components/App/Chart';
 import Stats from '~/components/App/Stats';
 import Providers from '~/components/App/Providers';
-import Transaction from '~/components/App/Transaction';
+// import Transaction from '~/components/App/Transaction';
 
 export default {
   name: 'Pool',
   components: {
     Menu,
-    Chart,
+    // Chart,
     Stats,
     Providers,
-    Transaction,
+    // Transaction,
   },
   data: () => ({
     balance: '',
@@ -189,6 +189,12 @@ export default {
     display: flex;
     grid-gap: 30px;
     justify-content: space-between;
+  }
+  @include _991 {
+    &__main {
+      flex-direction: column;
+      grid-gap: 16px;
+    }
   }
 }
 </style>

@@ -171,11 +171,11 @@
             <div class="table-mini__bottom">
               <div class="table-mini__liquidity">
                 <span class="table-mini__title">Liquidity</span>
-                <span class="table-mini__value">${{ Floor(poolsMap[poolAddress].getApyTax(), 7) }}</span>
+                <span class="table-mini__value">${{ Floor(poolsMap[poolAddress].getTotalStaked(), 7) }}</span>
               </div>
               <div class="table-mini__apy">
                 <span class="table-mini__title">Apy</span>
-                <span class="table-mini__value">{{ Floor(poolsMap[poolAddress].getTotalStaked(), 7) }}%</span>
+                <span class="table-mini__value">{{ Floor(poolsMap[poolAddress].getApyTax(), 7) }}%</span>
               </div>
             </div>
           </nuxt-link>

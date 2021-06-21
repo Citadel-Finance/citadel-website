@@ -1,10 +1,10 @@
 <template>
-  <div class="main__deposit deposit deposit__wrapper">
-    <div class="deposit__title">
+  <div class="main__stats stats stats__wrapper">
+    <div class="stats__title">
       Your stats
     </div>
-    <div class="deposit__balance-card balance-card">
-      <div class="balance-card__container">
+    <div class="stats__balance-card balance-card">
+      <div class="balance-card__container balance-card__deposit">
         <div class="balance-card__title">
           Your Deposit
         </div>
@@ -16,7 +16,7 @@
           {{ Floor(pool.userStaked) }} {{ pool.symbol }}
         </div>
       </div>
-      <div class="balance-card__container">
+      <div class="balance-card__container balance-card__earnings">
         <div class="balance-card__title">
           Your earnings
         </div>
@@ -25,7 +25,7 @@
           {{ Floor(pool.availableReward) }} {{ pool.symbol }}
         </div>
       </div>
-      <div class="balance-card__container">
+      <div class="balance-card__container balance-card__borrowed">
         <div class="balance-card__title">
           Total borrowed
         </div>
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="deposit__buttons">
+    <div class="stats__buttons">
       <base-btn
         mode="primary"
         @click="openDepositModal"
@@ -102,7 +102,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.deposit {
+.stats {
   &__wrapper {
     width: 100%;
     background: #FFFFFF;
@@ -159,9 +159,72 @@ export default {
   }
   &__value {
     font-weight: 600;
-    font-size: 20px;
+    font-size: 14px;
     line-height: 24px;
     color: #240B36;
+  }
+  @include _1199 {
+    grid-template-columns: repeat(2, 1fr);
+    &__deposit {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    &__earnings {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    &__borrowed {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+  }
+  @include _991 {
+    grid-template-columns: repeat(3, 1fr);
+    &__deposit {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    &__earnings {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    &__borrowed {
+      grid-column-start: 3;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+  }
+  @include _575 {
+    grid-template-columns: 1fr;
+    &__deposit {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 1;
+      grid-row-end: 2;
+    }
+    &__earnings {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 3;
+    }
+    &__borrowed {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 3;
+      grid-row-end: 4;
+    }
   }
 }
 </style>

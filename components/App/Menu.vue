@@ -6,7 +6,7 @@
           class="back__button"
         >
           <span class="icon-chevron_left" />
-          <span>Back</span>
+          <span class="back__title">Back</span>
         </button>
       </div>
     </n-link>
@@ -103,6 +103,11 @@ export default {
     font-size: 24px;
     color: #C31433;
   }
+  @include _575 {
+    &__title {
+      display: none;
+    }
+  }
 }
 .info {
   display: flex;
@@ -133,6 +138,9 @@ export default {
   }
   span::before {
     font-size: 24px;
+  }
+  @include _575 {
+    grid-gap: 15px;
   }
 }
 </style>

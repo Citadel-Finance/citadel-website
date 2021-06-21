@@ -11,11 +11,13 @@
             :key="`position__item-${i}`"
             class="table-main__tr"
           >
-            <div class="table-main__col address">
+            <div class="table-main__col">
               <img
                 :src="Require(`providers/rate_${ i + 1 }.svg`)"
                 alt=""
               >
+            </div>
+            <div class="table-main__col address">
               <div class="address__main">
                 <div class="address__title">
                   Address
@@ -29,14 +31,16 @@
               </div>
             </div>
             <div class="table-main__col contribution">
-              <div class="contribution__title">
-                Contributions (USD)
-              </div>
-              <div
-                class="contribution__value"
-                :title="provider.staked"
-              >
-                {{ Floor(provider.staked, 8) }}
+              <div class="contribution__main">
+                <div class="contribution__title">
+                  Contributions, $
+                </div>
+                <div
+                  class="contribution__value"
+                  :title="provider.staked"
+                >
+                  {{ Floor(provider.staked, 6) }}
+                </div>
               </div>
             </div>
           </div>
@@ -109,11 +113,12 @@ export default {
   }
   &__tr {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 30px repeat(2, 1fr);
     grid-gap: 35px;
     background: #F6F5F7;
     border-radius: 10px;
     padding: 15px;
+    height: 64px;
   }
   &__col {
     font-weight: normal;
@@ -123,11 +128,27 @@ export default {
     display: flex;
     align-items: center;
   }
+  @include _1199 {
+    &__tr {
+      height: 111px;
+    }
+  }
+  @include _991 {
+    &__tr {
+      height: 64px;
+    }
+  }
+  @include _767 {
+    &__tr {
+      grid-gap: 10px;
+    }
+  }
 }
 .address {
-  display: grid;
-  grid-template-columns: 30px 1fr;
-  grid-gap: 35px;
+  &__main {
+    display: grid;
+    grid-gap: 5px;
+  }
   &__title {
     font-weight: bold;
     font-size: 10px;
@@ -143,10 +164,10 @@ export default {
   }
 }
 .contribution {
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
-  display: grid;
+  &__main {
+    display: grid;
+    grid-gap: 5px;
+  }
   &__title {
     font-weight: bold;
     font-size: 10px;
