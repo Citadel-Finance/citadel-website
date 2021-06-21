@@ -1,0 +1,69 @@
+---
+# tasks file for website
+- name: set fact here
+  set_fact:
+    BUILD_DIR: "/tmp/build-{{ 1000000 | random }}"
+
+- name: Create build dir
+  file:
+    path: '{{ BUILD_DIR }}'
+    state: directory
+    recurse: yes
+
+- name: Upload website files
+  synchronize:
+    src: '{{ SRC_DIR }}'
+    dest: '{{ BUILD_DIR }}'
+
+- name: Install packages based on package.json
+  npm:
+    path: '{{ BUILD_DIR }}'
+    state: present
+
+- name: Copy or generate env file
+  template:
+    src: ./{{ WEBSITE_ENV }}.j2
+    dest: '{{ BUILD_DIR }}/{{ WEBSITE_ENV }}'
+
+- name: Copy or generate app.json file
+  template:
+    src: ./{{ WEBSITE_APP }}.j2
+    dest: '{{ BUILD_DIR }}/{{ WEBSITE_APP }}'
+
+- name: Build code
+  shell: npm run generate
+  args:
+    chdir: '{{ BUILD_DIR }}'
+
+- name: Stop nuxt process
+  shell: 'pm2 stop {{ WEBSITE_PROCCESS }}'
+  ignore_errors: yes
+
+- name: Delete website dir
+  file:
+    path: '{{ WEBSITE_BIN }}'
+    state: absent
+
+#- name: Create website dir
+#  file:
+#    path: '{{ WEBSITE_BIN }}'
+#    state: directory
+#    recurse: yes
+
+- name: Move generated files to webiste bin dir
+  shell: mv {{ BUILD_DIR }} {{ WEBSITE_BIN }}
+          
+- name: Start website process
+  shell: 'pm2 start {{ WEBSITE_APP }}'
+  args:
+    chdir: '{{ WEBSITE_BIN }}'
+
+- name: Saving current process list
+  shell: pm2 save
+  args:
+    chdir: '{{ WEBSITE_BIN }}'
+
+- name: Delete build dir
+  file:
+    path: '{{ BUILD_DIR }}'
+    state: absent

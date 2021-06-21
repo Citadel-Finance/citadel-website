@@ -1,0 +1,14 @@
+{
+  "apps": [
+      {
+          "name": "{{ WEBSITE_PROCCESS }}",
+          "script": "./node_modules/nuxt/bin/nuxt.js",
+          "autorestart": true,
+          "args": "start",
+          "env": {
+              "NODE_ENV": "production",
+              "NUXT_PORT": {{ NUXT_PORT }}
+          }
+      }
+  ]
+}

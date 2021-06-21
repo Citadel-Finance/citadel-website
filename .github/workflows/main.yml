@@ -8,46 +8,9 @@ on:
       
 
 jobs:
-  deploy-master:
-
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
-
-    steps:
-    - name: Copy code files to container
-      uses: actions/checkout@v2
-
-    - name: Install Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '12.x'
-
-    - name: Install npm dependencies
-      run: npm install
-
-    - name: Run generate task
-      run: npm run generate
-      env:
-          INFURA: ${{ secrets.INFURA_MAINNET }}
-          NETWORK_ID: ${{ secrets.NETWORK_ID_MAINNET }}
-          FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_MAINNET }}
-          FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_MAINNET }}
-          PORTIS_ID: ${{ secrets.PORTIS_ID }}
-
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v2.1.1
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-
-  deploy-develop:
-
-    runs-on: ubuntu-latest
+  build:
     if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
 
     steps:
       - name: Copy code files to container
@@ -58,65 +21,53 @@ jobs:
         with:
           node-version: '12.x'
 
+      - name: Environment preparation
+        run: |
+          mkdir -p ~/.ssh/
+          touch ~/.ssh/id_rsa
+          chmod -R go= ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SERVER_SSH_KEY }}" >> ~/.ssh/id_rsa
+
       - name: Install npm dependencies
         run: npm install
 
-      - name: Run generate task
-        run: npm run generate
-        env:
-        #  INFURA: ${{ secrets.INFURA_TESTNET }}
-          NETWORK_ID: ${{ secrets.NETWORK_ID_TESTNET }}
-        # FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_TESTNET }}
-          FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_TESTNET }}
-          PORTIS_ID: ${{ secrets.PORTIS_ID }}
-          API_URL: ${{ secrets.API_URL }}
-          ADDRESS_FACTORY: ${{ secrets.ADDRESS_FACTORY }}
-          IS_MAINNET: ${{ secrets.IS_MAINNET }}
+      - name: Run build task
+        run: npm run build
+
+  deploy-develop:
+
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+    needs: [build]
+
+    steps:
+      - name: Copy code files to container
+        uses: actions/checkout@v2
+
+      - name: Environment preparation
+        run: |
+          mkdir -p ~/.ssh/
+          touch ~/.ssh/id_rsa
+          chmod -R go= ~/.ssh
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SERVER_SSH_KEY }}" >> ~/.ssh/id_rsa
+          sudo apt-add-repository -y -u ppa:ansible/ansible
+          sudo apt-get install -y rsync
+          sudo apt-get install -y ansible 
 
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.1.1
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          SOURCE: "dist/"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-#
-#  deploy-develop-bsc:
-#
-#    runs-on: ubuntu-latest
-#    if: github.ref == 'refs/heads/develop-bsc'
-#
-#    steps:
-#      - name: Copy code files to container
-#        uses: actions/checkout@v2
-#
-#      - name: Install Node.js
-#        uses: actions/setup-node@v1
-#        with:
-#          node-version: '12.x'
-#
-#      - name: Install npm dependencies
-#        run: npm install
-#
-#      - name: Run generate task
-#        run: npm run generate
-#        env:
-#          INFURA: ${{ secrets.INFURA_TESTNET }}
-#          NETWORK_ID: ${{ secrets.NETWORK_ID_TESTNET }}
-#          FUNDRAISE_ADDRESS: ${{ secrets.FUNDRAISE_ADDRESS_TESTNET }}
-#          FORMATIC_KEY: ${{ secrets.FORMATIC_KEY_TESTNET }}
-#          PORTIS_ID: ${{ secrets.PORTIS_ID }}
-#
-#      - name: Deploy to Server
-#        uses: easingthemes/ssh-deploy@v2.1.1
-#        env:
-#          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-#          ARGS: "-rltgoDzvO --delete"
-#          SOURCE: "dist/"
-#          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-#          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-#          TARGET: ${{ secrets.REMOTE_TARGET }}
-#
-#  
+        run: |
+          chmod 700 ci-scripts
+          cd ci-scripts
+          ansible-playbook -i "${{ secrets.REMOTE_HOST }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \ 
+            INFURA=${{ secrets.INFURA_TESTNET }} \
+            SERVER_HOST=${{ secrets.SERVER_HOST }} \
+            ADDRESS_FACTORY=${{ secrets.ADDRESS_FACTORY }} \
+            NUXT_PORT=${{ secrets.NUXT_PORT }} \
+            WEBSITE_PROCCESS=${{ secrets.WEBSITE_PROCCESS_TESTNET }} \
+            IS_MAINNET=${{ secrets.IS_MAINNET }} \
+            API_URL=${{ secrets.API_URL }} \
+            WEBSITE_BIN=${{ secrets.WEBSITE_BIN }} \
+            SRC_DIR=${{ github.workspace }}/" website-update.yml;
+       
