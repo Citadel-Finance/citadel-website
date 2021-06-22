@@ -10,6 +10,14 @@ export default {
       } else if (chartName === 'borrowed') {
         commit('setTotalBorrowedData', r.data.result.data);
       }
+
+      // const keys = {
+      //   deposited: 'setTotalStakedData',
+      //   profit: 'setTotalEarningsData',
+      //   borrowed: 'setTotalBorrowedData',
+      // };
+      // commit(keys[chartName], r.data.result.data);
+
     } catch (e) {
       console.log(e);
     }
