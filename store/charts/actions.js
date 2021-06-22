@@ -17,7 +17,6 @@ export default {
       //   borrowed: 'setTotalBorrowedData',
       // };
       // commit(keys[chartName], r.data.result.data);
-
     } catch (e) {
       console.log(e);
     }
