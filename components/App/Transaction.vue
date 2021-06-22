@@ -1,5 +1,8 @@
 <template>
-  <div class="content__transactions transactions">
+  <div
+    v-if="isConnected"
+    class="content__transactions transactions"
+  >
     <div class="transactions__wrapper">
       <div class="transactions__title">
         Transactions ({{ txs.length }})
