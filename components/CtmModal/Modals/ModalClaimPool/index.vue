@@ -7,7 +7,10 @@
       >
         You don't have tokens for claim
       </div>
-      <div class="main__rewards rewards">
+      <div
+        v-if="availablePoolsRewardNoZero.length !== 0"
+        class="main__rewards rewards"
+      >
         <div
           v-for="(item, i) in availablePoolsRewardNoZero"
           :key="i"

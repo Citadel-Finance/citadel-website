@@ -252,9 +252,11 @@ export default {
   },
   methods: {
     tokensLogo(value) {
-      const exist = false;
-      return exist ? `https://bscscan.com/token/images/${value}_32.png`
-        : 'https://bscscan.com/images/main/empty-token.png';
+      try {
+        return `/img/tokens/${value}.png`;
+      } catch (err) {
+        return '/img/tokens/empty-token.png';
+      }
     },
     checkDesktop() {
       this.isDesktop = document.body.clientWidth > 991;
