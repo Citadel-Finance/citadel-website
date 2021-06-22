@@ -4,7 +4,7 @@
     <div class="content__charts">
       <Chart
         title="Total deposited"
-        :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
+        :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
         :chart-data="totalStakedDataChart"
         :name-chart="'deposited'"
         is-active="day"
@@ -12,7 +12,7 @@
       />
       <Chart
         title="Total earnings"
-        :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
+        :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
         :chart-data="totalEarningsDataChart"
         :name-chart="'profit'"
         is-active="day"

@@ -20,6 +20,7 @@
           :name="name"
           class="base-input__input"
           :placeholder="placeholder"
+          autocomplete="off"
           :class="[
             {'base-input__input_desc' : mode === 'desc'},
             {'base-input__input_error' : errors.length},
