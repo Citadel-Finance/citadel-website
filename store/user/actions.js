@@ -382,8 +382,26 @@ export default {
     }, { root: true });
   },
 
-  claimAll({ getters }) {
+  async claimAll({ getters, dispatch }) {
     const { getFactory: factory } = getters;
-    return factory.claimAll();
+    const claimRes = await factory.claimAll();
+    if (!claimRes.ok) {
+      if (claimRes.code === 500) {
+        console.log('claim error');
+        await dispatch('modals/show', {
+          key: modals.status,
+          title: 'Error',
+          status: 'error',
+          text: 'User denied claiming.',
+        }, { root: true });
+        return;
+      }
+    }
+    await dispatch('modals/show', {
+      key: modals.status,
+      title: 'Success',
+      status: 'success',
+      text: 'Your funds are claimed.',
+    }, { root: true });
   },
 };

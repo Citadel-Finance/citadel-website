@@ -7,20 +7,22 @@
       >
         You don't have tokens for claim
       </div>
-      <div
-        v-for="(item, i) in availablePoolsRewardNoZero"
-        :key="i"
-        class="main__rewards rewards"
-      >
-        <div class="rewards__titles">
-          <span class="rewards__title">
-            {{ getSymbolByPool(item.pool) }}
-          </span>
-        </div>
-        <div class="rewards__values">
-          <span class="rewards__value">
-            {{ Floor(item.reward) }}
-          </span>
+      <div class="main__rewards rewards">
+        <div
+          v-for="(item, i) in availablePoolsRewardNoZero"
+          :key="i"
+          class="main__token"
+        >
+          <div class="rewards__titles">
+            <span class="rewards__title">
+              {{ getSymbolByPool(item.pool) }}
+            </span>
+          </div>
+          <div class="rewards__values">
+            <span class="rewards__value">
+              {{ Floor(item.reward) }}
+            </span>
+          </div>
         </div>
       </div>
       <div class="main__amount amount">
@@ -96,6 +98,10 @@ export default {
     line-height: 20px;
     color: #7B6C86;
   }
+  &__token {
+    display: flex;
+    justify-content: space-between;
+  }
   &__text {
     font-weight: 300;
     letter-spacing: 0.05em;
@@ -121,8 +127,8 @@ export default {
   border-radius: 10px;
   padding: 20px 15px;
   margin: 0 0 10px;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-gap: 15px;
   &__titles {
     display: grid;
     grid-gap: 15px;
