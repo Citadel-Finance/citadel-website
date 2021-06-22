@@ -254,7 +254,6 @@ export default {
   methods: {
     tokensLogo(value) {
       const exist = false;
-      // const r = this.$axios.$get(`https://bscscan.com/token/images/${value}_32.png`);
       return exist ? `https://bscscan.com/token/images/${value}_32.png` : 'https://bscscan.com/images/main/empty-token.png';
     },
     checkDesktop() {
@@ -352,20 +351,28 @@ export default {
     letter-spacing: 0.105em;
     text-transform: uppercase;
     color: #7B6C86;
-    display: grid;
     margin-bottom: 10px;
+    padding: 14px 20px;
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
   }
   &__th {
-    padding: 14px 20px;
     border: none;
     align-items: center;
     display: flex;
+    overflow: hidden;
+  }
+  &__body {
+    display: grid;
+    grid-gap: 20px;
   }
   &__tr {
     display: grid;
+    grid-gap: 10px;
     grid-template-columns: 1fr;
-    padding: 14px 0;
+    padding: 14px 20px;
+    height: 80px;
     transition: 0.3s ease-out;
     &:hover {
       background: #FBFAFB;
@@ -373,7 +380,6 @@ export default {
     }
   }
   &__col {
-    padding: 14px 20px;
     border: none;
     font-weight: normal;
     font-size: 16px;
@@ -381,9 +387,11 @@ export default {
     color: #7B6C86;
     display: flex;
     align-items: center;
+    overflow: hidden;
   }
   &__link {
     display: grid;
+    grid-gap: 10px;
     grid-template-columns: repeat(4, 1fr);
     text-decoration: none;
   }
