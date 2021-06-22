@@ -5,17 +5,11 @@
         <div class="header__wrapper">
           <div class="header__logo" />
           <div class="header__btn">
-            <!--        <base-btn-->
-            <!--          mode="primary"-->
-            <!--          @click="$store.dispatch('user/disconnectWallet')"-->
-            <!--        >-->
-            <!--          disconnect-->
-            <!--        </base-btn>-->
             <div
               v-if="isConnected"
               class="header__connected"
             >
-              <span class="header__dot" />
+              <span class="header__dot icon-dot_03_m" />
               <span
                 class="header__address"
                 :title="userAddress"
@@ -55,7 +49,6 @@ export default {
   },
   async mounted() {
     await this.connectAnonNode();
-    // await this.connectWallet();
     this.SetLoader(false);
     setInterval(() => {
       this.$store.dispatch('user/updatePoolsData');
@@ -63,13 +56,6 @@ export default {
     }, 15000);
   },
   methods: {
-    // async connectWallet() {
-    //   const r = await this.$store.dispatch('user/connectWallet');
-    //   // if (!r.ok) {
-    //   //   return;
-    //   // }
-    //   return r;
-    // },
     openModalConnect() {
       this.ShowModal({
         text: 'WalletConnect',
@@ -132,20 +118,16 @@ export default {
   &__connected {
     background: #F6F5F7;
     border-radius: 10px;
-    padding: 15px 23px;
-    display: flex;
-    grid-gap: 20px;
-  }
-  &__dot {
-    position: relative;
+    padding: 15px;
     display: flex;
     align-items: center;
+    grid-gap: 10px;
+    height: 48px;
+  }
+  &__dot {
     &:before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #C31432;
+      color: #C31432;
+      font-size: 24px;
     }
   }
   &__address {

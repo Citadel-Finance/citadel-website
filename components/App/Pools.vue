@@ -85,7 +85,7 @@
               </div>
               <div class="table-main__col status">
                 <span
-                  class="status__dot"
+                  class="status__dot icon-dot_03_m"
                   :class="{'status__dot_active': getIsEnabledByAddress(poolAddress)}"
                 />
                 <span v-if="getIsEnabledByAddress(poolAddress)">
@@ -118,7 +118,7 @@
           <div class="table-mini__top">
             <div class="table-mini__status status">
               <span
-                class="status__dot"
+                class="status__dot icon-dot_03_m"
                 :class="{'status__dot_active': getIsEnabledByAddress(poolAddress)}"
               />
               <span v-if="getIsEnabledByAddress(poolAddress)">
@@ -194,7 +194,6 @@
 
 import { mapGetters } from 'vuex';
 import modals from '~/store/modals/modals';
-import { error, output } from '~/utils/web3';
 
 export default {
   name: 'Pools',
@@ -254,7 +253,8 @@ export default {
   methods: {
     tokensLogo(value) {
       const exist = false;
-      return exist ? `https://bscscan.com/token/images/${value}_32.png` : 'https://bscscan.com/images/main/empty-token.png';
+      return exist ? `https://bscscan.com/token/images/${value}_32.png`
+        : 'https://bscscan.com/images/main/empty-token.png';
     },
     checkDesktop() {
       this.isDesktop = document.body.clientWidth > 991;
@@ -480,19 +480,12 @@ export default {
   grid-gap: 10px;
   align-items: center;
   &__dot {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
     &:before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #C31432;
+      color: #C31432;
+      font-size: 24px;
     }
     &_active:before {
-      background: #2DCE89;
+      color: #2DCE89;
     }
   }
 }

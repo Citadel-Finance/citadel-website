@@ -47,6 +47,7 @@ export default {
     background: #F6F5F7;
     border-radius: 10px;
     height: 127px;
+    overflow: hidden;
   }
   &__title {
     font-weight: bold;
@@ -71,6 +72,8 @@ export default {
     font-size: 14px;
     line-height: 24px;
     color: #240B36;
+    overflow: hidden;
+    text-overflow: ellipsis;
     &_disc {
       font-weight: normal;
       font-size: 16px;
