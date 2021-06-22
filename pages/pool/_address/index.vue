@@ -8,18 +8,23 @@
         :chart-data="totalStakedDataChart"
         :name-chart="'deposited'"
         is-active="day"
+        :pool-address="poolAddress"
       />
       <Chart
         title="Total earnings"
         :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
         :chart-data="totalEarningsDataChart"
         :name-chart="'profit'"
+        is-active="day"
+        :pool-address="poolAddress"
       />
       <Chart
         title="Total borrowed"
         :value="`- ${ pool.symbol }`"
         :chart-data="totalBorrowedDataChart"
         :name-chart="'borrowed'"
+        is-active="day"
+        :pool-address="poolAddress"
       />
     </div>
     <div class="content__main">
@@ -121,27 +126,25 @@ export default {
     },
   },
   async mounted() {
-    await this.fetchTotalStaked({
+    await this.fetchTotalChartsData({
       poolAddress: this.poolAddress,
-      periodType: 'day',
       chartName: 'deposited',
-    });
-    await this.fetchTotalEarnings({
-      poolAddress: this.poolAddress,
       periodType: 'day',
+    });
+    await this.fetchTotalChartsData({
+      poolAddress: this.poolAddress,
       chartName: 'profit',
-    });
-    await this.fetchTotalBorrowed({
-      poolAddress: this.poolAddress,
       periodType: 'day',
+    });
+    await this.fetchTotalChartsData({
+      poolAddress: this.poolAddress,
       chartName: 'borrowed',
+      periodType: 'day',
     });
   },
   methods: {
     ...mapActions({
-      fetchTotalStaked: 'charts/fetchTotalStaked',
-      fetchTotalEarnings: 'charts/fetchTotalEarnings',
-      fetchTotalBorrowed: 'charts/fetchTotalBorrowed',
+      fetchTotalChartsData: 'charts/fetchTotalChartsData',
     }),
     formChartData(data) {
       const labels = data.map((el) => new Date(el.createdAt).getTime());

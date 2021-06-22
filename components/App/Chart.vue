@@ -10,13 +10,13 @@
       <div class="chart__btns">
         <base-btn
           :mode="activeBtn === 'day' ? 'mini-active' : 'mini'"
-          @click="activeBtn='day'"
+          @click="changePeriod('day')"
         >
           24h
         </base-btn>
         <base-btn
           :mode="activeBtn === 'week' ? 'mini-active' : 'mini'"
-          @click="activeBtn='week'"
+          @click="changePeriod('week')"
         >
           7d
         </base-btn>
@@ -66,6 +66,10 @@ export default {
       type: String,
       default: 'day',
     },
+    poolAddress: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -74,10 +78,12 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetchTotalStaked: 'charts/fetchTotalStaked',
+      fetchTotalChartsData: 'charts/fetchTotalChartsData',
     }),
     async changePeriod(value) {
-      await this.fetchTotalStaked({
+      this.activeBtn = value;
+      await this.fetchTotalChartsData({
+        poolAddress: this.poolAddress,
         periodType: value,
         chartName: this.nameChart,
       });
