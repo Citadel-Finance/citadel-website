@@ -9,6 +9,7 @@ import { shiftedBy } from '~/utils/helpers';
 const topByAddress = {};
 const totalStakedByAddress = {};
 const totalProfitByAddress = {};
+const totalBorrowedByAddress = {};
 const apyTaxByAddress = {};
 
 const tokensPerBlockByAddress = {};
@@ -61,6 +62,10 @@ export default class Pool extends BasicSmartContract {
 
   getTotalProfit() {
     return totalProfitByAddress[this.address];
+  }
+
+  getTotalBorrowed() {
+    return totalBorrowedByAddress[this.address];
   }
 
   getApyTax() {

@@ -4,7 +4,7 @@
     <div class="content__charts">
       <Chart
         title="Total deposited"
-        :value="`${ Floor(totalStaked) } ${ pool.symbol }`"
+        :value="`${ Floor(totalStaked) } ${ pool.symbol || '-' }`"
         :chart-data="totalStakedDataChart"
         :name-chart="'deposited'"
         is-active="day"
@@ -12,7 +12,7 @@
       />
       <Chart
         title="Total earnings"
-        :value="`${ Floor(totalProfit) } ${ pool.symbol }`"
+        :value="`${ Floor(totalProfit) } ${ pool.symbol || '-' }`"
         :chart-data="totalEarningsDataChart"
         :name-chart="'profit'"
         is-active="day"
@@ -20,7 +20,7 @@
       />
       <Chart
         title="Total borrowed"
-        :value="`- ${ pool.symbol }`"
+        :value="`${ Floor(totalBorrowed) } ${ pool.symbol || '-' }`"
         :chart-data="totalBorrowedDataChart"
         :name-chart="'borrowed'"
         is-active="day"
@@ -97,11 +97,15 @@ export default {
     },
     totalStaked() {
       const { pool } = this;
-      return pool && pool.getTotalStaked();
+      return (pool && pool.getTotalStaked());
     },
     totalProfit() {
       const { pool } = this;
-      return pool && pool.getTotalProfit();
+      return (pool && pool.getTotalProfit());
+    },
+    totalBorrowed() {
+      const { pool } = this;
+      return (pool && pool.getTotalBorrowed()) || 0;
     },
     totalStakedDataChart() {
       const { totalStakedData } = this;

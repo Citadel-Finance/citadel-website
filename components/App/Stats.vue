@@ -10,6 +10,14 @@
         </div>
         <hr class="balance-card__line">
         <div
+          v-if="!isConnected"
+          class="balance-card__disc"
+          :title="`${pool.userStaked}`"
+        >
+          Wallet disconnected
+        </div>
+        <div
+          v-else
           class="balance-card__value"
           :title="`${pool.userStaked}`"
         >
@@ -21,7 +29,17 @@
           Your earnings
         </div>
         <hr class="balance-card__line">
-        <div class="balance-card__value">
+        <div
+          v-if="!isConnected"
+          class="balance-card__disc"
+          :title="`${pool.userStaked}`"
+        >
+          Wallet disconnected
+        </div>
+        <div
+          v-else
+          class="balance-card__value"
+        >
           {{ Floor(pool.availableReward) }} {{ pool.symbol }}
         </div>
       </div>
@@ -30,7 +48,17 @@
           Total borrowed
         </div>
         <hr class="balance-card__line">
-        <div class="balance-card__value">
+        <div
+          v-if="!isConnected"
+          class="balance-card__disc"
+          :title="`${pool.userStaked}`"
+        >
+          Wallet disconnected
+        </div>
+        <div
+          v-else
+          class="balance-card__value"
+        >
           -
         </div>
       </div>
@@ -162,6 +190,12 @@ export default {
     font-size: 14px;
     line-height: 24px;
     color: #240B36;
+  }
+  &__disc {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    color: #D4CED7;
   }
   @include _1199 {
     grid-template-columns: repeat(2, 1fr);
