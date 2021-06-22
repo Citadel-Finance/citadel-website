@@ -172,9 +172,9 @@ export default {
     display: grid;
     grid-template-columns: 1fr 2fr;
     grid-gap: 20px;
+    margin-top: 20px;
   }
   &__radio {
-    margin: 22px 0 37px;
     font-weight: normal;
     font-size: 16px;
     line-height: 20px;

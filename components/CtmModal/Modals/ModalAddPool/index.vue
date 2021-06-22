@@ -139,5 +139,11 @@ export default {
     grid-gap: 20px;
     margin-top: 20px;
   }
+  &__radio {
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 20px;
+    color: #7B6C86;
+  }
 }
 </style>
