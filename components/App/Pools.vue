@@ -58,12 +58,8 @@
             >
               <div class="table-main__col currency">
                 <span class="currency__img">
-                  <!--                  <img-->
-                  <!--                    :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"-->
-                  <!--                    alt=""-->
-                  <!--                  >-->
                   <img
-                    :src="Require('logo_small.svg')"
+                    :src="tokensLogo(tokensMap[poolsMap[poolAddress].childAddress].symbol)"
                     alt=""
                   >
                 </span>
@@ -147,12 +143,8 @@
             <div class="table-mini__content">
               <div class="currency">
                 <span class="currency__img">
-                  <!--                  <img-->
-                  <!--                    :src="`https://bscscan.com/token/images/${tokensMap[poolsMap[poolAddress].childAddress].symbol}_32.png`"-->
-                  <!--                    alt=""-->
-                  <!--                  >-->
                   <img
-                    :src="Require('logo_small.svg')"
+                    :src="tokensLogo(tokensMap[poolsMap[poolAddress].childAddress].symbol)"
                     alt=""
                   >
                 </span>
@@ -202,6 +194,7 @@
 
 import { mapGetters } from 'vuex';
 import modals from '~/store/modals/modals';
+import { error, output } from '~/utils/web3';
 
 export default {
   name: 'Pools',
@@ -259,6 +252,11 @@ export default {
     window.removeEventListener('resize', () => {});
   },
   methods: {
+    tokensLogo(value) {
+      const exist = false;
+      // const r = this.$axios.$get(`https://bscscan.com/token/images/${value}_32.png`);
+      return exist ? `https://bscscan.com/token/images/${value}_32.png` : 'https://bscscan.com/images/main/empty-token.png';
+    },
     checkDesktop() {
       this.isDesktop = document.body.clientWidth > 991;
     },
