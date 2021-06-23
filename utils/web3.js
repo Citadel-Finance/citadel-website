@@ -72,7 +72,6 @@ export const initWeb3Provider = async () => {
   try {
     const { ethereum } = window;
     if (!ethereum) {
-      console.log(123);
       return error(449, 'no metamask');
     }
     web3 = new Web3(ethereum);
