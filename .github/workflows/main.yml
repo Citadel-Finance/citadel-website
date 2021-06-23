@@ -61,7 +61,6 @@ jobs:
           chmod 700 ci-scripts
           cd ci-scripts
           ansible-playbook -i "${{ secrets.REMOTE_HOST }}" -e "ansible_user=${{ secrets.REMOTE_USER }} \ 
-            INFURA=${{ secrets.INFURA_TESTNET }} \
             SERVER_HOST=${{ secrets.SERVER_HOST }} \
             ADDRESS_FACTORY=${{ secrets.ADDRESS_FACTORY }} \
             NUXT_PORT=${{ secrets.NUXT_PORT }} \
