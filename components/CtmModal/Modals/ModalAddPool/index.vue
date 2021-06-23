@@ -25,7 +25,7 @@
             class="main__input"
           />
           <div class="main__title">
-            APY tax
+            APY tax, %
           </div>
           <base-input
             v-model="apyTax"
@@ -36,7 +36,7 @@
             class="main__input"
           />
           <div class="main__title">
-            Pool rewards
+            Pool rewards, %
           </div>
           <base-input
             v-model="premiumCoeff"
