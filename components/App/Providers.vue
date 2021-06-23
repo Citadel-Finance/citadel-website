@@ -182,6 +182,8 @@ export default {
     font-size: 16px;
     line-height: 18px;
     color: #240A36;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 </style>

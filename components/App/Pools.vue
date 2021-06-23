@@ -251,11 +251,19 @@ export default {
     window.removeEventListener('resize', () => {});
   },
   methods: {
-    tokensLogo(value) {
+    tokensLogo(url) {
+      const defaultUrl = 'img/tokens/empty-token.png';
+      const path = `img/tokens/${url}.png`;
       try {
-        return `/img/tokens/${value}.png`;
+        // eslint-disable-next-line global-require
+        return require(path);
       } catch (err) {
-        return '/img/tokens/empty-token.png';
+        try {
+          // eslint-disable-next-line global-require
+          return require(defaultUrl);
+        } catch (err2) {
+          return 'img/tokens/empty-token.png';
+        }
       }
     },
     checkDesktop() {

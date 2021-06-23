@@ -29,8 +29,17 @@
             <div class="table-main__col date">
               {{ GetFormTimestamp(event.returnValues.date, format = 'LLL') }}
             </div>
-            <div class="table-main__col change">
-              {{ event.amount }} {{ event.event }}
+            <div
+              v-if="event.event === 'Deposited'"
+              class="table-main__col change"
+            >
+              + {{ Floor(event.amount, 6) }}
+            </div>
+            <div
+              v-else
+              class="table-main__col change"
+            >
+              - {{ event.amount }}
             </div>
             <div class="table-main__col hash">
               {{ SubstrString(event.transactionHash, 0, 10) + '...' + SubstrString(event.transactionHash, event.transactionHash.length - 10, 10) }}
@@ -52,8 +61,17 @@
               <div class="table-mini__date">
                 {{ GetFormTimestamp(event.returnValues.date, format = 'L') }}
               </div>
-              <div class="table-mini__change">
-                {{ event.amount }} {{ event.event }}
+              <div
+                v-if="event.event === 'Deposited'"
+                class="table-mini__change"
+              >
+                + {{ Floor(event.amount, 6) }}
+              </div>
+              <div
+                v-else
+                class="table-mini__change"
+              >
+                - {{ event.amount }}
               </div>
             </div>
             <div class="table-mini__bottom">

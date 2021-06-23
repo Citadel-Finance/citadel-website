@@ -136,6 +136,7 @@ export default {
     display: grid;
     grid-gap: 15px;
     grid-template-columns: 1fr;
+    min-width: 100px;
     font-size: 16px;
     line-height: 20px;
     color: #7B6C86;
@@ -160,6 +161,7 @@ export default {
     font-size: 16px;
     line-height: 20px;
     color: #7B6C86;
+    min-width: 100px;
   }
   &__value {
     font-weight: 600;
