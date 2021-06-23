@@ -251,18 +251,16 @@ export default {
     window.removeEventListener('resize', () => {});
   },
   methods: {
-    tokensLogo(url) {
-      const defaultUrl = 'img/tokens/empty-token.png';
-      const path = `img/tokens/${url}.png`;
+    tokensLogo(url, defaultUrl = 'empty-token') {
       try {
         // eslint-disable-next-line global-require
-        return require(path);
+        return require(`~/assets/img/tokens/${url}.png`);
       } catch (err) {
         try {
           // eslint-disable-next-line global-require
-          return require(defaultUrl);
+          return require(`~/assets/img/tokens/${defaultUrl}.png`);
         } catch (err2) {
-          return 'img/tokens/empty-token.png';
+          return '';
         }
       }
     },
