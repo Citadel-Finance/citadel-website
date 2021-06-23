@@ -32,7 +32,7 @@
             :type="'number'"
             :name="'APY tax'"
             :placeholder="'0.07'"
-            rules="required|number"
+            rules="required|number|max_value:100"
             class="main__input"
           />
           <div class="main__title">
@@ -43,7 +43,7 @@
             :type="'number'"
             :name="'Pool rewards'"
             :placeholder="'20.06'"
-            rules="required|number"
+            rules="required|number|max_value:100"
             class="main__input"
           />
           <div class="main__title">

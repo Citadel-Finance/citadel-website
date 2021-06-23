@@ -32,6 +32,10 @@ extend('number', {
   message: 'The {_field_} field must have numbers.',
 });
 
+extend('max_value', {
+  message: 'The {_field_} field must be between 0 and 100.',
+});
+
 export default ({ app }) => {
   configure({
     defaultMessage: (_field_, values) => app.i18n.t(`messages.${values._rule_}`, values),
