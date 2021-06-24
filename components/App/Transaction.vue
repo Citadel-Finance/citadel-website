@@ -300,7 +300,7 @@ export default {
   color: #7B6C86;
 }
 .pagination::v-deep {
-  font-family: sans-serif, 'Arial';
+  font-family: 'Arial', sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;

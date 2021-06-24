@@ -71,7 +71,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .primary {
-  font-family: sans-serif, 'Arial';
+  font-family: 'Arial', sans-serif;
   font-style: normal;
   background-color: #F6F5F7;
   overflow-y: auto;
