@@ -205,6 +205,7 @@ export default {
       factory.fetchPoolsData(),
       factory.fetchCtlAddress(),
     ]);
+    console.log('address-factory:', factory.address);
     commit('setPoolsData', r[0].result.poolData);
     commit('setFactory', factory);
   },
